@@ -1279,6 +1279,10 @@
       <xs:element name="target" type="xs:string" minOccurs="0"/>
       <xs:element name="username" type="xs:string" minOccurs="0"/>
       <xs:element name="password" type="xs:string" minOccurs="0"/>
+      <xs:element name="serial" type="xs:string" minOccurs="0"/>
+      <xs:element name="vendor_id" type="xs:string" minOccurs="0"/>
+      <xs:element name="product_id" type="xs:string" minOccurs="0"/>
+      <xs:element name="lun_mapping" type="xs:int" minOccurs="0"/>
     </xs:sequence>
   </xs:group>
 
