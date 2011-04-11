@@ -445,6 +445,18 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  
+  <xs:complexType name="ErrorHandling">
+    <xs:sequence>
+      <xs:element name="on_error" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="onError"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
 
   <!-- Capabilities -->
 
@@ -477,6 +489,7 @@
           <xs:element ref="vm_affinities" minOccurs="0"/>
           <xs:element name="hooks_env" type="VmHooksEnvs" minOccurs="0"/>
           <xs:element ref="boot_protocols" minOccurs="0"/>
+          <xs:element ref="error_handling" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -680,6 +693,20 @@
     </xs:sequence>
   </xs:complexType>  
 
+    <xs:element name="error_handling" type="ErrorHandlingOptions"/>
+
+  <xs:complexType name="ErrorHandlingOptions">
+    <xs:sequence>
+      <xs:element name="on_error" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="ErrorHandling"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <!-- Common to all resources -->
 
   <xs:complexType name="BaseResource">
@@ -790,6 +817,7 @@
           <xs:element name="scheduling_policy" type="SchedulingPolicy" minOccurs="0" maxOccurs="1"/>
           <xs:element name="version" type="Version" minOccurs="0"/>
           <xs:element name="supported_versions" type="SupportedVersions" minOccurs="0"/>
+          <xs:element name="error_handling" type="ErrorHandling" minOccurs="0" maxOccurs="1"/>          
           <!-- Also a rel="networks" link -->
         </xs:sequence>
       </xs:extension>
