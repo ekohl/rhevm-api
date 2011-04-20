@@ -88,7 +88,7 @@ public class LinkHelperTest extends Assert {
     private static final String HOST_TAG_HREF = BASE_PATH + "/hosts/" + HOST_ID + "/tags/" + TAG_ID;
     private static final String USER_TAG_HREF = BASE_PATH + "/users/" + USER_ID + "/tags/" + TAG_ID;
     private static final String CLUSTER_NETWORK_HREF = BASE_PATH + "/clusters/" + CLUSTER_ID + "/networks/" + NETWORK_ID;
-    private static final String FILE_HREF = BASE_PATH + "/datacenters/" + DATA_CENTER_ID + "/files/" + FILE_ID;
+    private static final String FILE_HREF = BASE_PATH + "/storagedomains/" + STORAGE_DOMAIN_ID + "/files/" + FILE_ID;
     private static final String CDROM_HREF = VM_HREF + "/cdroms/" + CDROM_ID;
     private static final String DISK_HREF = VM_HREF + "/disks/" + DISK_ID;
     private static final String NIC_HREF = VM_HREF + "/nics/" + NIC_ID;
@@ -300,8 +300,8 @@ public class LinkHelperTest extends Assert {
         File file = new File();
         file.setId(FILE_ID);
 
-        file.setDataCenter(new DataCenter());
-        file.getDataCenter().setId(DATA_CENTER_ID);
+        file.setStorageDomain(new StorageDomain());
+        file.getStorageDomain().setId(STORAGE_DOMAIN_ID);
 
         LinkHelper.addLinks(setUpUriExpectations(), file);
 

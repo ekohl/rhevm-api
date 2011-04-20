@@ -38,4 +38,7 @@ public interface StorageDomainResource extends UpdatableResource<StorageDomain> 
 
     @Path("templates")
     public StorageDomainContentsResource<Templates, Template> getStorageDomainTemplatesResource();
+
+    @Path("files")
+    public FilesResource getFilesResource();
 }

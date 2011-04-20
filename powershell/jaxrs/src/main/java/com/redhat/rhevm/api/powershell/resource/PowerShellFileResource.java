@@ -25,12 +25,12 @@ import com.redhat.rhevm.api.resource.FileResource;
 public class PowerShellFileResource implements FileResource {
 
     private String id;
-    private String dataCenterId;
+    private String storageDomainId;
     private PowerShellFilesResource parent;
 
-    public PowerShellFileResource(String id, String dataCenterId, PowerShellFilesResource parent) {
+    public PowerShellFileResource(String id, String storageDomainId, PowerShellFilesResource parent) {
         this.id = id;
-        this.dataCenterId = dataCenterId;
+        this.storageDomainId = storageDomainId;
         this.parent = parent;
     }
 
@@ -40,6 +40,6 @@ public class PowerShellFileResource implements FileResource {
         file.setId(id);
         file.setName(id);
         file.setType(FileType.ISO.value());
-        return parent.addLinks(file, dataCenterId);
+        return parent.addLinks(file, storageDomainId);
     }
 }

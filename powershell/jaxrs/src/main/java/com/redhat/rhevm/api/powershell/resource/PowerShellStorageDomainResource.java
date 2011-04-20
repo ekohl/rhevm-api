@@ -35,6 +35,7 @@ import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.model.VMs;
 import com.redhat.rhevm.api.resource.AssignedPermissionsResource;
 import com.redhat.rhevm.api.resource.StorageDomainContentsResource;
+import com.redhat.rhevm.api.resource.FilesResource;
 import com.redhat.rhevm.api.resource.StorageDomainResource;
 import com.redhat.rhevm.api.powershell.model.PowerShellStorageDomain;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
@@ -98,6 +99,15 @@ public class PowerShellStorageDomainResource extends AbstractPowerShellActionabl
 
         storageDomain = LinkHelper.addLinks(uriInfo, storageDomain);
 
+        String [] subCollections = { "files" };
+
+        for (String collection : subCollections) {
+            Link link = new Link();
+            link.setRel(collection);
+            link.setHref(LinkHelper.getUriBuilder(uriInfo, storageDomain).path(collection).build().toString());
+            storageDomain.getLinks().add(link);
+        }
+
         ActionsBuilder actionsBuilder = new ActionsBuilder(LinkHelper.getUriBuilder(uriInfo, storageDomain),
                                                            StorageDomainResource.class);
         storageDomain.setActions(actionsBuilder.build());
@@ -155,5 +165,10 @@ public class PowerShellStorageDomainResource extends AbstractPowerShellActionabl
             new PowerShellStorageDomainTemplatesResource(this, shellPools, getParser());
         resource.setUriInfo(getUriInfo());
         return resource;
+    }
+
+    @Override
+    public FilesResource getFilesResource() {
+        return new PowerShellFilesResource(getId(), getShellPools(), getParser(), getUriProvider());
     }
 }

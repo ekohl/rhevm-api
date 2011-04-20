@@ -186,7 +186,7 @@ public class LinkHelper {
         map = new ParentToCollectionMap(HostNicResource.class, HostNicsResource.class, Host.class);
         TYPES.put(HostNIC.class, map);
 
-        map = new ParentToCollectionMap(FileResource.class, FilesResource.class, DataCenter.class);
+        map = new ParentToCollectionMap(FileResource.class, FilesResource.class, StorageDomain.class);
         TYPES.put(File.class, map);
 
         map = new ParentToCollectionMap(GroupResource.class, GroupsResource.class);

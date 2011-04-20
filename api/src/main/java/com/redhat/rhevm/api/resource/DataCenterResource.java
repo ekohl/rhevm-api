@@ -26,9 +26,6 @@ import com.redhat.rhevm.api.model.DataCenter;
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_X_YAML})
 public interface DataCenterResource extends UpdatableResource<DataCenter> {
 
-    @Path("files")
-    public FilesResource getFilesResource();
-
     @Path("storagedomains")
     public AttachedStorageDomainsResource getAttachedStorageDomainsResource();
 

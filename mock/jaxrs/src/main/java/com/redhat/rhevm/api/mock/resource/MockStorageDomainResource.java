@@ -35,6 +35,7 @@ import com.redhat.rhevm.api.model.VMs;
 import com.redhat.rhevm.api.resource.AssignedPermissionsResource;
 import com.redhat.rhevm.api.resource.StorageDomainContentsResource;
 import com.redhat.rhevm.api.resource.StorageDomainResource;
+import com.redhat.rhevm.api.resource.FilesResource;
 
 public class MockStorageDomainResource extends AbstractMockResource<StorageDomain> implements StorageDomainResource {
 
@@ -96,5 +97,10 @@ public class MockStorageDomainResource extends AbstractMockResource<StorageDomai
 
     public StorageDomainContentsResource<Templates, Template> getStorageDomainTemplatesResource() {
         return null;
+    }
+
+    @Override
+    public FilesResource getFilesResource() {
+       return null;
     }
 }

@@ -20,9 +20,9 @@ package com.redhat.rhevm.api.powershell.resource;
 
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.common.util.LinkHelper;
-import com.redhat.rhevm.api.model.DataCenter;
 import com.redhat.rhevm.api.model.File;
 import com.redhat.rhevm.api.model.Files;
+import com.redhat.rhevm.api.model.StorageDomain;
 import com.redhat.rhevm.api.resource.FileResource;
 import com.redhat.rhevm.api.resource.FilesResource;
 import com.redhat.rhevm.api.powershell.model.PowerShellFile;
@@ -33,40 +33,40 @@ import com.redhat.rhevm.api.powershell.util.PowerShellUtils;
 
 public class PowerShellFilesResource extends UriProviderWrapper implements FilesResource {
 
-    private String dataCenterId;
+    private String storageDomainId;
 
-    public PowerShellFilesResource(String dataCenterId,
+    public PowerShellFilesResource(String storageDomainId,
                                   PowerShellPoolMap shellPools,
                                   PowerShellParser parser,
                                   UriInfoProvider uriProvider) {
         super(null, shellPools, parser, uriProvider);
-        this.dataCenterId = dataCenterId;
+        this.storageDomainId = storageDomainId;
     }
 
     @Override
     public Files list() {
         StringBuilder buf = new StringBuilder();
-        buf.append("$d = get-datacenter " + PowerShellUtils.escape(dataCenterId));
+        buf.append("$d = get-datacenter -storagedomainid " + PowerShellUtils.escape(storageDomainId));
         buf.append("; ");
         buf.append("if ($d.status -eq \"Up\") { ");
         buf.append("get-isoimages");
-        buf.append(" -datacenterid " + PowerShellUtils.escape(dataCenterId));
+        buf.append(" -datacenterid $d.datacenterid");
         buf.append("}");
         Files ret = new Files();
         for (File file : PowerShellFile.parse(parser, PowerShellCmd.runCommand(getPool(), buf.toString()))) {
-            ret.getFiles().add(addLinks(file, dataCenterId));
+            ret.getFiles().add(addLinks(file, storageDomainId));
         }
         return ret;
     }
 
     @Override
     public FileResource getFileSubResource(String id) {
-        return new PowerShellFileResource(id, dataCenterId, this);
+        return new PowerShellFileResource(id, storageDomainId, this);
     }
 
-    public File addLinks(File file, String dataCenterId) {
-        file.setDataCenter(new DataCenter());
-        file.getDataCenter().setId(dataCenterId);
+    public File addLinks(File file, String storageDomainId) {
+        file.setStorageDomain(new StorageDomain());
+        file.getStorageDomain().setId(storageDomainId);
         return LinkHelper.addLinks(getUriInfo(), file);
     }
 }

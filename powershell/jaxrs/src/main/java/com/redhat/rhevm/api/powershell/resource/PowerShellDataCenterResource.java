@@ -30,7 +30,6 @@ import com.redhat.rhevm.api.model.SupportedVersions;
 import com.redhat.rhevm.api.resource.AssignedPermissionsResource;
 import com.redhat.rhevm.api.resource.AttachedStorageDomainsResource;
 import com.redhat.rhevm.api.resource.DataCenterResource;
-import com.redhat.rhevm.api.resource.FilesResource;
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.common.util.LinkHelper;
 import com.redhat.rhevm.api.powershell.model.PowerShellDataCenter;
@@ -87,7 +86,7 @@ public class PowerShellDataCenterResource extends AbstractPowerShellActionableRe
     public static DataCenter addLinks(UriInfo uriInfo, PowerShellPool pool, PowerShellParser parser, DataCenter dataCenter) {
         dataCenter = querySupportedVersions(pool, parser, dataCenter);
 
-        String [] subCollections = { "files", "storagedomains" };
+        String [] subCollections = { "storagedomains" };
 
         dataCenter.getLinks().clear();
 
@@ -151,10 +150,6 @@ public class PowerShellDataCenterResource extends AbstractPowerShellActionableRe
     @Override
     public AssignedPermissionsResource getPermissionsResource() {
         return null;
-    }
-
-    public FilesResource getFilesResource() {
-        return new PowerShellFilesResource(getId(), shellPools, getParser(), uriProvider);
     }
 
     public AttachedStorageDomainsResource getAttachedStorageDomainsResource() {
