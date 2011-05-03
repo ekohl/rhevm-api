@@ -55,7 +55,8 @@ class genschema(Command):
         xsd = os.path.normpath(os.path.join(topdir,
                     '..', 'api', 'src', 'main', 'resources', 'api.xsd'))
         libdir = os.path.join(topdir, 'lib', 'rhev')
-        xsdcopy = os.path.join(libdir, 'data', 'api.xsd')
+        datadir = os.path.join(libdir, 'data')
+        xsdcopy = os.path.join(datadir, 'api.xsd')
         schema = os.path.join(libdir, '_schema.py')
         try:
             st1 = os.stat(xsd)
@@ -69,6 +70,13 @@ class genschema(Command):
             st3 = os.stat(schema)
         except OSError:
             st3 = None
+        try:
+            st4 = os.stat(datadir)
+        except OSError:
+            st4 = None
+        if st4 is None:
+            os.mkdir(datadir)
+            print 'created %s' % datadir
         if st1 and (st2 is None or st1.st_mtime > st2.st_mtime):
             shutil.copy(xsd, xsdcopy)
             print 'copied %s => %s' % (xsd, xsdcopy)
