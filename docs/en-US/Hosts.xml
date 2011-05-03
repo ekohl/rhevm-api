@@ -76,7 +76,7 @@
             <entry><literal>power_management</literal></entry>
             <entry>complex</entry>
             <entry>Fencing options for host power management. (see <xref linkend="sect-REST_API_Guide-Hosts-Power_Management"/>)</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            <entry></entry>
           </row>
         </tbody>
       </tgroup>
@@ -640,17 +640,19 @@ Accept: application/xml
   </section>
   <section id="sect-REST_API_Guide-Hosts-Power_Management">
     <title>Power Management Configuration</title>
-	<para>A recommended feature of the Red Hat Virtualization platform is the ability to fence a host with a <literal>power_management</literal> configuration. Certain sub-elements are required when configuring <literal>power_management</literal>.</para>
+	<para>A recommended feature of the Red Hat Virtualization platform is the option to fence a host with a <literal>power_management</literal> configuration. Certain sub-elements are required when configuring <literal>power_management</literal>.</para>
     <informaltable frame="none">
-      <tgroup cols="3">
+      <tgroup cols="4">
         <colspec colwidth="2*"/>
         <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
+        <colspec colwidth="3*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
             <entry>Type</entry>
             <entry>Description</entry>
+            <entry>Properties</entry>
           </row>
         </thead>
         <tbody>
@@ -658,31 +660,37 @@ Accept: application/xml
             <entry><literal>type=</literal></entry>
             <entry>A valid fencing device</entry>
             <entry>A list of valid fencing devices are available in system capabilities. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/> for more information.</entry>
+			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
             <entry><literal>enabled</literal></entry>
             <entry>boolean: true or false</entry>
             <entry>Indicates whether power management configuration is enabled or disabled</entry>
+			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
             <entry><literal>address</literal></entry>
             <entry>string</entry>
             <entry>The host name or IP address of the host</entry>
+			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
             <entry><literal>username</literal></entry>
             <entry>string</entry>
             <entry>A valid user name for power management</entry>
+			<entry></entry>
           </row>
           <row>
             <entry><literal>password</literal></entry>
             <entry>string</entry>
             <entry>A valid, robust password for power management</entry>
+			<entry></entry>
           </row>
           <row>
             <entry><literal>options</literal></entry>
             <entry>complex</entry>
             <entry>Fencing options for the selected <literal>type=</literal></entry>
+			<entry></entry>
           </row>
         </tbody>
       </tgroup>
