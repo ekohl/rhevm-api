@@ -476,6 +476,7 @@
           <xs:element ref="disk_interfaces" minOccurs="0"/>          
           <xs:element ref="vm_affinities" minOccurs="0"/>
           <xs:element name="hooks_env" type="VmHooksEnvs" minOccurs="0"/>
+          <xs:element ref="boot_protocols" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -664,6 +665,20 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  
+  <xs:element name="boot_protocols" type="BootProtocols"/>
+
+  <xs:complexType name="BootProtocols">
+    <xs:sequence>
+      <xs:element name="boot_protocol" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="BootProtocols"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>  
 
   <!-- Common to all resources -->
 
