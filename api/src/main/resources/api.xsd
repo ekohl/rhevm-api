@@ -1781,6 +1781,7 @@
           <xs:element ref="ip" minOccurs="0"/>
           <xs:element ref="vlan" minOccurs="0"/>
           <xs:element ref="slaves" minOccurs="0"/>
+          <xs:element name="boot_protocol" type="xs:string" minOccurs="0" maxOccurs="1"/>
           <xs:element name="statistics" type="Statistics" minOccurs="0" maxOccurs="1"/>
           <xs:element name="speed" type="xs:long" minOccurs="0" maxOccurs="1"/>
           <xs:element name="status" type="NicStatus" minOccurs="0" maxOccurs="1"/>
