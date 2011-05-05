@@ -179,7 +179,7 @@ public class PowerShellHostResource extends AbstractPowerShellActionableResource
     @Override
     public Response install(Action action) {
         validateParameters(action, "rootPassword");
-        return doAction(getUriInfo(), new HostInstaller(action, action.getRootPassword(), getPool()));
+        return doAction(getUriInfo(), new HostInstaller(action, action.getRootPassword(), action.getImage(), getPool()));
     }
 
     @Override
@@ -359,11 +359,13 @@ public class PowerShellHostResource extends AbstractPowerShellActionableResource
     class HostInstaller extends AbstractPowerShellActionTask {
 
         private String rootPassword;
+        private String isoFileName;
         private PowerShellPool pool;
 
-        HostInstaller(Action action, String rootPassword, PowerShellPool pool) {
+        HostInstaller(Action action, String rootPassword, String isoFileName, PowerShellPool pool) {
             super(action, "$h = get-host ");
             this.rootPassword = rootPassword;
+            this.isoFileName = isoFileName;
             this.pool = pool;
         }
 
@@ -377,6 +379,9 @@ public class PowerShellHostResource extends AbstractPowerShellActionableResource
             buf.append(" -hostobject $h");
             buf.append(" -install");
             buf.append(" -rootpassword " + PowerShellUtils.escape(rootPassword));
+            if (isoFileName!=null && !isoFileName.isEmpty()) {
+                buf.append( " -ovirtisofile " + PowerShellUtils.escape(isoFileName));
+            }
 
             PowerShellCmd.runCommand(pool, buf.toString());
         }
