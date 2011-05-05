@@ -26,6 +26,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
+import com.redhat.rhevm.api.common.util.DetailHelper.Detail;
 import com.redhat.rhevm.api.model.Action;
 import com.redhat.rhevm.api.model.BootDevice;
 import com.redhat.rhevm.api.model.CdRom;
@@ -43,7 +44,6 @@ import com.redhat.rhevm.api.model.StorageDomain;
 import com.redhat.rhevm.api.model.Ticket;
 import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.model.VmType;
-import com.redhat.rhevm.api.powershell.resource.PowerShellVmsResource.Detail;
 import com.redhat.rhevm.api.powershell.resource.PowerShellVmsResource.Method;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
 import com.redhat.rhevm.api.powershell.util.PowerShellException;

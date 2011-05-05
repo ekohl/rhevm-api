@@ -19,13 +19,14 @@
 package com.redhat.rhevm.api.powershell.resource;
 
 import java.text.MessageFormat;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
+import com.redhat.rhevm.api.common.util.DetailHelper;
+import com.redhat.rhevm.api.common.util.DetailHelper.Detail;
 import com.redhat.rhevm.api.common.util.ReflectionHelper;
 import com.redhat.rhevm.api.common.util.TimeZoneMapping;
 import com.redhat.rhevm.api.model.CpuTopology;
@@ -41,7 +42,6 @@ import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
 import com.redhat.rhevm.api.powershell.util.PowerShellUtils;
 
 import static com.redhat.rhevm.api.common.util.CompletenessAssertor.validateParameters;
-import static com.redhat.rhevm.api.common.util.DetailHelper.include;
 
 public class PowerShellVmsResource
     extends AbstractPowerShellCollectionResource<VM, PowerShellVmResource>
@@ -82,19 +82,6 @@ public class PowerShellVmsResource
 
     public enum Method { GET, ADD };
 
-    public enum Detail {
-        DISKS("$_.getdiskimages(); "),
-        NICS("$_.getnetworkadapters(); "),
-        STATISTICS("$_.getmemorystatistics(); $_.getcpustatistics(); "),
-        TAGS("get-tags -vmid $_.vmid; ");
-
-        public final String powershell;
-
-        Detail(String powershell) {
-            this.powershell = powershell;
-        }
-    }
-
     public List<PowerShellVM> runAndParse(String command, Set<Detail> details) {
         return PowerShellVmResource.runAndParse(getPool(), getParser(), command, details);
     }
@@ -106,7 +93,7 @@ public class PowerShellVmsResource
     @Override
     public VMs list() {
         VMs ret = new VMs();
-        Set<Detail> details = getDetails();
+        Set<Detail> details = DetailHelper.getDetails(getHttpHeaders());
         for (PowerShellVM vm : runAndParse(getSelectCommand("select-vm", getUriInfo(), VM.class) + getProcess(Method.GET, details), details)) {
             ret.getVMs().add(PowerShellVmResource.addLinks(getUriInfo(), vm));
         }
@@ -222,7 +209,7 @@ public class PowerShellVmsResource
             buf.append(ASYNC_OPTION).append(displayVm).append(ASYNC_TASKS);
         }
 
-        Set<Detail> details = getDetails();
+        Set<Detail> details = DetailHelper.getDetails(getHttpHeaders());
 
         buf.append("$v").append(getProcess(Method.ADD, details));
 
@@ -260,20 +247,25 @@ public class PowerShellVmsResource
         StringBuilder buf = new StringBuilder();
         if (details != null) {
             for (Detail detail : details) {
-                buf.append(detail.powershell);
+                buf.append(getDetailString(detail));
             }
         }
         return MessageFormat.format(PROCESS_VMS, method == Method.ADD ? " " : "$_; ", buf);
     }
 
-    private Set<Detail> getDetails() {
-        Set<Detail> details = EnumSet.noneOf(Detail.class);
-        for (Detail detail : Detail.class.getEnumConstants()) {
-            if (include(getHttpHeaders(), detail.name().toLowerCase())) {
-                details.add(detail);
-            }
+    static String getDetailString(Detail detail) {
+        switch(detail) {
+        case DISKS:
+            return "$_.getdiskimages(); ";
+        case NICS:
+            return "$_.getnetworkadapters(); ";
+        case STATISTICS:
+            return "$_.getmemorystatistics(); $_.getcpustatistics(); ";
+        case TAGS:
+            return "get-tags -vmid $_.vmid; ";
+        default:
+            return "";
         }
-        return details;
     }
 
     static String getStorageDomainLookupHack(String vmId) {

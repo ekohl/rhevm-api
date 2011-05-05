@@ -1,6 +1,8 @@
 package com.redhat.rhevm.api.common.util;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.core.HttpHeaders;
 
@@ -30,4 +32,20 @@ public class DetailHelper {
         return false;
     }
 
+    public enum Detail {
+        DISKS,
+        NICS,
+        STATISTICS,
+        TAGS
+    }
+
+    public static Set<Detail> getDetails(HttpHeaders httpHeaders) {
+        Set<Detail> details = EnumSet.noneOf(Detail.class);
+        for (Detail detail : Detail.class.getEnumConstants()) {
+            if (include(httpHeaders, detail.name().toLowerCase())) {
+                details.add(detail);
+            }
+        }
+        return details;
+    }
 }

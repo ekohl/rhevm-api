@@ -24,6 +24,7 @@ import java.math.BigDecimal;
 import java.util.EnumSet;
 import java.util.List;
 
+import com.redhat.rhevm.api.common.util.DetailHelper.Detail;
 import com.redhat.rhevm.api.model.BootDevice;
 import com.redhat.rhevm.api.model.DisplayType;
 import com.redhat.rhevm.api.model.Statistic;
@@ -33,7 +34,6 @@ import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.model.ValueType;
 import com.redhat.rhevm.api.model.VmStatus;
 import com.redhat.rhevm.api.model.VmType;
-import com.redhat.rhevm.api.powershell.resource.PowerShellVmsResource.Detail;
 
 public class PowerShellVmTest extends PowerShellModelTest {
 
