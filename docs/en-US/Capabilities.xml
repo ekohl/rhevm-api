@@ -31,7 +31,11 @@
           </row>
           <row>
             <entry><literal>power_managers</literal></entry>
-            <entry>The list of available fence agents and their configuration options. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/></entry>
+            <entry>The list of supported fence agents and their configuration options. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/></entry>
+          </row>
+          <row>
+            <entry><literal>storage_types</literal></entry>
+            <entry>A list of each <literal>storage_type</literal> the version supports, such as <literal>NFS</literal>, <literal>iSCSI</literal>, <literal>FCP</literal> or <literal>LOCAL</literal>.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -56,6 +60,11 @@ Content-Type: application/xml
     &lt;power_managers&gt;
       ...
     &lt;/power_managers&gt;
+    &lt;storage_types&gt;
+      &lt;storage_type&gt;ISCSI&lt;/storage_type&gt;
+      &lt;storage_type&gt;FCP&lt;/storage_type&gt;
+      &lt;storage_type&gt;NFS&lt;/storage_type&gt;
+    &lt;/storage_types&gt;
     ...
   &lt;/version&gt;
   &lt;version major="2" minor="3"&gt;
@@ -65,6 +74,12 @@ Content-Type: application/xml
     &lt;power_managers&gt;
       ...
     &lt;/power_managers&gt;
+    &lt;storage_types&gt;
+      &lt;storage_type&gt;ISCSI&lt;/storage_type&gt;
+      &lt;storage_type&gt;FCP&lt;/storage_type&gt;
+      &lt;storage_type&gt;NFS&lt;/storage_type&gt;
+      &lt;storage_type&gt;LOCAL&lt;/storage_type&gt;
+    &lt;/storage_types&gt;
     ...
   &lt;/version&gt;
 &lt;/capabilities&gt;
@@ -138,33 +153,36 @@ Content-Type: application/xml
     <para>For example:</para>
     <screen>
 &lt;capabilities&gt;
+    &lt;version major="2" minor="2"&gt;
     ...
-    &lt;power_managers&gt;
+      &lt;power_managers&gt;
         &lt;power_management type="alom"&gt;
-            &lt;options&gt;
-                &lt;option type="BOOL" name="secure"/&gt;
-                &lt;option type="INT" name="port"/&gt;
-            &lt;/options&gt;
+          &lt;options&gt;
+            &lt;option type="BOOL" name="secure"/&gt;
+            &lt;option type="INT" name="port"/&gt;
+          &lt;/options&gt;
         &lt;/power_management&gt;
         &lt;power_management type="apc"&gt;
-            &lt;options&gt;
-                &lt;option type="BOOL" name="secure"/&gt;
-                &lt;option type="INT" name="port"/&gt;
-                &lt;option type="INT" name="slot"/&gt;
-            &lt;/options&gt;
+          &lt;options&gt;
+            &lt;option type="BOOL" name="secure"/&gt;
+            &lt;option type="INT" name="port"/&gt;
+            &lt;option type="INT" name="slot"/&gt;
+          &lt;/options&gt;
         &lt;/power_management&gt;
         &lt;power_management type="bladecenter"&gt;
-            &lt;options&gt;
-                &lt;option type="BOOL" name="secure"/&gt;
-                &lt;option type="INT" name="port"/&gt;
-                &lt;option type="INT" name="slot"/&gt;
-            &lt;/options&gt;
+          &lt;options&gt;
+            &lt;option type="BOOL" name="secure"/&gt;
+            &lt;option type="INT" name="port"/&gt;
+            &lt;option type="INT" name="slot"/&gt;
+          &lt;/options&gt;
         &lt;/power_management&gt;
         ...
-    &lt;/power_managers&gt;
+      &lt;/power_managers&gt;
     ...
+  &lt;/version&gt;
 &lt;/capabilities&gt;
     </screen>
     <para>Each host can define a power management configuration using one of the listed fencing devices. See <xref linkend="sect-REST_API_Guide-Hosts-Power_Management"/>.</para>
   </section>
+
 </chapter>

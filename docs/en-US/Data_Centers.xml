@@ -32,7 +32,7 @@
         <tbody>
           <row>
             <entry><literal>storage_type</literal></entry>
-            <entry>One of <literal>ISCSI</literal>, <literal>NFS</literal> or <literal>FCP</literal></entry>
+            <entry>One of <literal>ISCSI</literal>, <literal>NFS</literal>, <literal>FCP</literal> or <literal>LOCAL</literal>.</entry>
             <entry>Describes which storage type is allowed in this datacenter</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
