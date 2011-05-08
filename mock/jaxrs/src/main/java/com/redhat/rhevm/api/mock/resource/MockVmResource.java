@@ -130,6 +130,12 @@ public class MockVmResource extends AbstractMockResource<VM> implements VmResour
     }
 
     @Override
+    public Response move(Action action) {
+        return null;
+    }
+
+
+    @Override
     public Response ticket(Action action) {
         return doAction(getUriInfo(), new DoNothingTask(action));
     }
@@ -156,5 +162,4 @@ public class MockVmResource extends AbstractMockResource<VM> implements VmResour
     @Override public AssignedTagsResource        getTagsResource()        { return null; }
     @Override public CreationResource            getCreationSubresource(String ids) { return null; }
     @Override public StatisticsResource          getStatisticsResource()  { return null; }
-
 }

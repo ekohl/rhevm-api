@@ -322,6 +322,11 @@ public class PowerShellVmResource extends AbstractPowerShellActionableResource<V
     }
 
     @Override
+    public Response move(Action action) {
+        return null;
+    }
+
+    @Override
     public Response ticket(Action action) {
         StringBuilder buf = new StringBuilder();
 
