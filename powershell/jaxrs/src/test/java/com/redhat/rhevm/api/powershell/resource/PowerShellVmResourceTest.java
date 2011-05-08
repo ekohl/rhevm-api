@@ -89,8 +89,11 @@ public class PowerShellVmResourceTest extends AbstractPowerShellResourceTest<VM,
     private static final String DEST_HOST_NAME = "farawaysoclose";
     private static final String MIGRATE_COMMAND = "migrate-vm -vmid \"" + VM_ID + "\" -desthostid \"" + DEST_HOST_ID + "\"";
     private static final String EXPORT_WITH_STORAGE_DOMAIN_COMMAND = "export-vm -vmid \"" + VM_ID + "\" -storagedomainid \"" + STORAGE_DOMAIN_ID + "\" -forceoverride -copycollapse";
+    private static final String MOVE_WITH_STORAGE_DOMAIN_COMMAND = "move-vmimages -vmid \"" + VM_ID + "\" -storagedomainid \"" + STORAGE_DOMAIN_ID + "\"";
     private static final String EXPORT_WITH_NAMED_STORAGE_DOMAIN_COMMAND = "$dest = select-storagedomain | ? { $_.name -eq \"" + STORAGE_DOMAIN_NAME + "\" }; export-vm -vmid \"" + VM_ID + "\" -storagedomainid $dest.storagedomainid -forceoverride -copycollapse";
+    private static final String MOVE_WITH_NAMED_STORAGE_DOMAIN_COMMAND = "$dest = select-storagedomain | ? { $_.name -eq \"" + STORAGE_DOMAIN_NAME + "\" }; if($dest -eq $null) {throw 'Cannot find storagedomain.'}; move-vmimages -vmid \"" + VM_ID + "\" -storagedomainid $dest.storagedomainid";
     private static final String EXPORT_WITH_PARAMS_COMMAND = "export-vm -vmid \"" + VM_ID + "\" -storagedomainid \"" + STORAGE_DOMAIN_ID + "\"";
+    private static final String MOVE_WITH_PARAMS_COMMAND = "move-vmimages -vmid \"" + VM_ID + "\" -storagedomainid \"" + STORAGE_DOMAIN_ID + "\"";
     private static final String MIGRATE_COMMAND_WITH_HOST_NAME =
         "$h = select-host -searchtext \"name=" + DEST_HOST_NAME + "\";" +
         "migrate-vm -vmid \"" + VM_ID + "\" -desthostid $h.hostid";
@@ -374,6 +377,55 @@ public class PowerShellVmResourceTest extends AbstractPowerShellResourceTest<VM,
             fail("expected WebApplicationException on incomplete parameters");
         } catch (WebApplicationException wae) {
              verifyIncompleteException(wae, "Action", "export", "storageDomain.id|name");
+        }
+    }
+
+    @Test
+    public void testMoveAsync() throws Exception {
+        Action action = getAction(true);
+        action.setStorageDomain(new StorageDomain());
+        action.getStorageDomain().setId(STORAGE_DOMAIN_ID);
+        setUriInfo(setUpActionExpectation("move", MOVE_WITH_STORAGE_DOMAIN_COMMAND, false, null));
+        verifyActionResponse(resource.move(action), true);
+    }
+
+        @Test
+    public void testMoveWithNamedStorageDomain() throws Exception {
+        Action action = getAction();
+        action.setStorageDomain(new StorageDomain());
+        action.getStorageDomain().setName(STORAGE_DOMAIN_NAME);
+        setUriInfo(setUpActionExpectation("move", MOVE_WITH_NAMED_STORAGE_DOMAIN_COMMAND, false, null));
+        verifyActionResponse(resource.move(action), false);
+    }
+
+        @Test
+    public void testMoveWithParams() throws Exception {
+        Action action = getAction();
+        action.setStorageDomain(new StorageDomain());
+        action.getStorageDomain().setId(STORAGE_DOMAIN_ID);
+        action.setDiscardSnapshots(true);
+        action.setExclusive(true);
+        setUriInfo(setUpActionExpectation("move", MOVE_WITH_PARAMS_COMMAND, false, null));
+        verifyActionResponse(resource.move(action), false);
+    }
+
+        @Test
+    public void testMoveWithStorageDomain() throws Exception {
+        Action action = getAction();
+        action.setStorageDomain(new StorageDomain());
+        action.getStorageDomain().setId(STORAGE_DOMAIN_ID);
+        setUriInfo(setUpActionExpectation("move", MOVE_WITH_STORAGE_DOMAIN_COMMAND, false, null));
+        verifyActionResponse(resource.move(action), false);
+    }
+
+        @Test
+    public void testIncompleteMove() throws Exception {
+        setUriInfo(setUpActionExpectation(null, null, null, null));
+        try {
+            resource.move(getAction());
+            fail("expected WebApplicationException on incomplete parameters");
+        } catch (WebApplicationException wae) {
+             verifyIncompleteException(wae, "Action", "move", "storageDomain.id|name");
         }
     }
 
