@@ -323,7 +323,27 @@ public class PowerShellVmResource extends AbstractPowerShellActionableResource<V
 
     @Override
     public Response move(Action action) {
-        return null;
+        validateParameters(action, "storageDomain.id|name");
+
+        StringBuilder buf = new StringBuilder();
+
+        String storageDomainArg;
+        if (action.getStorageDomain().isSetId()) {
+            storageDomainArg = PowerShellUtils.escape(action.getStorageDomain().getId());
+        } else {
+            buf.append("$dest = select-storagedomain ");
+            buf.append("| ? { $_.name -eq ");
+            buf.append(PowerShellUtils.escape(action.getStorageDomain().getName()));
+            buf.append(" }; ");
+            buf.append("if($dest -eq $null) {throw 'Cannot find storagedomain.'}; ");
+            storageDomainArg = "$dest.storagedomainid";
+        }
+
+        buf.append("move-vmimages");
+        buf.append(" -vmid " + PowerShellUtils.escape(getId()));
+        buf.append(" -storagedomainid " + storageDomainArg);
+
+        return doAction(getUriInfo(), new CommandRunner(action, buf.toString(), getPool()));
     }
 
     @Override
