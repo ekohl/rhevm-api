@@ -25,6 +25,10 @@
 		        <entry>A description of the system event</entry>
 		      </row>
 		      <row>
+		        <entry><literal>code</literal></entry>
+		        <entry>The integer event code. See <xref linkend="appe-REST_API_Guide-Event_Codes"/> for a full list of event codes with descriptions.</entry>
+		      </row>
+		      <row>
 		        <entry><literal>severity</literal></entry>
 		        <entry>The level of severity for the event</entry>
 		      </row>
@@ -43,6 +47,7 @@
 		<screen>&lt;events&gt;
   &lt;event id="537" href="/rhevm-api/events/537"&gt;
     &lt;description&gt;User vdcadmin logged in.&lt;/description&gt;
+    &lt;code&gt;30&lt;/code&gt;
     &lt;severity&gt;NORMAL&lt;/severity&gt;
     &lt;time&gt;2011-01-12T10:48:27.827+02:00&lt;/time&gt;
     &lt;user id="9b9002d1-ec33-4083-8a7b-31f6b8931648" href="/rhevm-api/users/9b9002d1-ec33-4083-8a7b-31f6b8931648"/&gt;
