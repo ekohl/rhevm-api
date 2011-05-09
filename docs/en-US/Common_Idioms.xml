@@ -117,6 +117,11 @@
           <entry>These elements cannot have their value changed when updating a resource. They may only be included in a client-provided representation on update if their values have not been altered. Otherwise they should be omitted from an update action.</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
+        <row>
+          <entry>Read-only</entry>
+          <entry>These elements are read-only. Values for read-only elements are not created or modified.</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
       </tbody>
     </tgroup>
   </table>

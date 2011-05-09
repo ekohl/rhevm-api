@@ -78,6 +78,18 @@
             <entry>Fencing options for host power management. (see <xref linkend="sect-REST_API_Guide-Hosts-Power_Management"/>)</entry>
             <entry></entry>
           </row>
+          <row>
+            <entry><literal>transparent_hugepages</literal></entry>
+            <entry>boolean: true or false</entry>
+            <entry><literal>true</literal> if transparent hugepages is enabled. (see <xref linkend="sect-REST_API_Guide-Hosts-Memory_Management"/>)</entry>
+            <entry></entry>
+          </row>
+          <row>
+            <entry><literal>ksm</literal></entry>
+            <entry>boolean: true or false</entry>
+            <entry><literal>true</literal> if Kernel SamePage Merging (KSM) is enabled. Is disabled if <literal>transparent_hugepages</literal> is enabled. (see <xref linkend="sect-REST_API_Guide-Hosts-Memory_Management"/>)</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
         </tbody>
       </tgroup>
     </informaltable>
@@ -491,6 +503,54 @@ Content-type: application/xml
       </para>
     </note>
 
+  </section>
+
+  <section id="sect-REST_API_Guide-Hosts-Memory_Management">
+  	<title>Memory Management</title>
+  	<para>The API provides two choices for a host's memory management:</para>
+  	<itemizedlist>
+	  	<listitem><para><emphasis role="bold">Kernel SamePage Merging (KSM)</emphasis> - The host kernel reduces references to memory pages from multiple identical pages to a single page reference. This helps with optimization for memory density.</para></listitem>
+	  	<listitem><para><emphasis role="bold">Transparent Hugepage support</emphasis> - Hugepage support expands the size of memory pages beyond the standard 4kB limit. This reduces memory consumption and increases host performance.</para></listitem> 
+  	</itemizedlist>
+  	<para>Kernel SamePage Merging (KSM) uses the <literal>ksm</literal> element, which is a read-only element:</para>
+  	<screen>
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+  &lt;name&gt;zig&lt;/name&gt;
+  &lt;status&gt;UP&lt;/status&gt;
+  ...
+  &lt;ksm&gt;true&lt;/ksm&gt;
+&lt;/host&gt;
+  	</screen>
+  	<para>Transparent Hugepage support uses the <literal>transparent_hugepages</literal> element and updates with a <literal>PUT</literal> request:</para>
+  	<screen>
+PUT /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+
+&lt;host&gt;
+  &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
+&lt;/host&gt;
+  	</screen>
+  	<para>This also sets the status of <literal>ksm</literal>. For example, if <literal>transparent_hugepages</literal> is set to <literal>true</literal>, the API sets <literal>ksm</literal> to <literal>false</literal>:</para>
+  	<screen>
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+  &lt;name&gt;zig&lt;/name&gt;
+  &lt;status&gt;UP&lt;/status&gt;
+  ...
+  &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
+  &lt;ksm&gt;false&lt;/ksm&gt;
+&lt;/host&gt;
+  	</screen>
+  	<para>If <literal>transparent_hugepages</literal> is set to <literal>false</literal>, the API sets <literal>ksm</literal> to <literal>true</literal>.</para>
+  	<screen>
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+  &lt;name&gt;zig&lt;/name&gt;
+  &lt;status&gt;UP&lt;/status&gt;
+  ...
+  &lt;transparent_hugepages&gt;false&lt;/transparent_hugepages&gt;
+  &lt;ksm&gt;true&lt;/ksm&gt;
+&lt;/host&gt;
+  </screen>
   </section>
 
   <section id="sect-REST_API_Guide-Hosts-Install">
