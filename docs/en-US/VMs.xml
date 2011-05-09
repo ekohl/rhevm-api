@@ -422,12 +422,6 @@
                 <entry>The MAC address of the interface</entry>
                 <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
               </row>
-              <row>
-                <entry><literal>ip address/netmask/gateway</literal></entry>
-                <entry>complex</entry>
-                <entry>IP level details on the interface configuration, obtained from a guest agent if available</entry>
-                <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-              </row>
             </tbody>
           </tgroup>
         </informaltable>
