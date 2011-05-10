@@ -55,6 +55,12 @@
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
+            <entry><literal>timezone</literal></entry>
+            <entry>tz database format: <literal>Area/Location</literal></entry>
+            <entry>The timezone for this VM</entry>
+            <entry></entry>
+          </row>
+          <row>
             <entry><literal>origin</literal></entry>
             <entry>One of <literal>RHEV</literal>, <literal>VMWARE</literal> or <literal>XEN</literal></entry>
             <entry>The system from which this VM originated</entry>
@@ -159,6 +165,7 @@
   &lt;status&gt;DOWN&lt;/status&gt;
   &lt;creation_time&gt;2010-08-16T14:24:29&lt;/creation_time&gt;
   &lt;start_time&gt;2010-18-16T13:14:15&lt;/start_time&gt;
+  &lt;timezone&gt;Europe/London&lt;/timezone&gt;
   &lt;origin&gt;RHEV&lt;/origin&gt;
   &lt;memory&gt;536870912&lt;/memory&gt;
   &lt;cpu&gt;
