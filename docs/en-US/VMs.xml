@@ -150,6 +150,12 @@
             <entry>A reference to the VM pool which this VM is a member of. See <xref linkend="chap-REST_API_Guide-VM_Pools"/></entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
+          <row>
+            <entry><literal>placement_policy</literal></entry>
+            <entry>complex</entry>
+            <entry>Sets the placement policy for VM migration. Requires a default <literal>host</literal><remark> and an <literal>affinity</literal> (one of <literal>MIGRATABLE</literal>, <literal>USER_MIGRATABLE</literal> or <literal>PINNED</literal>)</remark>.</entry>
+            <entry></entry>
+          </row>
         </tbody>
       </tgroup>
     </informaltable>
@@ -183,6 +189,10 @@
   &lt;stateless&gt;false&lt;/stateless&gt;
   &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
   &lt;template id="00000000-0000-0000-0000-000000000000" href="/rhevm-api/templates/00000000-0000-0000-0000-000000000000"/&gt;
+  &lt;placement_policy&gt;
+      &lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"/&gt;
+      &lt;affinity&gt;MIGRATABLE&lt;/affinity&gt;
+  &lt;/placement_policy&gt;
   &lt;link rel="cdroms" href="/rhevm-api/vms/082c794b-771f-452f-83c9-b2b5a19c0399/cdroms"/&gt;
   &lt;link rel="disks" href="/rhevm-api/vms/082c794b-771f-452f-83c9-b2b5a19c0399/disks"/&gt;
   &lt;link rel="nics" href="/rhevm-api/vms/082c794b-771f-452f-83c9-b2b5a19c0399/nics"/&gt;
