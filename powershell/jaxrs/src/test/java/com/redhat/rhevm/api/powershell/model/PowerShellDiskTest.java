@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import com.redhat.rhevm.api.common.util.SizeConverter;
 import com.redhat.rhevm.api.model.DiskFormat;
 import com.redhat.rhevm.api.model.DiskInterface;
 import com.redhat.rhevm.api.model.DiskStatus;
@@ -62,7 +63,7 @@ public class PowerShellDiskTest extends PowerShellModelTest {
         assertNotNull(disks);
         assertEquals(disks.size(), 2);
 
-        testDisk(disks.get(0), "222ea10f-7c0a-4302-8e80-2834b8fa681a", VM_ID, 1073741824L, DiskType.DATA, DiskStatus.OK, DiskInterface.IDE, DiskFormat.COW, true, false, false, false, "22a659ab-29a3-4160-9647-bb07753c612e", "00000000-0000-0000-0000-000000000000", "2", "2010-07-22T10:40:27.000Z", "788cd1e6-aa2b-412e-bcaf-0b37b96f00b2");
-        testDisk(disks.get(1), "0e833f37-3437-44f2-a04f-6f9692882431", VM_ID, 2147483648L, DiskType.SYSTEM, DiskStatus.OK, DiskInterface.VIRTIO, DiskFormat.RAW, false, true, true, false, "1d122de8-1aa2-4b07-9d42-937333ea577d", "00000000-0000-0000-0000-000000000000", "1", "2010-07-22T10:59:42.000Z", "788cd1e6-aa2b-412e-bcaf-0b37b96f00b2");
+        testDisk(disks.get(0), "222ea10f-7c0a-4302-8e80-2834b8fa681a", VM_ID, SizeConverter.gigasToBytes(3), DiskType.DATA, DiskStatus.OK, DiskInterface.IDE, DiskFormat.COW, true, false, false, false, "22a659ab-29a3-4160-9647-bb07753c612e", "00000000-0000-0000-0000-000000000000", "2", "2010-07-22T10:40:27.000Z", "788cd1e6-aa2b-412e-bcaf-0b37b96f00b2");
+        testDisk(disks.get(1), "0e833f37-3437-44f2-a04f-6f9692882431", VM_ID, SizeConverter.gigasToBytes(2), DiskType.SYSTEM, DiskStatus.OK, DiskInterface.VIRTIO, DiskFormat.RAW, false, true, true, false, "1d122de8-1aa2-4b07-9d42-937333ea577d", "00000000-0000-0000-0000-000000000000", "1", "2010-07-22T10:59:42.000Z", "788cd1e6-aa2b-412e-bcaf-0b37b96f00b2");
     }
 }
