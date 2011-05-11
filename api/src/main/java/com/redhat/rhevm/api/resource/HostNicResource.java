@@ -33,7 +33,7 @@ import com.redhat.rhevm.api.model.HostNIC;
 
 
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_X_YAML})
-public interface HostNicResource extends MeasurableResource {
+public interface HostNicResource extends UpdatableResource<HostNIC>, MeasurableResource {
 
     @GET
     @Formatted

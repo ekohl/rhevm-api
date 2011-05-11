@@ -18,6 +18,8 @@
  */
 package com.redhat.rhevm.api.powershell.resource;
 
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Executor;
 
 import javax.ws.rs.core.Response;
@@ -28,7 +30,12 @@ import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.HostNIC;
 import com.redhat.rhevm.api.resource.HostNicResource;
 import com.redhat.rhevm.api.resource.StatisticsResource;
+import com.redhat.rhevm.api.powershell.model.PowerShellHostNIC;
+import com.redhat.rhevm.api.powershell.model.PowerShellVM;
+import com.redhat.rhevm.api.powershell.resource.PowerShellVmsResource.Detail;
+import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
+import com.redhat.rhevm.api.powershell.util.PowerShellPool;
 import com.redhat.rhevm.api.powershell.util.PowerShellPoolMap;
 import com.redhat.rhevm.api.powershell.util.PowerShellUtils;
 
@@ -107,6 +114,11 @@ public class PowerShellHostNicResource
     @Override
     public StatisticsResource getStatisticsResource() {
         // REVISIT
+        return null;
+    }
+
+    @Override
+    public HostNIC update(HostNIC nic) {
         return null;
     }
 }
