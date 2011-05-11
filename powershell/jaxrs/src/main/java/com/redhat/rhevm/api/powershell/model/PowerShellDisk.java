@@ -137,7 +137,7 @@ public class PowerShellDisk extends Disk {
             disk.getStorageDomain().setId(storageDomainId);
         }
 
-        disk.setSize(entity.get("actualsizeinbytes", Double.class).longValue());
+        disk.setSize(entity.get("sizeingb", Long.class) * 1024L * 1024L * 1024L);
         disk.setType(entity.get("disktype", PowerShellDiskType.class).map().value());
         disk.setStatus(entity.get("status", PowerShellImageStatus.class).map());
         disk.setInterface(PowerShellDiskInterface.valueOf(entity.get("diskinterface")).map().value());
