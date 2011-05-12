@@ -1833,6 +1833,7 @@
           <xs:element ref="bonding" minOccurs="0" maxOccurs="1"/>                    
           <xs:element name="boot_protocol" type="xs:string" minOccurs="0" maxOccurs="1"/>
           <xs:element name="statistics" type="Statistics" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="check_connectivity" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
           <xs:element name="speed" type="xs:long" minOccurs="0" maxOccurs="1"/>
           <xs:element name="status" type="NicStatus" minOccurs="0" maxOccurs="1"/>
           <!-- Also a rel="master" link for bonded nics -->
