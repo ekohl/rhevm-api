@@ -19,20 +19,19 @@
 package com.redhat.rhevm.api.powershell.resource;
 
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.Executor;
 
 import javax.ws.rs.core.Response;
 
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.model.Action;
+import com.redhat.rhevm.api.model.BootProtocol;
 import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.HostNIC;
+import com.redhat.rhevm.api.model.Option;
 import com.redhat.rhevm.api.resource.HostNicResource;
 import com.redhat.rhevm.api.resource.StatisticsResource;
 import com.redhat.rhevm.api.powershell.model.PowerShellHostNIC;
-import com.redhat.rhevm.api.powershell.model.PowerShellVM;
-import com.redhat.rhevm.api.powershell.resource.PowerShellVmsResource.Detail;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
 import com.redhat.rhevm.api.powershell.util.PowerShellPool;
@@ -53,7 +52,7 @@ public class PowerShellHostNicResource
                                      PowerShellParser parser,
                                      PowerShellHostNicsResource parent,
                                      UriInfoProvider uriProvider) {
-        super(id, executor, uriProvider, shellPools);
+        super(id, executor, uriProvider, shellPools, parser);
         this.parent = parent;
     }
 
@@ -119,6 +118,73 @@ public class PowerShellHostNicResource
 
     @Override
     public HostNIC update(HostNIC nic) {
-        return null;
+        validateUpdate(nic);
+        validateParameters(nic, "network.id|name");
+
+        StringBuilder buf = new StringBuilder();
+
+        buf.append("$h = get-host -hostid " + PowerShellUtils.escape(parent.getHostId()) + "; ");
+        buf.append("if($h -eq $null){throw 'Cannot find host " + PowerShellUtils.escape(parent.getHostId()) + "'};");
+        buf.append("$na = $h.getnetworkadapters() | ? {$_.id -eq " + PowerShellUtils.escape(getId()) + "};");
+        buf.append("if($na -eq $null){throw 'Cannot find nic with id " + PowerShellUtils.escape(getId()) + "'};");
+
+        buf.append("$c = select-cluster | ? {$_.clusterid -eq $h.hostclusterid};");
+        buf.append("if($c -eq $null){throw 'Cannot find cluster with id $h.hostclusterid.'};");
+        if(nic.getNetwork().isSetName()){
+            buf.append("$network = get-networks -clusterid $c.clusterid | ? {$_.name -eq " + PowerShellUtils.escape(nic.getNetwork().getName()) + "};");
+        }else{
+            buf.append("$network = get-networks -clusterid $c.clusterid | ? {$_.networkid -eq " + PowerShellUtils.escape(nic.getNetwork().getId()) + "};");
+        }
+        buf.append("if($network -eq $null){throw 'Cannot find network with name $na.network'};");
+
+        buf.append("$updated_host = update-logicalnetworktonetworkadapter -hostobject $h -network $network -networkadapterobjects $na");
+
+        if(nic.isSetIp()){
+            if(nic.getIp().isSetAddress()){
+                buf.append(" -address " + PowerShellUtils.escape(nic.getIp().getAddress()));
+            }
+            if(nic.getIp().isSetNetmask()){
+                buf.append(" -subnet " + PowerShellUtils.escape(nic.getIp().getNetmask()));
+            }
+            if(nic.getIp().isSetGateway()){
+                buf.append(" -gateway " + PowerShellUtils.escape(nic.getIp().getGateway()));
+            }
+        }
+       if(nic.isSetBootProtocol()){
+            BootProtocol bootProtocol = BootProtocol.fromValue(nic.getBootProtocol());
+            if(bootProtocol != null){
+                buf.append(" -bootprotocol " + PowerShellUtils.escape(PowerShellHostNIC.buildNetworkBootProtocol(bootProtocol)));
+            }
+       }else if(nic.isSetIp()){
+            buf.append(" -bootprotocol " + PowerShellUtils.escape(PowerShellHostNIC.buildNetworkBootProtocol(BootProtocol.STATIC)));
+       }
+       if(nic.isSetBonding() && nic.getBonding().isSetOptions()){
+           StringBuffer bufOptions = new StringBuffer();
+           for(Option opt : nic.getBonding().getOptions().getOptions()){
+               bufOptions.append(opt.getName() + "=" + opt.getValue() + " ");
+           }
+           buf.append(" -bondingoptions " + PowerShellUtils.escape(bufOptions.toString().substring(0, bufOptions.length() - 1)));
+       }
+       if(nic.isSetCheckConectivity()){
+           buf.append(" -checkconectivity " + (nic.isCheckConectivity() ? "$true" : "$false"));
+       }
+       buf.append(" -oldnetworkname $na.network;");
+       buf.append("$h.getnetworkadapters() | ? {$_.name -eq $na.name};");
+
+       return parent.addLinks(runAndParseSingle(buf.toString(), parent.getHostId()));
+    }
+
+    public PowerShellHostNIC runAndParseSingle(String command, String hostId) {
+        return runAndParseSingle(getPool(), getParser(), command, hostId);
+    }
+
+    public static PowerShellHostNIC runAndParseSingle(PowerShellPool pool, PowerShellParser parser, String command, String hostId) {
+        List<PowerShellHostNIC> nics = runAndParse(pool, parser, command, hostId);
+
+        return !nics.isEmpty() ? nics.get(0) : null;
+    }
+
+    public static List<PowerShellHostNIC> runAndParse(PowerShellPool pool, PowerShellParser parser, String command, String hostId) {
+        return PowerShellHostNIC.parse(parser, hostId,  PowerShellCmd.runCommand(pool, command));
     }
 }

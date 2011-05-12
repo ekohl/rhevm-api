@@ -21,6 +21,7 @@ package com.redhat.rhevm.api.powershell.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.redhat.rhevm.api.model.BootProtocol;
 import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.HostNIC;
 import com.redhat.rhevm.api.model.IP;
@@ -99,5 +100,19 @@ public class PowerShellHostNIC extends HostNIC {
         }
 
         return ret;
+    }
+
+    public static String buildNetworkBootProtocol(BootProtocol protocol) {
+        if (protocol != null) {
+            switch (protocol) {
+                case DHCP:
+                    return "Dhcp";
+                case STATIC:
+                    return "StaticIp";
+                default:
+                    break;
+            }
+        }
+        return null;
     }
 }
