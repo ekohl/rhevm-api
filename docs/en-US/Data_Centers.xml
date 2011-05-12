@@ -43,6 +43,18 @@
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
+            <entry><literal>link rel="vms"</literal></entry>
+            <entry>string</entry>
+            <entry>A link to a description of the virtual machines on this data center</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
+          <row>
+            <entry><literal>link rel="templates"</literal></entry>
+            <entry>string</entry>
+            <entry>A link to a description of the virtual machines templates on this data center</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>          
+          <row>
             <entry><literal>link rel="files"</literal></entry>
             <entry>string</entry>
             <entry>A link to a description of the files available in this data center</entry>
@@ -73,6 +85,8 @@
   &lt;description&gt;The default Data Center&lt;/description&gt;
   &lt;storage_type&gt;NFS&lt;/storage_type&gt;
   &lt;link rel="storagedomains" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains"/&gt;
+  &lt;link rel="vms" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/vms"/&gt;
+  &lt;link rel="templates" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/templates"/&gt;
   &lt;link rel="files" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/files"/&gt;
   &lt;version major="2" minor="2"/&gt;
   &lt;supported_versions&gt;
@@ -123,8 +137,6 @@ Content-Type: application/xml
     &lt;path&gt;/exports/RHEVX/images/0&lt;/path&gt;
   &lt;/storage&gt;
   &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
-  &lt;link rel="vms" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed/vms"/&gt;
-  &lt;link rel="templates" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed/templates"/&gt;
   &lt;actions&gt;
     &lt;link rel="activate" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed/activate"/&gt;
     &lt;link rel="deactivate" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed/deactivate"/&gt;

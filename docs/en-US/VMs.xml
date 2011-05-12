@@ -384,6 +384,7 @@
   &lt;format&gt;RAW&lt;/format&gt;
   &lt;bootable&gt;true&lt;/bootable&gt;
   &lt;vm id="cdc0b102-fbfe-444a-b9cb-57d2af94f401" href="/rhevm-api/vms/cdc0b102-fbfe-444a-b9cb-57d2af94f401"/&gt;
+  &lt;storage_domain id="fabe0451-701f-4235-8f7e-e20e458819ed" href="/rhevm-api/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed"/&gt;
 &lt;/disk&gt;
       </screen>
     </section>
