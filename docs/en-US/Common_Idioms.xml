@@ -156,13 +156,40 @@ Content-Type: application/xml
 
   </section>
 
+  <section id="sect-REST_API_Guide-Common_Idioms-Listing_Resource_Subcollections">
+    <title>
+      Listing Resource Sub-Collections
+    </title>
+    <para>
+      A request for resources also allows for sub-collection listings using the <literal>detail</literal> parameter in the <literal>Accept</literal> header.
+    </para>
+    <screen>
+GET /rhevm-api/resources/ HTTP/1.1
+Accept: application/xml; detail=subcollection
+    </screen>
+    <para>
+      This includes multiple sub-collection requests using either seperated <literal>detail</literal> parameters:
+    </para>
+    <screen>
+GET /rhevm-api/resources/ HTTP/1.1
+Accept: application/xml; detail=subcollection1; detail=subcollection2
+    </screen>
+    <para>
+      Or one <literal>detail</literal> parameter that seperates the sub-collection with the <literal>+</literal> operator:
+    </para>
+    <screen>
+GET /rhevm-api/resources/ HTTP/1.1
+Accept: application/xml; detail=subcollection1+subcollection2+subcollection2
+    </screen>
+  </section>
+
   <section id="sect-REST_API_Guide-Common_Idioms-Querying_Collections">
     <title>
       Querying a Collection
     </title>
 
     <para>
-      A collection may be queried using a <literal>GET</literal> request on an appropropriate <literal>"collection/search"</literal> URI template, instantiated with a query constraint expressed in the Red Hat Enterprise Virtualization Manager query language. Only those resources in the collection satisfying the constraint will be returned.
+      A collection is queried using a <literal>GET</literal> request on an appropriate <literal>"collection/search"</literal> URI template, instantiated with a query constraint expressed in the Red Hat Enterprise Virtualization Manager query language. Only those resources in the collection satisfying the constraint will be returned.
     </para>
 
     <screen>
@@ -179,7 +206,9 @@ Content-Type: application/xml
   ...
 &lt;/resources&gt;
     </screen>
-
+    <para>
+    	More information about queries is found in <xref linkend="chap-REST_API_Guide-Search"/>.
+    </para>
   </section>
 
   <section id="sect-REST_API_Guide-Common_Idioms-Retrieving_Resources">
