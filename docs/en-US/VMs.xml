@@ -769,8 +769,12 @@ POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
 Content-type: application/xml
 
 &lt;action&gt;
-  &lt;storage_domain name="images0"/&gt;
-  &lt;cluster name="Default"/&gt;
+  &lt;storage_domain&gt;
+    &lt;name&gt;images0&lt;/name&gt;
+  &lt;/storage_domain&gt;
+  &lt;cluster&gt;
+    &lt;name&gt;Default&lt;/name&gt;
+  &lt;/cluster&gt;
 &lt;/action&gt;
     </screen>
 
