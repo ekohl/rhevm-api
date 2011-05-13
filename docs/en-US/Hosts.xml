@@ -816,12 +816,13 @@ Accept: application/xml
   <section id="sect-REST_API_Guide-Hosts-Fencing_Action">
     <title>Fencing Action</title>
     <para>The <literal>fence</literal> action enables the system to fence a troublesome host and reduce power usage. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/> for details on configuring a fencing device for a host.</para>
+    <para>The <literal>fence_type</literal> is one of <literal>manual</literal>, <literal>start</literal>, <literal>status</literal>, <literal>stop</literal>, or <literal>restart</literal>.</para>
     <screen>
 POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/fence
 Content-Type: application/xml
 
 &lt;action&gt;
-  &lt;fence_type&gt;(MANUAL|START|STATUS|STOP|RESTART)&lt;/fence_type&gt;
+  &lt;fence_type&gt;start&lt;/fence_type&gt;
 &lt;/action&gt;
     </screen>
   </section>
