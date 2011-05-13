@@ -121,7 +121,7 @@
         <tbody>
           <row>
             <entry><literal>policy</literal></entry>
-            <entry><literal>POWER_SAVING</literal> or <literal>EVENLY_DISTRIBUTED</literal></entry>
+            <entry><literal>power_saving</literal> or <literal>evenly_distributed</literal></entry>
             <entry>The VM scheduling mode for hosts in the cluster.</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>

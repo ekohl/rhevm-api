@@ -34,7 +34,7 @@
         <tbody>
           <row>
             <entry><literal>type</literal></entry>
-            <entry>One of DESKTOP or SERVER</entry>
+            <entry>One of <literal>desktop</literal> or <literal>server</literal></entry>
             <entry>The type of virtual machine the template provides</entry>
             <entry> </entry>
           </row>
@@ -52,7 +52,7 @@
           </row>
           <row>
             <entry><literal>origin</literal></entry>
-            <entry>One of <literal>RHEV</literal>, <literal>VMWARE</literal> or <literal>XEN</literal></entry>
+            <entry>One of <literal>rhev</literal>, <literal>vmware</literal> or <literal>xen</literal></entry>
             <entry>The system from which this template originated</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
@@ -77,7 +77,7 @@
           <row>
             <entry><literal>display</literal></entry>
             <entry>complex</entry>
-            <entry>The display <literal>type</literal> (either <literal>VNC</literal> or <literal>SPICE</literal>), port, and the number of <literal>monitors</literal></entry>
+            <entry>The display <literal>type</literal> (either <literal>vnc</literal> or <literal>spice</literal>), port, and the number of <literal>monitors</literal></entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
@@ -133,17 +133,17 @@
 &lt;template id="00000000-0000-0000-0000-000000000000" href="/rhevm-api/templates/00000000-0000-0000-0000-000000000000"&gt;
   &lt;name&gt;Blank&lt;/name&gt;
   &lt;description&gt;Blank template&lt;/description&gt;
-  &lt;type&gt;SERVER&lt;/type&gt;
+  &lt;type&gt;server&lt;/type&gt;
   &lt;status&gt;OK&lt;/status&gt;
   &lt;creation_time&gt;2010-08-16T14:24:29&lt;/creation_time&gt;
   &lt;stateless&gt;false&lt;/stateless&gt;
-  &lt;origin&gt;RHEV&lt;/origin&gt;
+  &lt;origin&gt;rhev&lt;/origin&gt;
   &lt;memory&gt;536870912&lt;/memory&gt;
   &lt;cpu&gt;
     &lt;topology cores="1" sockets="1"/&gt;
   &lt;/cpu&gt;
   &lt;display&gt;
-    &lt;type&gt;VNC&lt;/type&gt;
+    &lt;type&gt;vnc&lt;/type&gt;
     &lt;port&gt;5910&lt;/port&gt;
     &lt;monitors&gt;1&lt;/monitors&gt;
   &lt;/display&gt;

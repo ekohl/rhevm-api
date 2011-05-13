@@ -32,7 +32,7 @@
         <tbody>
           <row>
             <entry><literal>storage_type</literal></entry>
-            <entry>One of <literal>ISCSI</literal>, <literal>NFS</literal>, <literal>FCP</literal> or <literal>LOCAL</literal>.</entry>
+            <entry>One of <literal>iscsi</literal>, <literal>nfs</literal>, <literal>fcp</literal> or <literal>local</literal>.</entry>
             <entry>Describes which storage type is allowed in this datacenter</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
@@ -83,7 +83,7 @@
 &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"&gt;
   &lt;name&gt;Default&lt;/name&gt;
   &lt;description&gt;The default Data Center&lt;/description&gt;
-  &lt;storage_type&gt;NFS&lt;/storage_type&gt;
+  &lt;storage_type&gt;nfs&lt;/storage_type&gt;
   &lt;link rel="storagedomains" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains"/&gt;
   &lt;link rel="vms" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/vms"/&gt;
   &lt;link rel="templates" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/templates"/&gt;
@@ -128,11 +128,11 @@ Content-Type: application/xml
 
 &lt;storage_domain id="fabe0451-701f-4235-8f7e-e20e458819ed" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed"&gt;
   &lt;name&gt;images0&lt;/name&gt;
-  &lt;type&gt;DATA&lt;/type&gt;
+  &lt;type&gt;data&lt;/type&gt;
   &lt;status&gt;INACTIVE&lt;/status&gt;
   &lt;master&gt;true&lt;/master&gt;
   &lt;storage&gt;
-    &lt;type&gt;NFS&lt;/type&gt;
+    &lt;type&gt;nfs&lt;/type&gt;
     &lt;address&gt;172.31.0.6&lt;/address&gt;
     &lt;path&gt;/exports/RHEVX/images/0&lt;/path&gt;
   &lt;/storage&gt;
@@ -165,12 +165,12 @@ Accept: application/xml
 &lt;files&gt;
   &lt;file id="en_winxp_pro_with_sp2.iso" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/files/en_winxp_pro_with_sp2.iso"&gt;
     &lt;name&gt;en_winxp_pro_with_sp2.iso&lt;/name&gt;
-    &lt;type&gt;ISO&lt;/type&gt;
+    &lt;type&gt;iso&lt;/type&gt;
     &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
   &lt;/file&gt;
   &lt;file id="boot.vfd" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/files/boot.vfd"&gt;
     &lt;name&gt;boot.vfd&lt;/name&gt;
-    &lt;type&gt;VFD&lt;/type&gt;
+    &lt;type&gt;vfd&lt;/type&gt;
     &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
   &lt;/file&gt;
 &lt;/files&gt;
