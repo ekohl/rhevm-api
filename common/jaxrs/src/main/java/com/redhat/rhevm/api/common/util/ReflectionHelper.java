@@ -68,9 +68,12 @@ public class ReflectionHelper {
     }
 
     public static boolean isSet(Object o, String name) {
-        Method m = getMethod(o, IS_SET_ROOT + name);
-        Object ret = invoke(o, m);
-        return ret != null && ret instanceof Boolean && ((Boolean)ret).booleanValue();
+        if(o != null){
+            Method m = getMethod(o, IS_SET_ROOT + name);
+            Object ret = invoke(o, m);
+            return ret != null && ret instanceof Boolean && ((Boolean)ret).booleanValue();
+        }
+        return false;
     }
 
     public static boolean different(Object lhs, Object rhs, String name) {
