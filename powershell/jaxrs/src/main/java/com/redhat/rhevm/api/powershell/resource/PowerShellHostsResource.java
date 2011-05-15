@@ -28,8 +28,8 @@ import javax.ws.rs.core.UriBuilder;
 import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.Hosts;
 import com.redhat.rhevm.api.model.PowerManagement;
-import com.redhat.rhevm.api.model.PowerManagementOption;
-import com.redhat.rhevm.api.model.PowerManagementOptions;
+import com.redhat.rhevm.api.model.Option;
+import com.redhat.rhevm.api.model.Options;
 import com.redhat.rhevm.api.resource.HostResource;
 import com.redhat.rhevm.api.resource.HostsResource;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
@@ -106,7 +106,7 @@ public class PowerShellHostsResource
             }
 
             if (powerManagement.isSetOptions()) {
-                for (PowerManagementOption opt : powerManagement.getOptions().getOptions()) {
+                for (Option opt : powerManagement.getOptions().getOptions()) {
                     if (opt.getName() == null) {
                         continue;
                     }
@@ -149,11 +149,11 @@ public class PowerShellHostsResource
         return new PowerShellHostResource(id, getExecutor(), this, shellPools, getParser(), getHttpHeaders());
     }
 
-    public static String joinPowerManagementOptions(PowerManagementOptions options) {
+    public static String joinPowerManagementOptions(Options options) {
         StringBuilder buf = new StringBuilder();
-        Iterator<PowerManagementOption> iter = options.getOptions().iterator();
+        Iterator<Option> iter = options.getOptions().iterator();
         while (iter.hasNext()) {
-            PowerManagementOption option = iter.next();
+            Option option = iter.next();
             buf.append(option.getName());
             buf.append("=");
             buf.append(option.getValue());

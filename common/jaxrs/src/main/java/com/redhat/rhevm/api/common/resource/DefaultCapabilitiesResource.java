@@ -36,8 +36,8 @@ import com.redhat.rhevm.api.model.FenceTypes;
 import com.redhat.rhevm.api.model.NicType;
 import com.redhat.rhevm.api.model.NicTypes;
 import com.redhat.rhevm.api.model.PowerManagement;
-import com.redhat.rhevm.api.model.PowerManagementOption;
-import com.redhat.rhevm.api.model.PowerManagementOptions;
+import com.redhat.rhevm.api.model.Option;
+import com.redhat.rhevm.api.model.Options;
 import com.redhat.rhevm.api.model.PowerManagers;
 import com.redhat.rhevm.api.model.SchedulingPolicies;
 import com.redhat.rhevm.api.model.SchedulingPolicyType;
@@ -113,7 +113,7 @@ public class DefaultCapabilitiesResource implements CapabilitiesResource {
 
         powerManagement.setType(type);
 
-        powerManagement.setOptions(new PowerManagementOptions());
+        powerManagement.setOptions(new Options());
 
         String[] opts = options.split(",");
         for (int i = 0; i < opts.length; i++) {
@@ -123,7 +123,7 @@ public class DefaultCapabilitiesResource implements CapabilitiesResource {
 
             String[] parts = opts[i].split("=");
 
-            PowerManagementOption option = new PowerManagementOption();
+            Option option = new Option();
             option.setName(parts[0]);
             option.setType(parts[1]);
             powerManagement.getOptions().getOptions().add(option);

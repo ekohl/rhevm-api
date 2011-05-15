@@ -737,6 +737,26 @@
       <xs:element name="active" type="xs:unsignedInt" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
+  
+  <xs:complexType name="Option">
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+    <xs:attribute name="type" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:element name="options" type="Options"/>
+ 
+  <xs:complexType name="Options">
+    <xs:sequence>
+      <xs:element name="option" type="Option" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="Options"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
 
   <!-- Data Centers -->
 
@@ -842,25 +862,6 @@
   </xs:complexType>
 
   <!-- Hosts -->
-
-  <xs:complexType name="PowerManagementOption">
-    <xs:attribute name="name" type="xs:string"/>
-    <xs:attribute name="value" type="xs:string"/>
-    <xs:attribute name="type" type="xs:string"/>
-  </xs:complexType>
-
-  <xs:complexType name="PowerManagementOptions">
-    <xs:sequence>
-      <xs:element name="option" type="PowerManagementOption" minOccurs="0" maxOccurs="unbounded">
-        <xs:annotation>
-          <xs:appinfo>
-            <jaxb:property name="Options"/>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-
   <xs:element name="power_management" type="PowerManagement"/>
 
   <xs:complexType name="PowerManagement">
@@ -869,7 +870,7 @@
       <xs:element name="address" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="username" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="options" type="PowerManagementOptions" minOccurs="0"/>
+      <xs:element name="options" type="Options" minOccurs="0"/>
       <xs:element name="status" type="PowerManagementStatus" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute name="type" type="xs:string"/>
@@ -1829,8 +1830,7 @@
           <xs:element ref="mac" minOccurs="0"/>
           <xs:element ref="ip" minOccurs="0"/>
           <xs:element ref="vlan" minOccurs="0"/>
-          <xs:element ref="slaves" minOccurs="0"/>
-          <xs:element name="bond_options" type="xs:string" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="bonding" minOccurs="0" maxOccurs="1"/>                    
           <xs:element name="boot_protocol" type="xs:string" minOccurs="0" maxOccurs="1"/>
           <xs:element name="statistics" type="Statistics" minOccurs="0" maxOccurs="1"/>
           <xs:element name="speed" type="xs:long" minOccurs="0" maxOccurs="1"/>
@@ -1868,6 +1868,15 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="bonding" type="Bonding"/>
+
+  <xs:complexType name="Bonding">
+    <xs:sequence>
+      <xs:element ref="options" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="slaves" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
 

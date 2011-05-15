@@ -34,7 +34,7 @@ import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.IscsiDetails;
 import com.redhat.rhevm.api.model.Link;
 import com.redhat.rhevm.api.model.PowerManagement;
-import com.redhat.rhevm.api.model.PowerManagementOption;
+import com.redhat.rhevm.api.model.Option;
 import com.redhat.rhevm.api.model.Statistic;
 import com.redhat.rhevm.api.resource.AssignedPermissionsResource;
 import com.redhat.rhevm.api.resource.AssignedTagsResource;
@@ -149,7 +149,7 @@ public class PowerShellHostResource extends AbstractPowerShellActionableResource
             }
 
             if (powerManagement.isSetOptions()) {
-                for (PowerManagementOption opt : powerManagement.getOptions().getOptions()) {
+                for (Option opt : powerManagement.getOptions().getOptions()) {
                     if (opt.getName() == null) {
                         continue;
                     }

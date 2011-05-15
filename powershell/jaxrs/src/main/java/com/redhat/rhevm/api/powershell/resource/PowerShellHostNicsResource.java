@@ -27,6 +27,7 @@ import javax.ws.rs.core.UriBuilder;
 
 import com.redhat.rhevm.api.resource.MediaType;
 
+import com.redhat.rhevm.api.model.Bonding;
 import com.redhat.rhevm.api.model.HostNIC;
 import com.redhat.rhevm.api.model.HostNics;
 import com.redhat.rhevm.api.model.Link;
@@ -129,12 +130,13 @@ public class PowerShellHostNicsResource extends UriProviderWrapper implements Ho
             master.setHref(uriBuilder.clone().path(masterId).build().toString());
             nic.getLinks().add(master);
         } else {
-            nic.setSlaves(new Slaves());
+            nic.setBonding(new Bonding());
+            nic.getBonding().setSlaves(new Slaves());
             for (PowerShellHostNIC bond : bondNics) {
                 HostNIC slave = new HostNIC();
                 slave.setId(bond.getId());
                 slave.setHost(bond.getHost());
-                nic.getSlaves().getSlaves().add(LinkHelper.addLinks(getUriInfo(), slave));
+                nic.getBonding().getSlaves().getSlaves().add(LinkHelper.addLinks(getUriInfo(), slave));
                 slave.setHost(null);
             }
         }
@@ -179,7 +181,7 @@ public class PowerShellHostNicsResource extends UriProviderWrapper implements Ho
 
     @Override
     public Response add(HostNIC nic) {
-        validateParameters(nic, "name", "network.id|name", "slaves.id|name");
+        validateParameters(nic, "name", "network.id|name", "bonding.slaves.id|name");
 
         StringBuilder buf = new StringBuilder();
 
@@ -197,7 +199,7 @@ public class PowerShellHostNicsResource extends UriProviderWrapper implements Ho
 
         buf.append("$nics = @(); ");
         buf.append("foreach ($nic in $h.getnetworkadapters()) { ");
-        for (HostNIC slave : nic.getSlaves().getSlaves()) {
+        for (HostNIC slave : nic.getBonding().getSlaves().getSlaves()) {
             if (slave.isSetId()) {
                 buf.append("if ($nic.id -eq " + PowerShellUtils.escape(slave.getId()) + ") { ");
             } else {

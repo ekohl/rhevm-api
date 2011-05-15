@@ -25,8 +25,8 @@ import javax.ws.rs.WebApplicationException;
 import com.redhat.rhevm.api.model.Cluster;
 import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.PowerManagement;
-import com.redhat.rhevm.api.model.PowerManagementOption;
-import com.redhat.rhevm.api.model.PowerManagementOptions;
+import com.redhat.rhevm.api.model.Option;
+import com.redhat.rhevm.api.model.Options;
 
 import org.junit.Test;
 
@@ -144,7 +144,7 @@ public class PowerShellHostsResourceTest extends AbstractPowerShellCollectionRes
         model.getPowerManagement().setAddress("foo");
         model.getPowerManagement().setUsername("me");
         model.getPowerManagement().setPassword("mysecret");
-        model.getPowerManagement().setOptions(new PowerManagementOptions());
+        model.getPowerManagement().setOptions(new Options());
         model.getPowerManagement().getOptions().getOptions().add(buildOption("secure", "true"));
         model.getPowerManagement().getOptions().getOptions().add(buildOption("port", "12345"));
         model.getPowerManagement().getOptions().getOptions().add(buildOption("slot", "54321"));
@@ -156,8 +156,8 @@ public class PowerShellHostsResourceTest extends AbstractPowerShellCollectionRes
         verifyResponse(resource.add(model), NEW_NAME, NO_DESCRIPTION);
     }
 
-    private PowerManagementOption buildOption(String name, String value) {
-        PowerManagementOption option = new PowerManagementOption();
+    private Option buildOption(String name, String value) {
+        Option option = new Option();
         option.setName(name);
         option.setValue(value);
         return option;

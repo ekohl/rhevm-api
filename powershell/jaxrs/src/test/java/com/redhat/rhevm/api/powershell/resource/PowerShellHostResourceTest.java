@@ -33,8 +33,8 @@ import com.redhat.rhevm.api.model.FenceType;
 import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.IscsiDetails;
 import com.redhat.rhevm.api.model.PowerManagement;
-import com.redhat.rhevm.api.model.PowerManagementOption;
-import com.redhat.rhevm.api.model.PowerManagementOptions;
+import com.redhat.rhevm.api.model.Option;
+import com.redhat.rhevm.api.model.Options;
 import com.redhat.rhevm.api.model.PowerManagementStatus;
 import com.redhat.rhevm.api.model.Status;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
@@ -141,7 +141,7 @@ public class PowerShellHostResourceTest extends AbstractPowerShellResourceTest<H
         host.getPowerManagement().setAddress("foo");
         host.getPowerManagement().setUsername("me");
         host.getPowerManagement().setPassword("mysecret");
-        host.getPowerManagement().setOptions(new PowerManagementOptions());
+        host.getPowerManagement().setOptions(new Options());
         host.getPowerManagement().getOptions().getOptions().add(buildOption("secure", "true"));
         host.getPowerManagement().getOptions().getOptions().add(buildOption("port", "12345"));
         host.getPowerManagement().getOptions().getOptions().add(buildOption("slot", "54321"));
@@ -153,8 +153,8 @@ public class PowerShellHostResourceTest extends AbstractPowerShellResourceTest<H
         verifyHost(resource.update(host), "eris");
     }
 
-    private PowerManagementOption buildOption(String name, String value) {
-        PowerManagementOption option = new PowerManagementOption();
+    private Option buildOption(String name, String value) {
+        Option option = new Option();
         option.setName(name);
         option.setValue(value);
         return option;

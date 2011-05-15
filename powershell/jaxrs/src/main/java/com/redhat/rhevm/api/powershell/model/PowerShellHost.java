@@ -25,8 +25,8 @@ import com.redhat.rhevm.api.model.Cluster;
 import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.HostStatus;
 import com.redhat.rhevm.api.model.PowerManagement;
-import com.redhat.rhevm.api.model.PowerManagementOption;
-import com.redhat.rhevm.api.model.PowerManagementOptions;
+import com.redhat.rhevm.api.model.Option;
+import com.redhat.rhevm.api.model.Options;
 import com.redhat.rhevm.api.model.Statistic;
 import com.redhat.rhevm.api.model.Statistics;
 import com.redhat.rhevm.api.powershell.enums.PowerShellVdsSpmStatus;
@@ -58,18 +58,18 @@ public class PowerShellHost {
         return null;
     }
 
-    private static PowerManagementOptions parsePowerManagementOptions(String options) {
+    private static Options parsePowerManagementOptions(String options) {
         if (options == null) {
             return null;
          }
 
-        PowerManagementOptions ret = new PowerManagementOptions();
+        Options ret = new Options();
 
         String[] opts = options.split(",");
         for (int i = 0; i < opts.length; i++) {
             String[] parts = opts[i].split("=");
 
-            PowerManagementOption option = new PowerManagementOption();
+            Option option = new Option();
             option.setName(parts[0]);
             option.setValue(parts[1]);
             ret.getOptions().add(option);

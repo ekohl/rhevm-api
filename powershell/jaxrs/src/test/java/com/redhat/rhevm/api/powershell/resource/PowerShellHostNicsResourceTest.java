@@ -27,6 +27,7 @@ import javax.ws.rs.core.UriBuilder;
 
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.model.Action;
+import com.redhat.rhevm.api.model.Bonding;
 import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.HostNIC;
 import com.redhat.rhevm.api.model.HostNics;
@@ -177,15 +178,16 @@ public class PowerShellHostNicsResourceTest
         bond.setName(BOND_NAME);
         bond.setNetwork(new Network());
         bond.getNetwork().setId(asId(NETS[0]));
-        bond.setSlaves(new Slaves());
+        bond.setBonding(new Bonding());
+        bond.getBonding().setSlaves(new Slaves());
 
         HostNIC slave = new HostNIC();
         slave.setId(asId(NICS[0]));
-        bond.getSlaves().getSlaves().add(slave);
+        bond.getBonding().getSlaves().getSlaves().add(slave);
 
         slave = new HostNIC();
         slave.setId(asId(NICS[1]));
-        bond.getSlaves().getSlaves().add(slave);
+        bond.getBonding().getSlaves().getSlaves().add(slave);
 
         verifyBond((HostNIC)nicResource.add(bond).getEntity());
     }
@@ -310,12 +312,13 @@ public class PowerShellHostNicsResourceTest
         assertEquals(asId(BOND_NAME), nic.getId());
         assertNotNull(nic.getHref());
         verifyHostNicDetails(nic, 0);
-        assertNotNull(nic.getSlaves());
-        assertEquals(2, nic.getSlaves().getSlaves().size());
-        assertEquals(asId(NICS[0]), nic.getSlaves().getSlaves().get(0).getId());
-        assertNotNull(nic.getSlaves().getSlaves().get(0).getHref());
-        assertEquals(asId(NICS[1]), nic.getSlaves().getSlaves().get(1).getId());
-        assertNotNull(nic.getSlaves().getSlaves().get(0).getHref());
+        assertNotNull(nic.getBonding());
+        assertNotNull(nic.getBonding().getSlaves());
+        assertEquals(2, nic.getBonding().getSlaves().getSlaves().size());
+        assertEquals(asId(NICS[0]), nic.getBonding().getSlaves().getSlaves().get(0).getId());
+        assertNotNull(nic.getBonding().getSlaves().getSlaves().get(0).getHref());
+        assertEquals(asId(NICS[1]), nic.getBonding().getSlaves().getSlaves().get(1).getId());
+        assertNotNull(nic.getBonding().getSlaves().getSlaves().get(0).getHref());
     }
 
     private void verifyHostNic(HostNIC nic, int i) {
