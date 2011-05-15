@@ -77,6 +77,14 @@ public class PowerShellStorageDomainVmsResourceTest
         verifyVm(subResource.get(), 0);
     }
 
+    @Test
+    public void testRemove() {
+        setUpCmdExpectations(LOOKUP_DATA_CENTER_CMD + REMOVE_VM_FROM_EXPORT_CMD, EMPTY_RETURN_VALUE);
+        setUriInfo(setUpBasicUriExpectations());
+        replayAll();
+        resource.remove(NAMES[0]);
+    }
+
     protected void doTestImport(boolean async) throws Exception {
         PowerShellStorageDomainVmResource subResource = getSubResource(0);
 

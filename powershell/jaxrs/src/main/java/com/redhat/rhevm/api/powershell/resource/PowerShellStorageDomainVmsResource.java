@@ -33,11 +33,11 @@ import com.redhat.rhevm.api.powershell.util.PowerShellParser;
 import com.redhat.rhevm.api.powershell.util.PowerShellPoolMap;
 import com.redhat.rhevm.api.powershell.util.PowerShellUtils;
 import com.redhat.rhevm.api.resource.StorageDomainContentResource;
-import com.redhat.rhevm.api.resource.StorageDomainContentsResource;
+import com.redhat.rhevm.api.resource.RemovableStorageDomainContentsResource;
 
 public class PowerShellStorageDomainVmsResource
     extends AbstractPowerShellStorageDomainContentsResource<VM>
-    implements StorageDomainContentsResource<VMs, VM> {
+    implements RemovableStorageDomainContentsResource<VMs, VM> {
 
     public PowerShellStorageDomainVmsResource(PowerShellStorageDomainResource parent,
                                               PowerShellPoolMap shellPools,
@@ -86,5 +86,16 @@ public class PowerShellStorageDomainVmsResource
 
     public StorageDomainContentResource<VM> getStorageDomainContentSubResource(String id) {
         return new PowerShellStorageDomainVmResource(this, id, executor, this, shellPools, getParser());
+    }
+
+    @Override
+    public void remove(String id) {
+        StringBuilder buf = new StringBuilder();
+        String dataCenterArg = getDataCenterArg(buf);
+        buf.append("remove-vmfromexportdomain");
+        buf.append(" -vmid " + PowerShellUtils.escape(id));
+        buf.append(" -datacenterid " + dataCenterArg);
+        buf.append(" -storagedomainid " + PowerShellUtils.escape(getStorageDomainId()));
+        runAndParse(buf.toString());
     }
 }

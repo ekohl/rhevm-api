@@ -58,6 +58,8 @@ public abstract class AbstractPowerShellStorageDomainContentsResourceTest<C exte
     protected static final String LOOKUP_CLUSTER_CMD = "$cluster = select-cluster | ? { $_.clusterid -eq \"" + IMPORT_CLUSTER_ID + "\" }; ";
     protected static final String LOOKUP_DATA_CENTER_FROM_CLUSTER_CMD = "$datacenter = select-datacenter -searchtext $(\"clusters.name = \" + $cluster.name); ";
     protected static final String LOOKUP_DATA_CENTER_CMD = "$datacenter = $null; foreach ($dc in select-datacenter) { $sds = @(); try { $sds = get-storagedomain -datacenterid $dc.datacenterid } catch { } foreach ($sd in $sds) { if ($sd.storagedomainid -eq \"" + STORAGE_DOMAIN_ID + "\") { $datacenter = $dc; break } } if ($datacenter -ne $null) { break } } ";
+    protected static final String REMOVE_VM_FROM_EXPORT_CMD = "remove-vmfromexportdomain -vmid \"" + NAMES[0] + "\" -datacenterid $datacenter.datacenterid -storagedomainid \"" + STORAGE_DOMAIN_ID + "\"";
+    protected static final String EMPTY_RETURN_VALUE = "<?xml version=\"1.0\"?><Objects></Objects>";
 
     protected A getResource(Executor executor,
                             PowerShellPoolMap poolMap,
