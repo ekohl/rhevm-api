@@ -22,11 +22,15 @@ import java.util.Arrays;
 
 import javax.ws.rs.WebApplicationException;
 
+import com.redhat.rhevm.api.model.Bonding;
 import com.redhat.rhevm.api.model.Fault;
 import com.redhat.rhevm.api.model.Host;
+import com.redhat.rhevm.api.model.HostNIC;
+import com.redhat.rhevm.api.model.Network;
 import com.redhat.rhevm.api.model.Permission;
 import com.redhat.rhevm.api.model.Role;
 import com.redhat.rhevm.api.model.Roles;
+import com.redhat.rhevm.api.model.Slaves;
 import com.redhat.rhevm.api.model.User;
 import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.model.VmStatus;
@@ -231,6 +235,27 @@ public class CompletenessAssertorTest extends Assert {
     }
 
     @Test
+    public void testCompleteListSubFields() throws Exception {
+        HostNIC bond = new HostNIC();
+        bond.setName("joe");
+        bond.setNetwork(new Network());
+        bond.getNetwork().setId("0");
+        bond.setBonding(new Bonding());
+        bond.getBonding().setSlaves(new Slaves());
+
+        HostNIC slave = new HostNIC();
+        slave.setId("0");
+        bond.getBonding().getSlaves().getSlaves().add(slave);
+
+        slave = new HostNIC();
+        slave.setId("0");
+        bond.getBonding().getSlaves().getSlaves().add(slave);
+
+
+        CompletenessAssertor.validateParameters(bond, "name", "network.id|name", "bonding.slaves.id|name");
+    }
+
+    @Test
     public void testCompleteListSubFieldAlternatives() throws Exception {
         User user = new User();
         user.setRoles(new Roles());
@@ -254,6 +279,18 @@ public class CompletenessAssertorTest extends Assert {
             fail("expected WebApplicationException on incomplete model");
         } catch (WebApplicationException wae) {
             verifyIncompleteException(wae, "User", "roles.id");
+        }
+    }
+
+    @Test
+    public void testMissingListSubFields() throws Exception {
+        HostNIC bond = new HostNIC();
+
+        try {
+            CompletenessAssertor.validateParameters(bond, "name", "network.id|name", "bonding.slaves.id|name");
+            fail("expected WebApplicationException on incomplete model");
+        } catch (WebApplicationException wae) {
+            verifyIncompleteException(wae, "HostNIC", "name, network.id|name, bonding.slaves.id|name");
         }
     }
 
