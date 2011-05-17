@@ -22,6 +22,7 @@ import java.net.URI;
 import java.text.MessageFormat;
 import java.util.concurrent.Executor;
 
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.UriBuilder;
 
@@ -31,6 +32,7 @@ import com.redhat.rhevm.api.model.Bonding;
 import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.HostNIC;
 import com.redhat.rhevm.api.model.HostNics;
+import com.redhat.rhevm.api.model.IP;
 import com.redhat.rhevm.api.model.Network;
 import com.redhat.rhevm.api.model.Slaves;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
@@ -43,7 +45,7 @@ import org.junit.Test;
 
 import org.junit.runner.RunWith;
 
-import static org.easymock.classextension.EasyMock.expect;
+import static org.easymock.EasyMock.expect;
 
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -68,6 +70,8 @@ public class PowerShellHostNicsResourceTest
 
     private static final String GET_NIC_CMD = "$h = get-host \"" + asId(HOST_NAME) + "\"; foreach ($n in $h.getnetworkadapters()) { if ($n.id -eq \"" + asId(NICS[0]) + "\") { $n; break } }";
     private static final String GET_NICS_CMD = "$h = get-host \"" + asId(HOST_NAME) + "\"; $h.getnetworkadapters()";
+    private static final String UPDATE_NIC_CMD = "$h = get-host -hostid \"" + asId(HOST_NAME) + "\"; if($h -eq $null){throw 'Cannot find host \"" + asId(HOST_NAME) + "\"'};$na = $h.getnetworkadapters() | ? {$_.id -eq \"" + asId(NICS[0]) + "\"};if($na -eq $null){throw 'Cannot find nic with id \"" + asId(NICS[0]) + "\"'};$c = select-cluster | ? {$_.clusterid -eq $h.hostclusterid};if($c -eq $null){throw 'Cannot find cluster with id $h.hostclusterid.'};$network = get-networks -clusterid $c.clusterid | ? {$_.name -eq \"" + NETS[0] + "\"};if($network -eq $null){throw 'Cannot find network with name $na.network'};$updated_host = update-logicalnetworktonetworkadapter -hostobject $h -network $network -networkadapterobjects $na -address \"" +IPS[0]+ "\" -subnet \"" +SUBNETS[0]+ "\" -gateway \"\" -bootprotocol \"StaticIp\" -oldnetworkname $na.network;$h.getnetworkadapters() | ? {$_.name -eq $na.name};";
+    private static final String GET_NETWORK_CMD = "$n = get-networks; foreach ($i in $n) { if ($i.name -eq \"" + NETS[1] + "\") { $i; break } }";
 
     public static final String LOOKUP_NETWORK_ID_COMMAND = "$n = get-networks; foreach ($i in $n) '{' if ($i.name -eq \"{0}\") '{' $i; break '} }'";
     public static final String LOOKUP_SLAVE_ID_COMMAND = "$h = get-host \"" + asId(HOST_NAME) + "\"; foreach ($n in $h.getnetworkadapters()) { if ($n.name -eq \"" + NICS[0] + "\") { $n } if ($n.name -eq \"" + NICS[1] + "\") { $n } }";
@@ -139,6 +143,55 @@ public class PowerShellHostNicsResourceTest
         replayAll();
 
         verifyHostNic(nicResource.get(), 0);
+    }
+
+    @Test
+    public void testUpdate() {
+        setUpHttpHeaderNullExpectations("Accept");
+        setUriInfo(setUpBasicUriExpectations());
+        PowerShellHostNicsResource parent = new PowerShellHostNicsResource(asId(HOST_NAME), executor, poolMap, parser, uriProvider);
+        PowerShellHostNicResource nicResource = new PowerShellHostNicResource(asId(NICS[0]), executor, poolMap, parser, parent, uriProvider);
+
+        setUriInfo(setUpHostNicExpectations(new String[]{UPDATE_NIC_CMD, GET_NETWORK_CMD},
+                                            new String[]{formatNic(NICS[0], extraArgs[1]), formatNetwork(NETS[1]) }));
+        replayAll();
+
+        verifyUpdatedHostNic((nicResource.update(createNic(IPS[0], SUBNETS[0], "", NETS[0]))), 1);
+    }
+
+    @Test
+    public void testIncompleteUpdate() throws Exception {
+        setUriInfo(setUpActionExpectation(null, null, null, null));
+        PowerShellHostNicsResource parent = new PowerShellHostNicsResource(asId(HOST_NAME), executor, poolMap, parser, uriProvider);
+        PowerShellHostNicResource nicResource = new PowerShellHostNicResource(asId(NICS[0]), executor, poolMap, parser, parent, uriProvider);
+
+        try {
+            nicResource.update(new HostNIC());
+            fail("expected WebApplicationException on incomplete parameters");
+        } catch (WebApplicationException wae) {
+             verifyIncompleteException(wae, "HostNIC", "update", "network.id|name");
+        }
+    }
+
+    private UriInfo setUpHostNicExpectations(String[] commands, String[] rets) {
+        mockStatic(PowerShellCmd.class);
+        setUpCmdExpectations(commands, rets);
+        UriInfo uriInfo = setUpBasicUriExpectations();
+        replayAll();
+        return uriInfo;
+    }
+
+    private HostNIC createNic(String addr, String mask, String gw, String network) {
+      HostNIC nic = new HostNIC();
+      nic.setId(asId(NICS[0]));
+      nic.setIp(new IP());
+      nic.getIp().setAddress(addr);
+      nic.getIp().setNetmask(mask);
+      nic.getIp().setGateway(gw);
+      nic.setNetwork(new Network());
+      nic.getNetwork().setName(network);
+
+      return nic;
     }
 
     @Test
@@ -326,6 +379,15 @@ public class PowerShellHostNicsResourceTest
         assertEquals(asId(NICS[i]), nic.getId());
         verifyHostNicDetails(nic, i);
         verifyLinks(nic);
+    }
+
+    private void verifyUpdatedHostNic(HostNIC nic, int i) {
+        assertNotNull(nic);
+        assertNotNull(nic.getNetwork());
+        assertNotNull(nic.getIp());
+        assertEquals(nic.getNetwork().getId(), "3377716");
+        assertEquals(nic.getIp().getAddress(), IPS[i]);
+        assertEquals(nic.getIp().getNetmask(), SUBNETS[i]);
     }
 
     private void verifyHostNics(HostNics nics) {
