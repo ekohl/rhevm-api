@@ -165,8 +165,8 @@ public class PowerShellHostNicResource
            }
            buf.append(" -bondingoptions " + PowerShellUtils.escape(bufOptions.toString().substring(0, bufOptions.length() - 1)));
        }
-       if(nic.isSetCheckConectivity()){
-           buf.append(" -checkconectivity " + (nic.isCheckConectivity() ? "$true" : "$false"));
+       if(nic.isSetCheckConnectivity()){
+           buf.append(" -checkconectivity " + (nic.isCheckConnectivity() ? "$true" : "$false"));
        }
        buf.append(" -oldnetworkname $na.network;");
        buf.append("$h.getnetworkadapters() | ? {$_.name -eq $na.name};");
