@@ -22,7 +22,6 @@ import java.net.URI;
 import java.text.MessageFormat;
 import java.util.concurrent.Executor;
 
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.UriBuilder;
 
@@ -70,7 +69,7 @@ public class PowerShellHostNicsResourceTest
 
     private static final String GET_NIC_CMD = "$h = get-host \"" + asId(HOST_NAME) + "\"; foreach ($n in $h.getnetworkadapters()) { if ($n.id -eq \"" + asId(NICS[0]) + "\") { $n; break } }";
     private static final String GET_NICS_CMD = "$h = get-host \"" + asId(HOST_NAME) + "\"; $h.getnetworkadapters()";
-    private static final String UPDATE_NIC_CMD = "$h = get-host -hostid \"" + asId(HOST_NAME) + "\"; if($h -eq $null){throw 'Cannot find host \"" + asId(HOST_NAME) + "\"'};$na = $h.getnetworkadapters() | ? {$_.id -eq \"" + asId(NICS[0]) + "\"};if($na -eq $null){throw 'Cannot find nic with id \"" + asId(NICS[0]) + "\"'};$c = select-cluster | ? {$_.clusterid -eq $h.hostclusterid};if($c -eq $null){throw 'Cannot find cluster with id $h.hostclusterid.'};$network = get-networks -clusterid $c.clusterid | ? {$_.name -eq \"" + NETS[0] + "\"};if($network -eq $null){throw 'Cannot find network with name $na.network'};$updated_host = update-logicalnetworktonetworkadapter -hostobject $h -network $network -networkadapterobjects $na -address \"" +IPS[0]+ "\" -subnet \"" +SUBNETS[0]+ "\" -gateway \"\" -bootprotocol \"StaticIp\" -oldnetworkname $na.network;$h.getnetworkadapters() | ? {$_.name -eq $na.name};";
+    private static final String UPDATE_NIC_CMD = "$h = get-host -hostid \"" + asId(HOST_NAME) + "\"; if($h -eq $null){throw 'Cannot find host \"" + asId(HOST_NAME) + "\"'};$na = $h.getnetworkadapters() | ? {$_.id -eq \"" + asId(NICS[0]) + "\"};if($na -eq $null){throw 'Cannot find nic with id \"" + asId(NICS[0]) + "\"'};$c = select-cluster | ? {$_.clusterid -eq $h.hostclusterid};if($c -eq $null){throw 'Cannot find cluster with id $h.hostclusterid.'};$network = get-networks -clusterid $c.clusterid | ? {$_.name -eq \"" + NETS[0] + "\"};$updated_host = update-logicalnetworktonetworkadapter -hostobject $h -network $network -networkadapterobjects $na -address \"" +IPS[0]+ "\" -subnet \"" +SUBNETS[0]+ "\" -gateway \"\" -bootprotocol \"StaticIp\" -oldnetworkname $na.network;$h.getnetworkadapters() | ? {$_.name -eq $na.name};";
     private static final String GET_NETWORK_CMD = "$n = get-networks; foreach ($i in $n) { if ($i.name -eq \"" + NETS[1] + "\") { $i; break } }";
 
     public static final String LOOKUP_NETWORK_ID_COMMAND = "$n = get-networks; foreach ($i in $n) '{' if ($i.name -eq \"{0}\") '{' $i; break '} }'";
@@ -152,33 +151,13 @@ public class PowerShellHostNicsResourceTest
         PowerShellHostNicsResource parent = new PowerShellHostNicsResource(asId(HOST_NAME), executor, poolMap, parser, uriProvider);
         PowerShellHostNicResource nicResource = new PowerShellHostNicResource(asId(NICS[0]), executor, poolMap, parser, parent, uriProvider);
 
-        setUriInfo(setUpHostNicExpectations(new String[]{UPDATE_NIC_CMD, GET_NETWORK_CMD},
-                                            new String[]{formatNic(NICS[0], extraArgs[1]), formatNetwork(NETS[1]) }));
+        setUpCmdExpectations(new String[]{ UPDATE_NIC_CMD, GET_NETWORK_CMD },
+                                            new String[]{ formatNic(NICS[0], extraArgs[1]), formatNetwork(NETS[1]) });
+
+        setUriInfo(setUpBasicUriExpectations());
         replayAll();
 
         verifyUpdatedHostNic((nicResource.update(createNic(IPS[0], SUBNETS[0], "", NETS[0]))), 1);
-    }
-
-    @Test
-    public void testIncompleteUpdate() throws Exception {
-        setUriInfo(setUpActionExpectation(null, null, null, null));
-        PowerShellHostNicsResource parent = new PowerShellHostNicsResource(asId(HOST_NAME), executor, poolMap, parser, uriProvider);
-        PowerShellHostNicResource nicResource = new PowerShellHostNicResource(asId(NICS[0]), executor, poolMap, parser, parent, uriProvider);
-
-        try {
-            nicResource.update(new HostNIC());
-            fail("expected WebApplicationException on incomplete parameters");
-        } catch (WebApplicationException wae) {
-             verifyIncompleteException(wae, "HostNIC", "update", "network.id|name");
-        }
-    }
-
-    private UriInfo setUpHostNicExpectations(String[] commands, String[] rets) {
-        mockStatic(PowerShellCmd.class);
-        setUpCmdExpectations(commands, rets);
-        UriInfo uriInfo = setUpBasicUriExpectations();
-        replayAll();
-        return uriInfo;
     }
 
     private HostNIC createNic(String addr, String mask, String gw, String network) {

@@ -119,7 +119,6 @@ public class PowerShellHostNicResource
     @Override
     public HostNIC update(HostNIC nic) {
         validateUpdate(nic);
-        validateParameters(nic, "network.id|name");
 
         StringBuilder buf = new StringBuilder();
 
@@ -130,13 +129,16 @@ public class PowerShellHostNicResource
 
         buf.append("$c = select-cluster | ? {$_.clusterid -eq $h.hostclusterid};");
         buf.append("if($c -eq $null){throw 'Cannot find cluster with id $h.hostclusterid.'};");
-        if(nic.getNetwork().isSetName()){
-            buf.append("$network = get-networks -clusterid $c.clusterid | ? {$_.name -eq " + PowerShellUtils.escape(nic.getNetwork().getName()) + "};");
-        }else{
-            buf.append("$network = get-networks -clusterid $c.clusterid | ? {$_.networkid -eq " + PowerShellUtils.escape(nic.getNetwork().getId()) + "};");
+        if(nic.isSetNetwork()){
+            validateParameters(nic, "network.id|name");
+            if(nic.getNetwork().isSetName()){
+                buf.append("$network = get-networks -clusterid $c.clusterid | ? {$_.name -eq " + PowerShellUtils.escape(nic.getNetwork().getName()) + "};");
+            } else {
+                buf.append("$network = get-networks -clusterid $c.clusterid | ? {$_.networkid -eq " + PowerShellUtils.escape(nic.getNetwork().getId()) + "};");
+            }
+        } else {
+            buf.append("$network = get-networks -clusterid $c.clusterid | ? {$_.name -eq $na.network};");
         }
-        buf.append("if($network -eq $null){throw 'Cannot find network with name $na.network'};");
-
         buf.append("$updated_host = update-logicalnetworktonetworkadapter -hostobject $h -network $network -networkadapterobjects $na");
 
         if(nic.isSetIp()){
