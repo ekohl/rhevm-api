@@ -195,7 +195,7 @@ public class PowerShellTemplateResource extends AbstractPowerShellActionableReso
         buf.append(" -templateid " + PowerShellUtils.escape(getId()));
         buf.append(" -storagedomainid " + storageDomainArg);
 
-        if (!action.isSetExclusive() || !action.isExclusive()) {
+        if (action.isSetExclusive() && action.isExclusive()) {
             buf.append(" -forceoverride");
         }
 

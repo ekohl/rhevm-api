@@ -310,7 +310,7 @@ public class PowerShellVmResource extends AbstractPowerShellActionableResource<V
         buf.append(" -vmid " + PowerShellUtils.escape(getId()));
         buf.append(" -storagedomainid " + storageDomainArg);
 
-        if (!action.isSetExclusive() || !action.isExclusive()) {
+        if (action.isSetExclusive() && action.isExclusive()) {
             buf.append(" -forceoverride");
         }
 
