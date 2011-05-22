@@ -64,8 +64,6 @@ public class PowerShellVmResourceTest extends AbstractPowerShellResourceTest<VM,
     private static final String VM_NAME = "sedna";
     private static final String VM_ID = Integer.toString(VM_NAME.hashCode());
     private static final String NEW_NAME = "eris";
-    private static final String CLUSTER_ID = PowerShellVmsResourceTest.CLUSTER_ID;
-    private static final String TEMPLATE_ID = PowerShellVmsResourceTest.TEMPLATE_ID;
     private static final String STORAGE_DOMAIN_NAME = "xtratime";
     private static final String STORAGE_DOMAIN_ID = Integer.toString(STORAGE_DOMAIN_NAME.hashCode());
     private static final String BAD_ID = "98765";
@@ -87,7 +85,8 @@ public class PowerShellVmResourceTest extends AbstractPowerShellResourceTest<VM,
 
     private static final String DEST_HOST_ID = "1337";
     private static final String DEST_HOST_NAME = "farawaysoclose";
-    private static final String MIGRATE_COMMAND = "migrate-vm -vmid \"" + VM_ID + "\" -desthostid \"" + DEST_HOST_ID + "\"";
+    private static final String MIGRATE_COMMAND_NO_HOST = "migrate-vm -vmid \"" + VM_ID + "\"";
+    private static final String MIGRATE_COMMAND_WITH_HOST_ID = "migrate-vm -vmid \"" + VM_ID + "\" -desthostid \"" + DEST_HOST_ID + "\"";
     private static final String EXPORT_WITH_STORAGE_DOMAIN_COMMAND = "export-vm -vmid \"" + VM_ID + "\" -storagedomainid \"" + STORAGE_DOMAIN_ID + "\"";
     private static final String MOVE_WITH_STORAGE_DOMAIN_COMMAND = "move-vmimages -vmid \"" + VM_ID + "\" -storagedomainid \"" + STORAGE_DOMAIN_ID + "\"";
     private static final String EXPORT_WITH_NAMED_STORAGE_DOMAIN_COMMAND = "$dest = select-storagedomain | ? { $_.name -eq \"" + STORAGE_DOMAIN_NAME + "\" }; export-vm -vmid \"" + VM_ID + "\" -storagedomainid $dest.storagedomainid";
@@ -316,7 +315,7 @@ public class PowerShellVmResourceTest extends AbstractPowerShellResourceTest<VM,
         Action action = getAction();
         action.setHost(new Host());
         action.getHost().setId(DEST_HOST_ID);
-        setUriInfo(setUpActionExpectation("migrate", MIGRATE_COMMAND, false, null));
+        setUriInfo(setUpActionExpectation("migrate", MIGRATE_COMMAND_WITH_HOST_ID, false, null));
         verifyActionResponse(resource.migrate(action), false);
     }
 
@@ -330,14 +329,9 @@ public class PowerShellVmResourceTest extends AbstractPowerShellResourceTest<VM,
     }
 
     @Test
-    public void testIncompleteMigrate() throws Exception {
-        setUriInfo(setUpActionExpectation(null, null, null, null));
-        try {
-            resource.migrate(getAction());
-            fail("expected WebApplicationException on incomplete parameters");
-        } catch (WebApplicationException wae) {
-             verifyIncompleteException(wae, "Action", "migrate", "host.id|name");
-        }
+    public void testMigrateNoHost() throws Exception {
+        setUriInfo(setUpActionExpectation("migrate", MIGRATE_COMMAND_NO_HOST, false, null));
+        verifyActionResponse(resource.migrate(getAction()), false);
     }
 
     @Test
@@ -479,7 +473,7 @@ public class PowerShellVmResourceTest extends AbstractPowerShellResourceTest<VM,
         Action action = getAction(true);
         action.setHost(new Host());
         action.getHost().setId(DEST_HOST_ID);
-        setUriInfo(setUpActionExpectation("migrate", MIGRATE_COMMAND, false, null));
+        setUriInfo(setUpActionExpectation("migrate", MIGRATE_COMMAND_WITH_HOST_ID, false, null));
         verifyActionResponse(resource.migrate(action), true);
     }
 

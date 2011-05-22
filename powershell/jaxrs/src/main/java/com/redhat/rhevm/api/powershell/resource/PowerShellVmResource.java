@@ -277,15 +277,16 @@ public class PowerShellVmResource extends AbstractPowerShellActionableResource<V
 
     @Override
     public Response migrate(Action action) {
-        validateParameters(action, "host.id|name");
         StringBuilder buf = new StringBuilder();
-
-        String hostArg = getHostArg(buf, action.getHost());
-
+        String hostArg = "";
+        if (action.isSetHost()) {
+            hostArg = getHostArg(buf, action.getHost());
+        }
         buf.append("migrate-vm");
         buf.append(" -vmid " + PowerShellUtils.escape(getId()));
-        buf.append(" -desthostid " + hostArg);
-
+        if (action.isSetHost()) {
+            buf.append(" -desthostid " + hostArg);
+        }
         return doAction(getUriInfo(), new CommandRunner(action, buf.toString(), getPool()));
     }
 

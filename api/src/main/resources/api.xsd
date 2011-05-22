@@ -108,6 +108,8 @@
       <xs:element ref="vm" minOccurs="0" maxOccurs="1"/>
       <!-- A VM can be started paused -->
       <xs:element name="pause" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+      <!-- should migration be forced if VM is pinned to host? -->
+      <xs:element name="force" type="xs:boolean" minOccurs="0"/>
       <!-- ... etc., explicitly enumerate all the parameter types -->
     </xs:sequence>
   </xs:group>
