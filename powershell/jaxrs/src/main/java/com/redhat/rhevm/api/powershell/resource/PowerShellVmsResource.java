@@ -210,6 +210,9 @@ public class PowerShellVmsResource
         if (vm.isSetOs() && vm.getOs().isSetType()) {
             buf.append(" -os " + PowerShellUtils.escape(vm.getOs().getType()));
         }
+        if (vm.isSetDisks() && vm.getDisks().isSetClone() && vm.getDisks().isClone()) {
+            buf.append(" -copytemplate ");
+        }
 
         boolean expectBlocking = expectBlocking();
         final String displayVm = ";$v;";
