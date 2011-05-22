@@ -314,7 +314,7 @@ public class PowerShellVmResource extends AbstractPowerShellActionableResource<V
             buf.append(" -forceoverride");
         }
 
-        if (!action.isSetDiscardSnapshots() || !action.isDiscardSnapshots()) {
+        if (action.isSetDiscardSnapshots() && action.isDiscardSnapshots()) {
             buf.append(" -copycollapse");
         }
 
