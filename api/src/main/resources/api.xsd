@@ -1741,6 +1741,7 @@
     <xs:complexContent>
       <xs:extension base="BaseDevices">
         <xs:sequence>
+          <xs:element name="clone" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="disk" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
               <xs:appinfo>
