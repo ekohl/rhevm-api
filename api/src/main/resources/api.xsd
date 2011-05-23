@@ -412,6 +412,8 @@
     <xs:sequence>
       <xs:element name="topology" type="CpuTopology" minOccurs="0"/>
       <xs:element name="level" type="xs:int" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="speed" type="xs:decimal" minOccurs="0" maxOccurs="1"/>      
     </xs:sequence>
     <xs:attribute name="id" type="xs:string"/>
   </xs:complexType>
@@ -959,8 +961,8 @@
                this is not subsequently included in the representation -->
           <xs:element name="root_password" type="xs:string" minOccurs="0" maxOccurs="1"/>
           <xs:element name="statistics" type="Statistics" minOccurs="0" maxOccurs="1"/>
-          <xs:element name="vm_summary" type="VmSummary" minOccurs="0" maxOccurs="1"/>
-          <xs:element name="cpu_info" type="CPUInfo" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cpu" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="summary" type="VmSummary" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -968,17 +970,9 @@
 
   <xs:complexType name="VmSummary">
     <xs:sequence>
-    <xs:element name="active_vms" type="xs:int" minOccurs="0" maxOccurs="1"/>
-    <xs:element name="migrating_vms" type="xs:int" minOccurs="0" maxOccurs="1"/>
-    <xs:element name="total_vms" type="xs:int" minOccurs="0" maxOccurs="1"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="CPUInfo">
-    <xs:sequence>
-		<xs:element name="cpu_cores" type="xs:int" minOccurs="0" maxOccurs="1"/>
-		<xs:element name="cpu_name" type="xs:string" minOccurs="0" maxOccurs="1"/>
-		<xs:element name="cpu_speed" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+    <xs:element name="active" type="xs:int" minOccurs="0" maxOccurs="1"/>
+    <xs:element name="migrating" type="xs:int" minOccurs="0" maxOccurs="1"/>
+    <xs:element name="total" type="xs:int" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
 
