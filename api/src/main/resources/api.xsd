@@ -491,7 +491,7 @@
           <xs:element ref="disk_formats" minOccurs="0"/>
           <xs:element ref="disk_interfaces" minOccurs="0"/>          
           <xs:element ref="vm_affinities" minOccurs="0"/>
-          <xs:element name="custom_properties" type="VmHooksEnvs" minOccurs="0"/>
+          <xs:element name="custom_properties" type="CustomProperties" minOccurs="0"/>
           <xs:element ref="boot_protocols" minOccurs="0"/>
           <xs:element ref="error_handling" minOccurs="0"/>
         </xs:sequence>
@@ -1515,15 +1515,15 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="VmHooksEnv">
+  <xs:complexType name="CustomProperty">
     <xs:attribute name="name" type="xs:string"/>
     <xs:attribute name="value" type="xs:string"/>
     <xs:attribute name="regexp" type="xs:string"/>
   </xs:complexType>
 
-  <xs:complexType name="VmHooksEnvs">
+  <xs:complexType name="CustomProperties">
     <xs:sequence>
-      <xs:element name="env" type="VmHooksEnv" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="custom_property" type="CustomProperty" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -1575,7 +1575,7 @@
           <xs:element name="stateless" type="xs:boolean" minOccurs="0"/>
           <xs:element name="timezone" type="xs:string" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="domain" minOccurs="0" maxOccurs="1"/>
-          <xs:element name="custom_properties" type="VmHooksEnvs" minOccurs="0"/>
+          <xs:element name="custom_properties" type="CustomProperties" minOccurs="0"/>
           <xs:element name="statistics" type="Statistics" minOccurs="0" maxOccurs="1"/>
           <xs:element name="disks" type="Disks" minOccurs="0" maxOccurs="1"/>
           <xs:element name="nics" type="Nics" minOccurs="0" maxOccurs="1"/>
