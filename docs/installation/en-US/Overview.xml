@@ -239,9 +239,9 @@ Before moving to the next step, it's recommended to test the API with the instru
     <para>
       REST API functionality can be easily verified using any web browser. Start Internet Explorer or Firefox and navigate to:
     </para>
-    <screen>https://<replaceable>&lt;rhevm-IP-address-or-FQDN&gt;</replaceable>:8443/rhevm-api-powershell/</screen>
+    <screen>https://<replaceable>&lt;rhevm-IP-address-or-FQDN&gt;</replaceable>:8543/rhevm-api-powershell/</screen>
     <para>
-      Note that connections to the API will be on port 8443. If the Windows Firewall is enabled, ensure that this port is open.
+      Note that connections to the API will be on port 8543. If the Windows Firewall is enabled, ensure that this port is open.
     </para>
     <para>
       Since the SSL certificate is self-signed, accept the IE or Firefox security warning. To prevent this warning from occurring again, import the certificate.
