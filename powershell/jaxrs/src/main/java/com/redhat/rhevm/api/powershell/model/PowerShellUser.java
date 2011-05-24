@@ -42,7 +42,6 @@ public class PowerShellUser {
                 user.setEmail(entity.get("email"));
                 user.setLastName(entity.get("lastname"));
                 user.setUserName(entity.get("username"));
-                user.setLoggedIn(entity.get("isloggedin", Boolean.class));
                 parseGroups(user, entity.get("groups", List.class));
                 ret.add(user);
             }

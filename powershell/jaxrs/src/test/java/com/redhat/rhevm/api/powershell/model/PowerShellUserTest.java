@@ -37,7 +37,6 @@ public class PowerShellUserTest extends PowerShellModelTest {
         "Schema Admins@some_domain.local/Users",
         "Administrators@some_domain.local/Builtin" };
     private static final String LAST_NAME = "beam";
-    private static final boolean LOGGED_IN = false;
 
     @Test
     public void testParse() throws Exception {
@@ -61,6 +60,5 @@ public class PowerShellUserTest extends PowerShellModelTest {
         for (int i = 0 ; i < GROUPS.length ; i++) {
             assertEquals(GROUPS[i], u.getGroups().getGroups().get(i).getName());
         }
-        assertEquals(LOGGED_IN, u.isLoggedIn());
     }
 }
