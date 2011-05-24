@@ -489,7 +489,7 @@
           <xs:element ref="disk_formats" minOccurs="0"/>
           <xs:element ref="disk_interfaces" minOccurs="0"/>          
           <xs:element ref="vm_affinities" minOccurs="0"/>
-          <xs:element name="hooks_env" type="VmHooksEnvs" minOccurs="0"/>
+          <xs:element name="custom_properties" type="VmHooksEnvs" minOccurs="0"/>
           <xs:element ref="boot_protocols" minOccurs="0"/>
           <xs:element ref="error_handling" minOccurs="0"/>
         </xs:sequence>
@@ -1570,7 +1570,7 @@
           <xs:element name="stateless" type="xs:boolean" minOccurs="0"/>
           <xs:element name="timezone" type="xs:string" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="domain" minOccurs="0" maxOccurs="1"/>
-          <xs:element name="hooks_env" type="VmHooksEnvs" minOccurs="0"/>
+          <xs:element name="custom_properties" type="VmHooksEnvs" minOccurs="0"/>
           <xs:element name="statistics" type="Statistics" minOccurs="0" maxOccurs="1"/>
           <xs:element name="disks" type="Disks" minOccurs="0" maxOccurs="1"/>
           <xs:element name="nics" type="Nics" minOccurs="0" maxOccurs="1"/>
