@@ -200,7 +200,6 @@ Content-Type: application/xml
         <colspec colwidth="2*"/>
         <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
@@ -231,4 +230,62 @@ Content-Type: application/xml
     </screen>
 	</section>
 	
+  <section id="sect-REST_API_Guide-Capabilities-Permits">
+    <title>Permits</title>
+    <para>Permits are allowable actions a user assigns to a role. Each <literal>permit</literal> contains:</para>
+	 <informaltable frame="none">
+      <tgroup cols="3">
+        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
+        <colspec colwidth="6*"/>
+        <thead>
+          <row>
+            <entry>Element</entry>
+            <entry>Type</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><literal>id=</literal></entry>
+            <entry>integer</entry>
+            <entry>The opaque identifier for a permit</entry>
+          </row>
+          <row>
+            <entry><literal>name</literal></entry>
+            <entry>string</entry>
+            <entry>The name of the permit</entry>
+          </row>
+          <row>
+            <entry><literal>administrative</literal></entry>
+            <entry>boolean: true or false</entry>
+            <entry>The permit is assigned to only administrative roles</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>For example:</para>
+		<screen>
+&lt;capabilities&gt;
+  &lt;version major="2" minor="2"&gt;
+	  ...
+  &lt;/version&gt;
+  &lt;version major="2" minor="3"&gt;
+	  ...
+  &lt;/version&gt;
+  &lt;permits&gt;
+	  &lt;permit id="1"&gt;
+      &lt;name&gt;CREATE_VM&lt;/name&gt;
+      &lt;administrative&gt;false&lt;/administrative&gt;
+  	&lt;/permit&gt;
+    &lt;permit id="2"&gt;
+      &lt;name&gt;DELETE_VM&lt;/name&gt;
+      &lt;administrative&gt;false&lt;/administrative&gt;
+    &lt;/permit&gt;
+    ...
+  &lt;/permits&gt;
+  
+&lt;/capabilities&gt;
+    </screen>
+	</section>
 </chapter>

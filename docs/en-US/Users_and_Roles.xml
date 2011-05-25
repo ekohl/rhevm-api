@@ -67,8 +67,7 @@
    </para>
    <para>
       For example:
-    </para>
-
+    </para>   
     <screen>
 GET /rhevm-api/roles HTTP/1.1
 Accept: application/xml
@@ -109,13 +108,52 @@ Content-Type: application/xml
     <para>
       Any subset of the global roles set may be assigned to an individual user, as we shall see in the next section.
     </para>
+    <section id="sect-REST_API_Guide-Roles-Permits">
+      <title>Role Permits</title>
+      <para>Each role contains a set of allowable actions, or <literal>permits</literal>, which are defined in <xref linkend="sect-REST_API_Guide-Capabilities-Permits"/>. A role's <literal>permits</literal> are listed as a sub-collection:</para>
+      <screen>
+GET /rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits HTTP/1.1
+Accept: application/xml
 
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+&lt;permits&gt;
+    &lt;permit id="1" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/1"&gt;
+        &lt;name&gt;CREATE_VM&lt;/name&gt;
+        &lt;administrative&gt;false&lt;/administrative&gt;
+        &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
+    &lt;/permit&gt;
+    &lt;permit id="4" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/4"&gt;
+        &lt;name&gt;VM_BASIC_OPERATIONS&lt;/name&gt;
+        &lt;administrative&gt;false&lt;/administrative&gt;
+        &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
+    &lt;/permit&gt;
+&lt;/permits&gt;
+      </screen>
+      <para>A <literal>permit</literal> is assigned to a <literal>role</literal> when <literal>POST</literal>ed to the <literal>permits</literal> sub-collection. Use either an <literal>id=</literal> attribute or a <literal>name</literal> element to specify the <literal>permit</literal> to assign. For example:</para>
+      <screen>
+POST /rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits HTTP/1.1
+Accept: application/xml
+
+&lt;permit id="1"/&gt;
+
+HTTP/1.1 201 Created
+Content-Type: application/xml
+
+&lt;permits&gt;
+    &lt;permit id="1" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/1"&gt;
+        &lt;name&gt;CREATE_VM&lt;/name&gt;
+        &lt;administrative&gt;false&lt;/administrative&gt;
+        &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
+    &lt;/permit&gt;
+&lt;/permits&gt;
+      </screen>
+    </section>
   </section>
 
   <section id="sect-REST_API_Guide-Users">
-    <title>
-      Users
-    </title>
+    <title>Users</title>
 
     <para>
       Users are exposed via a top-level collection, referenced by the <literal>rel="users"</literal> link. Individual <literal>user</literal> elements contain the following:

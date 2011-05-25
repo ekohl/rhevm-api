@@ -460,6 +460,48 @@ Content-Type: application/xml
 
   </section>
 
+  <section id="sect-REST_API_Guide-Common_Idioms-Permissions">
+    <title>
+      Permissions
+    </title>
+    <para>Each resource contains a <literal>permissions</literal> sub-collection. Each <literal>permission</literal> contains a <literal>user</literal>, an assigned <literal>role</literal> and the specified resource. For example:</para>    
+    <screen>
+GET /rhevm-api/resources/{id}/permissions HTTP/1.1
+Accept: application/xml
+
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+&lt;permissions&gt;
+  &lt;permission id="{permission-id}" href="/rhevm-api/resources/{id}/permissions/{permission-id}"&gt;
+    &lt;role id="{role-id}" href="/rhevm-api/roles/{role-id}"/&gt;
+    &lt;user id="{role-id}" href="/rhevm-api/users/{role-id}"/&gt;
+    &lt;resource id="{id}" href="/rhevm-api/resources/{id}"/&gt;
+  &lt;/permission&gt;
+  ...
+&lt;/permissions&gt;
+    </screen>
+    <para>A resource acquires a new <literal>permission</literal> when <literal>POST</literal>ed to its <literal>permissions</literal> sub-collection. Each new permission requires a <literal>role</literal> and a <literal>user</literal>:</para>
+    <screen>
+POST /rhevm-api/resources/{id}/permissions HTTP/1.1
+Accept: application/xml
+
+&lt;permission"&gt;
+  &lt;role id="{role-id}"/&gt;
+  &lt;user id="{role-id}"/&gt;
+&lt;/permission&gt;
+
+HTTP/1.1 201 Created
+Content-Type: application/xml
+
+&lt;permission id="{permission-id}" href="/rhevm-api/resources/{id}/permissions/{permission-id}"&gt;
+  &lt;role id="{role-id}" href="/rhevm-api/roles/{role-id}"/&gt;
+  &lt;user id="{role-id}" href="/rhevm-api/users/{role-id}"/&gt;
+  &lt;resource id="{id}" href="/rhevm-api/resources/{id}"/&gt;
+&lt;/permission&gt;
+    </screen>
+	</section>
+	
   <section id="sect-REST_API_Guide-Common_Idioms-Handling_Errors">
     <title>
       Handling Errors
