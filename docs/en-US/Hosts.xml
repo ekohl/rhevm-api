@@ -31,6 +31,12 @@
         </thead>
         <tbody>
           <row>
+            <entry><literal>type</literal></entry>
+            <entry>One of <literal>rhel</literal> or <literal>rhev-h</literal></entry>
+            <entry>The host type</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
+          <row>
             <entry><literal>status</literal></entry>
             <entry>One of <literal>DOWN</literal>, <literal>ERROR</literal>, <literal>INITIALIZING</literal>, <literal>INSTALLING</literal>, <literal>INSTALL_FAILED</literal>, <literal>MAINTENANCE</literal>, <literal>NON_OPERATIONAL</literal>, <literal>NON_RESPONSIVE</literal>, <literal>PENDING_APPROVAL</literal>, <literal>PREPARING_FOR_MAINTENANCE</literal>, <literal>PROBLEMATIC</literal>, <literal>REBOOT</literal>, <literal>UNASSIGNED</literal> or <literal>UP</literal></entry>
             <entry>The host status</entry>
@@ -101,6 +107,7 @@
   <screen>
 &lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
   &lt;name&gt;zig&lt;/name&gt;
+  &lt;type&gt;rhev-h&lt;/type&gt;
   &lt;status&gt;UP&lt;/status&gt;
   &lt;version major="2" minor="3"/&gt;
   &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
