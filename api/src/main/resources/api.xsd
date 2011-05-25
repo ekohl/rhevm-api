@@ -504,6 +504,7 @@
           <xs:element name="custom_properties" type="CustomProperties" minOccurs="0"/>
           <xs:element ref="boot_protocols" minOccurs="0"/>
           <xs:element ref="error_handling" minOccurs="0"/>
+          <xs:element ref="storage_formats" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -721,6 +722,20 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:element name="storage_formats" type="StorageFormats"/>
+
+  <xs:complexType name="StorageFormats">
+    <xs:sequence>
+      <xs:element name="format" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="StorageFormats"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
   <!-- Common to all resources -->
 
   <xs:complexType name="BaseResource">
@@ -781,6 +796,7 @@
       <xs:extension base="BaseResource">
         <xs:sequence>
           <xs:element name="storage_type" type="xs:string" minOccurs="0"/>
+          <xs:element name="storage_format" type="xs:string" minOccurs="0"/>
           <xs:element name="version" type="Version" minOccurs="0"/>
           <xs:element name="supported_versions" type="SupportedVersions" minOccurs="0"/>
           <xs:element name="status" type="DataCenterStatus" minOccurs="0"/>
@@ -1421,6 +1437,7 @@
           <xs:element name="available" type="xs:long" minOccurs="0"/>
           <xs:element name="used" type="xs:long" minOccurs="0"/>
           <xs:element name="committed" type="xs:long" minOccurs="0"/>
+          <xs:element name="storage_format" type="xs:string" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
