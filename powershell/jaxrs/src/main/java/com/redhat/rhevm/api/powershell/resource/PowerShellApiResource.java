@@ -28,10 +28,12 @@ import com.redhat.rhevm.api.common.util.LinkHelper;
 import com.redhat.rhevm.api.common.util.LinkHelper.LinkFlags;
 import com.redhat.rhevm.api.model.API;
 import com.redhat.rhevm.api.model.ApiSummary;
+import com.redhat.rhevm.api.model.BaseResource;
 import com.redhat.rhevm.api.model.Hosts;
 import com.redhat.rhevm.api.model.Link;
 import com.redhat.rhevm.api.model.LinkHeader;
 import com.redhat.rhevm.api.model.ObjectFactory;
+import com.redhat.rhevm.api.model.SpecialObjects;
 import com.redhat.rhevm.api.model.StorageDomains;
 import com.redhat.rhevm.api.model.SystemVersion;
 import com.redhat.rhevm.api.model.Users;
@@ -62,10 +64,39 @@ public class PowerShellApiResource
         addLink(api, "users", LinkFlags.SEARCHABLE);
         addLink(api, "vmpools", LinkFlags.SEARCHABLE);
         addLink(api, "vms", LinkFlags.SEARCHABLE);
+
+        addStaticLinks(getSpecialObjects(api).getLinks(),
+                       new String[]{"templates/blank", "tags/root"},
+                       new String[]{getTemplateBlankUri(), getTagRootUri()});
+
         return api;
     }
 
-    private void addLink(API api, String rel, LinkFlags flags) {
+    private BaseResource getSpecialObjects(API api) {
+        api.setSpecialObjects(new SpecialObjects());
+        return api.getSpecialObjects();
+    }
+
+    private String getTagRootUri() {
+        return LinkHelper.combine(getUriInfo().getBaseUri().getPath(), "tags/-1");
+    }
+
+    private String getTemplateBlankUri() {
+        return LinkHelper.combine(getUriInfo().getBaseUri().getPath(), "templates/00000000-0000-0000-0000-000000000000");
+    }
+
+    private void addStaticLinks(List<Link> linker, String[] rels, String[] refs) {
+        if(rels.length == refs.length){
+            for(int i = 0; i < rels.length; i++){
+                Link link = new Link();
+                link.setRel(rels[i]);
+                link.setHref(refs[i]);
+                linker.add(link);
+            }
+        }
+    }
+
+    private void addLink(BaseResource api, String rel, LinkFlags flags) {
         LinkHelper.addLink(getUriInfo().getBaseUri().getPath(),api, rel, flags);
     }
 
