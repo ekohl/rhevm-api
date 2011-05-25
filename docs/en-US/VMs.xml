@@ -153,7 +153,7 @@
           <row>
             <entry><literal>placement_policy</literal></entry>
             <entry>complex</entry>
-            <entry>Sets the placement policy for VM migration. Requires a default <literal>host</literal><remark> and an <literal>affinity</literal> (one of <literal>migratable</literal>, <literal>user_migratable</literal> or <literal>pinned</literal>)</remark>.</entry>
+            <entry>Sets the placement policy for VM migration. Requires a default <literal>host</literal> and an <literal>affinity</literal> (one of <literal>migratable</literal>, <literal>user_migratable</literal> or <literal>pinned</literal>).</entry>
             <entry></entry>
           </row>
         </tbody>
