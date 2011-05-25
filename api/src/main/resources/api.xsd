@@ -28,9 +28,19 @@
     <xs:complexContent>
       <xs:extension base="BaseResource">
         <xs:sequence>
+          <xs:element ref="special_objects"/>
           <xs:element ref="system_version"/>
           <xs:element ref="summary"/>
         </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:element name="special_objects" type="SpecialObjects"/>
+  
+  <xs:complexType name="SpecialObjects">
+    <xs:complexContent>
+      <xs:extension base="BaseResource">
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
