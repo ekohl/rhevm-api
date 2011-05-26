@@ -325,7 +325,7 @@
                 <entry><literal>interface</literal></entry>
                 <entry>One of <literal>ide</literal>, <literal>scsi</literal> or <literal>virtio</literal></entry>
                 <entry>The type of interface driver used to connect to the disk device</entry>
-                <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+                <entry></entry>
               </row>
               <row>
                 <entry><literal>format</literal></entry>
@@ -343,19 +343,19 @@
                 <entry><literal>bootable</literal></entry>
                 <entry>boolean: true or false</entry>
                 <entry><literal>true</literal> if this disk is to be marked as bootable</entry>
-                <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+                <entry></entry>
               </row>
               <row>
                 <entry><literal>wipe_after_delete</literal></entry>
                 <entry>boolean: true or false</entry>
                 <entry><literal>true</literal> if the underlying physical storage for the disk should be zeroed when the disk is deleted</entry>
-                <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+                <entry></entry>
               </row>
               <row>
                 <entry><literal>propagate_errors</literal></entry>
                 <entry>boolean: true or false</entry>
                 <entry><literal>true</literal> if disk errors should not cause VM to be paused and, instead, disk errors should be propagated to the guest OS</entry>
-                <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+                <entry></entry>
               </row>
               <row>
                 <entry><literal>storage_domain</literal></entry>
@@ -370,11 +370,7 @@
       <para>
         When adding a new disk, the <literal>size</literal> property is required. Also the <literal>storage_domain</literal> ID is needed in the case of the first disk being added to a VM that was not itself created from a template.
       </para>
-      <note>
-        <para>
-          Note that it is not possible to modify disk properties using <literal>PUT</literal>.
-        </para>
-      </note>
+
       <screen>
 &lt;disk id="ed7feafe-9aaf-458c-809a-ed789cdbd5b4" href="/rhevm-api/vms/cdc0b102-fbfe-444a-b9cb-57d2af94f401/disks/ed7feafe-9aaf-458c-809a-ed789cdbd5b4"&gt;
   &lt;size&gt;10737418240&lt;/size&gt;
@@ -423,19 +419,19 @@
                 <entry><literal>name</literal></entry>
                 <entry>string</entry>
                 <entry>The name of the guest network device, e.g. <literal>eth0</literal></entry>
-                <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+                <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
               </row>
               <row>
                 <entry><literal>network id</literal></entry>
                 <entry>GUID</entry>
                 <entry>A reference to the network which the interface should be connected</entry>
-                <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+                <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
               </row>
               <row>
                 <entry><literal>type</literal></entry>
                 <entry>One of <literal>e1000</literal>, <literal>virtio</literal>, <literal>rtl8139</literal> or <literal>rtl8139_virtio</literal></entry>
                 <entry>The type of driver used for the nic</entry>
-                <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+                <entry></entry>
               </row>
               <row>
                 <entry><literal>mac address</literal></entry>
@@ -451,11 +447,6 @@
       <para>
         When adding a new network interface, the <literal>name</literal> and <literal>network id</literal> properties are required.
       </para>
-      <note>
-        <para>
-          Note that it is not possible to modify network interface properties using <literal>PUT</literal>.
-        </para>
-      </note>
 
       <screen>
 &lt;nic id="7a3cff5e-3cc4-47c2-8388-9adf16341f5e" href="/rhevm-api/vms/cdc0b102-fbfe-444a-b9cb-57d2af94f401/nics/7a3cff5e-3cc4-47c2-8388-9adf16341f5e"&gt;
