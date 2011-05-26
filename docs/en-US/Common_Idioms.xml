@@ -161,7 +161,7 @@ Content-Type: application/xml
       Listing Resource Sub-Collections
     </title>
     <para>
-      A request for resources also allows for sub-collection listings using the <literal>detail</literal> parameter in the <literal>Accept</literal> header.
+      A request for resources also allows for extended sub-collection listings using the <literal>detail</literal> parameter in the <literal>Accept</literal> header.
     </para>
     <screen>
 GET /rhevm-api/resources/ HTTP/1.1
@@ -179,8 +179,9 @@ Accept: application/xml; detail=subcollection1; detail=subcollection2
     </para>
     <screen>
 GET /rhevm-api/resources/ HTTP/1.1
-Accept: application/xml; detail=subcollection1+subcollection2+subcollection2
+Accept: application/xml; detail=subcollection1+subcollection2+subcollection3
     </screen>
+    <para>The API only supports the <literal>statistics</literal> sub-collection listings for <literal>vms</literal> and <literal>hosts</literal>.
   </section>
 
   <section id="sect-REST_API_Guide-Common_Idioms-Querying_Collections">
