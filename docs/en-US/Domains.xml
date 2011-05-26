@@ -65,7 +65,7 @@
           <row>
             <entry><literal>groups</literal></entry>
             <entry>complex</entry>
-            <entry>The list of Active Directory groups the user is member</entry>
+            <entry>A list of Active Directory groups for this user</entry>
           </row>
         </tbody>
       </tgroup>
@@ -113,7 +113,7 @@
           <row>
             <entry><literal>id</literal></entry>
             <entry>GUID</entry>
-            <entry>Globally unique identifier for this role</entry>
+            <entry>Globally unique identifier for this group</entry>
           </row>
           <row>
             <entry><literal>name</literal></entry>
