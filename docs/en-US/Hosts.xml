@@ -96,6 +96,12 @@
             <entry><literal>true</literal> if Kernel SamePage Merging (KSM) is enabled. Is disabled if <literal>transparent_hugepages</literal> is enabled. (see <xref linkend="sect-REST_API_Guide-Hosts-Memory_Management"/>)</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
+          <row>
+            <entry><literal>iscsi</literal></entry>
+            <entry>complex</entry>
+            <entry>The SCSI <literal>initiator</literal> for the host</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
         </tbody>
       </tgroup>
     </informaltable>
@@ -113,6 +119,9 @@
   &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
   &lt;port&gt;54321&lt;/port&gt;
   &lt;storage_manager&gt;true&lt;/storage_manager&gt;
+  &lt;iscsi&gt;
+    &lt;initiator&gt;iqn.2001-04.com.example:diskarrays-sn-a8675309&lt;/initiator&gt;
+  &lt;/iscsi&gt;
   &lt;link rel="statistics" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/statistics"/&gt;
   &lt;link rel="nics" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics"/&gt;
   &lt;link rel="storage" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage"/&gt;
