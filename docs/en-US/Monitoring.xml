@@ -30,7 +30,7 @@
 		      </row>
 		      <row>
 		        <entry><literal>severity</literal></entry>
-		        <entry>The level of severity for the event</entry>
+		        <entry>The level of severity for the event. One of <literal>NORMAL</literal>, <literal>WARNING</literal>, <literal>ERROR</literal>, <literal>ALERT</literal>.</entry>
 		      </row>
 		      <row>
 		        <entry><literal>time</literal></entry>
