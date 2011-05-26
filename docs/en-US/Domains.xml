@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "REST_API_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-REST_API_Guide-Domains">
+  <title>Domains</title>
+	<para>The API provides the ability to access user and group information from the organization's Active Directory Service using the <literal>domains</literal> collection.</para>
+	<screen>
+&lt;domains&gt;
+  &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
+      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"&gt;
+    &lt;name&gt;domain.example.com&lt;/name&gt;
+    &lt;link rel="users"
+        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users"/&gt;
+    &lt;link rel="groups"
+        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups"/&gt;
+    &lt;link rel="users/search"
+        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users?search={query}"/&gt;
+    &lt;link rel="groups/search"
+        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups?search={query}"/&gt;
+  &lt;/domain&gt;
+&lt;/domains&gt;
+  </screen>
+  <note>
+    <para>The <literal>domains</literal> collection and its sub-collections are read-only.</para>
+  </note>
+	<section id="chap-REST_API_Guide-Domains-Users">
+	  <title>Domains Users</title>
+	  <para>The <literal>users</literal> sub-collection contains all users in Active Directory. This information is used to add new users to the Red Hat Enterprise Virtualization environment as per <xref linkend="sect-REST_API_Guide-Users"/>.</para>
+	  <para>A domain <literal>user</literal> resource contains these main properties:</para>
+    <informaltable frame="none">
+      <tgroup cols="3">
+        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
+        <colspec colwidth="6*"/>
+        <thead>
+          <row>
+            <entry>Element</entry>
+            <entry>Type</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><literal>id</literal></entry>
+            <entry>GUID</entry>
+            <entry>Globally unique identifier for this user</entry>
+          </row>
+          <row>
+            <entry><literal>name</literal></entry>
+            <entry>string</entry>
+            <entry>The name of the user</entry>
+          </row>
+          <row>
+            <entry><literal>user_name</literal></entry>
+            <entry>string</entry>
+            <entry>The username from Active Directory</entry>
+          </row>
+          <row>
+            <entry><literal>domain id</literal></entry>
+            <entry>GUID</entry>
+            <entry>The containing Active Directory domain</entry>
+          </row>
+          <row>
+            <entry><literal>groups</literal></entry>
+            <entry>complex</entry>
+            <entry>The list of Active Directory groups the user is member</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>For example:</para>
+	  <screen>
+&lt;users&gt;
+  &lt;user id="225f15cd-e891-434d-8262-a66808fcb9b1"
+      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users/d3b4e7be-5f57-4dac-b937-21e1771a501f"&gt;
+    &lt;name&gt;RHEV-M Admin&lt;/name&gt;
+    &lt;user_name&gt;rhevmadmin@domain.example.com&lt;/user_name&gt;
+    &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
+        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"/&gt;
+    &lt;groups&gt;
+      &lt;group&gt;
+        &lt;name&gt;domain.example.com/Users/Enterprise Admins&lt;/name&gt;
+      &lt;/group&gt;
+      &lt;group&gt;
+        &lt;name&gt;domain.example.com/Users/Domain Admins&lt;/name&gt;
+      &lt;/group&gt;
+      ...
+    &lt;/groups&gt;
+  &lt;/user&gt;
+  ...
+&lt;/users&gt;
+	  </screen>
+
+  </section>
+	<section id="chap-REST_API_Guide-Domains-Groups">
+	  <title>Domains Groups</title>
+	  <para>The <literal>groups</literal> sub-collection contains all groups in Active Directory. A domain <literal>group</literal> resource contains these main properties:</para>
+    <informaltable frame="none">
+      <tgroup cols="3">
+        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
+        <colspec colwidth="6*"/>
+        <thead>
+          <row>
+            <entry>Element</entry>
+            <entry>Type</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><literal>id</literal></entry>
+            <entry>GUID</entry>
+            <entry>Globally unique identifier for this role</entry>
+          </row>
+          <row>
+            <entry><literal>name</literal></entry>
+            <entry>string</entry>
+            <entry>The name of the group</entry>
+          </row>
+          <row>
+            <entry><literal>domain id</literal></entry>
+            <entry>GUID</entry>
+            <entry>The containing Active Directory domain</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+	  <screen>
+&lt;groups&gt;
+  &lt;group id="85bf8d97-273c-4a5c-b801-b17d58330dab"
+      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups/85bf8d97-273c-4a5c-b801-b17d58330dab"&gt;
+    &lt;name&gt;example.com/Users/Enterprise Admins&lt;/name&gt;
+    &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
+        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"/&gt;
+  &lt;/group&gt;
+  ...
+&lt;/groups&gt;
+	  </screen>
+  </section>
+</chapter>
