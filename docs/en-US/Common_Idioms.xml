@@ -181,7 +181,7 @@ Accept: application/xml; detail=subcollection1; detail=subcollection2
 GET /rhevm-api/resources/ HTTP/1.1
 Accept: application/xml; detail=subcollection1+subcollection2+subcollection3
     </screen>
-    <para>The API only supports the <literal>statistics</literal> sub-collection listings for <literal>vms</literal> and <literal>hosts</literal>.
+    <para>The API only supports the <literal>statistics</literal> sub-collection listings for <literal>vms</literal> and <literal>hosts</literal>.</para>
   </section>
 
   <section id="sect-REST_API_Guide-Common_Idioms-Querying_Collections">
