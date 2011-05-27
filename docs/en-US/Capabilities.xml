@@ -6,45 +6,107 @@
 <chapter id="chap-REST_API_Guide-Capabilities">
   <title>Capabilities</title>
   <para>
-    The <literal>rel="capabilities"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>) allows information about the supported capabilities of this instance of Red Hat Enterprise Virtualization Manager to be queried. The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements which describe capabilities which are dependent on a compatiblity level. The <literal>version</literal> element may contain the following information:
+    The <literal>rel="capabilities"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>) allows information about the supported capabilities of this instance of Red Hat Enterprise Virtualization Manager to be queried. The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements which describe capabilities which are dependent on a compatiblity level. The <literal>version</literal> element may contain the following information:</para>
 
-    <informaltable frame="none">
-      <tgroup cols="2">
-        <colspec colwidth="2*"/>
-        <colspec colwidth="5*"/>
-        <tbody>
-          <row>
-            <entry><literal>major</literal></entry>
-            <entry>The major version number</entry>
-          </row>
-          <row>
-            <entry><literal>minor</literal></entry>
-            <entry>The minor version number</entry>
-          </row>
-          <row>
-            <entry><literal>current</literal></entry>
-            <entry>Whether this is the most recent supported compatibility level</entry>
-          </row>
-          <row>
-            <entry><literal>cpus</literal></entry>
-            <entry>The list of supported CPU types. See <xref linkend="sect-REST_API_Guide-Capabilities-CPUs"/></entry>
-          </row>
-          <row>
-            <entry><literal>power_managers</literal></entry>
-            <entry>The list of supported fence agents and their configuration options. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/></entry>
-          </row>
-          <row>
-            <entry><literal>storage_types</literal></entry>
-            <entry>The list of each <literal>storage_type</literal> the version supports, such as <literal>nfs</literal>, <literal>iscsi</literal>, <literal>fcp</literal> or <literal>local</literal>.</entry>
-          </row>
-          <row>
-            <entry><literal>features</literal></entry>
-            <entry>The list of features the version supports</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-
+  <informaltable frame="none">
+    <tgroup cols="2">
+      <colspec colwidth="2*"/>
+      <colspec colwidth="5*"/>
+      <tbody>
+        <row>
+          <entry><literal>major</literal></entry>
+          <entry>The major version number</entry>
+        </row>
+        <row>
+          <entry><literal>minor</literal></entry>
+          <entry>The minor version number</entry>
+        </row>
+        <row>
+          <entry><literal>current</literal></entry>
+          <entry>Whether this is the most recent supported compatibility level</entry>
+        </row>
+        <row>
+          <entry><literal>features</literal></entry>
+          <entry>The list of features the version supports. See <xref linkend="sect-REST_API_Guide-Capabilities-Features"/>.</entry>
+        </row>
+        <row>
+          <entry><literal>cpus</literal></entry>
+          <entry>List of supported CPU types. See <xref linkend="sect-REST_API_Guide-Capabilities-CPUs"/>.</entry>
+        </row>
+        <row>
+          <entry><literal>power_managers</literal></entry>
+          <entry>List of supported fence agents and their configuration options. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/>.</entry>
+        </row>
+        <row>
+          <entry><literal>fence_types</literal></entry>
+          <entry>Supported fence actions for hosts</entry>
+        </row>
+        <row>
+          <entry><literal>storage_types</literal></entry>
+          <entry>Supported storage types for a version</entry>
+        </row>
+        <row>
+          <entry><literal>storage_domain_types</literal></entry>
+          <entry>List of all domain types</entry>
+        </row>
+        <row>
+          <entry><literal>vm_types</literal></entry>
+          <entry>List of all virtual machine types</entry>
+        </row>
+        <row>
+          <entry><literal>boot_devices</literal></entry>
+          <entry>Boot devices for a virtual machine</entry>
+        </row>
+        <row>
+          <entry><literal>display_types</literal></entry>
+          <entry>Available display protocols for a virtual machine</entry>
+        </row>
+ 				<row>
+          <entry><literal>nic_types</literal></entry>
+          <entry>Network interface types for a virtual machine</entry>
+        </row>
+ 				<row>
+          <entry><literal>disk_types</literal></entry>
+          <entry>List of storage device types</entry>
+        </row>
+        <row>
+          <entry><literal>disk_formats</literal></entry>
+          <entry>List of storage device formats</entry>
+        </row>
+        <row>
+          <entry><literal>disk_interfaces</literal></entry>
+          <entry>List of interfaces for storage devices</entry>
+        </row>
+        <row>
+          <entry><literal>vm_affinities</literal></entry>
+          <entry>Affinities for a host's placement policy</entry>
+        </row>
+        <row>
+          <entry><literal>hooks_env</literal></entry>
+          <entry>Environment variables for a virtual machine's custom scripts (Hooks)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+    
+	<para>The <literal>capabilities</literal> container also includes capabilities that are not version-specific. This includes:</para>
+  <informaltable frame="none">
+    <tgroup cols="2">
+      <colspec colwidth="2*"/>
+      <colspec colwidth="5*"/>
+      <tbody>
+        <row>
+          <entry><literal>permits</literal></entry>
+          <entry>A list of allowable actions assignable to roles. See <xref linkend="sect-REST_API_Guide-Capabilities-Permits"/>.</entry>
+        </row>
+        <row>
+          <entry><literal>scheduling_policies</literal></entry>
+          <entry>Available virtual machine scheduling modes for hosts in a cluster.</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+  <para>
     For example:
   </para>
 
@@ -64,33 +126,176 @@ Content-Type: application/xml
     &lt;power_managers&gt;
       ...
     &lt;/power_managers&gt;
+    &lt;fence_types&gt;
+      &lt;fence_type&gt;manual&lt;/fence_type&gt;
+      &lt;fence_type&gt;restart&lt;/fence_type&gt;
+      &lt;fence_type&gt;start&lt;/fence_type&gt;
+      &lt;fence_type&gt;stop&lt;/fence_type&gt;
+      &lt;fence_type&gt;status&lt;/fence_type&gt;
+    &lt;/fence_types&gt;
     &lt;storage_types&gt;
       &lt;storage_type&gt;iscsi&lt;/storage_type&gt;
       &lt;storage_type&gt;fcp&lt;/storage_type&gt;
       &lt;storage_type&gt;nfs&lt;/storage_type&gt;
     &lt;/storage_types&gt;
+    &lt;storage_domain_types&gt;
+      &lt;storage_domain_type&gt;data&lt;/storage_domain_type&gt;
+      &lt;storage_domain_type&gt;iso&lt;/storage_domain_type&gt;
+      &lt;storage_domain_type&gt;export&lt;/storage_domain_type&gt;
+    &lt;/storage_domain_types&gt;
+    &lt;vm_types&gt;
+      &lt;vm_type&gt;desktop&lt;/vm_type&gt;
+      &lt;vm_type&gt;server&lt;/vm_type&gt;
+    &lt;/vm_types&gt;
+    &lt;boot_devices&gt;
+      &lt;boot_device&gt;cdrom&lt;/boot_device&gt;
+      &lt;boot_device&gt;hd&lt;/boot_device&gt;
+      &lt;boot_device&gt;network&lt;/boot_device&gt;
+    &lt;/boot_devices&gt;
+    &lt;display_types&gt;
+      &lt;display_type&gt;vnc&lt;/display_type&gt;
+      &lt;display_type&gt;spice&lt;/display_type&gt;
+    &lt;/display_types&gt;
+    &lt;nic_types&gt;
+      &lt;nic_type&gt;e1000&lt;/nic_type&gt;
+      &lt;nic_type&gt;virtio&lt;/nic_type&gt;
+      &lt;nic_type&gt;rtl8139&lt;/nic_type&gt;
+      &lt;nic_type&gt;rtl8139_virtio&lt;/nic_type&gt;
+    &lt;/nic_types&gt;
+    &lt;disk_types&gt;
+      &lt;disk_type&gt;data&lt;/disk_type&gt;
+      &lt;disk_type&gt;shared&lt;/disk_type&gt;
+      &lt;disk_type&gt;swap&lt;/disk_type&gt;
+      &lt;disk_type&gt;system&lt;/disk_type&gt;
+      &lt;disk_type&gt;temp&lt;/disk_type&gt;
+    &lt;/disk_types&gt;
+    &lt;disk_formats&gt;
+      &lt;disk_format&gt;cow&lt;/disk_format&gt;
+      &lt;disk_format&gt;raw&lt;/disk_format&gt;
+    &lt;/disk_formats&gt;
+    &lt;disk_interfaces&gt;
+      &lt;disk_interface&gt;ide&lt;/disk_interface&gt;
+      &lt;disk_interface&gt;scsi&lt;/disk_interface&gt;
+      &lt;disk_interface&gt;virtio&lt;/disk_interface&gt;
+    &lt;/disk_interfaces&gt;
     ...
   &lt;/version&gt;
   &lt;version major="2" minor="3"&gt;
+    &lt;features&gt;
+    	...
+    &lt;/features&gt;
     &lt;cpus&gt;
       ...
     &lt;/cpus&gt;
     &lt;power_managers&gt;
       ...
     &lt;/power_managers&gt;
+    &lt;fence_types&gt;
+      &lt;fence_type&gt;manual&lt;/fence_type&gt;
+      &lt;fence_type&gt;restart&lt;/fence_type&gt;
+      &lt;fence_type&gt;start&lt;/fence_type&gt;
+      &lt;fence_type&gt;stop&lt;/fence_type&gt;
+      &lt;fence_type&gt;status&lt;/fence_type&gt;
+    &lt;/fence_types&gt;
     &lt;storage_types&gt;
       &lt;storage_type&gt;iscsi&lt;/storage_type&gt;
       &lt;storage_type&gt;fcp&lt;/storage_type&gt;
       &lt;storage_type&gt;nfs&lt;/storage_type&gt;
       &lt;storage_type&gt;local&lt;/storage_type&gt;
     &lt;/storage_types&gt;
+    &lt;storage_domain_types&gt;
+      &lt;storage_domain_type&gt;data&lt;/storage_domain_type&gt;
+      &lt;storage_domain_type&gt;iso&lt;/storage_domain_type&gt;
+      &lt;storage_domain_type&gt;export&lt;/storage_domain_type&gt;
+    &lt;/storage_domain_types&gt;
+    &lt;vm_types&gt;
+      &lt;vm_type&gt;desktop&lt;/vm_type&gt;
+      &lt;vm_type&gt;server&lt;/vm_type&gt;
+    &lt;/vm_types&gt;
+    &lt;boot_devices&gt;
+      &lt;boot_device&gt;cdrom&lt;/boot_device&gt;
+      &lt;boot_device&gt;hd&lt;/boot_device&gt;
+      &lt;boot_device&gt;network&lt;/boot_device&gt;
+    &lt;/boot_devices&gt;
+    &lt;display_types&gt;
+      &lt;display_type&gt;vnc&lt;/display_type&gt;
+      &lt;display_type&gt;spice&lt;/display_type&gt;
+    &lt;/display_types&gt;
+    &lt;nic_types&gt;
+      &lt;nic_type&gt;e1000&lt;/nic_type&gt;
+      &lt;nic_type&gt;virtio&lt;/nic_type&gt;
+      &lt;nic_type&gt;rtl8139&lt;/nic_type&gt;
+      &lt;nic_type&gt;rtl8139_virtio&lt;/nic_type&gt;
+    &lt;/nic_types&gt;
+    &lt;disk_types&gt;
+      &lt;disk_type&gt;data&lt;/disk_type&gt;
+      &lt;disk_type&gt;shared&lt;/disk_type&gt;
+      &lt;disk_type&gt;swap&lt;/disk_type&gt;
+      &lt;disk_type&gt;system&lt;/disk_type&gt;
+      &lt;disk_type&gt;temp&lt;/disk_type&gt;
+    &lt;/disk_types&gt;
+    &lt;disk_formats&gt;
+      &lt;disk_format&gt;cow&lt;/disk_format&gt;
+      &lt;disk_format&gt;raw&lt;/disk_format&gt;
+    &lt;/disk_formats&gt;
+    &lt;disk_interfaces&gt;
+      &lt;disk_interface&gt;ide&lt;/disk_interface&gt;
+      &lt;disk_interface&gt;scsi&lt;/disk_interface&gt;
+      &lt;disk_interface&gt;virtio&lt;/disk_interface&gt;
+    &lt;/disk_interfaces&gt;
+    &lt;vm_affinities&gt;
+      &lt;affinity&gt;migratable&lt;/affinity&gt;
+      &lt;affinity&gt;user_migratable&lt;/affinity&gt;
+      &lt;affinity&gt;pinned&lt;/affinity&gt;
+    &lt;/vm_affinities&gt;
+    ...
+  &lt;/version&gt;
+  &lt;permits&gt;
+    ...
+  &lt;/permits&gt;
+  &lt;scheduling_policies&gt;
+    ...
+  &lt;/scheduling_policies&gt;
+&lt;/capabilities&gt;
+  </screen>
+
+  <section id="sect-REST_API_Guide-Capabilities-Features">
+    <title>Features</title>
+    <para>Each <literal>version</literal> contains a list of compatible <literal>features</literal>. These features include:</para>
+    <informaltable frame="none">
+      <tgroup cols="3">
+        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
+        <colspec colwidth="6*"/>
+        <thead>
+          <row>
+            <entry>Element</entry>
+            <entry>Type</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><literal>transparent_hugepages</literal></entry>
+            <entry>boolean: true or false</entry>
+            <entry>Defines the availablity of Transparent Hugepages for hosts</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>For example:</para>
+		<screen>
+&lt;capabilities&gt;
+  &lt;version major="2" minor="3"&gt;
+	  ...
     &lt;features&gt;
-    	...
+      &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
     &lt;/features&gt;
     ...
   &lt;/version&gt;
 &lt;/capabilities&gt;
-  </screen>
+    </screen>
+	</section>
 
   <section id="sect-REST_API_Guide-Capabilities-CPUs">
     <title>CPUs</title>
@@ -138,6 +343,7 @@ Content-Type: application/xml
     </screen>
 
   </section>
+
   <section id="sect-REST_API_Guide-Capabilities-Power_Managers">
     <title>Power Managers</title>
     <para>Red Hat Enterprise Virtualization platform provides a list of supported power managers for host fencing configuration. Each power manager contains the following properties:</para>
@@ -191,44 +397,6 @@ Content-Type: application/xml
     </screen>
     <para>Each host can define a power management configuration using one of the listed fencing devices. See <xref linkend="sect-REST_API_Guide-Hosts-Power_Management"/>.</para>
   </section>
-  
-  <section id="sect-REST_API_Guide-Capabilities-Features">
-    <title>Features</title>
-    <para>Each <literal>version</literal> contains a list of compatible <literal>features</literal>. These features include:</para>
-    <informaltable frame="none">
-      <tgroup cols="3">
-        <colspec colwidth="2*"/>
-        <colspec colwidth="4*"/>
-        <colspec colwidth="6*"/>
-        <thead>
-          <row>
-            <entry>Element</entry>
-            <entry>Type</entry>
-            <entry>Description</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry><literal>transparent_hugepages</literal></entry>
-            <entry>boolean: true or false</entry>
-            <entry>Defines the availablity of Transparent Hugepages for hosts</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-    <para>For example:</para>
-		<screen>
-&lt;capabilities&gt;
-  &lt;version major="2" minor="3"&gt;
-	  ...
-    &lt;features&gt;
-      &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
-    &lt;/features&gt;
-    ...
-  &lt;/version&gt;
-&lt;/capabilities&gt;
-    </screen>
-	</section>
 	
   <section id="sect-REST_API_Guide-Capabilities-Permits">
     <title>Permits</title>
