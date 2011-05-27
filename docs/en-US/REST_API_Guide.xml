@@ -27,5 +27,6 @@
 	<xi:include href="Tags.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Monitoring.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Event_Codes.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="Timezones.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </book>

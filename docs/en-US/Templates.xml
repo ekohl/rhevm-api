@@ -63,6 +63,12 @@
             <entry> </entry>
           </row>
           <row>
+            <entry><literal>timezone</literal></entry>
+            <entry>tz database format: <literal>Area/Location</literal></entry>
+            <entry>The timezone for this VM. Only certain timezones are allowed as specified in <xref linkend="appe-REST_API_Guide-Timezones"/></entry>
+            <entry></entry>
+          </row>
+          <row>
             <entry><literal>memory</literal></entry>
             <entry>integer</entry>
             <entry>The amount of memory allocated to the guest, in bytes</entry>
@@ -138,6 +144,7 @@
   &lt;creation_time&gt;2010-08-16T14:24:29&lt;/creation_time&gt;
   &lt;stateless&gt;false&lt;/stateless&gt;
   &lt;origin&gt;rhev&lt;/origin&gt;
+  &lt;timezone&gt;Europe/London&lt;/timezone&gt;
   &lt;memory&gt;536870912&lt;/memory&gt;
   &lt;cpu&gt;
     &lt;topology cores="1" sockets="1"/&gt;
