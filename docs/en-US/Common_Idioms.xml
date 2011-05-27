@@ -208,7 +208,7 @@ Content-Type: application/xml
 &lt;/resources&gt;
     </screen>
     <para>
-    	More information about queries is found in <xref linkend="chap-REST_API_Guide-Search"/>.
+      More information about queries is found in <xref linkend="chap-REST_API_Guide-Search"/>.
     </para>
   </section>
 
@@ -270,6 +270,57 @@ Content-Type: application/xml
     <para>
       The <literal>Location</literal> header in the response gives the URI from which the resource may be queried. The response body can contain a complete representation, partial representation or no representation of the resource, so clients should rely only on fetching the representation via the URI in the response header.
     </para>
+  </section>
+  <section id="sect-REST_API_Guide-Common_Idioms-Creating_Asynchronous_Resources">
+    <title>
+      Creating an Asynchronous Resource
+    </title>
+    <para>Certain resources, such as Virtual Machines, Disks, Snapshots and Templates, are created asynchronously. This means a request to create one of these types of resources results in a <literal>202 Accepted</literal> status. The initial document structure for a <literal>202 Accepted</literal> resource also contains a <literal>creation_status</literal> element and link for creation status updates. For example:</para>
+
+    <screen>
+POST /rhevm-api/resources HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+
+&lt;resource&gt;
+  &lt;name&gt;foo&lt;/name&gt;
+&lt;/resource&gt;
+
+HTTP/1.1 202 Accepted
+Location: http://{host}/resources/1234-abcd-6789-ef00
+Content-Type: application/xml
+
+&lt;resource id="1234-abcd-6789-ef00" href="/rhevm-api/resources/1234-abcd-6789-ef00"&gt;
+  &lt;name&gt;foo&lt;/name&gt;
+  &lt;creation_status&gt;PENDING&lt;/creation status&gt;
+  &lt;link rel="creation_status" href="/rhevm-api/resources/1234-abcd-6789-ef00/creation_status/2468-wxyz-1357-qrst"/&gt;
+  ...
+&lt;/resource&gt;
+    </screen>
+    <para>A <literal>GET</literal> request to the <literal>creation_status</literal> link provides a creation status update:</para>
+    <screen>
+GET /rhevm-api/resources/1234-abcd-6789-ef00/creation_status/2468-wxyz-1357-qrst HTTP/1.1
+Accept: application/xml
+
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+&lt;creation id="2468-wxyz-1357-qrst" href="/rhevm-api/resource/1234-abcd-6789-ef00/creation_status/2468-wxyz-1357-qrst"&gt;
+    &lt;status&gt;COMPLETE&lt;/status&gt;
+&lt;/creation&gt;
+    </screen>
+
+    <para>Overriding the asynchronous resource creation requires an <literal>Expect: 201-created</literal> header:</para>
+    <screen>
+POST /rhevm-api/resources HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+Expect: 201-created
+
+&lt;resource&gt;
+  &lt;name&gt;foo&lt;/name&gt;
+&lt;/resource&gt;
+    </screen>
 
   </section>
 
@@ -501,8 +552,8 @@ Content-Type: application/xml
   &lt;resource id="{id}" href="/rhevm-api/resources/{id}"/&gt;
 &lt;/permission&gt;
     </screen>
-	</section>
-	
+  </section>
+  
   <section id="sect-REST_API_Guide-Common_Idioms-Handling_Errors">
     <title>
       Handling Errors
