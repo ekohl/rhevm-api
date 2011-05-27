@@ -83,6 +83,7 @@
       </tgroup>
     </informaltable>
   </para>
+
   <para>
     For example:
   </para>
@@ -274,11 +275,11 @@ Content-Type: application/xml
 
   <section id="sect-REST_API_Guide-Storage_Domains-Listing">
     <title>
-      Listing Storage Domain Contents
+      Listing Export Storage Domain Contents
     </title>
 
     <para>
-      Attached storage domains (see <xref linkend="sect-REST_API_Guide-Data_Centers-Attached_Storage_Domains"/>) contain <literal>vms</literal> and <literal>templates</literal> sub-collections which list the VMs and templates stored on that particular storage domain.
+      Storage domains with <literal>type</literal> set to <literal>export</literal> contain <literal>vms</literal> and <literal>templates</literal> sub-collections which list the import candidate VMs and templates stored on that particular storage domain.
     </para>
 
     <para>
