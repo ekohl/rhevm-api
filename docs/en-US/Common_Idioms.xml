@@ -377,7 +377,81 @@ HTTP/1.1 204 No Content
     </screen>
 
   </section>
+  
+  <section id="sect-REST_API_Guide-Common_Idioms-Relationships">
+    <title>
+      Relationships
+    </title>
 
+    <para>
+      The API maps two types of relationships from one resource to another: <emphasis role="bold">sub-collections</emphasis> and <emphasis role="bold">XML element links</emphasis>.
+    </para>
+    
+    <formalpara>
+      <title>
+        Sub-collections
+      </title>
+      <para>
+        A sub-collection relationship defines hierarchical link between a resource and a resource collection. The resource collection exists, or at least has some meaning, in the context of the parent resource. For example, a virtual machine contains network interfaces, which means the API maps the relationship between the virtual machine resource and the network interfaces sub-collection.
+      </para>
+    </formalpara>
+    <para>
+      The API defines a relationship between resource and sub-collection using the <literal>link rel=</literal> attribute:
+    </para>
+    <screen>
+GET /rhevm-api/collection/resource HTTP/1.1
+
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+&lt;resource&gt;
+  &lt;link rel="subcollection" href="/rhevm-api/collection/resource/subcollection"/&gt;
+  ...
+&lt;/resource&gt;
+    </screen>
+    <para>
+      This means an API user can query the sub-collection at <uri>/rhevm-api/collection/resource/subcollection</uri>.
+    </para>
+    
+    <formalpara>
+      <title>
+        XML element links
+      </title>
+      <para>
+        XML element links define relationships between resources. These resources include:
+      </para>
+    </formalpara>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Backlinks from a resource in a sub-collection to a parent resource; or
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Links between resources with an arbitrary relationship.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      An element link in a resource requires a special XML element tag to refer to another resource:
+    </para>
+    <screen>
+GET /rhevm-api/collection/resource/subcollection HTTP/1.1
+
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+&lt;subcollection&gt;
+  &lt;subresource&gt;
+    &lt;resource id="resource" href="/rhevm-api/collection/resource"/&gt;
+    ...
+  &lt;/subresource&gt;
+&lt;/subcollection&gt;
+    </screen>      
+
+  </section>
+  
   <section id="sect-REST_API_Guide-Common_Idioms-Actions">
     <title>
       Actions
