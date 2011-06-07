@@ -37,12 +37,12 @@
   <section id="chap-REST_API_Guide-Introduction-Overview">
     <title>Overview</title>
     <para>
-      Explaining how the API works requires an examination of RESTful web services. The simplest way to think about RESTful web services is in terms of four key concepts: <emphasis role="bold">Resources</emphasis>, <emphasis role="bold">Identifiers</emphasis>, <emphasis role="bold">Representations</emphasis>, and <emphasis role="bold">Requests</emphasis>. The following sections explore these concepts in the context of the Red Hat Enterprise Virtualization environment.
+      Explaining the Red Hat Enterprise Virtualization Manager REST API requires an examination of REST architectural style and RESTful web services in the context of a virtualization environment. The simplest way to think about REST is in terms of four key concepts: <emphasis role="bold">Resources</emphasis>, <emphasis role="bold">Identifiers</emphasis>, <emphasis role="bold">Representations</emphasis>, and <emphasis role="bold">Requests</emphasis>. The following sections explore these concepts in more detail.
     </para>
     <section id="chap-REST_API_Guide-Introduction-Overview-Resources">
       <title>Resources</title>
       <para>
-        A REST API focuses primarily on <emphasis role="bold">resources</emphasis> for a specific service. Red Hat Enterprise Virtualization Manager's REST API organises such resources into individual <emphasis role="bold">collections</emphasis> based on the management infrastructure types in a Red Hat Enterprise Virtualization environment. Examples include collections for Data Centers, Clusters, Storage Domains, Hosts, and Virtual Machines.
+        A REST API focuses primarily on <emphasis role="bold">resources</emphasis> of a specific service. Red Hat Enterprise Virtualization Manager's REST API organises such resources into individual <emphasis role="bold">collections</emphasis> based on the management infrastructure types in a Red Hat Enterprise Virtualization environment. Examples of collections include Data Centers, Clusters, Storage Domains, Hosts, and Virtual Machines.
       </para>
       
       <para>
@@ -50,7 +50,7 @@
       </para>
       
       <para>
-        This establishes a relationship model using collections, resources and sub-collections in a Red Hat Enterprise Virtualization environment.
+        This establishes a layered relationship model using collections, resources and sub-collections in a Red Hat Enterprise Virtualization environment.
       </para>
     </section>
     <section id="chap-REST_API_Guide-Introduction-Overview-Identifiers">
@@ -118,7 +118,7 @@ http://www.example.com/collection/resource
     <section id="chap-REST_API_Guide-Introduction-Overview-Methods">
       <title>Requests</title>
       <para>
-        The REST API uses HTTP as a protocol to transfer a <emphasis role="bold">request</emphasis> for a resource representation from a client to the Red Hat Enterprise Virtualization Manager server. For example:
+        The REST API uses HTTP as a protocol to transfer a <emphasis role="bold">request</emphasis> for a resource representation from a <emphasis role="bold">client</emphasis> to the Red Hat Enterprise Virtualization Manager <emphasis role="bold">server</emphasis>. For example:
       </para>
       <screen>
 GET /collection/resource HTTP/1.1
@@ -194,8 +194,10 @@ Accept: application/xml
       </screen>
       
       <para>
-        The body is a user-defined representation sent to the API server. This creates or updates a resource with specified elements in the representation when using <literal>POST</literal> or <literal>PUT</literal> respectively.
+        The body acts as a user-defined representation sent to the API server. This creates or updates a resource with specified elements in the representation when using <literal>POST</literal> or <literal>PUT</literal> respectively.
       </para>
+      
+      <para>Requests made from a client to a server contains all necessary information to process the request without depending on any previous request or stored context on the server. This defines a REST API as <emphasis role="bold">stateless</emphasis> communication.</para>
       
     </section> 
     
