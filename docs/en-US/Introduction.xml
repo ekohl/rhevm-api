@@ -5,10 +5,11 @@
 ]>
 <chapter id="chap-REST_API_Guide-Introduction">
   <title>Introduction</title>
+  <para><remark>Please note: This chapter is in the process of being rewritten.</remark></para>
   <para>
     Red Hat Enterprise Virtualization Manager provides a <emphasis role="bold">Representational State Transfer (REST)</emphasis> API. Software developers and system administrators control their Red Hat Enterprise Virtualization environment outside of the standard web interface using the API. The REST API is useful for developers and administrators who aim to integrate the functionality of a Red Hat Enterprise Virtualization environment with custom scripts or client-side applications that are able to send HTTP requests and intepret responses.
   </para>
-  <para>Other advantages of the REST API include:</para>
+  <para>Other benefits of the REST API include:</para>
   <itemizedlist>
     <listitem>
       <para>
@@ -22,7 +23,7 @@
     </listitem>
     <listitem>
       <para>
-        Use of the REST API means repetitive tasks in a Red Hat Enterprise Virtualization environment are completed with simple script.
+        Use of the REST API means repetitive tasks in a Red Hat Enterprise Virtualization environment are completed with simple scripts.
       </para>
     </listitem>
     <listitem>
@@ -37,40 +38,43 @@
   <section id="chap-REST_API_Guide-Introduction-Overview">
     <title>Overview</title>
     <para>
-      Explaining the Red Hat Enterprise Virtualization Manager REST API requires an examination of REST architectural style and RESTful web services in the context of a virtualization environment. The simplest way to think about REST is in terms of four key concepts: <emphasis role="bold">Resources</emphasis>, <emphasis role="bold">Identifiers</emphasis>, <emphasis role="bold">Representations</emphasis>, and <emphasis role="bold">Requests</emphasis>. The following sections explore these concepts in more detail.
+      Explaining the Red Hat Enterprise Virtualization Manager REST API requires an examination of REST architectural style and RESTful web services in the context of a virtualization environment.
     </para>
+    
     <section id="chap-REST_API_Guide-Introduction-Overview-Resources">
       <title>Resources</title>
       <para>
-        A REST API focuses primarily on <emphasis role="bold">resources</emphasis> of a specific service. Red Hat Enterprise Virtualization Manager's REST API organises such resources into individual <emphasis role="bold">collections</emphasis> based on the management infrastructure types in a Red Hat Enterprise Virtualization environment. Examples of collections include Data Centers, Clusters, Storage Domains, Hosts, and Virtual Machines.
+        A REST API focuses primarily on <emphasis role="bold">resources</emphasis> of a specific service. 
       </para>
-      
+    </section>
+    
+    <section id="chap-REST_API_Guide-Introduction-Overview-Collections">
+      <title>Collections</title>
+      <para>
+      Red Hat Enterprise Virtualization Manager's REST API organises such resources into individual <emphasis role="bold">collections</emphasis> based on the management infrastructure types in a Red Hat Enterprise Virtualization environment. Examples of collections include Data Centers, Clusters, Storage Domains, Hosts, and Virtual Machines.
+      </para>
       <para>
         Some resources contain additional <emphasis role="bold">sub-collections</emphasis> that relate to the resource in question. For example, a Virtual Machine contains sub-collections for resources such as Network Interfaces, Storage Disks, and CD-ROMs.
       </para>
-      
       <para>
         This establishes a layered relationship model using collections, resources and sub-collections in a Red Hat Enterprise Virtualization environment.
       </para>
     </section>
-    <section id="chap-REST_API_Guide-Introduction-Overview-Identifiers">
-      <title>Identifiers</title>
+    
+    <section id="chap-REST_API_Guide-Introduction-Overview-URIs">
+      <title>URIs</title>
       <para>
-        The advantage of using a model with collections, resources and sub-collections is an API user can perform a request on any part of the model to achieve a specific function. For example, access to all resources in a collection requires only a request to the collection itself. Access to a specific resource requires a request to the resource within the context of its collection. An API user targets these requests to a specific location called an <emphasis role="bold">identifier</emphasis>.
+        The advantage of using a model with collections, resources and sub-collections is an API user can perform a request on any part of the model to achieve a specific function. For example, access to all resources in a collection requires only a request to the collection itself. Access to a specific resource requires a request to the resource within the context of its collection. An API user targets these requests to a specific location called an <emphasis role="bold">Uniform Resource Identifier (URI)</emphasis>.
       </para>
-      
       <para>
-        The REST API combines our model with the use of HTTP to construct a series of <emphasis role="bold">Uniform Resource Identifiers (URIs)</emphasis> for collections and resources within collections. This means an API user accesses collections and resources in a manner similar to loading a webpage on the internet. For example, an API user accesses <literal>collection</literal> from a REST API installed at <uri>www.example.com</uri> with the following URI:
+        The REST API combines our model with the use of HTTP to construct a series of <emphasis role="bold">URIs</emphasis> for collections and resources within collections. This means an API user accesses collections and resources in a manner similar to loading a webpage on the internet. For example, an API user accesses a collection group called <literal>collection</literal> from a REST API installed at <uri>www.example.com</uri> with the following URI:
       </para>
-      
       <screen>
 http://www.example.com/collection
       </screen>
-
       <para>
-        Access to <literal>resource</literal> within <literal>collection</literal> requires the following URI:
+        Access to a resource called <literal>resource</literal> within <literal>collection</literal> requires the following URI:
       </para>  
-
       <screen>
 http://www.example.com/collection/resource
       </screen>  
@@ -81,11 +85,9 @@ http://www.example.com/collection/resource
       <para>
         Access to a resource URI in a RESTful web service does not mean direct access to the resource itself. Instead, the API provides an abstraction of the resource. This is called a <emphasis role="bold">representation</emphasis>. The API constructs representations using various formats. However, this documentation focuses primarily on XML representations.
       </para>
-      
       <para>
         When working with a specific resource, the API constructs a representation using <emphasis role="bold">elements</emphasis> to depict aspects of a resource's paradigm. When an API user accesses <uri>http://www.example.com/collection/resource</uri>, an XML resource representation structures elements in the following way:
       </para>
-      
       <screen>
 &lt;resource&gt;
   &lt;element_one&gt;value one&lt;/element_one&gt;
@@ -94,7 +96,6 @@ http://www.example.com/collection/resource
   ...
 &lt;/resource&gt;
       </screen>
-              
       <para>  
         For example, a virtual machine resource contains elements such as machine type, operational status, memory in bytes, CPUs and creation time. These elements form the following basic XML structure for a virtual machine resource representation:
       </para>
@@ -115,7 +116,7 @@ http://www.example.com/collection/resource
       </para>
     </section>
 
-    <section id="chap-REST_API_Guide-Introduction-Overview-Methods">
+    <section id="chap-REST_API_Guide-Introduction-Overview-Requests">
       <title>Requests</title>
       <para>
         The REST API uses HTTP as a protocol to transfer a <emphasis role="bold">request</emphasis> for a resource representation from a <emphasis role="bold">client</emphasis> to the Red Hat Enterprise Virtualization Manager <emphasis role="bold">server</emphasis>. For example:
@@ -126,9 +127,22 @@ Host: www.example.com
 Accept: application/xml
       </screen>
       <para>
-        The first line of a HTTP request message is the <emphasis role="bold">Request-Line</emphasis>. The Request-Line requires three parts: <emphasis role="bold">Method</emphasis>, <emphasis role="bold">path</emphasis> and <emphasis role="bold">HTTP version</emphasis>.
+        The first line of a HTTP request message is the <emphasis role="bold">Request-Line</emphasis>. The Request-Line requires three parts: <emphasis role="bold">method</emphasis>, <emphasis role="bold">path</emphasis> and <emphasis role="bold">HTTP version</emphasis>.
       </para>
-      
+
+      <para>
+        The <emphasis role="bold">path</emphasis> is the base URI for a particular resource, as discussed in <xref linkend="chap-REST_API_Guide-Introduction-Overview-URIs"/>. Note the removal of the host from the URI as this is specified later.
+      </para>
+      <para>
+        The <emphasis role="bold">HTTP version</emphasis> tells the server the version of the protocol in use. This is always either <literal>HTTP/1.1</literal> or <literal>HTTP/1.0</literal>.
+      </para>
+      <para>
+        Requests made from a client to a server contains all necessary information to process the request without depending on any previous request or stored context on the server. This defines a REST API as <emphasis role="bold">stateless</emphasis> communication.
+      </para>
+    </section> 
+    
+    <section id="chap-REST_API_Guide-Introduction-Overview-Methods">
+      <title>Methods</title>
       <para>
         An advantage of using HTTP to communicate with the REST API is the ability to use a <emphasis role="bold">method</emphasis> to access Red Hat Enterprise Virtualization resources. The REST API uses four HTTP methods:
       </para>
@@ -153,13 +167,11 @@ Accept: application/xml
       <para>
         The default method is <literal>GET</literal>. However, an API user has a choice of any of the four methods to access and control resources in their virtualization environment.
       </para>
-      <para>
-        The <emphasis role="bold">path</emphasis> is the base URI for a particular resource, as discussed in <xref linkend="chap-REST_API_Guide-Introduction-Overview-Identifiers"/>. Note the removal of the host from the URI as this is specified later.
-      </para>
-      <para>
-        The <emphasis role="bold">HTTP version</emphasis> tells the server the version of the protocol in use. This is always either <literal>HTTP/1.1</literal> or <literal>HTTP/1.0</literal>.
-      </para>
-      <para>
+    </section>
+
+    <section id="chap-REST_API_Guide-Introduction-Overview-Headers">
+      <title>Headers</title>
+            <para>
         The next few lines of the HTTP request are called <emphasis role="bold">header fields</emphasis>. Header fields define parameters for a HTTP request. They are optional except for two requried in the context of the REST API: 
       </para>
       <informaltable frame="none">
@@ -178,11 +190,13 @@ Accept: application/xml
           </tbody>
         </tgroup>
       </informaltable>
-      
+    </section>
+
+    <section id="chap-REST_API_Guide-Introduction-Overview-Entities">
+      <title>Entities</title>
       <para>
-        Using a <literal>POST</literal> or <literal>PUT</literal> method often requires an additional <emphasis role="bold">body</emphasis> in the the request. For example:
+        Using a <literal>POST</literal> or <literal>PUT</literal> method often requires an additional <emphasis role="bold">body entity</emphasis> in the request. For example:
       </para>
-      
       <screen>
 POST /collection HTTP/1.1
 Host: www.example.com
@@ -192,15 +206,11 @@ Accept: application/xml
   &lt;element&gt;value&lt;/element&gt;
 &lt;/resource&gt;
       </screen>
-      
       <para>
-        The body acts as a user-defined representation sent to the API server. This creates or updates a resource with specified elements in the representation when using <literal>POST</literal> or <literal>PUT</literal> respectively.
+        The body entity acts as a user-defined representation sent to the API server. This creates or updates a resource with specified elements in the representation when using <literal>POST</literal> or <literal>PUT</literal> respectively.
       </para>
-      
-      <para>Requests made from a client to a server contains all necessary information to process the request without depending on any previous request or stored context on the server. This defines a REST API as <emphasis role="bold">stateless</emphasis> communication.</para>
-      
-    </section> 
-    
+    </section>
+
   </section>
   
 </chapter>
