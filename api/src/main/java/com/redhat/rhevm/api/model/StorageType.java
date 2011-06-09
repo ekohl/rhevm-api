@@ -19,7 +19,7 @@
 package com.redhat.rhevm.api.model;
 
 public enum StorageType {
-    ISCSI, FCP, NFS, LOCAL;
+    ISCSI, FCP, NFS, LOCALFS;
 
     public String value() {
         return name().toLowerCase();
