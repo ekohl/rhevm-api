@@ -37,6 +37,8 @@ import com.redhat.rhevm.api.model.FenceType;
 import com.redhat.rhevm.api.model.FenceTypes;
 import com.redhat.rhevm.api.model.NicType;
 import com.redhat.rhevm.api.model.NicTypes;
+import com.redhat.rhevm.api.model.OsType;
+import com.redhat.rhevm.api.model.OsTypes;
 import com.redhat.rhevm.api.model.SchedulingPolicies;
 import com.redhat.rhevm.api.model.SchedulingPolicyType;
 import com.redhat.rhevm.api.model.VersionCaps;
@@ -88,6 +90,14 @@ public class PowerShellCapabilitiesResourceTest extends BasePowerShellResourceTe
         assertEquals(expected.length, vmTypes.getVmTypes().size());
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i].value(), vmTypes.getVmTypes().get(i));
+        }
+    }
+
+    private void checkOsTypes(OsTypes vmTypes, OsType... expected) {
+        assertNotNull(vmTypes);
+        assertEquals(expected.length, vmTypes.getOsTypes().size());
+        for (int i = 0; i < expected.length; i++) {
+            assertEquals(expected[i].value(), vmTypes.getOsTypes().get(i));
         }
     }
 
@@ -190,6 +200,12 @@ public class PowerShellCapabilitiesResourceTest extends BasePowerShellResourceTe
     public void testVmTypes() {
         checkVmTypes(caps.getVersions().get(0).getVmTypes(), VmType.values());
         checkVmTypes(caps.getVersions().get(1).getVmTypes(), VmType.values());
+    }
+
+    @Test
+    public void testOsTypes() {
+        checkOsTypes(caps.getVersions().get(0).getOsTypes(), OsType.values());
+        checkOsTypes(caps.getVersions().get(1).getOsTypes(), OsType.values());
     }
 
     @Test

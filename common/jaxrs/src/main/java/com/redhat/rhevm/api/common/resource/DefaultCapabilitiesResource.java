@@ -35,6 +35,8 @@ import com.redhat.rhevm.api.model.FenceType;
 import com.redhat.rhevm.api.model.FenceTypes;
 import com.redhat.rhevm.api.model.NicType;
 import com.redhat.rhevm.api.model.NicTypes;
+import com.redhat.rhevm.api.model.OsType;
+import com.redhat.rhevm.api.model.OsTypes;
 import com.redhat.rhevm.api.model.PowerManagement;
 import com.redhat.rhevm.api.model.Option;
 import com.redhat.rhevm.api.model.Options;
@@ -157,6 +159,18 @@ public class DefaultCapabilitiesResource implements CapabilitiesResource {
     {
         addStorageTypes(VERSION21, StorageType.ISCSI, StorageType.FCP, StorageType.NFS);
         addStorageTypes(VERSION22, StorageType.ISCSI, StorageType.FCP, StorageType.NFS);
+    }
+
+    private void addOsTypes(VersionCaps version, OsType... types) {
+        version.setOsTypes(new OsTypes());
+        for (OsType type : types) {
+            version.getOsTypes().getOsTypes().add(type.value());
+        }
+    }
+
+    {
+        addOsTypes(VERSION21, OsType.values());
+        addOsTypes(VERSION22, OsType.values());
     }
 
     private void addStorageDomainTypes(VersionCaps version, StorageDomainType... types) {
