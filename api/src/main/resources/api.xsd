@@ -500,6 +500,7 @@
           <xs:element ref="display_types" minOccurs="0"/>
           <xs:element ref="nic_types" minOccurs="0"/>
           <xs:element ref="disk_types" minOccurs="0"/>
+          <xs:element ref="os_types" minOccurs="0"/>
           <xs:element ref="disk_formats" minOccurs="0"/>
           <xs:element ref="disk_interfaces" minOccurs="0"/>          
           <xs:element ref="vm_affinities" minOccurs="0"/>
@@ -653,7 +654,21 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  
+  <xs:element name="os_types" type="OsTypes"/>
 
+  <xs:complexType name="OsTypes">
+    <xs:sequence>
+      <xs:element name="os_type" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="OsTypes"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
   <xs:element name="disk_formats" type="DiskFormats"/>
 
   <xs:complexType name="DiskFormats">
