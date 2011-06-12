@@ -34,6 +34,7 @@ import com.redhat.rhevm.api.model.Display;
 import com.redhat.rhevm.api.model.DisplayType;
 import com.redhat.rhevm.api.model.Host;
 import com.redhat.rhevm.api.model.Link;
+import com.redhat.rhevm.api.model.OsType;
 import com.redhat.rhevm.api.model.Statistic;
 import com.redhat.rhevm.api.model.Ticket;
 import com.redhat.rhevm.api.model.VM;
@@ -145,7 +146,10 @@ public class PowerShellVmResource extends AbstractPowerShellActionableResource<V
             buf.append(" $v.defaultbootsequence = '" + bootSequence + "';");
         }
         if (vm.isSetOs() && vm.getOs().isSetType()) {
-            buf.append(" $v.operatingsystem = " + PowerShellUtils.escape(vm.getOs().getType()) + ";");
+            OsType osType = OsType.fromValue(vm.getOs().getType());
+            if (osType != null) {
+               buf.append(" $v.operatingsystem = " + PowerShellUtils.escape(PowerShellVM.asString(osType)) + ";");
+            }
         }
         if (vm.isSetStateless()) {
             buf.append(" $v.stateless = " + PowerShellUtils.encode(vm.isStateless()) + ";");

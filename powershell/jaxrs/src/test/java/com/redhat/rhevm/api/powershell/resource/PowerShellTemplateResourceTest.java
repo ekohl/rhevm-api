@@ -34,6 +34,7 @@ import com.redhat.rhevm.api.model.DisplayType;
 import com.redhat.rhevm.api.model.Fault;
 import com.redhat.rhevm.api.model.HighAvailability;
 import com.redhat.rhevm.api.model.OperatingSystem;
+import com.redhat.rhevm.api.model.OsType;
 import com.redhat.rhevm.api.model.StorageDomain;
 import com.redhat.rhevm.api.model.Template;
 
@@ -220,7 +221,7 @@ public class PowerShellTemplateResourceTest extends AbstractPowerShellResourceTe
 
     private Template updateOperatingSystem(Template template) {
         template.setOs(new OperatingSystem());
-        template.getOs().setType("OtherLinux");
+        template.getOs().setType(OsType.OTHER_LINUX.value());
         return template;
     }
 

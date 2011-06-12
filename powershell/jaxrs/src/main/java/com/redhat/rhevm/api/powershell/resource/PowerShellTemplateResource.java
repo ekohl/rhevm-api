@@ -30,6 +30,7 @@ import com.redhat.rhevm.api.model.CpuTopology;
 import com.redhat.rhevm.api.model.Display;
 import com.redhat.rhevm.api.model.DisplayType;
 import com.redhat.rhevm.api.model.Link;
+import com.redhat.rhevm.api.model.OsType;
 import com.redhat.rhevm.api.model.Template;
 import com.redhat.rhevm.api.model.VmType;
 import com.redhat.rhevm.api.resource.AssignedPermissionsResource;
@@ -142,7 +143,10 @@ public class PowerShellTemplateResource extends AbstractPowerShellActionableReso
             buf.append(" $t.defaultbootsequence = '" + bootSequence + "';");
         }
         if (template.isSetOs() && template.getOs().isSetType()) {
-            buf.append(" $t.operatingsystem = " + PowerShellUtils.escape(template.getOs().getType()) + ";");
+            OsType osType = OsType.fromValue(template.getOs().getType());
+            if (osType != null) {
+               buf.append(" $t.operatingsystem = " + PowerShellUtils.escape(PowerShellVM.asString(osType)) + ";");
+            }
         }
         if (template.isSetStateless()) {
             buf.append(" $t.isstateless = " + PowerShellUtils.encode(template.isStateless()) + ";");

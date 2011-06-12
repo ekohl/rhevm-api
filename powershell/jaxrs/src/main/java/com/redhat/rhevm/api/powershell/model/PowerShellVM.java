@@ -38,6 +38,7 @@ import com.redhat.rhevm.api.model.Disks;
 import com.redhat.rhevm.api.model.Domain;
 import com.redhat.rhevm.api.model.NIC;
 import com.redhat.rhevm.api.model.Nics;
+import com.redhat.rhevm.api.model.OsType;
 import com.redhat.rhevm.api.model.Tag;
 import com.redhat.rhevm.api.model.Tags;
 import com.redhat.rhevm.api.model.Display;
@@ -57,6 +58,7 @@ import com.redhat.rhevm.api.model.VmPool;
 import com.redhat.rhevm.api.model.VmStatus;
 import com.redhat.rhevm.api.powershell.enums.PowerShellBootSequence;
 import com.redhat.rhevm.api.powershell.enums.PowerShellDisplayType;
+import com.redhat.rhevm.api.powershell.enums.PowerShellOsType;
 import com.redhat.rhevm.api.powershell.enums.PowerShellVmType;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
 import com.redhat.rhevm.api.powershell.util.PowerShellUtils;
@@ -118,8 +120,16 @@ public class PowerShellVM extends VM {
         return PowerShellDisplayType.forModel(type).name();
     }
 
+    public static String asString(OsType type) {
+        return PowerShellOsType.forModel(type).name();
+    }
+
     public static DisplayType parseDisplayType(String s) {
         return PowerShellDisplayType.valueOf(s).map();
+    }
+
+    public static OsType parseOsType(String s) {
+        return PowerShellOsType.valueOf(s).map();
     }
 
     private static VmStatus parseStatus(String s) {
@@ -231,7 +241,10 @@ public class PowerShellVM extends VM {
         vm.setCpu(cpu);
 
         OperatingSystem os = new OperatingSystem();
-        os.setType(entity.get("operatingsystem"));
+        OsType osType = parseOsType(entity.get("operatingsystem"));
+        if (osType != null) {
+            os.setType(osType.value());
+        }
         for (Boot boot : entity.get("defaultbootsequence", PowerShellBootSequence.class).map()) {
             os.getBoot().add(boot);
         }

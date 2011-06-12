@@ -32,6 +32,7 @@ import com.redhat.rhevm.api.common.util.TimeZoneMapping;
 import com.redhat.rhevm.api.model.CpuTopology;
 import com.redhat.rhevm.api.model.Display;
 import com.redhat.rhevm.api.model.DisplayType;
+import com.redhat.rhevm.api.model.OsType;
 import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.model.VMs;
 import com.redhat.rhevm.api.model.VmType;
@@ -195,7 +196,10 @@ public class PowerShellVmsResource
             buf.append(" -defaultbootsequence " + bootSequence);
         }
         if (vm.isSetOs() && vm.getOs().isSetType()) {
-            buf.append(" -os " + PowerShellUtils.escape(vm.getOs().getType()));
+             OsType osType = OsType.fromValue(vm.getOs().getType());
+             if (osType != null) {
+                buf.append(" -os " + PowerShellVM.asString(osType));
+             }
         }
         if (vm.isSetDisks() && vm.getDisks().isSetClone() && vm.getDisks().isClone()) {
             buf.append(" -copytemplate ");

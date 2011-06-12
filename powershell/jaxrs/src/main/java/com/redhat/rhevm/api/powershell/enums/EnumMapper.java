@@ -43,6 +43,7 @@ public class EnumMapper {
         mapping.put("VdcDAL.VdsSpmStatus",                                  PowerShellVdsSpmStatus.class);
         mapping.put("VdcDAL.VmTemplateStatus",                              PowerShellVmTemplateStatus.class);
         mapping.put("VdcDAL.VmType",                                        PowerShellVmType.class);
+        mapping.put("VdcDAL.VmOsType",                                      PowerShellOsType.class);
         mapping.put("VdcDAL.VolumeFormat",                                  PowerShellVolumeFormat.class);
         mapping.put("VdcDAL.VolumeType",                                    PowerShellVolumeType.class);
         mapping.put("VdcCommon.AsyncTasks.AsyncTaskStatusEnum",             PowerShellAsyncTaskStatus.class);
