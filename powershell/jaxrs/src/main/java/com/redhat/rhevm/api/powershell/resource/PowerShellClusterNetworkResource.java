@@ -35,4 +35,9 @@ public class PowerShellClusterNetworkResource implements AssignedNetworkResource
     public Network get() {
         return parent.addLinks(parent.getClusterNetwork(id));
     }
+
+    @Override
+    public Network update(Network resource) {
+        return null;
+    }
 }
