@@ -4,16 +4,25 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-REST_API_Guide-Common_Idioms">
-  <title>Common Idioms For All Resources</title>
+  <title>Common Idioms</title>
   <para>
-    Resources are represented by XML documents e.g.
+    The API structures resource representations in the following XML document structure:
   </para>
   <para>
     <screen>
-&lt;resource id="d9a0e106-9273-4812-bb05-ed75fe1ac652" href="/rhevm-api/resources/d9a0e106-9273-4812-bb05-ed75fe1ac652"&gt;
-  &lt;name&gt;foo&lt;/name&gt;
-  &lt;description&gt;This is the foo resource&lt;/description&gt;
-&lt;/resource&gt;
+&lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+  &lt;name&gt;Resource-Name&lt;/name&gt;
+  &lt;description&gt;A description of the resource&lt;/description&gt;
+  ...
+&lt;/{resource}&gt;
+    </screen>
+    For example:
+    <screen>
+&lt;vm id="5b9bbce5-0d72-4f56-b931-5d449181ee06" href="/rhevm-api/vms/5b9bbce5-0d72-4f56-b931-5d449181ee06"&gt;
+  &lt;name&gt;RHEL6-Machine&lt;/name&gt;
+  &lt;description&gt;Red Hat Enterprize Linux 6 Virtual Machine&lt;/description&gt;
+  ...
+&lt;/vm&gt;
     </screen>
   </para>  
   <para>
@@ -50,42 +59,6 @@
         </tbody>
       </tgroup>
     </informaltable>
-  </para>
-  <para>
-    The following elements are common to all resource descriptions:
-  </para>
-  <para>
-    <informaltable frame="none">
-      <tgroup cols="4">
-        <colspec colwidth="2*"/>
-        <colspec colwidth="4*"/>
-        <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
-        <thead>
-          <row>
-            <entry>Element</entry>
-            <entry>Type</entry>
-            <entry>Description</entry>
-            <entry>Properties</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry><literal>name</literal></entry>
-            <entry>string</entry>
-            <entry>A user-supplied human readable name for the resource which also must be unique across all resources</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>description</literal></entry>
-            <entry>string</entry>
-            <entry>A free-form user-supplied human readable description of the resource</entry>
-            <entry> </entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-
   </para>
   <note>
     <title>Element property icons</title>
@@ -128,7 +101,7 @@
 
   <section id="sect-REST_API_Guide-Common_Idioms-Listing_Resources">
     <title>
-      Listing Resources
+      Collections: Listing All Resources
     </title>
 
     <para>
@@ -136,57 +109,61 @@
     </para>
 
     <screen>
-GET /rhevm-api/resources/ HTTP/1.1
+GET /rhevm-api/{collection} HTTP/1.1
 Accept: application/xml
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;resources&gt;
-  &lt;resource id="{id}" href="/rhevm-api/resources/{id}"&gt;
-    &lt;name&gt;foo&lt;/name&gt;
-    &lt;description&gt;The Foo Resource&lt;/description&gt;
+&lt;{collection}&gt;
+  &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+    &lt;name&gt;Resource-Name&lt;/name&gt;
+    &lt;description&gt;A description of the resource&lt;/description&gt;
     ...
-  &lt;/resource&gt;
-  &lt;resource ...&gt;
-    ...
-  &lt;/resource&gt;
-&lt;/resources&gt;
+  &lt;/{resource}&gt;
+  ...
+&lt;/{collection}&gt;
     </screen>
 
   </section>
 
   <section id="sect-REST_API_Guide-Common_Idioms-Listing_Resource_Subcollections">
     <title>
-      Listing Resource Sub-Collections
+      Collections: Listing Extended Resource Sub-Collections
     </title>
     <para>
-      A request for resources also allows for extended sub-collection listings using the <literal>detail</literal> parameter in the <literal>Accept</literal> header.
+      Collection requests extend resource representations to include sub-collections using the <literal>detail</literal> parameter in the <literal>Accept</literal> header.
     </para>
     <screen>
-GET /rhevm-api/resources/ HTTP/1.1
-Accept: application/xml; detail=subcollection
+GET /rhevm-api/{collection} HTTP/1.1
+Accept: application/xml; detail={subcollection}
     </screen>
     <para>
       This includes multiple sub-collection requests using either seperated <literal>detail</literal> parameters:
     </para>
     <screen>
-GET /rhevm-api/resources/ HTTP/1.1
-Accept: application/xml; detail=subcollection1; detail=subcollection2
+GET /rhevm-api/{collection} HTTP/1.1
+Accept: application/xml; detail={subcollection 1}; detail={subcollection 2}
     </screen>
     <para>
       Or one <literal>detail</literal> parameter that seperates the sub-collection with the <literal>+</literal> operator:
     </para>
     <screen>
-GET /rhevm-api/resources/ HTTP/1.1
-Accept: application/xml; detail=subcollection1+subcollection2+subcollection3
+GET /rhevm-api/{collection} HTTP/1.1
+Accept: application/xml; detail={subcollection 1}+{subcollection 2}+{subcollection 3}
     </screen>
-    <para>The API only supports the <literal>statistics</literal> sub-collection listings for <literal>vms</literal> and <literal>hosts</literal>.</para>
+    <para>The API only supports the <literal>statistics</literal> sub-collection listings for <literal>vms</literal> and <literal>hosts</literal>. For example:</para>
+    <screen>
+GET /rhevm-api/vms HTTP/1.1
+Accept: application/xml; detail=statistics
+    </screen>
+
+
   </section>
 
   <section id="sect-REST_API_Guide-Common_Idioms-Querying_Collections">
     <title>
-      Querying a Collection
+      Collections: Search Queries
     </title>
 
     <para>
@@ -194,27 +171,84 @@ Accept: application/xml; detail=subcollection1+subcollection2+subcollection3
     </para>
 
     <screen>
-GET /rhevm-api/resources?search={query} HTTP/1.1
+GET /rhevm-api/{collection}?search={query} HTTP/1.1
 Accept: application/xml
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;resources&gt;
-  &lt;resource id="{id}" href="/rhevm-api/resources/{id}"&gt;
+&lt;{collection}&gt;
+  &lt;{resource} id="{id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
     ...
-  &lt;/resource&gt;
+  &lt;/{resource}&gt;
   ...
-&lt;/resources&gt;
+&lt;/{collection}&gt;
     </screen>
-    <para>
-      More information about queries is found in <xref linkend="chap-REST_API_Guide-Search"/>.
-    </para>
+    
+  	<section id="sect-REST_API_Guide-Syntax">
+		  <title>Query Syntax</title>
+	   	<para>The API uses the following syntax to perform search queries with a <literal>GET</literal> request:</para>
+	   	<screen>
+  GET /rhevm-api/{collection}?search={query} HTTP/1.1
+  Accept: application/xml
+      </screen>
+		  <para>The <literal>query</literal> refers to the search query the API directs to the <literal>collection</literal>. This query takes the following form:</para>
+		  <para><literal>{property} {operator} {value}</literal></para>		
+		  <para>The <literal>property</literal> refers to any element within the <literal>collection</literal> that contains a searchable value. For example, a search for a virtual machine name in the <literal>vms</literal> collection requires the <literal>name</literal> property.</para>
+		  <para>The <literal>operator</literal> is a comparison operation between your chosen <literal>value</literal> and the <literal>property</literal> value. The API requires this operator to be URL encoded. The following table lists the API's supported operators and their URL encoded equivalents:</para>
+   		<informaltable frame="none">
+      		<tgroup cols="3">
+				  <colspec colwidth="6*"/>
+				  <colspec colwidth="2*"/>
+				  <colspec colwidth="2*"/>
+				  <thead>
+					  <row>
+						  <entry>Description</entry>
+						  <entry>Operator</entry>
+						  <entry>URL Encoded</entry>
+					  </row>
+				  </thead>
+				  <tbody>
+					  <row>
+						  <entry>is equal to</entry>
+						  <entry><literal>=</literal></entry>
+						  <entry><literal>%3D</literal></entry>
+					  </row>
+				  </tbody>
+			  </tgroup>
+		  </informaltable>
+		  <para>The <literal>value</literal> refers to the value contained within the chosen <literal>property</literal>. For example, to search for a virtual machine named "vm1", the value would need to be <literal>vm1</literal>.</para>
+		  <para>The combined <literal>collection</literal> and <literal>query</literal> examples produce the following search query:</para>
+	   	<screen>
+  GET /rhevm-api/vms?search=name%3Dvm1 HTTP/1.1
+  Accept: application/xml
+      </screen>
+
+	  </section>
+
+	  <section id="sect-REST_API_Guide-Wildcard_Searches">
+		  <title>Wildcards</title>
+		  <para>Search queries can substitute part of a value with an asterisk as a wildcard. For example:</para>
+      <screen>
+  GET /rhevm-api/vms?search=name%3Dvm* HTTP/1.1
+  Accept: application/xml
+  Content-Type: application/xml
+      </screen>
+		  <para>This query would result in all virtual machines with names beginning with <literal>vm</literal>, such as <literal>vm1</literal>, <literal>vm2</literal>, <literal>vma</literal> or <literal>vm-webserver</literal>.</para>
+		
+      <screen>
+  GET /rhevm-api/vms?search=name%3Dv*1 HTTP/1.1
+  Accept: application/xml
+  Content-Type: application/xml
+      </screen>
+		  <para>This query would result in all virtual machines with names beginning with <literal>v</literal> and ending with <literal>1</literal>, such as <literal>vm1</literal>, <literal>vr1</literal> or <literal>virtualmachine1</literal>.</para>
+	  </section>
+
   </section>
 
   <section id="sect-REST_API_Guide-Common_Idioms-Retrieving_Resources">
     <title>
-      Retrieving a Resource
+      Resources: Retrieving a Resource
     </title>
 
     <para>
@@ -222,13 +256,13 @@ Content-Type: application/xml
     </para>
 
     <screen>
-GET /rhevm-api/resources/{id} HTTP/1.1
+GET /rhevm-api/{collection}/{resource_id} HTTP/1.1
 Accept: application/xml
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;resource id="{id}" href="/rhevm-api/resources/{id}"&gt;
+&lt;resource id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
   ...
 &lt;/resource&gt;
     </screen>
@@ -237,7 +271,7 @@ Content-Type: application/xml
 
   <section id="sect-REST_API_Guide-Common_Idioms-Creating_Resources">
     <title>
-      Creating a Resource
+      Resources: Creating a Resource
     </title>
 
     <para>
@@ -249,20 +283,20 @@ Content-Type: application/xml
     </para>
 
     <screen>
-POST /rhevm-api/resources HTTP/1.1
+POST /rhevm-api/{collection} HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
 
-&lt;resource&gt;
-  &lt;name&gt;foo&lt;/name&gt;
-&lt;/resource&gt;
+&lt;{resource}&gt;
+  &lt;name&gt;Resource-Name&lt;/name&gt;
+&lt;/{resource}&gt;
 
 HTTP/1.1 201 Created
-Location: http://{host}/resources/1234-abcd-6789-ef00
+Location: http://{host}/rhevm-api/{collection}/{resource_id}
 Content-Type: application/xml
 
-&lt;resource id="1234-abcd-6789-ef00" href="/rhevm-api/resources/1234-abcd-6789-ef00"&gt;
-  &lt;name&gt;foo&lt;/name&gt;
+&lt;resource id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+  &lt;name&gt;Resource-Name&lt;/name&gt;
   ...
 &lt;/resource&gt;
     </screen>
@@ -273,60 +307,60 @@ Content-Type: application/xml
   </section>
   <section id="sect-REST_API_Guide-Common_Idioms-Creating_Asynchronous_Resources">
     <title>
-      Creating an Asynchronous Resource
+      Resources: Creating Resources Asynchronously
     </title>
-    <para>Certain resources, such as Virtual Machines, Disks, Snapshots and Templates, are created asynchronously. This means a request to create one of these types of resources results in a <literal>202 Accepted</literal> status. The initial document structure for a <literal>202 Accepted</literal> resource also contains a <literal>creation_status</literal> element and link for creation status updates. For example:</para>
+    <para>Certain resources, such as Virtual Machines, Disks, Snapshots and Templates, are created asynchronously. A request to create an asynchronous resources results in a <literal>202 Accepted</literal> status. The initial document structure for a <literal>202 Accepted</literal> resource also contains a <literal>creation_status</literal> element and link for creation status updates. For example:</para>
 
     <screen>
-POST /rhevm-api/resources HTTP/1.1
+POST /rhevm-api/{collection} HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
 
-&lt;resource&gt;
-  &lt;name&gt;foo&lt;/name&gt;
-&lt;/resource&gt;
+&lt;{resource}&gt;
+  &lt;name&gt;Resource-Name&lt;/name&gt;
+&lt;/{resource}&gt;
 
 HTTP/1.1 202 Accepted
-Location: http://{host}/resources/1234-abcd-6789-ef00
+Location: http://{host}/rhevm-api/{collection}/{resource_id}
 Content-Type: application/xml
 
-&lt;resource id="1234-abcd-6789-ef00" href="/rhevm-api/resources/1234-abcd-6789-ef00"&gt;
-  &lt;name&gt;foo&lt;/name&gt;
+&lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+  &lt;name&gt;Resource-Name&lt;/name&gt;
   &lt;creation_status&gt;PENDING&lt;/creation status&gt;
-  &lt;link rel="creation_status" href="/rhevm-api/resources/1234-abcd-6789-ef00/creation_status/2468-wxyz-1357-qrst"/&gt;
+  &lt;link rel="creation_status" href="/rhevm-api/{collection}/{resource_id}/creation_status/{creation_status_id}"/&gt;
   ...
-&lt;/resource&gt;
+&lt;/{resource}&gt;
     </screen>
     <para>A <literal>GET</literal> request to the <literal>creation_status</literal> link provides a creation status update:</para>
     <screen>
-GET /rhevm-api/resources/1234-abcd-6789-ef00/creation_status/2468-wxyz-1357-qrst HTTP/1.1
+GET /rhevm-api/{collection}/{resource_id}/creation_status/{creation_status_id} HTTP/1.1
 Accept: application/xml
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;creation id="2468-wxyz-1357-qrst" href="/rhevm-api/resource/1234-abcd-6789-ef00/creation_status/2468-wxyz-1357-qrst"&gt;
+&lt;creation id="{creation_status_id}" href="/rhevm-api/{collection}/{resource_id}/creation_status/{creation_status_id}"&gt;
     &lt;status&gt;COMPLETE&lt;/status&gt;
 &lt;/creation&gt;
     </screen>
 
     <para>Overriding the asynchronous resource creation requires an <literal>Expect: 201-created</literal> header:</para>
     <screen>
-POST /rhevm-api/resources HTTP/1.1
+POST /rhevm-api/{collection} HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
 Expect: 201-created
 
-&lt;resource&gt;
-  &lt;name&gt;foo&lt;/name&gt;
-&lt;/resource&gt;
+&lt;{resource}&gt;
+  &lt;name&gt;Resource-Name&lt;/name&gt;
+&lt;/{resource}&gt;
     </screen>
 
   </section>
 
   <section id="sect-REST_API_Guide-Common_Idioms-Updating_Resources">
     <title>
-      Updating a Resource
+      Resources: Updating a Resource
     </title>
 
     <para>
@@ -334,26 +368,22 @@ Expect: 201-created
     </para>
 
     <screen>
-PUT /rhevm-api/resources/{id} HTTP/1.1
+PUT /rhevm-api/{collection}/{resource_id} HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
 
-&lt;resource&gt;
-  &lt;name&gt;foo&lt;/name&gt;
-&lt;/resource&gt;
+&lt;{resource}&gt;
+  &lt;name&gt;New-Resource-Name&lt;/name&gt;
+&lt;/{resource}&gt;
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;resource id="..." href="/rhevm-api/..."&gt;
-  &lt;name&gt;foo&lt;/name&gt;
+&lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+  &lt;name&gt;New-Resource-Name&lt;/name&gt;
   ...
-&lt;/resource&gt;
+&lt;/{resource}&gt;
     </screen>
-
-    <para>
-      Again, the server may or may not return the updated resource description in the response body.
-    </para>
 
     <para>
       If an attempt is made to modify a <emphasis>strictly</emphasis> immutable resource property, this is reported as <literal>409 Conflict</literal> error with a <literal>Fault</literal> representation in the response body. Other non-modifiable properties specified in the request entity-body may be silently ignored.
@@ -363,7 +393,7 @@ Content-Type: application/xml
 
   <section id="sect-REST_API_Guide-Common_Idioms-Deleting_Resources">
     <title>
-      Deleting a Resource
+      Resources: Deleting a Resource
     </title>
 
     <para>
@@ -371,56 +401,59 @@ Content-Type: application/xml
     </para>
 
     <screen>
-DELETE /rhevm-api/resources/{id} HTTP/1.1
+DELETE /rhevm-api/{collection}/{resource_id} HTTP/1.1
 
 HTTP/1.1 204 No Content
     </screen>
 
   </section>
   
-  <section id="sect-REST_API_Guide-Common_Idioms-Relationships">
+  <section id="sect-REST_API_Guide-Common_Idioms-Subcollections">
     <title>
-      Relationships
+      Resources: Sub-Collection Relationships
     </title>
-
     <para>
-      The API maps two types of relationships from one resource to another: <emphasis role="bold">sub-collections</emphasis> and <emphasis role="bold">XML element links</emphasis>.
+      A sub-collection relationship defines hierarchical link between a resource and a sub-collection. The sub-collection exists, or at least has some meaning, in the context of a parent resource. For example, a virtual machine contains network interfaces, which means the API maps the relationship between the virtual machine resource and the network interfaces sub-collection.
     </para>
-    
-    <formalpara>
-      <title>
-        Sub-collections
-      </title>
-      <para>
-        A sub-collection relationship defines hierarchical link between a resource and a resource collection. The resource collection exists, or at least has some meaning, in the context of the parent resource. For example, a virtual machine contains network interfaces, which means the API maps the relationship between the virtual machine resource and the network interfaces sub-collection.
-      </para>
-    </formalpara>
     <para>
-      The API defines a relationship between resource and sub-collection using the <literal>link rel=</literal> attribute:
+      The API defines a relationship between a resource and a sub-collection using the <literal>link rel=</literal> attribute:
     </para>
     <screen>
-GET /rhevm-api/collection/resource HTTP/1.1
+GET /rhevm-api/{collection}/{resource_id} HTTP/1.1
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;resource&gt;
-  &lt;link rel="subcollection" href="/rhevm-api/collection/resource/subcollection"/&gt;
+&lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
   ...
-&lt;/resource&gt;
+  &lt;link rel="{subcollection}" href="/rhevm-api/{collection}/{resource_id}/{subcollection}"/&gt;
+  ...
+&lt;/{resource}&gt;
     </screen>
     <para>
-      This means an API user can query the sub-collection at <uri>/rhevm-api/collection/resource/subcollection</uri>.
+      This means an API user can query the sub-collection at <uri>/rhevm-api/{collection}/{resource_id}/{subcollection}</uri>:
     </para>
-    
-    <formalpara>
-      <title>
-        XML element links
-      </title>
-      <para>
-        XML element links define relationships between resources. These resources include:
-      </para>
-    </formalpara>
+    <screen>
+GET /rhevm-api/{collection}/{resource_id}/{subcollection} HTTP/1.1
+
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+&lt;{subcollection}&gt;
+  &lt;{subresource} id="{subresource_id}" href="/rhevm-api/{collection}/{resource_id}/{subcollection}/{subresource_id}"&gt;
+    ...
+  &lt;/{subresource}&gt;
+  ...
+&lt;/{subcollection}&gt;
+    </screen>
+  </section>
+  <section id="sect-REST_API_Guide-Common_Idioms-XML_Elements">
+    <title>
+      Resources: XML Element Relationships
+    </title>
+    <para>
+      XML element links define relationships between resources. These resources include:
+    </para>
     <itemizedlist>
       <listitem>
         <para>
@@ -437,24 +470,23 @@ Content-Type: application/xml
       An element link in a resource requires a special XML element tag to refer to another resource:
     </para>
     <screen>
-GET /rhevm-api/collection/resource/subcollection HTTP/1.1
+GET /rhevm-api/{collection}/{resource_id}/{subcollection}/{subresource_id} HTTP/1.1
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;subcollection&gt;
-  &lt;subresource&gt;
-    &lt;resource id="resource" href="/rhevm-api/collection/resource"/&gt;
+&lt;{subcollection}&gt;
+  &lt;{subresource} id="{subresource_id}" href="/rhevm-api/{collection}/{resource_id}/{subcollection}/{subresource_id}"&gt;
+    &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"/&gt;
     ...
-  &lt;/subresource&gt;
-&lt;/subcollection&gt;
+  &lt;/{subresource}&gt;
+&lt;/{subcollection}&gt;
     </screen>      
-
   </section>
   
   <section id="sect-REST_API_Guide-Common_Idioms-Actions">
     <title>
-      Actions
+      Resources: Actions
     </title>
 
     <para>
@@ -462,11 +494,11 @@ Content-Type: application/xml
     </para>
 
     <screen>
-&lt;resource&gt;
+&lt;{resource}&gt;
   ...
   &lt;actions&gt;
-    &lt;link rel="frob" href="/rhevm-api/resources/{id}/frob"/&gt;
-    &lt;link rel="twiddle" href="/rhevm-api/resources/{id}/twiddle"/&gt;
+    &lt;link rel="start" href="/rhevm-api/{collection}/{resource_id}/start"/&gt;
+    &lt;link rel="stop" href="/rhevm-api/{collection}/{resource_id}/stop"/&gt;
     ...
   &lt;/actions&gt;
   ...
@@ -502,7 +534,7 @@ Content-Type: application/xml
     </para>
 
     <screen>
-POST /rhevm-api/resources/{id}/{verb} HTTP/1.1
+POST /rhevm-api/{collection}/{resource_id}/{action} HTTP/1.1
 Content-Type: application/xml
 Accept: application/xml
 
@@ -513,7 +545,7 @@ Accept: application/xml
 HTTP/1.1 202 Accepted
 Content-Type: application/xml
 
-&lt;action id="{action_id}" href="/rhevm-api/resources/{id}/{verb}/{action_id}"&gt;
+&lt;action id="{action_id}" href="/rhevm-api/{collection}/{resource_id}/{action}/{action_id}"&gt;
   &lt;async&gt;true&lt;/async&gt;
   ...
 &lt;action&gt;
@@ -551,16 +583,16 @@ Content-Type: application/xml
     </para>
 
     <screen>
-GET /rhevm-api/resources/{id}/{verb}/{action_id} HTTP/1.1
+GET /rhevm-api/{collection}/{resource_id}/{action}/{action_id} HTTP/1.1
 Accept: application/xml
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;action id="{action_id}" href="/rhevm-api/resources/{id}/{verb}/{action_id}"&gt;
+&lt;action id="{action_id}" href="/rhevm-api/{collection}/{resource_id}/{action}/{action_id}"&gt;
   &lt;status&gt;{PENDING|IN_PROGRESS|COMPLETE|FAILED}&lt;/status&gt;
-  &lt;link rel="parent" href="/rhevm-api/resources/{id}"/&gt;
-  &lt;link rel="replay" href="/rhevm-api/resources/{id}/{verb}"/&gt;
+  &lt;link rel="parent" /rhevm-api/{collection}/{resource_id}"/&gt;
+  &lt;link rel="replay" href="/rhevm-api/{collection}/{resource_id}/{action}"/&gt;
 &lt;action&gt;
     </screen>
 
@@ -588,49 +620,49 @@ Content-Type: application/xml
 
   <section id="sect-REST_API_Guide-Common_Idioms-Permissions">
     <title>
-      Permissions
+      Resources: Permissions
     </title>
     <para>Each resource contains a <literal>permissions</literal> sub-collection. Each <literal>permission</literal> contains a <literal>user</literal>, an assigned <literal>role</literal> and the specified resource. For example:</para>    
     <screen>
-GET /rhevm-api/resources/{id}/permissions HTTP/1.1
+GET /rhevm-api/{collection}/{resource_id}/permissions HTTP/1.1
 Accept: application/xml
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;permissions&gt;
-  &lt;permission id="{permission-id}" href="/rhevm-api/resources/{id}/permissions/{permission-id}"&gt;
-    &lt;role id="{role-id}" href="/rhevm-api/roles/{role-id}"/&gt;
-    &lt;user id="{role-id}" href="/rhevm-api/users/{role-id}"/&gt;
-    &lt;resource id="{id}" href="/rhevm-api/resources/{id}"/&gt;
+  &lt;permission id="{permission-id}" href="/rhevm-api/{collection}/{resource_id}/permissions/{permission_id}"&gt;
+    &lt;role id="{role_id}" href="/rhevm-api/roles/{role_id}"/&gt;
+    &lt;user id="{user_id}" href="/rhevm-api/users/{user_id}"/&gt;
+    &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"/&gt;
   &lt;/permission&gt;
   ...
 &lt;/permissions&gt;
     </screen>
     <para>A resource acquires a new <literal>permission</literal> when <literal>POST</literal>ed to its <literal>permissions</literal> sub-collection. Each new permission requires a <literal>role</literal> and a <literal>user</literal>:</para>
     <screen>
-POST /rhevm-api/resources/{id}/permissions HTTP/1.1
+POST /rhevm-api/{collection}/{resource_id}/permissions HTTP/1.1
 Accept: application/xml
 
 &lt;permission"&gt;
-  &lt;role id="{role-id}"/&gt;
-  &lt;user id="{role-id}"/&gt;
+  &lt;role id="{role_id}"/&gt;
+  &lt;user id="{user_id}"/&gt;
 &lt;/permission&gt;
 
 HTTP/1.1 201 Created
 Content-Type: application/xml
 
-&lt;permission id="{permission-id}" href="/rhevm-api/resources/{id}/permissions/{permission-id}"&gt;
-  &lt;role id="{role-id}" href="/rhevm-api/roles/{role-id}"/&gt;
-  &lt;user id="{role-id}" href="/rhevm-api/users/{role-id}"/&gt;
-  &lt;resource id="{id}" href="/rhevm-api/resources/{id}"/&gt;
+&lt;permission id="{permission_id}" href="/rhevm-api/resources/{id}/permissions/{permission_id}"&gt;
+  &lt;role id="{role_id}" href="/rhevm-api/roles/{role_id}"/&gt;
+  &lt;user id="{user_id}" href="/rhevm-api/users/{user_id}"/&gt;
+  &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"/&gt;
 &lt;/permission&gt;
     </screen>
   </section>
   
   <section id="sect-REST_API_Guide-Common_Idioms-Handling_Errors">
     <title>
-      Handling Errors
+      Resources: Handling Errors
     </title>
 
     <para>
@@ -638,13 +670,13 @@ Content-Type: application/xml
     </para>
 
     <screen>
-PUT /rhevm-api/resources/{id} HTTP/1.1
+PUT /rhevm-api/{collection}/{resource_id} HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
 
-&lt;resource&gt;
-  &lt;id&gt;bar&lt;/id&gt;
-&lt;/resource&gt;
+&lt;{resource}&gt;
+  &lt;id&gt;id-update-test&lt;/id&gt;
+&lt;/{resource}&gt;
 
 HTTP/1.1 409 Conflict
 Content-Type: application/xml

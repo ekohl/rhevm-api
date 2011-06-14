@@ -23,7 +23,7 @@
 	<xi:include href="VM_Pools.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Users_and_Roles.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Domains.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	<xi:include href="Search.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />	
+	<!-- <xi:include href="Search.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />	-->
 	<xi:include href="Tags.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Monitoring.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	<xi:include href="Event_Codes.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
