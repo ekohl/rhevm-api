@@ -127,60 +127,38 @@ Content-Type: application/xml
       ...
     &lt;/power_managers&gt;
     &lt;fence_types&gt;
-      &lt;fence_type&gt;manual&lt;/fence_type&gt;
-      &lt;fence_type&gt;restart&lt;/fence_type&gt;
-      &lt;fence_type&gt;start&lt;/fence_type&gt;
-      &lt;fence_type&gt;stop&lt;/fence_type&gt;
-      &lt;fence_type&gt;status&lt;/fence_type&gt;
+      ...
     &lt;/fence_types&gt;
     &lt;storage_types&gt;
-      &lt;storage_type&gt;iscsi&lt;/storage_type&gt;
-      &lt;storage_type&gt;fcp&lt;/storage_type&gt;
-      &lt;storage_type&gt;nfs&lt;/storage_type&gt;
+      ...
     &lt;/storage_types&gt;
     &lt;storage_domain_types&gt;
-      &lt;storage_domain_type&gt;data&lt;/storage_domain_type&gt;
-      &lt;storage_domain_type&gt;iso&lt;/storage_domain_type&gt;
-      &lt;storage_domain_type&gt;export&lt;/storage_domain_type&gt;
+      ...
     &lt;/storage_domain_types&gt;
     &lt;vm_types&gt;
-      &lt;vm_type&gt;desktop&lt;/vm_type&gt;
-      &lt;vm_type&gt;server&lt;/vm_type&gt;
+      ...
     &lt;/vm_types&gt;
     &lt;boot_devices&gt;
-      &lt;boot_device&gt;cdrom&lt;/boot_device&gt;
-      &lt;boot_device&gt;hd&lt;/boot_device&gt;
-      &lt;boot_device&gt;network&lt;/boot_device&gt;
+      ...
     &lt;/boot_devices&gt;
     &lt;display_types&gt;
-      &lt;display_type&gt;vnc&lt;/display_type&gt;
-      &lt;display_type&gt;spice&lt;/display_type&gt;
+      ...
     &lt;/display_types&gt;
     &lt;nic_types&gt;
-      &lt;nic_type&gt;e1000&lt;/nic_type&gt;
-      &lt;nic_type&gt;virtio&lt;/nic_type&gt;
-      &lt;nic_type&gt;rtl8139&lt;/nic_type&gt;
-      &lt;nic_type&gt;rtl8139_virtio&lt;/nic_type&gt;
+      ...
     &lt;/nic_types&gt;
     &lt;disk_types&gt;
-      &lt;disk_type&gt;data&lt;/disk_type&gt;
-      &lt;disk_type&gt;shared&lt;/disk_type&gt;
-      &lt;disk_type&gt;swap&lt;/disk_type&gt;
-      &lt;disk_type&gt;system&lt;/disk_type&gt;
-      &lt;disk_type&gt;temp&lt;/disk_type&gt;
+      ...
     &lt;/disk_types&gt;
     &lt;disk_formats&gt;
-      &lt;disk_format&gt;cow&lt;/disk_format&gt;
-      &lt;disk_format&gt;raw&lt;/disk_format&gt;
+      ...
     &lt;/disk_formats&gt;
     &lt;disk_interfaces&gt;
-      &lt;disk_interface&gt;ide&lt;/disk_interface&gt;
-      &lt;disk_interface&gt;scsi&lt;/disk_interface&gt;
-      &lt;disk_interface&gt;virtio&lt;/disk_interface&gt;
+      ...
     &lt;/disk_interfaces&gt;
     ...
   &lt;/version&gt;
-  &lt;version major="2" minor="3"&gt;
+  &lt;version major="3" minor="0"&gt;
     &lt;features&gt;
     	...
     &lt;/features&gt;
@@ -191,62 +169,37 @@ Content-Type: application/xml
       ...
     &lt;/power_managers&gt;
     &lt;fence_types&gt;
-      &lt;fence_type&gt;manual&lt;/fence_type&gt;
-      &lt;fence_type&gt;restart&lt;/fence_type&gt;
-      &lt;fence_type&gt;start&lt;/fence_type&gt;
-      &lt;fence_type&gt;stop&lt;/fence_type&gt;
-      &lt;fence_type&gt;status&lt;/fence_type&gt;
+      ...
     &lt;/fence_types&gt;
     &lt;storage_types&gt;
-      &lt;storage_type&gt;iscsi&lt;/storage_type&gt;
-      &lt;storage_type&gt;fcp&lt;/storage_type&gt;
-      &lt;storage_type&gt;nfs&lt;/storage_type&gt;
-      &lt;storage_type&gt;local&lt;/storage_type&gt;
+      ...
     &lt;/storage_types&gt;
     &lt;storage_domain_types&gt;
-      &lt;storage_domain_type&gt;data&lt;/storage_domain_type&gt;
-      &lt;storage_domain_type&gt;iso&lt;/storage_domain_type&gt;
-      &lt;storage_domain_type&gt;export&lt;/storage_domain_type&gt;
+      ...
     &lt;/storage_domain_types&gt;
     &lt;vm_types&gt;
-      &lt;vm_type&gt;desktop&lt;/vm_type&gt;
-      &lt;vm_type&gt;server&lt;/vm_type&gt;
+      ...
     &lt;/vm_types&gt;
     &lt;boot_devices&gt;
-      &lt;boot_device&gt;cdrom&lt;/boot_device&gt;
-      &lt;boot_device&gt;hd&lt;/boot_device&gt;
-      &lt;boot_device&gt;network&lt;/boot_device&gt;
+      ...
     &lt;/boot_devices&gt;
     &lt;display_types&gt;
-      &lt;display_type&gt;vnc&lt;/display_type&gt;
-      &lt;display_type&gt;spice&lt;/display_type&gt;
+      ...
     &lt;/display_types&gt;
     &lt;nic_types&gt;
-      &lt;nic_type&gt;e1000&lt;/nic_type&gt;
-      &lt;nic_type&gt;virtio&lt;/nic_type&gt;
-      &lt;nic_type&gt;rtl8139&lt;/nic_type&gt;
-      &lt;nic_type&gt;rtl8139_virtio&lt;/nic_type&gt;
+      ...
     &lt;/nic_types&gt;
     &lt;disk_types&gt;
-      &lt;disk_type&gt;data&lt;/disk_type&gt;
-      &lt;disk_type&gt;shared&lt;/disk_type&gt;
-      &lt;disk_type&gt;swap&lt;/disk_type&gt;
-      &lt;disk_type&gt;system&lt;/disk_type&gt;
-      &lt;disk_type&gt;temp&lt;/disk_type&gt;
+      ...
     &lt;/disk_types&gt;
     &lt;disk_formats&gt;
-      &lt;disk_format&gt;cow&lt;/disk_format&gt;
-      &lt;disk_format&gt;raw&lt;/disk_format&gt;
+      ...
     &lt;/disk_formats&gt;
     &lt;disk_interfaces&gt;
-      &lt;disk_interface&gt;ide&lt;/disk_interface&gt;
-      &lt;disk_interface&gt;scsi&lt;/disk_interface&gt;
-      &lt;disk_interface&gt;virtio&lt;/disk_interface&gt;
+      ...
     &lt;/disk_interfaces&gt;
     &lt;vm_affinities&gt;
-      &lt;affinity&gt;migratable&lt;/affinity&gt;
-      &lt;affinity&gt;user_migratable&lt;/affinity&gt;
-      &lt;affinity&gt;pinned&lt;/affinity&gt;
+      ...
     &lt;/vm_affinities&gt;
     ...
   &lt;/version&gt;
@@ -264,8 +217,8 @@ Content-Type: application/xml
     <para>Each <literal>version</literal> contains a list of compatible <literal>features</literal>. These features include:</para>
     <informaltable frame="none">
       <tgroup cols="3">
-        <colspec colwidth="2*"/>
         <colspec colwidth="4*"/>
+        <colspec colwidth="2*"/>
         <colspec colwidth="6*"/>
         <thead>
           <row>

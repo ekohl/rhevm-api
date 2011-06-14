@@ -18,10 +18,10 @@
   <para>
     <informaltable frame="none">
       <tgroup cols="4">
-        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
         <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
+        <colspec colwidth="2*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>

@@ -17,10 +17,10 @@
   <para>
     <informaltable frame="none">
       <tgroup cols="4">
-        <colspec colwidth="2*"/>
-        <colspec colwidth="4*"/>
+        <colspec colwidth="5*"/>
+        <colspec colwidth="3*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
+        <colspec colwidth="2*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
@@ -38,7 +38,7 @@
           </row>
           <row>
             <entry><literal>status</literal></entry>
-            <entry>One of <literal>UNASSIGNED</literal>, <literal>DOWN</literal>, <literal>UP</literal>, <literal>POWERING_UP</literal>, <literal>POWERED_DOWN</literal>, <literal>PAUSED</literal>, <literal>MIGRATING_FROM</literal>, <literal>MIGRATING_TO</literal>, <literal>UNKNOWN</literal>, <literal>NOT_RESPONDING</literal>, <literal>WAIT_FOR_LAUNCH</literal>, <literal>REBOOT_IN_PROGRESS</literal>, <literal>SAVING_STATE</literal>, <literal>RESTORING_STATE</literal>, <literal>SUSPENDED</literal>, <literal>IMAGE_ILLEGAL</literal>, <literal>IMAGE_LOCKED</literal> or <literal>POWERING_DOWN</literal></entry>
+            <entry>See below</entry>
             <entry>The VM status</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
@@ -159,6 +159,9 @@
         </tbody>
       </tgroup>
     </informaltable>
+  </para>
+  <para>
+    The <literal>status</literal> contains one of the following enumerative values: <literal>UNASSIGNED</literal>, <literal>DOWN</literal>, <literal>UP</literal>, <literal>POWERING_UP</literal>, <literal>POWERED_DOWN</literal>, <literal>PAUSED</literal>, <literal>MIGRATING_FROM</literal>, <literal>MIGRATING_TO</literal>, <literal>UNKNOWN</literal>, <literal>NOT_RESPONDING</literal>, <literal>WAIT_FOR_LAUNCH</literal>, <literal>REBOOT_IN_PROGRESS</literal>, <literal>SAVING_STATE</literal>, <literal>RESTORING_STATE</literal>, <literal>SUSPENDED</literal>, <literal>IMAGE_ILLEGAL</literal>, <literal>IMAGE_LOCKED</literal> or <literal>POWERING_DOWN</literal>.
   </para>
   <para>
     For example:
@@ -291,10 +294,10 @@
   <para>
     <informaltable frame="none">
       <tgroup cols="4">
-        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
         <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
+        <colspec colwidth="2*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
@@ -403,10 +406,10 @@
       <para>
         <informaltable frame="none">
           <tgroup cols="4">
-            <colspec colwidth="2*"/>
+            <colspec colwidth="4*"/>
             <colspec colwidth="4*"/>
             <colspec colwidth="6*"/>
-            <colspec colwidth="3*" colname="prop"/>
+            <colspec colwidth="2*" colname="prop"/>
             <thead>
               <row>
                 <entry>Element</entry>
@@ -483,10 +486,10 @@
     <para>
       <informaltable frame="none">
         <tgroup cols="4">
-          <colspec colwidth="2*"/>
+          <colspec colwidth="4*"/>
           <colspec colwidth="4*"/>
           <colspec colwidth="6*"/>
-          <colspec colwidth="3*" colname="prop"/>
+          <colspec colwidth="2*" colname="prop"/>
           <thead>
             <row>
               <entry>Element</entry>

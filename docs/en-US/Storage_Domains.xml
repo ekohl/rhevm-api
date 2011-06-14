@@ -18,10 +18,10 @@
   <para>
     <informaltable frame="none">
       <tgroup cols="4">
-        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
         <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
+        <colspec colwidth="2*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
@@ -124,10 +124,10 @@
 
       <informaltable frame="none">
         <tgroup cols="4">
-          <colspec colwidth="2*"/>
+          <colspec colwidth="4*"/>
           <colspec colwidth="4*"/>
           <colspec colwidth="6*"/>
-          <colspec colwidth="3*" colname="prop"/>
+          <colspec colwidth="2*" colname="prop"/>
           <thead>
             <row>
               <entry>Element</entry>
@@ -165,10 +165,10 @@
   
       <informaltable frame="none">
         <tgroup cols="4">
-          <colspec colwidth="2*"/>
+          <colspec colwidth="4*"/>
           <colspec colwidth="4*"/>
           <colspec colwidth="6*"/>
-          <colspec colwidth="3*" colname="prop"/>
+          <colspec colwidth="2*" colname="prop"/>
           <thead>
             <row>
               <entry>Element</entry>
@@ -211,10 +211,10 @@
       <para>The <literal>local</literal> specific elements in a <literal>storage</literal> description are:</para>
       <informaltable frame="none">
         <tgroup cols="4">
-          <colspec colwidth="2*"/>
+          <colspec colwidth="4*"/>
           <colspec colwidth="4*"/>
           <colspec colwidth="6*"/>
-          <colspec colwidth="3*" colname="prop"/>
+          <colspec colwidth="2*" colname="prop"/>
           <thead>
             <row>
               <entry>Element</entry>

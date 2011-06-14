@@ -17,10 +17,10 @@
   <para>
     <informaltable frame="none">
       <tgroup cols="4">
-        <colspec colwidth="2*"/>
-        <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
+        <colspec colwidth="2*"/>
+        <colspec colwidth="6*"/>
+        <colspec colwidth="2*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
@@ -38,7 +38,7 @@
           </row>
           <row>
             <entry><literal>status</literal></entry>
-            <entry>One of <literal>DOWN</literal>, <literal>ERROR</literal>, <literal>INITIALIZING</literal>, <literal>INSTALLING</literal>, <literal>INSTALL_FAILED</literal>, <literal>MAINTENANCE</literal>, <literal>NON_OPERATIONAL</literal>, <literal>NON_RESPONSIVE</literal>, <literal>PENDING_APPROVAL</literal>, <literal>PREPARING_FOR_MAINTENANCE</literal>, <literal>PROBLEMATIC</literal>, <literal>REBOOT</literal>, <literal>UNASSIGNED</literal> or <literal>UP</literal></entry>
+            <entry>See below</entry>
             <entry>The host status</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
@@ -107,6 +107,9 @@
     </informaltable>
   </para>
   <para>
+    The <literal>status</literal> contains one of the following enumerative values: <literal>DOWN</literal>, <literal>ERROR</literal>, <literal>INITIALIZING</literal>, <literal>INSTALLING</literal>, <literal>INSTALL_FAILED</literal>, <literal>MAINTENANCE</literal>, <literal>NON_OPERATIONAL</literal>, <literal>NON_RESPONSIVE</literal>, <literal>PENDING_APPROVAL</literal>, <literal>PREPARING_FOR_MAINTENANCE</literal>, <literal>PROBLEMATIC</literal>, <literal>REBOOT</literal>, <literal>UNASSIGNED</literal> or <literal>UP</literal>.
+  </para>
+  <para>
     For example:
   </para>
 
@@ -167,10 +170,10 @@
   <para>
     <informaltable frame="none">
       <tgroup cols="4">
-        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
         <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
+        <colspec colwidth="2*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
@@ -385,10 +388,10 @@ Content-type: application/xml
   <para>
     <informaltable frame="none">
       <tgroup cols="4">
-        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
         <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
+        <colspec colwidth="2*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
@@ -446,10 +449,10 @@ Content-type: application/xml
     <para>
     <informaltable frame="none">
       <tgroup cols="4">
-        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
         <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
+        <colspec colwidth="2*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
@@ -720,10 +723,10 @@ Accept: application/xml
 	<para>A recommended feature of the Red Hat Virtualization platform is the option to fence a host with a <literal>power_management</literal> configuration. Certain sub-elements are required when configuring <literal>power_management</literal>.</para>
     <informaltable frame="none">
       <tgroup cols="4">
-        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
         <colspec colwidth="4*"/>
         <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
+        <colspec colwidth="2*" colname="prop"/>
         <thead>
           <row>
             <entry>Element</entry>
