@@ -20,7 +20,7 @@ from subprocess import Popen, PIPE
 
 version_info = {
     'name': 'python-rhev',
-    'version': '1.0-SNAPSHOT',
+    'version': '1.0-rc1.2',
     'description': 'A Python API for Red Hat Enterprise Virtualization',
     'author': 'Geert Jansen',
     'author_email': 'gjansen@redhat.com',
