@@ -1,0 +1,537 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "REST_API_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-REST_API_Guide-Example">
+  <title>Example</title>
+  <para>
+    This chapter provides an example to demonstrate the REST API's ability to create a basic virtual environment with Red Hat Enterprise Virtualization. It is intended for users with some proficiency with REST architectural style and some experience with Red Hat Enterprise Virtualization Manager.
+  </para>
+  <para>
+    This example requires the following:
+  </para>
+  <itemizedlist>
+    <listitem>
+      <para>A networked installation of Red Hat Enterprise Virtualization Manager;</para>
+    </listitem>
+    <listitem>
+      <para>A networked and configured host containing Red Hat Enterprise Virtualization Hypervisor; and</para>
+    </listitem>
+    <listitem>
+      <para>An ISO of Red Hat Enterprise Linux 6.0 DVD, or other choice of virtual machine operating system, pre-loaded on Red Hat Enterprise Virtualization Manager's default ISO storage domain.</para>
+    </listitem>
+  </itemizedlist>
+  <note>
+    <title>Identifier Codes</title>
+    <para>
+      Red Hat Enterprise Virtualization Manager generates an opaque identifier code, or <literal>id</literal>, for each resource. Identifier codes in this example might appear different to the identifier codes in your Red Hat Enterprise Virtualization environment.
+    </para>
+  </note>
+  
+  
+  <section id="sect-REST_API_Guide-Example-List_Data_Centers">
+    <title>List Data Center Collection</title>
+    <para>
+      Red Hat Enteprise Virtualization creates a <literal>Default</literal> data center on installation. The following request retrieves a representation of the datacenter collection.
+    </para>
+    <example>
+      <title>List data center collection</title>
+   		<screen>
+GET /rhevm-api/datacenters HTTP/1.1
+Accept: application/xml
+      </screen>
+    </example>
+    <para>
+      This produces the following representation:
+    </para>
+    <screen>
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+&lt;data_centers&gt;
+    &lt;data_center id="01a45ff0-915a-11e0-8b87-5254004ac988"
+      href="/rhevm-api/datacenters/01a45ff0-915a-11e0-8b87-5254004ac988"&gt;
+        &lt;name&gt;Default&lt;/name&gt;
+        &lt;description&gt;The default Data Center&lt;/description&gt;
+        &lt;link rel="storagedomains"
+          href="/rhevm-api/datacenters/01a45ff0-915a-11e0-8b87-5254004ac988/storagedomains"/&gt;
+        &lt;link rel="permissions"
+          href="/rhevm-api/datacenters/01a45ff0-915a-11e0-8b87-5254004ac988/permissions"/&gt;
+        &lt;storage_type&gt;nfs&lt;/storage_type&gt;
+        &lt;storage_format&gt;v1&lt;/storage_format&gt;
+        &lt;version minor="0" major="3"/&gt;
+        &lt;supported_versions&gt;
+            &lt;version minor="0" major="3"/&gt;
+        &lt;/supported_versions&gt;
+        &lt;status&gt;UP&lt;/status&gt;
+    &lt;/data_center&gt;
+&lt;/data_centers&gt;
+    </screen>
+  </section>
+    
+    
+  <section id="sect-REST_API_Guide-Example-List_Clusters">
+    <title>List Host Clusters Collection</title>
+    <para>
+      Red Hat Enteprise Virtualization creates a <literal>Default</literal> host cluster on installation. The following request retrieves a representation of the cluster collection.
+    </para>
+    <example>
+      <title>List host clusters collection</title>
+   		<screen>
+GET /rhevm-api/clusters HTTP/1.1
+Accept: application/xml
+      </screen>
+    </example>
+    <para>
+      This produces the following representation:
+    </para>
+    <screen>
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+&lt;clusters&gt;
+    &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
+      href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"&gt;
+        &lt;name&gt;Default&lt;/name&gt;
+        &lt;description&gt;The default server cluster&lt;/description&gt;
+        &lt;link rel="networks"
+          href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95/networks"/&gt;
+        &lt;link rel="permissions"
+          href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95/permissions"/&gt;
+        &lt;cpu id="Intel Penryn Family"/&gt;
+        &lt;data_center id="01a45ff0-915a-11e0-8b87-5254004ac988"
+          href="/rhevm-api/datacenters/01a45ff0-915a-11e0-8b87-5254004ac988"/&gt;
+        &lt;memory_policy&gt;
+            &lt;overcommit percent="100"/&gt;
+            &lt;transparent_hugepages&gt;
+                &lt;enabled&gt;false&lt;/enabled&gt;
+            &lt;/transparent_hugepages&gt;
+        &lt;/memory_policy&gt;
+        &lt;scheduling_policy/&gt;
+        &lt;version minor="0" major="3"/&gt;
+        &lt;error_handling&gt;
+            &lt;on_error&gt;migrate&lt;/on_error&gt;
+        &lt;/error_handling&gt;
+    &lt;/cluster&gt;
+&lt;/clusters&gt;
+    </screen>
+  </section>
+    
+    
+  <section id="sect-REST_API_Guide-Example-List_Logical_Networks">
+    <title>List Logical Networks Collection</title>
+    <para>
+      Red Hat Enteprise Virtualization creates a default <literal>rhevm</literal> network on installation. The following request retrieves a representation of the logical networks collection.
+    </para>
+    <example>
+      <title>List logical networks collection</title>
+   		<screen>
+GET /rhevm-api/networks HTTP/1.1
+Accept: application/xml
+      </screen>
+    </example>
+    <para>
+      This produces the following representation:
+    </para>
+    <screen>
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
+&lt;networks&gt;
+    &lt;network id="00000000-0000-0000-0000-000000000009"
+      href="/rhevm-api/networks/00000000-0000-0000-0000-000000000009"&gt;
+        &lt;name&gt;rhevm&lt;/name&gt;
+        &lt;description&gt;Management Network&lt;/description&gt;
+        &lt;data_center id="01a45ff0-915a-11e0-8b87-5254004ac988"
+          href="/rhevm-api/datacenters/01a45ff0-915a-11e0-8b87-5254004ac988"/&gt;
+        &lt;stp&gt;false&lt;/stp&gt;
+        &lt;status&gt;OPERATIONAL&lt;/status&gt;
+        &lt;display&gt;false&lt;/display&gt;
+    &lt;/network&gt;
+&lt;/networks&gt;
+    </screen>
+  </section>
+    
+    
+  <section id="sect-REST_API_Guide-Example-List_Hosts">
+    <title>List Host Collection</title>
+    <para>
+        This example uses a Red Hat Enteprise Virtualization Hypervisor host. Red Hat Enteprise Virtualization Manager automatically registers any configured Red Hat Enteprise Virtualization Hypervisor. This example retrieves a representation of the hosts collection and shows the a Red Hat Enteprise Virtualization Hypervisor host named <literal>hypervisor</literal> registered with the virtualization environment.
+    </para>
+    <example>
+      <title>List hosts collection</title>
+   		<screen>
+GET /rhevm-api/hosts HTTP/1.1
+Accept: application/xml
+      </screen>
+    </example>
+    <para>
+      This produces the following representation:
+    </para>
+    <screen>
+HTTP/1.1 200 OK
+Accept: application/xml
+
+&lt;hosts&gt;
+    &lt;host id="0656f432-923a-11e0-ad20-5254004ac988"
+      href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988"&gt;
+        &lt;name&gt;hypervisor&lt;/name&gt;
+        &lt;actions&gt;
+            &lt;link rel="install"
+              href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/install"/&gt;
+            &lt;link rel="activate"
+              href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/activate"/&gt;
+            &lt;link rel="fence"
+              href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/fence"/&gt;
+            &lt;link rel="deactivate"
+              href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/deactivate"/&gt;
+            &lt;link rel="approve"
+              href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/approve"/&gt;
+            &lt;link rel="iscsilogin"
+              href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/iscsilogin"/&gt;
+            &lt;link rel="iscsidiscover"
+              href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/iscsidiscover"/&gt;
+            &lt;link rel="commitnetconfig"
+              href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/commitnetconfig"/&gt;
+        &lt;/actions&gt;
+        &lt;link rel="storage"
+          href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/storage"/&gt;
+        &lt;link rel="nics"
+          href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/nics"/&gt;
+        &lt;link rel="tags"
+          href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/tags"/&gt;
+        &lt;link rel="permissions"
+          href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/permissions"/&gt;
+        &lt;link rel="statistics"
+          href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/statistics"/&gt;
+        &lt;address&gt;10.64.14.110&lt;/address&gt;
+        &lt;status&gt;NON OPERATIONAL&lt;/status&gt;
+        &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
+          href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
+        &lt;port&gt;54321&lt;/port&gt;
+        &lt;storage_manager&gt;true&lt;/storage_manager&gt;
+        &lt;power_management&gt;
+            &lt;enabled&gt;false&lt;/enabled&gt;
+            &lt;options/&gt;
+        &lt;/power_management&gt;
+        &lt;ksm&gt;
+            &lt;enabled&gt;false&lt;/enabled&gt;
+        &lt;/ksm&gt;
+        &lt;transparent_hugepages&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+        &lt;/transparent_hugepages&gt;
+        &lt;iscsi&gt;
+            &lt;initiator&gt;iqn.1994-05.com.example:644949fe81ce&lt;/initiator&gt;
+        &lt;/iscsi&gt;
+        &lt;cpu&gt;
+            &lt;topology cores="2"/&gt;
+            &lt;name&gt;Intel(R) Core(TM)2 Duo CPU E8400 @ 3.00GHz&lt;/name&gt;
+            &lt;speed&gt;2993&lt;/speed&gt;
+        &lt;/cpu&gt;
+        &lt;summary&gt;
+            &lt;active&gt;0&lt;/active&gt;
+            &lt;migrating&gt;0&lt;/migrating&gt;
+            &lt;total&gt;0&lt;/total&gt;
+        &lt;/summary&gt;
+    &lt;/host&gt;
+&lt;/hosts&gt;
+    </screen>
+  </section>
+  <section id="sect-REST_API_Guide-Example-Approve_Host">
+    <title>Approve Host</title>
+    <para>  
+      The <literal>hypervisor</literal> host contains an <literal>approve</literal> action. A user accesses this action's URI with a <literal>POST</literal> request.
+    </para>
+    <example>
+      <title>Approve Red Hat Enterprise Virtualization Hypervisor hosts</title>
+   		<screen>
+POST /rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/approve HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+      </screen>
+    </example>
+    <para>
+      This approves and activates the host for use in your virtual environment. The <literal>status</literal> for <literal>hypervisor</literal> changes from <literal>NON OPERATIONAL</literal> to <literal>UP</literal>. 
+    </para>
+  </section>
+
+
+  <section id="sect-REST_API_Guide-Example-Create_NFS_Data_Storage_Domain">
+    <title>Create NFS Data Storage</title>
+    <para>
+      An NFS data storage domain is a mounted NFS share attached to a data center and provides storage for virtualized guest images.
+    </para>
+    <example>
+      <title>Create an NFS Data Storage Domain</title>
+   		<screen>
+POST /rhevm-api/storagedomains HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;storage_domain&gt;
+  &lt;name&gt;data1&lt;/name&gt;
+  &lt;type&gt;data&lt;/type&gt;
+  &lt;storage&gt;
+    &lt;type&gt;nfs&lt;/type&gt;
+    &lt;address&gt;192.168.0.10&lt;/address&gt;
+    &lt;path&gt;/Images/ISO&lt;/path&gt;
+  &lt;/storage&gt;
+  &lt;host&gt;
+    &lt;name&gt;hypervisor&lt;/name&gt;
+  &lt;/host&gt;
+&lt;/storage_domain&gt;
+      </screen>
+    </example>
+    <para>
+      This creates a NFS data storage domain called <literal>data1</literal> at <uri>192.168.0.10:/Images/ISO</uri> and initializes it with our <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
+    </para>
+    <screen>
+HTTP/1.1 200 OK
+Accept: application/xml
+
+&lt;storage_domains&gt;
+    &lt;storage_domain id="00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"
+      href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"&gt;
+        &lt;name&gt;data1&lt;/name&gt;
+        &lt;link rel="permissions"
+          href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/permissions"/&gt;
+        &lt;link rel="files"
+          href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/files"/&gt;
+        &lt;type&gt;data&lt;/type&gt;
+        &lt;master&gt;false&lt;/master&gt;
+        &lt;storage&gt;
+            &lt;type&gt;nfs&lt;/type&gt;
+            &lt;address&gt;192.168.0.10&lt;/address&gt;
+            &lt;path&gt;/Images/ISO&lt;/path&gt;
+        &lt;/storage&gt;
+        &lt;available&gt;82678120448&lt;/available&gt;
+        &lt;used&gt;18253611008&lt;/used&gt;
+        &lt;committed&gt;0&lt;/committed&gt;
+        &lt;storage_format&gt;v1&lt;/storage_format&gt;
+    &lt;/storage_domain&gt;
+&lt;/storage_domains&gt;
+    </screen>
+  </section>
+ 
+ 
+  <section id="sect-REST_API_Guide-Example-Attach_NFS_Data_Storage_Domain">
+    <title>Attach Data Storage to Data Center</title>
+    <para>
+      This example attaches the <literal>data1</literal> storage domain to the <literal>Default</literal> data center. 
+    </para>
+    <example>
+      <title>Attach an Data Storage Domain to a Data Center</title>
+ 	  	<screen>
+POST /rhevm-api/datacenters/01a45ff0-915a-11e0-8b87-5254004ac988/storagedomains HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;storage_domain&gt;
+  &lt;name&gt;
+    data1
+  &lt;/name&gt;
+&lt;/storage_domain&gt;
+      </screen>
+    </example>
+  </section>
+  
+
+  <section id="sect-REST_API_Guide-Example-Activate_Data_Storage">
+    <title>Activate Data Storage</title>
+    <para>
+      This example activates the <literal>data1</literal> storage domain for the Red Hat Enterprise Virtualization Manager's use.
+    </para>
+    <example>
+      <title>Activate Storage Domain</title>
+ 	  	<screen>
+POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
+00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/activate HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+      </screen>
+    </example>
+  </section>
+
+  <section id="sect-REST_API_Guide-Example-Create_VM">
+    <title>Create Virtual Machine</title>
+    <para>
+      The following example creates a virtual machine called <literal>vm1</literal> on the <literal>default</literal> cluster using the virtualization environment's <literal>Blank</literal> template as a basis. The request also defines the virtual machine's memory as 512kb and sets the boot device to CD-ROM.
+    </para>
+    <example>
+      <title>Create a Virtual Machine</title>
+ 	  	<screen>
+POST /rhevm-api/vms HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+ 	  	
+&lt;vm&gt;
+  &lt;name&gt;vm1&lt;/name&gt;
+  &lt;cluster&gt;
+    &lt;name&gt;default&lt;/name&gt;
+  &lt;/cluster&gt;
+  &lt;template&gt;
+    &lt;name&gt;Blank&lt;/name&gt;
+  &lt;/template&gt;
+  &lt;memory&gt;536870912&lt;/memory&gt; 
+  &lt;os&gt;
+    &lt;boot dev="cdrom"/&gt;
+  &lt;/os&gt;
+&lt;/vm&gt;
+      </screen>
+    </example>
+    <para>
+      The API returns the following representation of the newly created virtual machine resource:
+    </para>
+    <screen>
+HTTP/1.1 200 OK
+Accept: application/xml    
+
+&lt;vm id="6efc0cfa-8495-4a96-93e5-ee490328cf48"
+  href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48"&gt;
+    &lt;name&gt;vm1&lt;/name&gt;
+    &lt;actions&gt;
+        &lt;link rel="shutdown"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/shutdown"/&gt;
+        &lt;link rel="start"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/start"/&gt;
+        &lt;link rel="stop"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/stop"/&gt;
+        &lt;link rel="suspend"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/suspend"/&gt;
+        &lt;link rel="detach"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/detach"/&gt;
+        &lt;link rel="export"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/export"/&gt;
+        &lt;link rel="move"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/move"/&gt;
+        &lt;link rel="ticket"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/ticket"/&gt;
+        &lt;link rel="migrate"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/migrate"/&gt;
+    &lt;/actions&gt;
+    &lt;link rel="disks"
+      href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/disks"/&gt;
+    &lt;link rel="nics"
+      href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/nics"/&gt;
+    &lt;link rel="cdroms"
+      href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/cdroms"/&gt;
+    &lt;link rel="snapshots"
+      href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/snapshots"/&gt;
+    &lt;link rel="tags"
+      href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/tags"/&gt;
+    &lt;link rel="permissions"
+      href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/permissions"/&gt;
+    &lt;link rel="statistics"
+      href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/statistics"/&gt;
+    &lt;type&gt;desktop&lt;/type&gt;
+    &lt;status&gt;DOWN&lt;/status&gt;
+    &lt;memory&gt;536870912&lt;/memory&gt;
+    &lt;cpu&gt;
+        &lt;topology cores="1" sockets="1"/&gt;
+    &lt;/cpu&gt;
+    &lt;os type="Unassigned"&gt;
+        &lt;boot dev="cdrom"/&gt;
+    &lt;/os&gt;
+    &lt;high_availability&gt;
+        &lt;enabled&gt;false&lt;/enabled&gt;
+        &lt;priority&gt;0&lt;/priority&gt;
+    &lt;/high_availability&gt;
+    &lt;display&gt;
+        &lt;type&gt;spice&lt;/type&gt;
+        &lt;monitors&gt;1&lt;/monitors&gt;
+    &lt;/display&gt;
+    &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
+      href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
+    &lt;template id="00000000-0000-0000-0000-000000000000"
+      href="/rhevm-api/templates/00000000-0000-0000-0000-000000000000"/&gt;
+    &lt;start_time&gt;2011-06-15T04:48:02.167Z&lt;/start_time&gt;
+    &lt;creation_time&gt;2011-06-15T14:48:02.078+10:00&lt;/creation_time&gt;
+    &lt;origin&gt;rhevm&lt;/origin&gt;
+    &lt;stateless&gt;false&lt;/stateless&gt;
+    &lt;placement_policy&gt;
+        &lt;affinity&gt;MIGRATABLE&lt;/affinity&gt;
+    &lt;/placement_policy&gt;
+    &lt;memory_policy&gt;
+        &lt;guaranteed&gt;536870912&lt;/guaranteed&gt;
+    &lt;/memory_policy&gt;
+&lt;/vm&gt;
+    </screen>
+  </section>
+
+
+  <section id="sect-REST_API_Guide-Example-Attach_CDROM">
+    <title>Attach ISO Image to Virtual Machine</title>
+    <para>The boot media for our virtual machine requires an ISO domain pre-populated with a Red Hat Enterprise Server 6.0 ISO image.</para>
+    <example>
+      <title>Attach an ISO image to a Virtual Machine</title>
+ 	  	<screen>
+POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/cdroms HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;cdrom&gt;
+  &lt;file id="rhel-server-6.0-x86_64-dvd.iso.iso"/&gt;
+&lt;/cdrom&gt;
+ 	  	</screen>
+ 	  </example>
+  </section>
+
+
+  <section id="sect-REST_API_Guide-Example-Attach_NIC">
+    <title>Attach NIC to Virtual Machine</title>
+    <para></para>
+    <example>
+      <title>Attach a NIC to a Virtual Machine</title>
+ 	  	<screen>
+POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/nics HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;nic&gt;
+  &lt;name&gt;nic1&lt;/name&gt;
+  &lt;network&gt;
+    &lt;name&gt;rhevm&lt;/name&gt;
+  &lt;/network&gt;
+&lt;/nic&gt;
+ 	  	</screen>
+ 	  </example>
+  </section>
+  
+
+  <section id="sect-REST_API_Guide-Example-Attach_Disk">
+    <title>Attach Storage Disk to Virtual Machine</title>
+    <para></para>
+    <example>
+      <title>Create a Storage Disk on a Virtual Machine</title>
+ 	  	<screen>
+POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/disks HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;disk&gt;
+  &lt;size&gt;4294967296&lt;/size&gt;
+  &lt;type&gt;system&lt;/type&gt;
+  &lt;interface&gt;virtio&lt;/interface&gt;
+  &lt;format&gt;raw&lt;/format&gt;
+  &lt;bootable&gt;true&lt;/bootable&gt;
+&lt;/disk&gt;
+ 	  	</screen>
+ 	  </example>
+  </section>
+
+
+  <section id="sect-REST_API_Guide-Example-Start_VM">
+    <title>Start Virtual Machine</title>
+    <para></para>
+    <example>
+      <title>Create a Virtual Machine</title>
+ 	  	<screen>
+POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/start HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+ 	  	</screen>
+ 	  </example>
+  </section>
+
+</chapter>

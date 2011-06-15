@@ -34,20 +34,20 @@
 
   <para>This documentation acts as a reference to the Red Hat Enterprise Virtualization Manager REST API. It aims to provide developers and administrators with instructions and examples to help harness the functionality of their Red Hat Enterprise Virtualization environment through the REST API.</para>
   
-  <section id="chap-REST_API_Guide-Introduction-Overview">
+  <section id="sect-REST_API_Guide-Introduction-Overview">
     <title>Overview</title>
     <para>
       Explaining the Red Hat Enterprise Virtualization Manager REST API requires an examination of REST architectural style and RESTful web services in the context of a virtualization environment. The following sections provide this examination of REST architecture through explanations of the key REST terms.
     </para>
     
-    <section id="chap-REST_API_Guide-Introduction-Overview-Resources">
+    <section id="sect-REST_API_Guide-Introduction-Overview-Resources">
       <title>Resources</title>
       <para>
         A REST API focuses primarily on <emphasis role="bold">resources</emphasis> of a specific service. A resource is a key abstraction of information and in the context of virtualization represents an individual component, capability or data set in the virtualizaion infrastructure. 
       </para>
     </section>
     
-    <section id="chap-REST_API_Guide-Introduction-Overview-Collections">
+    <section id="sect-REST_API_Guide-Introduction-Overview-Collections">
       <title>Collections</title>
       <para>
       Red Hat Enterprise Virtualization Manager's REST API groups resources into individual <emphasis role="bold">collections</emphasis> based on the management infrastructure types in a Red Hat Enterprise Virtualization environment. Examples of collections include Data Centers, Clusters, Storage Domains, Hosts, and Virtual Machines.
@@ -60,7 +60,7 @@
       </para>
     </section>
     
-    <section id="chap-REST_API_Guide-Introduction-Overview-URIs">
+    <section id="sect-REST_API_Guide-Introduction-Overview-URIs">
       <title>URIs</title>
       <para>
         The advantage of using a model with collections, resources and sub-collections is an API user can perform a request on any part of the model to achieve a specific function. For example, access to all resources in a collection requires only a request to the collection itself. Access to a specific resource requires a request to the resource within the context of its collection. An API user targets these requests to a specific location called an <emphasis role="bold">Uniform Resource Identifier (URI)</emphasis>.
@@ -79,7 +79,7 @@ http://www.example.com/collection/resource
       </screen>  
     </section>
     
-    <section id="chap-REST_API_Guide-Introduction-Overview-Representations">
+    <section id="sect-REST_API_Guide-Introduction-Overview-Representations">
       <title>Representations</title>
       <para>
         Access to a resource URI in a RESTful web service does not mean direct access to the resource itself. Instead, the API provides an abstraction of the resource. This is called a <emphasis role="bold">representation</emphasis>. The API constructs representations using various formats. However, this documentation focuses primarily on XML representations.
@@ -125,7 +125,7 @@ http://www.example.com/collection/resource
 
     </section>
 
-    <section id="chap-REST_API_Guide-Introduction-Overview-Requests">
+    <section id="sect-REST_API_Guide-Introduction-Overview-Requests">
       <title>Requests</title>
       <para>
         The REST API uses HTTP as a protocol to transfer a <emphasis role="bold">request</emphasis> for a resource representation from a <emphasis role="bold">client</emphasis> to the Red Hat Enterprise Virtualization Manager <emphasis role="bold">server</emphasis>. For example:
@@ -179,7 +179,7 @@ Accept: application/xml
       </para>
     </section> 
     
-    <section id="chap-REST_API_Guide-Introduction-Overview-Methods">
+    <section id="sect-REST_API_Guide-Introduction-Overview-Methods">
       <title>Methods</title>
       <para>
         The benefit of using HTTP to communicate with the REST API is the ability to use a <emphasis role="bold">method</emphasis> to access Red Hat Enterprise Virtualization resources. A method defines the type of request send to a resource. The REST API uses four HTTP methods:
@@ -207,7 +207,7 @@ Accept: application/xml
       </para>
     </section>
 
-    <section id="chap-REST_API_Guide-Introduction-Overview-Headers">
+    <section id="sect-REST_API_Guide-Introduction-Overview-Headers">
       <title>Headers</title>
       <para>
         The HTTP request contains a <emphasis role="bold">header</emphasis> to define parameters of a HTTP request. The header uses specific <emphasis role="bold">header fields</emphasis> to define these  parameters. All are optional except for two requried in the context of the REST API: 
@@ -231,7 +231,7 @@ Accept: application/xml
       <para>This documentation defines optional header fields in later chapters.</para>
     </section>
 
-    <section id="chap-REST_API_Guide-Introduction-Overview-Entities">
+    <section id="sect-REST_API_Guide-Introduction-Overview-Entities">
       <title>Message Entities</title>
       <para>
         It is possible for a HTTP request to contain a <emphasis role="bold">message entity</emphasis>. Using a <literal>POST</literal> or <literal>PUT</literal> method often requires an additional <emphasis role="bold">message entity</emphasis> in the request. For example:
@@ -253,7 +253,7 @@ Accept: application/xml
       </para>
     </section>
     
-    <section id="chap-REST_API_Guide-Introduction-Overview-Actions">
+    <section id="sect-REST_API_Guide-Introduction-Overview-Actions">
       <title>Actions</title>
       <para>
         Some resources provide specialized functions called <emphasis role="bold">actions</emphasis>. An API user performs a request on a resource's action, which launches a task specific to that action. For example, a virtual machine contains functions to start, stop and reboot. The API abstracts these function as actions specific to each virtual machine resource.
