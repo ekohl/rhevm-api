@@ -30,9 +30,10 @@ import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
 import com.redhat.rhevm.api.powershell.util.PowerShellPoolMap;
 import com.redhat.rhevm.api.powershell.util.PowerShellUtils;
+import com.redhat.rhevm.api.resource.ReadOnlyDevicesResource;
 
 
-public class PowerShellReadOnlyNicsResource extends AbstractPowerShellDevicesResource<NIC, Nics> {
+public class PowerShellReadOnlyNicsResource extends AbstractPowerShellDevicesResource<NIC, Nics> implements ReadOnlyDevicesResource<NIC, Nics> {
 
     private String getCommand;
 

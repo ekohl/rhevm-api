@@ -28,9 +28,10 @@ import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.common.util.LinkHelper;
 import com.redhat.rhevm.api.powershell.util.PowerShellPoolMap;
+import com.redhat.rhevm.api.resource.ReadOnlyDevicesResource;
 
 
-public class PowerShellReadOnlyCdRomsResource extends AbstractPowerShellDevicesResource<CdRom, CdRoms> {
+public class PowerShellReadOnlyCdRomsResource extends AbstractPowerShellDevicesResource<CdRom, CdRoms> implements ReadOnlyDevicesResource<CdRom, CdRoms> {
 
     private static final String CDROM_ID = Integer.toString("cdrom".hashCode());
 
