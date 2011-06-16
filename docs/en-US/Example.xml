@@ -6,7 +6,7 @@
 <chapter id="chap-REST_API_Guide-Example">
   <title>Example</title>
   <para>
-    This chapter provides an example to demonstrate the REST API's ability to create a basic virtual environment with Red Hat Enterprise Virtualization. It is intended for users with some proficiency with REST architectural style and some experience with Red Hat Enterprise Virtualization Manager.
+    This chapter provides an example to demonstrate the REST API's ability to create a basic Red Hat Enterprise Virtualization environment. This example is intended for users with some proficiency with REST architectural style and some experience with Red Hat Enterprise Virtualization infrastructure.
   </para>
   <para>
     This example requires the following:
@@ -16,10 +16,13 @@
       <para>A networked installation of Red Hat Enterprise Virtualization Manager;</para>
     </listitem>
     <listitem>
-      <para>A networked and configured host containing Red Hat Enterprise Virtualization Hypervisor; and</para>
+      <para>A networked and configured host containing Red Hat Enterprise Virtualization Hypervisor;</para>
     </listitem>
     <listitem>
-      <para>An ISO of Red Hat Enterprise Linux 6.0 DVD, or other choice of virtual machine operating system, pre-loaded on Red Hat Enterprise Virtualization Manager's default ISO storage domain.</para>
+      <para>An ISO file containing a desired virtual machine operating system to install. This chapter uses Red Hat Enterprize Linux Server&nbsp;6 for our installation ISO example; and</para>
+    </listitem>
+    <listitem>
+      <para>Red Hat Enterprise Virtualization Platform's uploader tool to upload your chosen operating system ISO file.</para>
     </listitem>
   </itemizedlist>
   <note>
@@ -33,7 +36,10 @@
   <section id="sect-REST_API_Guide-Example-List_Data_Centers">
     <title>List Data Center Collection</title>
     <para>
-      Red Hat Enteprise Virtualization creates a <literal>Default</literal> data center on installation. The following request retrieves a representation of the datacenter collection.
+      Red Hat Enteprise Virtualization Manager creates a <literal>Default</literal> data center on installation. This example uses the <literal>Default</literal> data center as the basis for our virtual environment.
+    </para>
+    <para>
+       The following request retrieves a representation of the data center collection:
     </para>
     <example>
       <title>List data center collection</title>
@@ -43,7 +49,7 @@ Accept: application/xml
       </screen>
     </example>
     <para>
-      This produces the following representation:
+      The API returns the following representation:
     </para>
     <screen>
 HTTP/1.1 200 OK
@@ -68,13 +74,19 @@ Content-Type: application/xml
     &lt;/data_center&gt;
 &lt;/data_centers&gt;
     </screen>
+    <para>
+      Note the <literal>id</literal> code of your <literal>Default</literal> data center. This code indentifies this data center in relation to other resources of your virtual environment.
+    </para>
   </section>
     
     
   <section id="sect-REST_API_Guide-Example-List_Clusters">
-    <title>List Host Clusters Collection</title>
+    <title>List Host Cluster Collection</title>
     <para>
-      Red Hat Enteprise Virtualization creates a <literal>Default</literal> host cluster on installation. The following request retrieves a representation of the cluster collection.
+      Red Hat Enteprise Virtualization Manager creates a <literal>Default</literal> host cluster on installation. This example uses the <literal>Default</literal> cluster to group virtual machines in your Red Hat Enteprise Virtualization environment.
+    </para>
+    <para>
+      The following request retrieves a representation of the cluster collection:
     </para>
     <example>
       <title>List host clusters collection</title>
@@ -84,7 +96,7 @@ Accept: application/xml
       </screen>
     </example>
     <para>
-      This produces the following representation:
+      The API returns the following representation:
     </para>
     <screen>
 HTTP/1.1 200 OK
@@ -116,13 +128,22 @@ Content-Type: application/xml
     &lt;/cluster&gt;
 &lt;/clusters&gt;
     </screen>
+    <para>
+      Note the <literal>id</literal> code of your <literal>Default</literal> host cluster. This code indentifies this host cluster in relation to other resources of your virtual environment.
+    </para>
+    <para>
+      The <literal>networks</literal> sub-collection also contains a list of associated network resources for this cluster. The next section examines the <literal>networks</literal> collection in more detail.
+    </para>
   </section>
     
     
   <section id="sect-REST_API_Guide-Example-List_Logical_Networks">
     <title>List Logical Networks Collection</title>
     <para>
-      Red Hat Enteprise Virtualization creates a default <literal>rhevm</literal> network on installation. The following request retrieves a representation of the logical networks collection.
+      Red Hat Enteprise Virtualization Manager creates a default <literal>rhevm</literal> network on installation. This network is associated with our <literal>Default</literal> cluster and is a member of the <literal>Default</literal> data center. This example uses the <literal>rhevm</literal> network to connect our virtual machines.
+    </para>
+    <para>
+      The following request retrieves a representation of the logical networks collection:
     </para>
     <example>
       <title>List logical networks collection</title>
@@ -132,7 +153,7 @@ Accept: application/xml
       </screen>
     </example>
     <para>
-      This produces the following representation:
+      The API returns the following representation:
     </para>
     <screen>
 HTTP/1.1 200 OK
@@ -157,7 +178,7 @@ Content-Type: application/xml
   <section id="sect-REST_API_Guide-Example-List_Hosts">
     <title>List Host Collection</title>
     <para>
-        This example uses a Red Hat Enteprise Virtualization Hypervisor host. Red Hat Enteprise Virtualization Manager automatically registers any configured Red Hat Enteprise Virtualization Hypervisor. This example retrieves a representation of the hosts collection and shows the a Red Hat Enteprise Virtualization Hypervisor host named <literal>hypervisor</literal> registered with the virtualization environment.
+        This example uses a Red Hat Enteprise Virtualization Hypervisor host. Red Hat Enteprise Virtualization Manager automatically registers any configured Red Hat Enteprise Virtualization Hypervisor. This example retrieves a representation of the hosts collection and shows a Red Hat Enteprise Virtualization Hypervisor host named <literal>hypervisor</literal> registered with the virtualization environment.
     </para>
     <example>
       <title>List hosts collection</title>
@@ -167,7 +188,7 @@ Accept: application/xml
       </screen>
     </example>
     <para>
-      This produces the following representation:
+      The API returns the following representation:
     </para>
     <screen>
 HTTP/1.1 200 OK
@@ -237,14 +258,22 @@ Accept: application/xml
     &lt;/host&gt;
 &lt;/hosts&gt;
     </screen>
+    <para>
+      Note the <literal>id</literal> code of your <literal>Default</literal> host. This code indentifies this host in relation to other resources of your virtual environment.
+    </para>
+    <para>
+      This host is a member of the <literal>Default</literal> cluster and accessing the <literal>nics</literal> sub-collection shows this host has a connection to the <literal>rhevm</literal> network.
+    </para>
   </section>
+  
+  
   <section id="sect-REST_API_Guide-Example-Approve_Host">
     <title>Approve Host</title>
     <para>  
-      The <literal>hypervisor</literal> host contains an <literal>approve</literal> action. A user accesses this action's URI with a <literal>POST</literal> request.
+      The <literal>hypervisor</literal> host resource contains an <literal>approve</literal> action. A user accesses this action's URI with a <literal>POST</literal> request.
     </para>
     <example>
-      <title>Approve Red Hat Enterprise Virtualization Hypervisor hosts</title>
+      <title>Approve a pre-configured Red Hat Enterprise Virtualization Hypervisor host</title>
    		<screen>
 POST /rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/approve HTTP/1.1
 Accept: application/xml
@@ -263,7 +292,7 @@ Content-type: application/xml
       An NFS data storage domain is a mounted NFS share attached to a data center and provides storage for virtualized guest images.
     </para>
     <example>
-      <title>Create an NFS Data Storage Domain</title>
+      <title>Create an NFS data storage domain</title>
    		<screen>
 POST /rhevm-api/storagedomains HTTP/1.1
 Accept: application/xml
@@ -275,7 +304,7 @@ Content-type: application/xml
   &lt;storage&gt;
     &lt;type&gt;nfs&lt;/type&gt;
     &lt;address&gt;192.168.0.10&lt;/address&gt;
-    &lt;path&gt;/Images/ISO&lt;/path&gt;
+    &lt;path&gt;/data1&lt;/path&gt;
   &lt;/storage&gt;
   &lt;host&gt;
     &lt;name&gt;hypervisor&lt;/name&gt;
@@ -284,7 +313,64 @@ Content-type: application/xml
       </screen>
     </example>
     <para>
-      This creates a NFS data storage domain called <literal>data1</literal> at <uri>192.168.0.10:/Images/ISO</uri> and initializes it with our <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
+      The API creates a NFS data storage domain called <literal>data1</literal> with an export path of <uri>192.168.0.10:/data1</uri> and sets access to the storage domain through the <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
+    </para>
+    <screen>
+HTTP/1.1 200 OK
+Accept: application/xml
+
+&lt;storage_domains&gt;
+    &lt;storage_domain id="9ca7cb40-9a2a-4513-acef-dc254af57aac"
+      href="/rhevm-api/storagedomains/9ca7cb40-9a2a-4513-acef-dc254af57aac"&gt;
+        &lt;name&gt;data1&lt;/name&gt;
+        &lt;link rel="permissions"
+          href="/rhevm-api/storagedomains/9ca7cb40-9a2a-4513-acef-dc254af57aac/permissions"/&gt;
+        &lt;link rel="files"
+          href="/rhevm-api/storagedomains/9ca7cb40-9a2a-4513-acef-dc254af57aac/files"/&gt;
+        &lt;type&gt;data&lt;/type&gt;
+        &lt;master&gt;false&lt;/master&gt;
+        &lt;storage&gt;
+            &lt;type&gt;nfs&lt;/type&gt;
+            &lt;address&gt;192.168.0.10&lt;/address&gt;
+            &lt;path&gt;/data1&lt;/path&gt;
+        &lt;/storage&gt;
+        &lt;available&gt;175019917312&lt;/available&gt;
+        &lt;used&gt;27917287424&lt;/used&gt;
+        &lt;committed&gt;10737418240&lt;/committed&gt;
+        &lt;storage_format&gt;v1&lt;/storage_format&gt;
+    &lt;/storage_domain&gt;
+&lt;/storage_domains&gt;
+    </screen>
+  </section>
+  
+  <section id="sect-REST_API_Guide-Example-Create_NFS_ISO_Storage_Domain">
+    <title>Create NFS ISO Storage</title>
+    <para>
+      An NFS ISO storage domain is a mounted NFS share attached to a data center and provides storage for CD-ROM and DVD image files.
+    </para>
+    <example>
+      <title>Create an NFS ISO storage domain</title>
+   		<screen>
+POST /rhevm-api/storagedomains HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;storage_domain&gt;
+  &lt;name&gt;iso1&lt;/name&gt;
+  &lt;type&gt;iso&lt;/type&gt;
+  &lt;storage&gt;
+    &lt;type&gt;nfs&lt;/type&gt;
+    &lt;address&gt;192.168.0.10&lt;/address&gt;
+    &lt;path&gt;/iso1&lt;/path&gt;
+  &lt;/storage&gt;
+  &lt;host&gt;
+    &lt;name&gt;hypervisor&lt;/name&gt;
+  &lt;/host&gt;
+&lt;/storage_domain&gt;
+      </screen>
+    </example>
+    <para>
+      The API creates a NFS data storage domain called <literal>iso1</literal> with an export path of <uri>192.168.0.10:/iso1</uri> and sets access to the storage domain through the <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
     </para>
     <screen>
 HTTP/1.1 200 OK
@@ -293,17 +379,17 @@ Accept: application/xml
 &lt;storage_domains&gt;
     &lt;storage_domain id="00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"
       href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"&gt;
-        &lt;name&gt;data1&lt;/name&gt;
+        &lt;name&gt;iso1&lt;/name&gt;
         &lt;link rel="permissions"
           href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/permissions"/&gt;
         &lt;link rel="files"
           href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/files"/&gt;
-        &lt;type&gt;data&lt;/type&gt;
+        &lt;type&gt;iso&lt;/type&gt;
         &lt;master&gt;false&lt;/master&gt;
         &lt;storage&gt;
             &lt;type&gt;nfs&lt;/type&gt;
             &lt;address&gt;192.168.0.10&lt;/address&gt;
-            &lt;path&gt;/Images/ISO&lt;/path&gt;
+            &lt;path&gt;/iso1&lt;/path&gt;
         &lt;/storage&gt;
         &lt;available&gt;82678120448&lt;/available&gt;
         &lt;used&gt;18253611008&lt;/used&gt;
@@ -316,12 +402,12 @@ Accept: application/xml
  
  
   <section id="sect-REST_API_Guide-Example-Attach_NFS_Data_Storage_Domain">
-    <title>Attach Data Storage to Data Center</title>
+    <title>Attach Storage Domains to Data Center</title>
     <para>
-      This example attaches the <literal>data1</literal> storage domain to the <literal>Default</literal> data center. 
+      The following example attaches the <literal>data1</literal> and <literal>iso1</literal> storage domains to the <literal>Default</literal> data center. 
     </para>
     <example>
-      <title>Attach an Data Storage Domain to a Data Center</title>
+      <title>Attach data1 storage domain to the Default data center</title>
  	  	<screen>
 POST /rhevm-api/datacenters/01a45ff0-915a-11e0-8b87-5254004ac988/storagedomains HTTP/1.1
 Accept: application/xml
@@ -334,16 +420,39 @@ Content-type: application/xml
 &lt;/storage_domain&gt;
       </screen>
     </example>
+    <example>
+      <title>Attach iso1 storage domain to the Default data center</title>
+ 	  	<screen>
+POST /rhevm-api/datacenters/01a45ff0-915a-11e0-8b87-5254004ac988/storagedomains HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;storage_domain&gt;
+  &lt;name&gt;
+    iso1
+  &lt;/name&gt;
+&lt;/storage_domain&gt;
+      </screen>
+    </example>
   </section>
   
 
   <section id="sect-REST_API_Guide-Example-Activate_Data_Storage">
-    <title>Activate Data Storage</title>
+    <title>Activate Storage Domains</title>
     <para>
       This example activates the <literal>data1</literal> storage domain for the Red Hat Enterprise Virtualization Manager's use.
     </para>
     <example>
-      <title>Activate Storage Domain</title>
+      <title>Activate data1 storage domain</title>
+ 	  	<screen>
+POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
+9ca7cb40-9a2a-4513-acef-dc254af57aac/activate HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+      </screen>
+    </example>
+    <example>
+      <title>Activate iso1 storage domain</title>
  	  	<screen>
 POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
 00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/activate HTTP/1.1
@@ -353,13 +462,14 @@ Content-type: application/xml
     </example>
   </section>
 
+
   <section id="sect-REST_API_Guide-Example-Create_VM">
     <title>Create Virtual Machine</title>
     <para>
-      The following example creates a virtual machine called <literal>vm1</literal> on the <literal>default</literal> cluster using the virtualization environment's <literal>Blank</literal> template as a basis. The request also defines the virtual machine's memory as 512kb and sets the boot device to CD-ROM.
+      The following example creates a virtual machine called <literal>vm1</literal> on the <literal>Default</literal> cluster using the virtualization environment's <literal>Blank</literal> template as a basis. The request also defines the virtual machine's <literal>memory</literal> as 512&nbsp;MB and sets the <literal>boot</literal> device to CD-ROM.
     </para>
     <example>
-      <title>Create a Virtual Machine</title>
+      <title>Create a virtual machine</title>
  	  	<screen>
 POST /rhevm-api/vms HTTP/1.1
 Accept: application/xml
@@ -460,29 +570,13 @@ Accept: application/xml
   </section>
 
 
-  <section id="sect-REST_API_Guide-Example-Attach_CDROM">
-    <title>Attach ISO Image to Virtual Machine</title>
-    <para>The boot media for our virtual machine requires an ISO domain pre-populated with a Red Hat Enterprise Server 6.0 ISO image.</para>
-    <example>
-      <title>Attach an ISO image to a Virtual Machine</title>
- 	  	<screen>
-POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/cdroms HTTP/1.1
-Accept: application/xml
-Content-type: application/xml
-
-&lt;cdrom&gt;
-  &lt;file id="rhel-server-6.0-x86_64-dvd.iso.iso"/&gt;
-&lt;/cdrom&gt;
- 	  	</screen>
- 	  </example>
-  </section>
-
-
   <section id="sect-REST_API_Guide-Example-Attach_NIC">
     <title>Attach NIC to Virtual Machine</title>
-    <para></para>
+    <para>
+      The following example creates a virtual network interface to connect the example virtual machine to the <literal>rhevm</literal> network.
+    </para>
     <example>
-      <title>Attach a NIC to a Virtual Machine</title>
+      <title>Attach a NIC to the virtual machine</title>
  	  	<screen>
 POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/nics HTTP/1.1
 Accept: application/xml
@@ -501,16 +595,18 @@ Content-type: application/xml
 
   <section id="sect-REST_API_Guide-Example-Attach_Disk">
     <title>Attach Storage Disk to Virtual Machine</title>
-    <para></para>
+    <para>
+      The following example creates an 8&nbsp;GB storage disk for the example virtual machine.
+    </para>
     <example>
-      <title>Create a Storage Disk on a Virtual Machine</title>
+      <title>Create a Storage Disk on the virtual machine</title>
  	  	<screen>
 POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/disks HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
 
 &lt;disk&gt;
-  &lt;size&gt;4294967296&lt;/size&gt;
+  &lt;size&gt;8589934592&lt;/size&gt;
   &lt;type&gt;system&lt;/type&gt;
   &lt;interface&gt;virtio&lt;/interface&gt;
   &lt;format&gt;raw&lt;/format&gt;
@@ -521,17 +617,70 @@ Content-type: application/xml
   </section>
 
 
+  <section id="sect-REST_API_Guide-Example-Attach_CDROM">
+    <title>Attach ISO Image to Virtual Machine</title>
+    <para>
+      The boot media for our example virtual machine requires an CD-ROM or DVD ISO image for an operating system installation. This example uses a Red Hat Enterprise Server&nbsp;6 ISO Image for installation.
+    </para>
+    <para>
+      ISO images must be available in the <literal>iso1</literal> ISO domain for the virtual machines to use. Red Hat Enterprise Virtualization Platform provides an uploader tool that ensures that the ISO images are uploaded into the correct directory path with the correct user permissions.
+    </para>
+    <para>
+      Once the ISO is uploaded, an API user requests the ISO storage domain's <literal>files</literal> sub-collection to view the file resource:
+    </para>
+    <example>
+      <title>View the files sub-collection in an ISO storage domain</title>
+ 	  	<screen>
+GET /rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/files HTTP/1.1
+Accept: application/xml
+ 	  	</screen>
+ 	  </example>
+    <para>
+      The API returns the following representation of the files sub-collection:
+    </para>
+    <screen>
+&lt;files&gt;
+    &lt;file id="rhel-server-6.0-x86_64-dvd.iso"
+      href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/
+      files/rhel-server-6.0-x86_64-dvd.iso.iso"&gt;
+        &lt;name&gt;rhel-server-6.0-x86_64-dvd.iso.iso&lt;/name&gt;
+        &lt;storage_domain id="00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"
+          href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"/&gt;
+    &lt;/file&gt;
+&lt;/files&gt;
+    </screen>
+    <para>
+      An API user attaches the <literal>rhel-server-6.0-x86_64-dvd.iso</literal> to our example virtual machine.
+    </para>
+    <example>
+      <title>Attach an ISO image to the virtual machine</title>
+ 	  	<screen>
+POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/cdroms HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;cdrom&gt;
+  &lt;file id="rhel-server-6.0-x86_64-dvd.iso"/&gt;
+&lt;/cdrom&gt;
+ 	  	</screen>
+ 	  </example>
+  </section>
+
+
   <section id="sect-REST_API_Guide-Example-Start_VM">
     <title>Start Virtual Machine</title>
-    <para></para>
+    <para>The virtual environment is complete and the virtual machine contains all necessary components to function. This example starts the virtual machine using the <literal>start</literal> action.</para>
     <example>
-      <title>Create a Virtual Machine</title>
+      <title>Start the virtual machine</title>
  	  	<screen>
 POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/start HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
  	  	</screen>
  	  </example>
+ 	  <para>
+ 	    This concludes the REST API example for your Red Hat Virtualization environment.
+ 	  </para>
   </section>
 
 </chapter>
