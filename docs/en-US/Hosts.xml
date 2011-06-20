@@ -102,6 +102,18 @@
             <entry>The SCSI <literal>initiator</literal> for the host</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
+          <row>
+            <entry><literal>cpu</literal></entry>
+            <entry>complex</entry>
+            <entry>Statistics for the host CPU. Includes sub-elements for the CPU's <literal>name</literal>, <literal>topology cores</literal> and <literal>speed</literal></entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
+          <row>
+            <entry><literal>summary</literal></entry>
+            <entry>complex</entry>
+            <entry>Summary statistics of the virtual machines on the host. Includes sub-elements for numbers of <literal>active</literal>, <literal>migrating</literal> and <literal>total</literal> VMs</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
         </tbody>
       </tgroup>
     </informaltable>
@@ -125,6 +137,16 @@
   &lt;iscsi&gt;
     &lt;initiator&gt;iqn.2001-04.com.example:diskarrays-sn-a8675309&lt;/initiator&gt;
   &lt;/iscsi&gt;
+  &lt;cpu&gt;
+    &lt;topology cores="2"/&gt;
+    &lt;name&gt;Intel(R) Core(TM)2 Duo CPU E8400 @ 3.00GHz&lt;/name&gt;
+    &lt;speed&gt;2993&lt;/speed&gt;
+  &lt;/cpu&gt;
+  &lt;summary&gt;
+    &lt;active&gt;2&lt;/active&gt;
+    &lt;migrating&gt;0&lt;/migrating&gt;
+    &lt;total&gt;3&lt;/total&gt;
+  &lt;/summary&gt;
   &lt;link rel="statistics" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/statistics"/&gt;
   &lt;link rel="nics" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics"/&gt;
   &lt;link rel="storage" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage"/&gt;
