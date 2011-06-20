@@ -79,6 +79,12 @@
             <entry>Space committed in bytes</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
+          <row>
+            <entry><literal>storage_format</literal></entry>
+            <entry>One of <literal>v1</literal> or <literal>v2</literal></entry>
+            <entry>Describes the storage format version for the storage domain</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
         </tbody>
       </tgroup>
     </informaltable>
@@ -102,6 +108,7 @@
   &lt;available&gt;156766306304&lt;/available&gt;
   &lt;used&gt;433791696896&lt;/used&gt;
   &lt;committed&gt;617401548800&lt;/committed&gt;
+  &lt;storage_format&gt;v1&lt;/storage_format&gt;
 &lt;/storage_domain&gt;
   </screen>
 

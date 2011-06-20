@@ -32,8 +32,14 @@
         <tbody>
           <row>
             <entry><literal>storage_type</literal></entry>
-            <entry>One of <literal>iscsi</literal>, <literal>nfs</literal>, <literal>fcp</literal> or <literal>local</literal>.</entry>
+            <entry>One of <literal>iscsi</literal>, <literal>nfs</literal>, <literal>fcp</literal> or <literal>local</literal></entry>
             <entry>Describes which storage type is allowed in this datacenter</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
+          <row>
+            <entry><literal>storage_format</literal></entry>
+            <entry>One of <literal>v1</literal> or <literal>v2</literal></entry>
+            <entry>Describes the storage format version for the data center</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
@@ -78,6 +84,7 @@
   &lt;name&gt;Default&lt;/name&gt;
   &lt;description&gt;The default Data Center&lt;/description&gt;
   &lt;storage_type&gt;nfs&lt;/storage_type&gt;
+  &lt;storage_format&gt;v1&lt;/storage_format&gt;
   &lt;link rel="storagedomains" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains"/&gt;
   &lt;link rel="vms" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/vms"/&gt;
   &lt;link rel="templates" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/templates"/&gt;
