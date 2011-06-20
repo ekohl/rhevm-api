@@ -221,7 +221,7 @@
               <entry><literal>network id</literal></entry>
               <entry>GUID</entry>
               <entry>A reference to the network, if any, that the interface is attached to</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when adding bonded interfaces. Other interfaces are read-only and cannot be added.</para></footnote><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when adding bonded interfaces. Other interfaces are read-only and cannot be added.</para></footnote></entry>
             </row>
             <row>
               <entry><literal>mac address</literal></entry>
@@ -233,14 +233,14 @@
               <entry><literal>ip address/netmask/gateway</literal></entry>
               <entry>complex</entry>
               <entry>The IP level configuration of the interface</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+              <entry></entry>
             </row>
             <row>
               <entry><literal>boot_protocol</literal></entry>
               <entry>One of <literal>dhcp</literal>, <literal>static</literal> or <literal>none</literal></entry>
               <entry>The protocol for IP address assignment when the host is booting</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
+              <entry></entry>
+            </row>         
             <row>
               <entry><literal>speed</literal></entry>
               <entry>integer</entry>
@@ -305,11 +305,9 @@
 &lt;/host_nic&gt;
     </screen>
 
-    <note>
-      <para>
-        With the exception of bonded interfaces (see <xref linkend="sect-REST_API_Guide-Hosts-Network_Interfaces-Bonds"/>), network interfaces are read-only. Interfaces cannot be added, updated or removed.
-      </para>
-    </note>
+    <para>
+      An API user creates only bonded interfaces (see <xref linkend="sect-REST_API_Guide-Hosts-Network_Interfaces-Bonds"/>). All other network interfaces contain updatable <literal>network</literal>, <literal>ip address/netmask/gateway</literal> and <literal>boot_protocol</literal> properties using a <literal>PUT</literal> request.
+    </para>
 
     <section id="sect-REST_API_Guide-Hosts-Network_Interfaces-Bonds">
       <title>
