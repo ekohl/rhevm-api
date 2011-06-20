@@ -22,6 +22,10 @@ Content-Type: application/xml
   &lt;link rel="hosts" href="{base}/hosts"/&gt;
   &lt;link rel="vms" href="{base}/vms"/&gt;
   ...
+  &lt;special_objects&gt;
+    &lt;link rel="templates/blank" href="..."/&gt;
+    &lt;link rel="tags/root" href="..."/&gt;
+  &lt;/special_objects&gt;
   &lt;summary&gt;
     &lt;vms&gt;
       &lt;total&gt;10&lt;/total&gt;
@@ -209,6 +213,30 @@ Content-Type: application/xml
 
   </para>
   </section>
+  
+  <section id="sect-REST_API_Guide-Entry_Point-Special">
+    <title>Special object elements</title>
+    <para>
+      Special object elements define relationships to special fixed resources within the virtualization environment. These special objects include:
+    </para>
+    <informaltable frame="none">
+      <tgroup cols="2">
+        <colspec colwidth="2*"/>
+        <colspec colwidth="5*"/>
+        <tbody>
+          <row>
+            <entry><literal>templates/blank</literal></entry>
+            <entry>The default <literal>blank</literal> virtual machine template for your virtualization environment</entry>
+          </row>
+          <row>
+            <entry><literal>tags/root</literal></entry>
+            <entry>The <literal>root</literal> tag that acts a base for tag hierarchy in your virtualization environment</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+  
   <section id="sect-REST_API_Guide-Entry_Point-Summary">
     <title>Summary element</title>
     <para>
