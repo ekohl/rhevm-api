@@ -260,11 +260,11 @@
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
-              <entry><literal>slaves</literal></entry>
+              <entry><literal>bonding</literal></entry>
               <entry>complex</entry>
-              <entry>A list of slave <literal>host_nic</literal> elements, if this is a bonded interface</entry>
+              <entry>A list of <literal>options</literal> and <literal>slave</literal> NICs for bonded interfaces. See below</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when adding bonded interfaces. Other interfaces are read-only and cannot be added.</para></footnote><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
+            </row>       
             <row>
               <entry><literal>link rel="master"</literal></entry>
               <entry>complex</entry>
@@ -289,10 +289,15 @@
   &lt;boot_protocol&gt;dhcp&lt;/boot_protocol&gt;
   &lt;speed&gt;1000000000&lt;/speed&gt;
   &lt;status&gt;UP&lt;/status&gt;
-  &lt;slaves&gt;
-    &lt;host_nic id="eb14e154-5e73-4f7f-bf6b-7f52609d94ec" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/eb14e154-5e73-4f7f-bf6b-7f52609d94ec"/&gt;
-    &lt;host_nic id="6aede5ca-4c54-4b37-a81b-c0d6b53558ea" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/6aede5ca-4c54-4b37-a81b-c0d6b53558ea"/&gt;
-  &lt;/slaves&gt;
+  &lt;bonded&gt;
+    &lt;options&gt;
+      ...
+    &lt;/options&gt;
+    &lt;slaves&gt;
+      &lt;host_nic id="eb14e154-5e73-4f7f-bf6b-7f52609d94ec"/&gt;
+      &lt;host_nic id="6aede5ca-4c54-4b37-a81b-c0d6b53558ea"/&gt;
+    &lt;/slaves&gt;
+  &lt;/bonded&gt;
   &lt;actions&gt;
     &lt;link rel="attach" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/e8f02fdf-3d7b-4135-86e1-1bf185570cd8/attach"/&gt;
     &lt;link rel="detach" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/e8f02fdf-3d7b-4135-86e1-1bf185570cd8/detach"/&gt;
@@ -312,11 +317,42 @@
       </title>
 
       <para>
-        A bonded interface is represented by a <literal>host_nic</literal> with a <literal>slaves</literal> element containing a <literal>host_nic</literal> reference for each of the interfaces enslaved to the bond. Each slave <literal>host_nic</literal> contains a <literal>link rel="master"</literal> reference back to the bonded interface.
+        A bonded interface is represented as a <literal>host_nic</literal> resource containing a <literal>bonded</literal> element, which contains the following properties:
       </para>
 
+      <informaltable frame="none">
+        <tgroup cols="4">
+          <colspec colwidth="4*"/>
+          <colspec colwidth="4*"/>
+          <colspec colwidth="6*"/>
+          <colspec colwidth="2*" colname="prop"/>
+          <thead>
+            <row>
+              <entry>Element</entry>
+              <entry>Type</entry>
+              <entry>Description</entry>
+              <entry>Properties</entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry><literal>options</literal></entry>
+              <entry>complex</entry>
+              <entry>A list of <literal>option</literal> elements for a bonded interface. Each <literal>option</literal> contains property <literal>name</literal> and <literal>value</literal> attributes.</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when adding bonded interfaces. Other interfaces are read-only and cannot be added.</para></footnote><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>slaves</literal></entry>
+              <entry>complex</entry>
+              <entry>A list of slave <literal>host_nic</literal> elements for a bonded interface</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when adding bonded interfaces. Other interfaces are read-only and cannot be added.</para></footnote><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+
       <para>
-        A new bond may be created by <literal>POST</literal>ing a <literal>host_nic</literal> describing which interfaces should be enslaved. For example:
+        An API user creates a new bond when <literal>POST</literal>ing to a <literal>host_nic</literal> with bonding options and slave interfaces. For example:
       </para>
 
       <screen>
@@ -327,15 +363,20 @@ Content-Type: application/xml
 &lt;host_nic&gt;
   &lt;name&gt;bond4&lt;/name&gt;
   &lt;network id="e657d631-657d-42bb-a536-73501a085d85"/&gt;
-  &lt;slaves&gt;
-    &lt;host_nic id="eb14e154-5e73-4f7f-bf6b-7f52609d94ec"/&gt;
-    &lt;host_nic id="6aede5ca-4c54-4b37-a81b-c0d6b53558ea"/&gt;
-  &lt;/slaves&gt;
+  &lt;bonded&gt;
+    &lt;options&gt;
+      ...
+    &lt;/options&gt;
+    &lt;slaves&gt;
+      &lt;host_nic id="eb14e154-5e73-4f7f-bf6b-7f52609d94ec"/&gt;
+      &lt;host_nic id="6aede5ca-4c54-4b37-a81b-c0d6b53558ea"/&gt;
+    &lt;/slaves&gt;
+  &lt;/bonded&gt;
 &lt;/host_nic&gt;
       </screen>
 
       <para>
-        The <literal>name</literal>, <literal>network</literal> and slave <literal>host_nic</literal> elements are required when creating a new bonded interface. The <literal>network</literal> and slave <literal>host_nic</literal>s may be identified by <literal>id</literal> or <literal>name</literal>.
+        The <literal>name</literal>, <literal>network</literal> and <literal>bonded</literal> elements are required when creating a new bonded interface. The <literal>network</literal> and slave <literal>host_nic</literal>s may be identified by <literal>id</literal> or <literal>name</literal>.
       </para>
 
       <note>
