@@ -237,6 +237,41 @@
         <para>A <literal>local</literal> storage domain requires a data center with <literal>storage_type</literal> set to LOCAL (see <xref linkend="chap-REST_API_Guide-Data_Centers"/>). This data center only contains a single host cluster, and the host cluster only contains a single host.</para>
     </section>
   </section>
+  
+  <section id="sect-REST_API_Guide-Data_Centers-Files">
+    <title>
+      Files
+    </title>
+    <para>
+       The files sub-collection under each storage domain provides a way for clients to list available files. This sub-collection is specifically targeted to ISO storage domains, which contain ISO images and virtual floppy disks (VFDs) that an administrator uploads through Red Hat Enterprise Virtualization Manager.
+    </para>
+    <para>
+      The addition of a CD-ROM device to a VM requires an ISO image from the files sub-collection of an ISO storage domain. See <xref linkend="chap-REST_API_Guide-VMs"/> for details.
+    </para>
+
+    <screen>
+GET /rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/files HTTP/1.1
+Accept: application/xml
+
+&lt;files&gt;
+  &lt;file id="en_winxp_pro_with_sp2.iso" href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/files/en_winxp_pro_with_sp2.iso"&gt;
+    &lt;name&gt;en_winxp_pro_with_sp2.iso&lt;/name&gt;
+    &lt;type&gt;iso&lt;/type&gt;
+    &lt;storage_domain id="00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da" href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"/&gt;
+  &lt;/file&gt;
+  &lt;file id="boot.vfd" href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/files/boot.vfd"&gt;
+    &lt;name&gt;boot.vfd&lt;/name&gt;
+    &lt;type&gt;vfd&lt;/type&gt;
+    &lt;storage_doman id="00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da" href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"/&gt;
+  &lt;/file&gt;
+&lt;/files&gt;
+    </screen>
+
+    <para>
+      Like other resources, files have opaque <literal>id</literal> and <literal>href</literal> attributes. The <literal>name</literal> element actually contains the filename.
+    </para>
+  </section>
+
   <section id="sect-REST_API_Guide-Storage_Domains-Import_Existing">
     <title>
       Importing Existing Storage Domains

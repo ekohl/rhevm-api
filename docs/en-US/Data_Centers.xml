@@ -55,12 +55,6 @@
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>          
           <row>
-            <entry><literal>link rel="files"</literal></entry>
-            <entry>string</entry>
-            <entry>A link to a description of the files available in this data center</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
             <entry><literal>version</literal></entry>
             <entry>complex</entry>
             <entry>The compatibility level of the data center (see <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/>)</entry>
@@ -148,37 +142,6 @@ Content-Type: application/xml
       There are two possible actions for attached storage domains - <literal>activate</literal> and <literal>deactivate</literal>. See <xref linkend="sect-REST_API_Guide-Storage_Domains-Activate"/> and <xref linkend="sect-REST_API_Guide-Storage_Domains-Deactivate"/>.
     </para>
 
-  </section>
-
-  <section id="sect-REST_API_Guide-Data_Centers-Files">
-    <title>
-      Files
-    </title>
-    <para>
-       The files collection under each data center provides a way for clients to list the files made available by the data center. These files include ISO images and virtual floppy disks (VFDs). When adding a CD-ROM device to a VM, an ISO image needs to be supplied. See <xref linkend="chap-REST_API_Guide-VMs"/> for details.
-    </para>
-
-    <screen>
-GET /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/files HTTP/1.1
-Accept: application/xml
-
-&lt;files&gt;
-  &lt;file id="en_winxp_pro_with_sp2.iso" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/files/en_winxp_pro_with_sp2.iso"&gt;
-    &lt;name&gt;en_winxp_pro_with_sp2.iso&lt;/name&gt;
-    &lt;type&gt;iso&lt;/type&gt;
-    &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
-  &lt;/file&gt;
-  &lt;file id="boot.vfd" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/files/boot.vfd"&gt;
-    &lt;name&gt;boot.vfd&lt;/name&gt;
-    &lt;type&gt;vfd&lt;/type&gt;
-    &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
-  &lt;/file&gt;
-&lt;/files&gt;
-    </screen>
-
-    <para>
-      Like other resources, files have opaque <literal>id</literal> and <literal>href</literal> attributes. The <literal>name</literal> element actually contains the filename.
-    </para>
   </section>
 
 </chapter>
