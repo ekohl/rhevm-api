@@ -717,7 +717,7 @@ Content-type: application/xml
     </title>
 
     <para>
-      Migrate a VM to another physical host. The destination host id or name is a required parameter.
+      Migrate a VM to another physical host. The destination <literal>host</literal> element is an optional element as Red Hat Enterprise Virtualization Manager automatically selects a default host for migration. If an API user requires a specific <literal>host</literal>, the user can specify the host with either an <literal>id</literal> or <literal>name</literal> parameter.
     </para>
 
     <screen>
