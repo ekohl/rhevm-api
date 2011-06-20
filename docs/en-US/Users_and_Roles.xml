@@ -216,12 +216,6 @@ Content-Type: application/xml
               <entry>A list of Active Directory groups for this user</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
-            <row>
-              <entry><literal>logged_in</literal></entry>
-              <entry>boolean: true or false</entry>
-              <entry><literal>true</literal> if the user is currently logged in</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
           </tbody>
         </tgroup>
       </informaltable>
