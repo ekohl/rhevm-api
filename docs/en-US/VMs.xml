@@ -156,6 +156,12 @@
             <entry>Sets the placement policy for VM migration. Requires a default <literal>host</literal> and an <literal>affinity</literal> (one of <literal>migratable</literal>, <literal>user_migratable</literal> or <literal>pinned</literal>).</entry>
             <entry></entry>
           </row>
+          <row>
+            <entry><literal>guest_info</literal></entry>
+            <entry>complex</entry>
+            <entry>A reference to the guest client information. Includes an <literal>ip</literal> element with an <literal>address</literal> attribute.</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
         </tbody>
       </tgroup>
     </informaltable>
@@ -199,6 +205,9 @@
       &lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"/&gt;
       &lt;affinity&gt;migratable&lt;/affinity&gt;
   &lt;/placement_policy&gt;
+  &lt;guest_info&gt;
+      &lt;ip address="192.168.0.25"/&gt;
+  &lt;/guest_info&gt;
   &lt;link rel="cdroms" href="/rhevm-api/vms/082c794b-771f-452f-83c9-b2b5a19c0399/cdroms"/&gt;
   &lt;link rel="disks" href="/rhevm-api/vms/082c794b-771f-452f-83c9-b2b5a19c0399/disks"/&gt;
   &lt;link rel="nics" href="/rhevm-api/vms/082c794b-771f-452f-83c9-b2b5a19c0399/nics"/&gt;
