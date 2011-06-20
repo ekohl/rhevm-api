@@ -214,6 +214,24 @@
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
+              <entry><literal>boot_protocol</literal></entry>
+              <entry>One of <literal>dhcp</literal>, <literal>static</literal> or <literal>none</literal></entry>
+              <entry>The protocol for IP address assignment when the host is booting</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>speed</literal></entry>
+              <entry>integer</entry>
+              <entry>The network interface speed in bits per second</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>status</literal></entry>
+              <entry>integer</entry>
+              <entry>The link status for the network interface</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
               <entry><literal>vlan id</literal></entry>
               <entry>GUID</entry>
               <entry>The VLAN which this interface represents, if any</entry>
@@ -246,6 +264,9 @@
   &lt;network id="e657d631-657d-42bb-a536-73501a085d85" href="/rhevm-api/networks/e657d631-657d-42bb-a536-73501a085d85"/&gt;
   &lt;mac address="D6:76:F1:3A:AF:74"/&gt;
   &lt;ip address="192.168.0.128" netmask="255.255.255.0" gateway="192.168.0.1"/&gt;
+  &lt;boot_protocol&gt;dhcp&lt;/boot_protocol&gt;
+  &lt;speed&gt;1000000000&lt;/speed&gt;
+  &lt;status&gt;UP&lt;/status&gt;
   &lt;slaves&gt;
     &lt;host_nic id="eb14e154-5e73-4f7f-bf6b-7f52609d94ec" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/eb14e154-5e73-4f7f-bf6b-7f52609d94ec"/&gt;
     &lt;host_nic id="6aede5ca-4c54-4b37-a81b-c0d6b53558ea" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/6aede5ca-4c54-4b37-a81b-c0d6b53558ea"/&gt;
