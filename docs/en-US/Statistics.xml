@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "REST_API_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-REST_API_Guide-Statistics">
+  <title>Statistics</title>
+  <para>The <literal>rel="statistics"</literal> link obtained from the entry point URI allows a user to query information on system events from Red Hat Enterprise Virtualisation Manager. The following table lists the statistics specific elements:</para>
+
+  <informaltable frame="none">
+    <tgroup cols="2">
+      <colspec colwidth="2*"/>
+      <colspec colwidth="5*"/>
+      <tbody>
+        <row>
+          <entry><literal>name</literal></entry>
+          <entry>The unique identifier for the statistic entry</entry>
+        </row>
+        <row>
+          <entry><literal>description</literal></entry>
+          <entry>A plain text description of the statistic</entry>
+        </row>
+        <row>
+          <entry><literal>unit</literal></entry>
+          <entry>The unit or rate to measure the statistical values</entry>
+        </row>
+        <row>
+          <entry><literal>type</literal></entry>
+          <entry>The type of statistic measures. Either <literal>GAUGE</literal> or <literal>COUNTER</literal>.</entry>
+        </row>
+        <row>
+          <entry><literal>values type=</literal></entry>
+          <entry>The data type for the statistical values that follow. Either <literal>INTEGER</literal> or <literal>DECIMAL</literal>.</entry>
+        </row>
+        <row>
+          <entry><literal>value</literal></entry>
+          <entry>A data set that contains <literal>datum</literal></entry>
+        </row>
+        <row>
+          <entry><literal>datum</literal></entry>
+          <entry>An individual piece of data from a <literal>value</literal></entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+  <para>For example:</para>
+  <screen>
+&lt;statistics&gt;
+    &lt;statistic&gt;
+        &lt;name&gt;bytes.current.rx&lt;/name&gt;
+        &lt;description&gt;Receive rate&lt;/description&gt;
+        &lt;unit&gt;BITS_PER_SECOND&lt;/unit&gt;
+        &lt;type&gt;GUAGE&lt;/type&gt;
+        &lt;values type="DECIMAL"&gt;
+            &lt;value&gt;
+                &lt;datum&gt;131072.0&lt;datum&gt;
+            &lt;/value&gt;
+        &lt;/values&gt;
+    &lt;/statistic&gt;
+    &lt;statistic&gt;
+        &lt;name&gt;errors.total.rx&lt;/name&gt;
+        &lt;description&gt;Receive error rate&lt;/description&gt;
+        &lt;unit&gt;NONE&lt;/unit&gt;
+        &lt;type&gt;COUNTER&lt;/type&gt;
+        &lt;values type="INTEGER"&gt;
+            &lt;value&gt;
+                &lt;datum&gt;1.0&lt;datum&gt;
+            &lt;/value&gt;
+        &lt;/values&gt;
+    &lt;/statistic&gt;
+    ...
+&lt;/statistics&gt;
+  </screen>
+
+</chapter>

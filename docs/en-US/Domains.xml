@@ -29,7 +29,7 @@
   </note>
 	<section id="chap-REST_API_Guide-Domains-Users">
 	  <title>Domains Users</title>
-	  <para>The <literal>users</literal> sub-collection contains all users in Active Directory. This information is used to add new users to the Red Hat Enterprise Virtualization environment as per <xref linkend="sect-REST_API_Guide-Users"/>.</para>
+	  <para>The <literal>users</literal> sub-collection contains all users in Active Directory. This information is used to add new users to the Red Hat Enterprise Virtualization environment as per <xref linkend="chap-REST_API_Guide-Users"/>.</para>
 	  <para>A domain <literal>user</literal> resource contains these main properties:</para>
     <informaltable frame="none">
       <tgroup cols="3">

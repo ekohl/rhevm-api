@@ -5,7 +5,7 @@
 ]>
 <appendix id="appe-REST_API_Guide-Event_Codes">
 	<title>Event Codes</title>
-		<para>This table lists all event codes for <xref linkend="sect-REST_API_Guide-Monitoring-Events"/>.</para>
+		<para>This table lists all event codes for <xref linkend="chap-REST_API_Guide-Events"/>.</para>
     <informaltable frame="none">
       <tgroup cols="2">
         <colspec colwidth="1*"/>

@@ -40,7 +40,7 @@
           <row>
             <entry><literal>user</literal></entry>
             <entry>complex</entry>
-            <entry>A reference to the user which the tag is attached. See <xref linkend="chap-REST_API_Guide-Users-and-Roles"/></entry>
+            <entry>A reference to the user which the tag is attached. See <xref linkend="chap-REST_API_Guide-Users"/></entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
