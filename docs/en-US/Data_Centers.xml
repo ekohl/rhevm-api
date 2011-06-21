@@ -89,9 +89,9 @@
   &lt;link rel="vms" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/vms"/&gt;
   &lt;link rel="templates" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/templates"/&gt;
   &lt;link rel="files" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/files"/&gt;
-  &lt;version major="2" minor="2"/&gt;
+  &lt;version major="3" minor="0"/&gt;
   &lt;supported_versions&gt;
-    &lt;version major="2" minor="3"/&gt;
+    &lt;version major="3" minor="0"/&gt;
   &lt;/supported_versions&gt;
 &lt;/data_center&gt;
   </screen>

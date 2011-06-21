@@ -152,9 +152,9 @@ considered overloaded. The <literal>low</literal> attribute controls the lowest 
   &lt;description&gt;The default server cluster&lt;/description&gt;
   &lt;cpu id="Intel Xeon 45nm Core2"/&gt;
   &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
-  &lt;version major="2" minor="2"/&gt;
+  &lt;version major="3" minor="0"/&gt;
   &lt;supported_versions&gt;
-    &lt;version major="2" minor="3"/&gt;
+    &lt;version major="3" minor="0"/&gt;
   &lt;/supported_versions&gt;
   &lt;memory_policy&gt;
     &lt;overcommit percent="200"/&gt;

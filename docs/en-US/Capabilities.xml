@@ -246,7 +246,7 @@ Content-Type: application/xml
     <para>For example:</para>
 		<screen>
 &lt;capabilities&gt;
-  &lt;version major="2" minor="3"&gt;
+  &lt;version major="3" minor="0"&gt;
 	  ...
     &lt;features&gt;
       &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
@@ -326,7 +326,7 @@ Content-Type: application/xml
     <para>For example:</para>
     <screen>
 &lt;capabilities&gt;
-    &lt;version major="2" minor="2"&gt;
+    &lt;version major="3" minor="0"&gt;
     ...
       &lt;power_managers&gt;
         &lt;power_management type="alom"&gt;
@@ -398,7 +398,7 @@ Content-Type: application/xml
   &lt;version major="2" minor="2"&gt;
 	  ...
   &lt;/version&gt;
-  &lt;version major="2" minor="3"&gt;
+  &lt;version major="3" minor="0"&gt;
 	  ...
   &lt;/version&gt;
   &lt;permits&gt;

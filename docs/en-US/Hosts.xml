@@ -130,7 +130,7 @@
   &lt;name&gt;zig&lt;/name&gt;
   &lt;type&gt;rhev-h&lt;/type&gt;
   &lt;status&gt;UP&lt;/status&gt;
-  &lt;version major="2" minor="3"/&gt;
+  &lt;version major="3" minor="0"/&gt;
   &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
   &lt;port&gt;54321&lt;/port&gt;
   &lt;storage_manager&gt;true&lt;/storage_manager&gt;
