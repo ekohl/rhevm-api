@@ -85,6 +85,10 @@
           <entry><literal>custom_properties</literal></entry>
           <entry>Environment variables for a virtual machine's custom scripts</entry>
         </row>
+        <row>
+          <entry><literal>error_handling</literal></entry>
+          <entry>Statuses to determine virtual machine handling when a host in a cluster becomes non-operational</entry>
+        </row>
       </tbody>
     </tgroup>
   </informaltable>

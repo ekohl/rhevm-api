@@ -67,6 +67,12 @@
             <entry>Defines the load-balancing or power sharing modes for hosts in the cluster. See below.</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
+          <row>
+            <entry><literal>error_handling</literal></entry>
+            <entry>complex</entry>
+            <entry>Defines virtual machine handling when a host within a cluster becomes non-operational. Requires an <literal>on_error</literal> element to define the property as <literal>migrate</literal>, <literal>do_not_migrate</literal> or <literal>migrate_highly_available</literal> </entry>
+            <entry></entry>
+          </row>
         </tbody>
       </tgroup>
     </informaltable>
@@ -157,6 +163,9 @@ considered overloaded. The <literal>low</literal> attribute controls the lowest 
     &lt;policy&gt;POWER_SAVING&lt;/policy&gt;
     &lt;thresholds low="10" high="75" duration="120"/&gt;
   &lt;/scheduling_policy&gt;
+  &lt;error_handling&gt;
+    &lt;on_error&gt;migrate&lt;/on_error&gt;
+  &lt;/error_handling&gt;
   &lt;link rel="networks" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95/networks"/&gt;
 &lt;/cluster&gt;
   </screen>
