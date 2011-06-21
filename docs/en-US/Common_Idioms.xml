@@ -11,17 +11,18 @@
   <para>
     <screen>
 &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
-  &lt;name&gt;Resource-Name&lt;/name&gt;
-  &lt;description&gt;A description of the resource&lt;/description&gt;
-  ...
+    &lt;name&gt;Resource-Name&lt;/name&gt;
+    &lt;description&gt;A description of the resource&lt;/description&gt;
+    ...
 &lt;/{resource}&gt;
     </screen>
     For example:
     <screen>
-&lt;vm id="5b9bbce5-0d72-4f56-b931-5d449181ee06" href="/rhevm-api/vms/5b9bbce5-0d72-4f56-b931-5d449181ee06"&gt;
-  &lt;name&gt;RHEL6-Machine&lt;/name&gt;
-  &lt;description&gt;Red Hat Enterprize Linux 6 Virtual Machine&lt;/description&gt;
-  ...
+&lt;vm id="5b9bbce5-0d72-4f56-b931-5d449181ee06"
+  href="/rhevm-api/vms/5b9bbce5-0d72-4f56-b931-5d449181ee06"&gt;
+    &lt;name&gt;RHEL6-Machine&lt;/name&gt;
+    &lt;description&gt;Red Hat Enterprize Linux 6 Virtual Machine&lt;/description&gt;
+    ...
 &lt;/vm&gt;
     </screen>
   </para>  
@@ -116,12 +117,12 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;{collection}&gt;
-  &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
-    &lt;name&gt;Resource-Name&lt;/name&gt;
-    &lt;description&gt;A description of the resource&lt;/description&gt;
+    &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+        &lt;name&gt;Resource-Name&lt;/name&gt;
+        &lt;description&gt;A description of the resource&lt;/description&gt;
+        ...
+    &lt;/{resource}&gt;
     ...
-  &lt;/{resource}&gt;
-  ...
 &lt;/{collection}&gt;
     </screen>
 
@@ -178,10 +179,10 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;{collection}&gt;
-  &lt;{resource} id="{id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+    &lt;{resource} id="{id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+        ...
+    &lt;/{resource}&gt;
     ...
-  &lt;/{resource}&gt;
-  ...
 &lt;/{collection}&gt;
     </screen>
     
@@ -189,8 +190,8 @@ Content-Type: application/xml
 		  <title>Query Syntax</title>
 	   	<para>The API uses the following syntax to perform search queries with a <literal>GET</literal> request:</para>
 	   	<screen>
-  GET /rhevm-api/{collection}?search={query} HTTP/1.1
-  Accept: application/xml
+GET /rhevm-api/{collection}?search={query} HTTP/1.1
+Accept: application/xml
       </screen>
 		  <para>The <literal>query</literal> refers to the search query the API directs to the <literal>collection</literal>. This query takes the following form:</para>
 		  <para><literal>{property} {operator} {value}</literal></para>		
@@ -220,8 +221,8 @@ Content-Type: application/xml
 		  <para>The <literal>value</literal> refers to the value contained within the chosen <literal>property</literal>. For example, to search for a virtual machine named "vm1", the value would need to be <literal>vm1</literal>.</para>
 		  <para>The combined <literal>collection</literal> and <literal>query</literal> examples produce the following search query:</para>
 	   	<screen>
-  GET /rhevm-api/vms?search=name%3Dvm1 HTTP/1.1
-  Accept: application/xml
+GET /rhevm-api/vms?search=name%3Dvm1 HTTP/1.1
+Accept: application/xml
       </screen>
 
 	  </section>
@@ -230,16 +231,16 @@ Content-Type: application/xml
 		  <title>Wildcards</title>
 		  <para>Search queries can substitute part of a value with an asterisk as a wildcard. For example:</para>
       <screen>
-  GET /rhevm-api/vms?search=name%3Dvm* HTTP/1.1
-  Accept: application/xml
-  Content-Type: application/xml
+GET /rhevm-api/vms?search=name%3Dvm* HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
       </screen>
 		  <para>This query would result in all virtual machines with names beginning with <literal>vm</literal>, such as <literal>vm1</literal>, <literal>vm2</literal>, <literal>vma</literal> or <literal>vm-webserver</literal>.</para>
 		
       <screen>
-  GET /rhevm-api/vms?search=name%3Dv*1 HTTP/1.1
-  Accept: application/xml
-  Content-Type: application/xml
+GET /rhevm-api/vms?search=name%3Dv*1 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
       </screen>
 		  <para>This query would result in all virtual machines with names beginning with <literal>v</literal> and ending with <literal>1</literal>, such as <literal>vm1</literal>, <literal>vr1</literal> or <literal>virtualmachine1</literal>.</para>
 	  </section>
@@ -262,9 +263,9 @@ Accept: application/xml
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;resource id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
-  ...
-&lt;/resource&gt;
+&lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+    ...
+&lt;/{resource}&gt;
     </screen>
 
   </section>
@@ -288,7 +289,7 @@ Accept: application/xml
 Content-Type: application/xml
 
 &lt;{resource}&gt;
-  &lt;name&gt;Resource-Name&lt;/name&gt;
+    &lt;name&gt;Resource-Name&lt;/name&gt;
 &lt;/{resource}&gt;
 
 HTTP/1.1 201 Created
@@ -296,8 +297,8 @@ Location: http://{host}/rhevm-api/{collection}/{resource_id}
 Content-Type: application/xml
 
 &lt;resource id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
-  &lt;name&gt;Resource-Name&lt;/name&gt;
-  ...
+    &lt;name&gt;Resource-Name&lt;/name&gt;
+    ...
 &lt;/resource&gt;
     </screen>
 
@@ -317,7 +318,7 @@ Accept: application/xml
 Content-Type: application/xml
 
 &lt;{resource}&gt;
-  &lt;name&gt;Resource-Name&lt;/name&gt;
+    &lt;name&gt;Resource-Name&lt;/name&gt;
 &lt;/{resource}&gt;
 
 HTTP/1.1 202 Accepted
@@ -325,10 +326,11 @@ Location: http://{host}/rhevm-api/{collection}/{resource_id}
 Content-Type: application/xml
 
 &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
-  &lt;name&gt;Resource-Name&lt;/name&gt;
-  &lt;creation_status&gt;PENDING&lt;/creation status&gt;
-  &lt;link rel="creation_status" href="/rhevm-api/{collection}/{resource_id}/creation_status/{creation_status_id}"/&gt;
-  ...
+    &lt;name&gt;Resource-Name&lt;/name&gt;
+    &lt;creation_status&gt;PENDING&lt;/creation status&gt;
+    &lt;link rel="creation_status" 
+      href="/rhevm-api/{collection}/{resource_id}/creation_status/{creation_status_id}"/&gt;
+    ...
 &lt;/{resource}&gt;
     </screen>
     <para>A <literal>GET</literal> request to the <literal>creation_status</literal> link provides a creation status update:</para>
@@ -339,8 +341,9 @@ Accept: application/xml
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;creation id="{creation_status_id}" href="/rhevm-api/{collection}/{resource_id}/creation_status/{creation_status_id}"&gt;
-    &lt;status&gt;COMPLETE&lt;/status&gt;
+&lt;creation id="{creation_status_id}"
+  href="/rhevm-api/{collection}/{resource_id}/creation_status/{creation_status_id}"&gt;
+      &lt;status&gt;COMPLETE&lt;/status&gt;
 &lt;/creation&gt;
     </screen>
 
@@ -352,7 +355,7 @@ Content-Type: application/xml
 Expect: 201-created
 
 &lt;{resource}&gt;
-  &lt;name&gt;Resource-Name&lt;/name&gt;
+    &lt;name&gt;Resource-Name&lt;/name&gt;
 &lt;/{resource}&gt;
     </screen>
 
@@ -373,15 +376,15 @@ Accept: application/xml
 Content-Type: application/xml
 
 &lt;{resource}&gt;
-  &lt;name&gt;New-Resource-Name&lt;/name&gt;
+    &lt;name&gt;New-Resource-Name&lt;/name&gt;
 &lt;/{resource}&gt;
 
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
-  &lt;name&gt;New-Resource-Name&lt;/name&gt;
-  ...
+    &lt;name&gt;New-Resource-Name&lt;/name&gt;
+    ...
 &lt;/{resource}&gt;
     </screen>
 
@@ -425,9 +428,10 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
-  ...
-  &lt;link rel="{subcollection}" href="/rhevm-api/{collection}/{resource_id}/{subcollection}"/&gt;
-  ...
+    ...
+    &lt;link rel="{subcollection}"
+      href="/rhevm-api/{collection}/{resource_id}/{subcollection}"/&gt;
+    ...
 &lt;/{resource}&gt;
     </screen>
     <para>
@@ -440,10 +444,11 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;{subcollection}&gt;
-  &lt;{subresource} id="{subresource_id}" href="/rhevm-api/{collection}/{resource_id}/{subcollection}/{subresource_id}"&gt;
+    &lt;{subresource} id="{subresource_id}"
+      href="/rhevm-api/{collection}/{resource_id}/{subcollection}/{subresource_id}"&gt;
+        ...
+    &lt;/{subresource}&gt;
     ...
-  &lt;/{subresource}&gt;
-  ...
 &lt;/{subcollection}&gt;
     </screen>
   </section>
@@ -476,10 +481,11 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;{subcollection}&gt;
-  &lt;{subresource} id="{subresource_id}" href="/rhevm-api/{collection}/{resource_id}/{subcollection}/{subresource_id}"&gt;
-    &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"/&gt;
-    ...
-  &lt;/{subresource}&gt;
+    &lt;{subresource} id="{subresource_id}"
+      href="/rhevm-api/{collection}/{resource_id}/{subcollection}/{subresource_id}"&gt;
+        &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"/&gt;
+        ...
+    &lt;/{subresource}&gt;
 &lt;/{subcollection}&gt;
     </screen>      
   </section>
@@ -495,13 +501,13 @@ Content-Type: application/xml
 
     <screen>
 &lt;{resource}&gt;
-  ...
-  &lt;actions&gt;
-    &lt;link rel="start" href="/rhevm-api/{collection}/{resource_id}/start"/&gt;
-    &lt;link rel="stop" href="/rhevm-api/{collection}/{resource_id}/stop"/&gt;
     ...
-  &lt;/actions&gt;
-  ...
+    &lt;actions&gt;
+        &lt;link rel="start" href="/rhevm-api/{collection}/{resource_id}/start"/&gt;
+        &lt;link rel="stop" href="/rhevm-api/{collection}/{resource_id}/stop"/&gt;
+        ...
+    &lt;/actions&gt;
+    ...
 &lt;/resource&gt;
     </screen>
 
@@ -539,15 +545,16 @@ Content-Type: application/xml
 Accept: application/xml
 
 &lt;action&gt;
-  &lt;async&gt;true&lt;/async&gt;
+    &lt;async&gt;true&lt;/async&gt;
 &lt;/action&gt;
 
 HTTP/1.1 202 Accepted
 Content-Type: application/xml
 
-&lt;action id="{action_id}" href="/rhevm-api/{collection}/{resource_id}/{action}/{action_id}"&gt;
-  &lt;async&gt;true&lt;/async&gt;
-  ...
+&lt;action id="{action_id}"
+  href="/rhevm-api/{collection}/{resource_id}/{action}/{action_id}"&gt;
+    &lt;async&gt;true&lt;/async&gt;
+    ...
 &lt;action&gt;
     </screen>
 
@@ -589,10 +596,11 @@ Accept: application/xml
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
-&lt;action id="{action_id}" href="/rhevm-api/{collection}/{resource_id}/{action}/{action_id}"&gt;
-  &lt;status&gt;{PENDING|IN_PROGRESS|COMPLETE|FAILED}&lt;/status&gt;
-  &lt;link rel="parent" /rhevm-api/{collection}/{resource_id}"/&gt;
-  &lt;link rel="replay" href="/rhevm-api/{collection}/{resource_id}/{action}"/&gt;
+&lt;action id="{action_id}"
+  href="/rhevm-api/{collection}/{resource_id}/{action}/{action_id}"&gt;
+    &lt;status&gt;{PENDING|IN_PROGRESS|COMPLETE|FAILED}&lt;/status&gt;
+    &lt;link rel="parent" /rhevm-api/{collection}/{resource_id}"/&gt;
+    &lt;link rel="replay" href="/rhevm-api/{collection}/{resource_id}/{action}"/&gt;
 &lt;action&gt;
     </screen>
 
@@ -631,12 +639,13 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;permissions&gt;
-  &lt;permission id="{permission-id}" href="/rhevm-api/{collection}/{resource_id}/permissions/{permission_id}"&gt;
-    &lt;role id="{role_id}" href="/rhevm-api/roles/{role_id}"/&gt;
-    &lt;user id="{user_id}" href="/rhevm-api/users/{user_id}"/&gt;
-    &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"/&gt;
-  &lt;/permission&gt;
-  ...
+    &lt;permission id="{permission-id}"
+      href="/rhevm-api/{collection}/{resource_id}/permissions/{permission_id}"&gt;
+        &lt;role id="{role_id}" href="/rhevm-api/roles/{role_id}"/&gt;
+        &lt;user id="{user_id}" href="/rhevm-api/users/{user_id}"/&gt;
+        &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"/&gt;
+    &lt;/permission&gt;
+    ...
 &lt;/permissions&gt;
     </screen>
     <para>A resource acquires a new <literal>permission</literal> when <literal>POST</literal>ed to its <literal>permissions</literal> sub-collection. Each new permission requires a <literal>role</literal> and a <literal>user</literal>:</para>
@@ -645,17 +654,18 @@ POST /rhevm-api/{collection}/{resource_id}/permissions HTTP/1.1
 Accept: application/xml
 
 &lt;permission"&gt;
-  &lt;role id="{role_id}"/&gt;
-  &lt;user id="{user_id}"/&gt;
+    &lt;role id="{role_id}"/&gt;
+    &lt;user id="{user_id}"/&gt;
 &lt;/permission&gt;
 
 HTTP/1.1 201 Created
 Content-Type: application/xml
 
-&lt;permission id="{permission_id}" href="/rhevm-api/resources/{id}/permissions/{permission_id}"&gt;
-  &lt;role id="{role_id}" href="/rhevm-api/roles/{role_id}"/&gt;
-  &lt;user id="{user_id}" href="/rhevm-api/users/{user_id}"/&gt;
-  &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"/&gt;
+&lt;permission id="{permission_id}"
+  href="/rhevm-api/resources/{id}/permissions/{permission_id}"&gt;
+    &lt;role id="{role_id}" href="/rhevm-api/roles/{role_id}"/&gt;
+    &lt;user id="{user_id}" href="/rhevm-api/users/{user_id}"/&gt;
+    &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"/&gt;
 &lt;/permission&gt;
     </screen>
   </section>
@@ -675,15 +685,15 @@ Accept: application/xml
 Content-Type: application/xml
 
 &lt;{resource}&gt;
-  &lt;id&gt;id-update-test&lt;/id&gt;
+    &lt;id&gt;id-update-test&lt;/id&gt;
 &lt;/{resource}&gt;
 
 HTTP/1.1 409 Conflict
 Content-Type: application/xml
 
 &lt;fault&gt;
-  &lt;reason&gt;Broken immutability constraint&lt;/reason&gt;
-  &lt;detail&gt;Attempt to set immutable field: id&lt;/detail&gt;
+    &lt;reason&gt;Broken immutability constraint&lt;/reason&gt;
+    &lt;detail&gt;Attempt to set immutable field: id&lt;/detail&gt;
 &lt;/fault&gt;
     </screen>
 

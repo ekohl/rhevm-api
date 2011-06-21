@@ -19,31 +19,31 @@ Link: &lt;http://{host}/{base}/hosts&gt;; rel=hosts, &lt;http://{host}/{base}/vm
 Content-Type: application/xml
 
 &lt;api&gt;
-  &lt;link rel="hosts" href="{base}/hosts"/&gt;
-  &lt;link rel="vms" href="{base}/vms"/&gt;
-  ...
-  &lt;special_objects&gt;
-    &lt;link rel="templates/blank" href="..."/&gt;
-    &lt;link rel="tags/root" href="..."/&gt;
-  &lt;/special_objects&gt;
-  &lt;summary&gt;
-    &lt;vms&gt;
-      &lt;total&gt;10&lt;/total&gt;
-      &lt;active&gt;3&lt;/active&gt;
-    &lt;/vms&gt;
-    &lt;hosts&gt;
-      &lt;total&gt;2&lt;/total&gt;
-      &lt;active&gt;2&lt;/active&gt;
-    &lt;/hosts&gt;
-   &lt;users&gt;
-      &lt;total&gt;8&lt;/total&gt;
-      &lt;active&gt;2&lt;/active&gt;
-    &lt;/users&gt;
-    &lt;storage_domains&gt;
-      &lt;total&gt;2&lt;/total&gt;
-      &lt;active&gt;2&lt;/active&gt;
-    &lt;/storage_domains&gt;
-  &lt;/summary&gt;
+    &lt;link rel="hosts" href="{base}/hosts"/&gt;
+    &lt;link rel="vms" href="{base}/vms"/&gt;
+    ...
+    &lt;special_objects&gt;
+        &lt;link rel="templates/blank" href="..."/&gt;
+        &lt;link rel="tags/root" href="..."/&gt;
+    &lt;/special_objects&gt;
+    &lt;summary&gt;
+        &lt;vms&gt;
+            &lt;total&gt;10&lt;/total&gt;
+            &lt;active&gt;3&lt;/active&gt;
+        &lt;/vms&gt;
+        &lt;hosts&gt;
+            &lt;total&gt;2&lt;/total&gt;
+            &lt;active&gt;2&lt;/active&gt;
+        &lt;/hosts&gt;
+        &lt;users&gt;
+            &lt;total&gt;8&lt;/total&gt;
+            &lt;active&gt;2&lt;/active&gt;
+        &lt;/users&gt;
+        &lt;storage_domains&gt;
+            &lt;total&gt;2&lt;/total&gt;
+            &lt;active&gt;2&lt;/active&gt;
+        &lt;/storage_domains&gt;
+    &lt;/summary&gt;
 &lt;/api&gt;
   </screen>
 

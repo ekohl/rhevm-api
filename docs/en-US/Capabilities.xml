@@ -6,8 +6,8 @@
 <chapter id="chap-REST_API_Guide-Capabilities">
   <title>Capabilities</title>
   <para>
-    The <literal>rel="capabilities"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>) allows information about the supported capabilities of this instance of Red Hat Enterprise Virtualization Manager to be queried. The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements which describe capabilities which are dependent on a compatiblity level. The <literal>version</literal> element may contain the following information:</para>
-
+    The <literal>rel="capabilities"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>) allows information about the supported capabilities of this instance of Red Hat Enterprise Virtualization Manager to be queried. The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements which describe capabilities which are dependent on a compatiblity level. The <literal>version</literal> element may contain the following information:
+  </para>
   <informaltable frame="none">
     <tgroup cols="2">
       <colspec colwidth="2*"/>
@@ -122,100 +122,100 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;capabilities&gt;
-  &lt;version major="2" minor="2"&gt;
-    &lt;current/&gt;
-    &lt;cpus&gt;
-      ...
-    &lt;/cpus&gt;
-    &lt;power_managers&gt;
-      ...
-    &lt;/power_managers&gt;
-    &lt;fence_types&gt;
-      ...
-    &lt;/fence_types&gt;
-    &lt;storage_types&gt;
-      ...
-    &lt;/storage_types&gt;
-    &lt;storage_domain_types&gt;
-      ...
-    &lt;/storage_domain_types&gt;
-    &lt;vm_types&gt;
-      ...
-    &lt;/vm_types&gt;
-    &lt;boot_devices&gt;
-      ...
-    &lt;/boot_devices&gt;
-    &lt;display_types&gt;
-      ...
-    &lt;/display_types&gt;
-    &lt;nic_types&gt;
-      ...
-    &lt;/nic_types&gt;
-    &lt;disk_types&gt;
-      ...
-    &lt;/disk_types&gt;
-    &lt;disk_formats&gt;
-      ...
-    &lt;/disk_formats&gt;
-    &lt;disk_interfaces&gt;
-      ...
-    &lt;/disk_interfaces&gt;
-    ...
-  &lt;/version&gt;
-  &lt;version major="3" minor="0"&gt;
-    &lt;features&gt;
-    	...
-    &lt;/features&gt;
-    &lt;cpus&gt;
-      ...
-    &lt;/cpus&gt;
-    &lt;power_managers&gt;
-      ...
-    &lt;/power_managers&gt;
-    &lt;fence_types&gt;
-      ...
-    &lt;/fence_types&gt;
-    &lt;storage_types&gt;
-      ...
-    &lt;/storage_types&gt;
-    &lt;storage_domain_types&gt;
-      ...
-    &lt;/storage_domain_types&gt;
-    &lt;vm_types&gt;
-      ...
-    &lt;/vm_types&gt;
-    &lt;boot_devices&gt;
-      ...
-    &lt;/boot_devices&gt;
-    &lt;display_types&gt;
-      ...
-    &lt;/display_types&gt;
-    &lt;nic_types&gt;
-      ...
-    &lt;/nic_types&gt;
-    &lt;disk_types&gt;
-      ...
-    &lt;/disk_types&gt;
-    &lt;disk_formats&gt;
-      ...
-    &lt;/disk_formats&gt;
-    &lt;disk_interfaces&gt;
-      ...
-    &lt;/disk_interfaces&gt;
-    &lt;vm_affinities&gt;
-      ...
-    &lt;/vm_affinities&gt;
-    &lt;custom_properties&gt;
-      ...
-    &lt;/custom_properties&gt;
-    ...
-  &lt;/version&gt;
-  &lt;permits&gt;
-    ...
-  &lt;/permits&gt;
-  &lt;scheduling_policies&gt;
-    ...
-  &lt;/scheduling_policies&gt;
+    &lt;version major="2" minor="2"&gt;
+        &lt;current/&gt;
+        &lt;cpus&gt;
+            ...
+        &lt;/cpus&gt;
+        &lt;power_managers&gt;
+            ...
+        &lt;/power_managers&gt;
+        &lt;fence_types&gt;
+            ...
+        &lt;/fence_types&gt;
+        &lt;storage_types&gt;
+            ...
+        &lt;/storage_types&gt;
+        &lt;storage_domain_types&gt;
+            ...
+        &lt;/storage_domain_types&gt;
+        &lt;vm_types&gt;
+            ...
+        &lt;/vm_types&gt;
+        &lt;boot_devices&gt;
+            ...
+        &lt;/boot_devices&gt;
+        &lt;display_types&gt;
+            ...
+        &lt;/display_types&gt;
+        &lt;nic_types&gt;
+            ...
+        &lt;/nic_types&gt;
+        &lt;disk_types&gt;
+            ...
+        &lt;/disk_types&gt;
+        &lt;disk_formats&gt;
+            ...
+        &lt;/disk_formats&gt;
+        &lt;disk_interfaces&gt;
+            ...
+        &lt;/disk_interfaces&gt;
+        ...
+    &lt;/version&gt;
+    &lt;version major="3" minor="0"&gt;
+        &lt;features&gt;
+          	...
+        &lt;/features&gt;
+        &lt;cpus&gt;
+            ...
+        &lt;/cpus&gt;
+        &lt;power_managers&gt;
+            ...
+        &lt;/power_managers&gt;
+        &lt;fence_types&gt;
+            ...
+        &lt;/fence_types&gt;
+        &lt;storage_types&gt;
+            ...
+        &lt;/storage_types&gt;
+        &lt;storage_domain_types&gt;
+            ...
+        &lt;/storage_domain_types&gt;
+        &lt;vm_types&gt;
+            ...
+        &lt;/vm_types&gt;
+        &lt;boot_devices&gt;
+            ...
+        &lt;/boot_devices&gt;
+        &lt;display_types&gt;
+            ...
+        &lt;/display_types&gt;
+        &lt;nic_types&gt;
+            ...
+        &lt;/nic_types&gt;
+        &lt;disk_types&gt;
+            ...
+        &lt;/disk_types&gt;
+        &lt;disk_formats&gt;
+            ...
+        &lt;/disk_formats&gt;
+        &lt;disk_interfaces&gt;
+            ...
+        &lt;/disk_interfaces&gt;
+        &lt;vm_affinities&gt;
+            ...
+        &lt;/vm_affinities&gt;
+        &lt;custom_properties&gt;
+            ...
+        &lt;/custom_properties&gt;
+        ...
+    &lt;/version&gt;
+    &lt;permits&gt;
+        ...
+    &lt;/permits&gt;
+    &lt;scheduling_policies&gt;
+        ...
+    &lt;/scheduling_policies&gt;
 &lt;/capabilities&gt;
   </screen>
 
@@ -246,13 +246,13 @@ Content-Type: application/xml
     <para>For example:</para>
 		<screen>
 &lt;capabilities&gt;
-  &lt;version major="3" minor="0"&gt;
-	  ...
-    &lt;features&gt;
-      &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
-    &lt;/features&gt;
-    ...
-  &lt;/version&gt;
+    &lt;version major="3" minor="0"&gt;
+	      ...
+        &lt;features&gt;
+            &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
+        &lt;/features&gt;
+        ...
+    &lt;/version&gt;
 &lt;/capabilities&gt;
     </screen>
 	</section>
@@ -289,16 +289,16 @@ Content-Type: application/xml
 
     <screen>
 &lt;capabilities&gt;
-  &lt;cpus&gt;
-    &lt;cpu id="Intel Xeon w/o XD/NX"&gt;
-      &lt;level&gt;2&lt;/level&gt;
-    &lt;/cpu&gt;
-    &lt;cpu id="Intel Xeon"&gt;
-      &lt;level&gt;3&lt;/level&gt;
-    &lt;/cpu&gt;
+    &lt;cpus&gt;
+        &lt;cpu id="Intel Xeon w/o XD/NX"&gt;
+            &lt;level&gt;2&lt;/level&gt;
+        &lt;/cpu&gt;
+        &lt;cpu id="Intel Xeon"&gt;
+            &lt;level&gt;3&lt;/level&gt;
+        &lt;/cpu&gt;
+        ...
+    &lt;/cpus&gt;
     ...
-  &lt;/cpus&gt;
-  ...
 &lt;/capabilities&gt;
     </screen>
 
@@ -328,31 +328,31 @@ Content-Type: application/xml
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
     ...
-      &lt;power_managers&gt;
-        &lt;power_management type="alom"&gt;
-          &lt;options&gt;
-            &lt;option type="bool" name="secure"/&gt;
-            &lt;option type="int" name="port"/&gt;
-          &lt;/options&gt;
-        &lt;/power_management&gt;
-        &lt;power_management type="apc"&gt;
-          &lt;options&gt;
-            &lt;option type="bool" name="secure"/&gt;
-            &lt;option type="int" name="port"/&gt;
-            &lt;option type="int" name="slot"/&gt;
-          &lt;/options&gt;
-        &lt;/power_management&gt;
-        &lt;power_management type="bladecenter"&gt;
-          &lt;options&gt;
-            &lt;option type="bool" name="secure"/&gt;
-            &lt;option type="int" name="port"/&gt;
-            &lt;option type="int" name="slot"/&gt;
-          &lt;/options&gt;
-        &lt;/power_management&gt;
+        &lt;power_managers&gt;
+            &lt;power_management type="alom"&gt;
+                &lt;options&gt;
+                    &lt;option type="bool" name="secure"/&gt;
+                    &lt;option type="int" name="port"/&gt;
+                &lt;/options&gt;
+            &lt;/power_management&gt;
+            &lt;power_management type="apc"&gt;
+                &lt;options&gt;
+                    &lt;option type="bool" name="secure"/&gt;
+                    &lt;option type="int" name="port"/&gt;
+                    &lt;option type="int" name="slot"/&gt;
+                &lt;/options&gt;
+            &lt;/power_management&gt;
+            &lt;power_management type="bladecenter"&gt;
+                &lt;options&gt;
+                    &lt;option type="bool" name="secure"/&gt;
+                    &lt;option type="int" name="port"/&gt;
+                    &lt;option type="int" name="slot"/&gt;
+                &lt;/options&gt;
+            &lt;/power_management&gt;
+            ...
+        &lt;/power_managers&gt;
         ...
-      &lt;/power_managers&gt;
-    ...
-  &lt;/version&gt;
+    &lt;/version&gt;
 &lt;/capabilities&gt;
     </screen>
     <para>Each host can define a power management configuration using one of the listed fencing devices. See <xref linkend="sect-REST_API_Guide-Hosts-Power_Management"/>.</para>
@@ -395,24 +395,23 @@ Content-Type: application/xml
     <para>For example:</para>
 		<screen>
 &lt;capabilities&gt;
-  &lt;version major="2" minor="2"&gt;
-	  ...
-  &lt;/version&gt;
-  &lt;version major="3" minor="0"&gt;
-	  ...
-  &lt;/version&gt;
-  &lt;permits&gt;
-	  &lt;permit id="1"&gt;
-      &lt;name&gt;CREATE_VM&lt;/name&gt;
-      &lt;administrative&gt;false&lt;/administrative&gt;
-  	&lt;/permit&gt;
-    &lt;permit id="2"&gt;
-      &lt;name&gt;DELETE_VM&lt;/name&gt;
-      &lt;administrative&gt;false&lt;/administrative&gt;
-    &lt;/permit&gt;
-    ...
-  &lt;/permits&gt;
-  
+    &lt;version major="2" minor="2"&gt;
+  	    ...
+    &lt;/version&gt;
+    &lt;version major="3" minor="0"&gt;
+	      ...
+    &lt;/version&gt;
+    &lt;permits&gt;
+	      &lt;permit id="1"&gt;
+            &lt;name&gt;CREATE_VM&lt;/name&gt;
+            &lt;administrative&gt;false&lt;/administrative&gt;
+      	&lt;/permit&gt;
+        &lt;permit id="2"&gt;
+            &lt;name&gt;DELETE_VM&lt;/name&gt;
+            &lt;administrative&gt;false&lt;/administrative&gt;
+        &lt;/permit&gt;
+        ...
+    &lt;/permits&gt;
 &lt;/capabilities&gt;
     </screen>
 	</section>

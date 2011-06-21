@@ -126,40 +126,53 @@
   </para>
 
   <screen>
-&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
-  &lt;name&gt;zig&lt;/name&gt;
-  &lt;type&gt;rhev-h&lt;/type&gt;
-  &lt;status&gt;UP&lt;/status&gt;
-  &lt;version major="3" minor="0"/&gt;
-  &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
-  &lt;port&gt;54321&lt;/port&gt;
-  &lt;storage_manager&gt;true&lt;/storage_manager&gt;
-  &lt;iscsi&gt;
-    &lt;initiator&gt;iqn.2001-04.com.example:diskarrays-sn-a8675309&lt;/initiator&gt;
-  &lt;/iscsi&gt;
-  &lt;cpu&gt;
-    &lt;topology cores="2"/&gt;
-    &lt;name&gt;Intel(R) Core(TM)2 Duo CPU E8400 @ 3.00GHz&lt;/name&gt;
-    &lt;speed&gt;2993&lt;/speed&gt;
-  &lt;/cpu&gt;
-  &lt;summary&gt;
-    &lt;active&gt;2&lt;/active&gt;
-    &lt;migrating&gt;0&lt;/migrating&gt;
-    &lt;total&gt;3&lt;/total&gt;
-  &lt;/summary&gt;
-  &lt;link rel="statistics" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/statistics"/&gt;
-  &lt;link rel="nics" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics"/&gt;
-  &lt;link rel="storage" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage"/&gt;
-  &lt;link rel="tags" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/tags"/&gt;
-  &lt;actions&gt;
-    &lt;link rel="install" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/install"/&gt;
-    &lt;link rel="approve" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/approve"/&gt;
-    &lt;link rel="activate" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/activate"/&gt;
-    &lt;link rel="deactivate" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/deactivate"/&gt;
-    &lt;link rel="commitnetconfig" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/commitnetconfig"/&gt;
-    &lt;link rel="iscsidiscover" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsidiscover"/&gt;
-    &lt;link rel="iscsilogin" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsilogin"/&gt;
-  &lt;/actions&gt;
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+    &lt;name&gt;zig&lt;/name&gt;
+    &lt;type&gt;rhev-h&lt;/type&gt;
+    &lt;status&gt;UP&lt;/status&gt;
+    &lt;version major="3" minor="0"/&gt;
+    &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
+      href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
+    &lt;port&gt;54321&lt;/port&gt;
+    &lt;storage_manager&gt;true&lt;/storage_manager&gt;
+    &lt;iscsi&gt;
+        &lt;initiator&gt;iqn.2001-04.com.example:diskarrays-sn-a8675309&lt;/initiator&gt;
+    &lt;/iscsi&gt;
+    &lt;cpu&gt;
+        &lt;topology cores="2"/&gt;
+        &lt;name&gt;Intel(R) Core(TM)2 Duo CPU E8400 @ 3.00GHz&lt;/name&gt;
+        &lt;speed&gt;2993&lt;/speed&gt;
+    &lt;/cpu&gt;
+    &lt;summary&gt;
+        &lt;active&gt;2&lt;/active&gt;
+        &lt;migrating&gt;0&lt;/migrating&gt;
+        &lt;total&gt;3&lt;/total&gt;
+    &lt;/summary&gt;
+    &lt;link rel="statistics"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/statistics"/&gt;
+    &lt;link rel="nics"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics"/&gt;
+    &lt;link rel="storage"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage"/&gt;
+    &lt;link rel="tags"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/tags"/&gt;
+    &lt;actions&gt;
+        &lt;link rel="install"
+          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/install"/&gt;
+        &lt;link rel="approve"
+          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/approve"/&gt;
+        &lt;link rel="activate"
+          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/activate"/&gt;
+        &lt;link rel="deactivate"
+          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/deactivate"/&gt;
+        &lt;link rel="commitnetconfig"
+          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/commitnetconfig"/&gt;
+        &lt;link rel="iscsidiscover"
+          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsidiscover"/&gt;
+        &lt;link rel="iscsilogin"
+          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsilogin"/&gt;
+    &lt;/actions&gt;
 &lt;/host&gt;
   </screen>
 
@@ -280,28 +293,36 @@
     </para>
 
     <screen>
-&lt;host_nic id="e8f02fdf-3d7b-4135-86e1-1bf185570cd8" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/e8f02fdf-3d7b-4135-86e1-1bf185570cd8"&gt;
-  &lt;name&gt;bond0&lt;/name&gt;
-  &lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"/&gt;
-  &lt;network id="e657d631-657d-42bb-a536-73501a085d85" href="/rhevm-api/networks/e657d631-657d-42bb-a536-73501a085d85"/&gt;
-  &lt;mac address="D6:76:F1:3A:AF:74"/&gt;
-  &lt;ip address="192.168.0.128" netmask="255.255.255.0" gateway="192.168.0.1"/&gt;
-  &lt;boot_protocol&gt;dhcp&lt;/boot_protocol&gt;
-  &lt;speed&gt;1000000000&lt;/speed&gt;
-  &lt;status&gt;UP&lt;/status&gt;
-  &lt;bonded&gt;
-    &lt;options&gt;
-      ...
-    &lt;/options&gt;
-    &lt;slaves&gt;
-      &lt;host_nic id="eb14e154-5e73-4f7f-bf6b-7f52609d94ec"/&gt;
-      &lt;host_nic id="6aede5ca-4c54-4b37-a81b-c0d6b53558ea"/&gt;
-    &lt;/slaves&gt;
-  &lt;/bonded&gt;
-  &lt;actions&gt;
-    &lt;link rel="attach" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/e8f02fdf-3d7b-4135-86e1-1bf185570cd8/attach"/&gt;
-    &lt;link rel="detach" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/e8f02fdf-3d7b-4135-86e1-1bf185570cd8/detach"/&gt;
-  &lt;/actions&gt;
+&lt;host_nic id="e8f02fdf-3d7b-4135-86e1-1bf185570cd8"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/
+  e8f02fdf-3d7b-4135-86e1-1bf185570cd8"&gt;
+    &lt;name&gt;bond0&lt;/name&gt;
+    &lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"/&gt;
+    &lt;network id="e657d631-657d-42bb-a536-73501a085d85"
+      href="/rhevm-api/networks/e657d631-657d-42bb-a536-73501a085d85"/&gt;
+    &lt;mac address="D6:76:F1:3A:AF:74"/&gt;
+    &lt;ip address="192.168.0.128" netmask="255.255.255.0" gateway="192.168.0.1"/&gt;
+    &lt;boot_protocol&gt;dhcp&lt;/boot_protocol&gt;
+    &lt;speed&gt;1000000000&lt;/speed&gt;
+    &lt;status&gt;UP&lt;/status&gt;
+    &lt;bonded&gt;
+        &lt;options&gt;
+            ...
+        &lt;/options&gt;
+        &lt;slaves&gt;
+            &lt;host_nic id="eb14e154-5e73-4f7f-bf6b-7f52609d94ec"/&gt;
+            &lt;host_nic id="6aede5ca-4c54-4b37-a81b-c0d6b53558ea"/&gt;
+        &lt;/slaves&gt;
+    &lt;/bonded&gt;
+    &lt;actions&gt;
+        &lt;link rel="attach"
+          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/
+          e8f02fdf-3d7b-4135-86e1-1bf185570cd8/attach"/&gt;
+        &lt;link rel="detach"
+          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/
+          e8f02fdf-3d7b-4135-86e1-1bf185570cd8/detach"/&gt;
+    &lt;/actions&gt;
 &lt;/host_nic&gt;
     </screen>
 
@@ -359,17 +380,17 @@ Accept: application/xml
 Content-Type: application/xml
 
 &lt;host_nic&gt;
-  &lt;name&gt;bond4&lt;/name&gt;
-  &lt;network id="e657d631-657d-42bb-a536-73501a085d85"/&gt;
-  &lt;bonded&gt;
-    &lt;options&gt;
-      ...
-    &lt;/options&gt;
-    &lt;slaves&gt;
-      &lt;host_nic id="eb14e154-5e73-4f7f-bf6b-7f52609d94ec"/&gt;
-      &lt;host_nic id="6aede5ca-4c54-4b37-a81b-c0d6b53558ea"/&gt;
-    &lt;/slaves&gt;
-  &lt;/bonded&gt;
+    &lt;name&gt;bond4&lt;/name&gt;
+    &lt;network id="e657d631-657d-42bb-a536-73501a085d85"/&gt;
+    &lt;bonded&gt;
+        &lt;options&gt;
+            ...
+        &lt;/options&gt;
+        &lt;slaves&gt;
+            &lt;host_nic id="eb14e154-5e73-4f7f-bf6b-7f52609d94ec"/&gt;
+            &lt;host_nic id="6aede5ca-4c54-4b37-a81b-c0d6b53558ea"/&gt;
+        &lt;/slaves&gt;
+    &lt;/bonded&gt;
 &lt;/host_nic&gt;
       </screen>
 
@@ -409,7 +430,7 @@ POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/e8f02fdf-3d7b-41
 Content-type: application/xml
 
 &lt;action&gt;
-  &lt;network id="e657d631-657d-42bb-a536-73501a085d85"/&gt;
+    &lt;network id="e657d631-657d-42bb-a536-73501a085d85"/&gt;
 &lt;/action&gt;
       </screen>
 
@@ -435,7 +456,7 @@ POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/e8f02fdf-3d7b-41
 Content-type: application/xml
 
 &lt;action&gt;
-  &lt;network id="e657d631-657d-42bb-a536-73501a085d85"/&gt;
+    &lt;network id="e657d631-657d-42bb-a536-73501a085d85"/&gt;
 &lt;/action&gt;
       </screen>
 
@@ -573,29 +594,33 @@ Content-type: application/xml
 
     <screen>
 &lt;host_storage&gt;
-  &lt;storage id="82fb123b-321e-40a1-9889-95dcd2654463" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage/82fb123b-321e-40a1-9889-95dcd2654463"&gt;
-    &lt;name&gt;LUN0&lt;/name&gt;
-    &lt;type&gt;iscsi&lt;/type&gt;
-    &lt;logical_unit id="LUN0"&gt;
-      &lt;address&gt;mysan.example.com&lt;/address&gt;
-      &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
-    &lt;/logical_unit&gt;
-  &lt;/storage&gt;
-  &lt;storage id="f1d0ced5-d727-4217-8f2a-a514dff14bd5" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage/f1d0ced5-d727-4217-8f2a-a514dff14bd5"&gt;
-    &lt;name&gt;FooVG&lt;/name&gt;
-    &lt;type&gt;iscsi&lt;/type&gt;
-    &lt;volume_group id="5432"&gt;
-      &lt;name&gt;FooVG&lt;/name&gt;
-      &lt;logical_unit id="LUN1"&gt;
-        &lt;address&gt;mysan.example.com&lt;/address&gt;
-        &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
-      &lt;/logical_unit&gt;
-      &lt;logical_unit id="LUN2"&gt;
-        &lt;address&gt;mysan.example.com&lt;/address&gt;
-        &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
-      &lt;/logical_unit&gt;
-    &lt;/volume_group&gt;
-  &lt;/storage&gt;
+    &lt;storage id="82fb123b-321e-40a1-9889-95dcd2654463"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage/
+      82fb123b-321e-40a1-9889-95dcd2654463"&gt;
+        &lt;name&gt;LUN0&lt;/name&gt;
+        &lt;type&gt;iscsi&lt;/type&gt;
+        &lt;logical_unit id="LUN0"&gt;
+            &lt;address&gt;mysan.example.com&lt;/address&gt;
+            &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
+        &lt;/logical_unit&gt;
+    &lt;/storage&gt;
+    &lt;storage id="f1d0ced5-d727-4217-8f2a-a514dff14bd5"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage/
+      f1d0ced5-d727-4217-8f2a-a514dff14bd5"&gt;
+        &lt;name&gt;FooVG&lt;/name&gt;
+        &lt;type&gt;iscsi&lt;/type&gt;
+        &lt;volume_group id="5432"&gt;
+            &lt;name&gt;FooVG&lt;/name&gt;
+            &lt;logical_unit id="LUN1"&gt;
+                &lt;address&gt;mysan.example.com&lt;/address&gt;
+                &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
+            &lt;/logical_unit&gt;
+            &lt;logical_unit id="LUN2"&gt;
+                &lt;address&gt;mysan.example.com&lt;/address&gt;
+                &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
+            &lt;/logical_unit&gt;
+        &lt;/volume_group&gt;
+    &lt;/storage&gt;
 &lt;/host_storage&gt;
     </screen>
 
@@ -616,11 +641,12 @@ Content-type: application/xml
   	</itemizedlist>
   	<para>Kernel SamePage Merging (KSM) uses the <literal>ksm</literal> element, which is a read-only element:</para>
   	<screen>
-&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
-  &lt;name&gt;zig&lt;/name&gt;
-  &lt;status&gt;UP&lt;/status&gt;
-  ...
-  &lt;ksm&gt;true&lt;/ksm&gt;
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+    &lt;name&gt;zig&lt;/name&gt;
+    &lt;status&gt;UP&lt;/status&gt;
+    ...
+    &lt;ksm&gt;true&lt;/ksm&gt;
 &lt;/host&gt;
   	</screen>
   	<para>Transparent Hugepage support uses the <literal>transparent_hugepages</literal> element and updates with a <literal>PUT</literal> request:</para>
@@ -630,27 +656,29 @@ Accept: application/xml
 Content-Type: application/xml
 
 &lt;host&gt;
-  &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
+    &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
 &lt;/host&gt;
   	</screen>
   	<para>This also sets the status of <literal>ksm</literal>. For example, if <literal>transparent_hugepages</literal> is set to <literal>true</literal>, the API sets <literal>ksm</literal> to <literal>false</literal>:</para>
   	<screen>
-&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
-  &lt;name&gt;zig&lt;/name&gt;
-  &lt;status&gt;UP&lt;/status&gt;
-  ...
-  &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
-  &lt;ksm&gt;false&lt;/ksm&gt;
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+    &lt;name&gt;zig&lt;/name&gt;
+    &lt;status&gt;UP&lt;/status&gt;
+    ...
+    &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
+    &lt;ksm&gt;false&lt;/ksm&gt;
 &lt;/host&gt;
   	</screen>
   	<para>If <literal>transparent_hugepages</literal> is set to <literal>false</literal>, the API sets <literal>ksm</literal> to <literal>true</literal>.</para>
   	<screen>
-&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
-  &lt;name&gt;zig&lt;/name&gt;
-  &lt;status&gt;UP&lt;/status&gt;
-  ...
-  &lt;transparent_hugepages&gt;false&lt;/transparent_hugepages&gt;
-  &lt;ksm&gt;true&lt;/ksm&gt;
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+    &lt;name&gt;zig&lt;/name&gt;
+    &lt;status&gt;UP&lt;/status&gt;
+    ...
+    &lt;transparent_hugepages&gt;false&lt;/transparent_hugepages&gt;
+    &lt;ksm&gt;true&lt;/ksm&gt;
 &lt;/host&gt;
   </screen>
   </section>
@@ -669,7 +697,7 @@ POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/install HTTP/1.1
 Content-type: application/xml
 
 &lt;action&gt;
-  &lt;root_password&gt;p@55w0Rd!&lt;/root_password&gt;
+    &lt;root_password&gt;p@55w0Rd!&lt;/root_password&gt;
 &lt;/action&gt;
     </screen>
 
@@ -759,17 +787,19 @@ Content-Type: application/xml
 Accept: application/xml
 
 &lt;action&gt;
-  &lt;iscsi&gt;
-    &lt;address&gt;mysan.example.com&lt;/address&gt;
-  &lt;/iscsi&gt;
+    &lt;iscsi&gt;
+        &lt;address&gt;mysan.example.com&lt;/address&gt;
+    &lt;/iscsi&gt;
 &lt;/action&gt;
 
 HTTP/1.1 202 Accept
 Content-Type: application/xml
 
-&lt;action id="e9126d04-0f74-4e1a-9139-13f11fcbb4ab" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsidiscover/e9126d04-0f74-4e1a-9139-13f11fcbb4ab"&gt;
-  &lt;iscsi_target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/iscsi_target&gt;
-  ...
+&lt;action id="e9126d04-0f74-4e1a-9139-13f11fcbb4ab"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsidiscover/
+  e9126d04-0f74-4e1a-9139-13f11fcbb4ab"&gt;
+    &lt;iscsi_target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/iscsi_target&gt;
+    ...
 &lt;action&gt;
     </screen>
 
@@ -790,12 +820,12 @@ Content-Type: application/xml
 Accept: application/xml
 
 &lt;action&gt;
-  &lt;iscsi&gt;
-    &lt;address&gt;mysan.example.com&lt;/address&gt;
-    &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
-    &lt;username&gt;jimmy&lt;/username&gt;
-    &lt;password&gt;s3kr37&lt;/password&gt;
-  &lt;/iscsi&gt;
+    &lt;iscsi&gt;
+        &lt;address&gt;mysan.example.com&lt;/address&gt;
+        &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
+        &lt;username&gt;jimmy&lt;/username&gt;
+        &lt;password&gt;s3kr37&lt;/password&gt;
+    &lt;/iscsi&gt;
 &lt;/action&gt;
     </screen>
 
@@ -897,19 +927,20 @@ Accept: application/xml
     <para>A new host can include a <literal>power_management</literal> configuration when <literal>POST</literal>ing the host configuration. The <literal>power_management</literal> configuration can also update using <literal>PUT</literal>.</para>
     <para>For example:</para>
     <screen>
-&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3" href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
     &lt;name&gt;zig&lt;/name&gt;
     ...
     &lt;power_management type="ilo"&gt;
-      &lt;enabled&gt;true&lt;/enabled&gt;
-      &lt;address&gt;192.168.1.107&lt;/address&gt;
-      &lt;username&gt;admin&lt;/username&gt;
-      &lt;password&gt;p@55w0Rd!&lt;/password&gt;
-      &lt;options&gt;
-        &lt;option name="secure" value="true"/&gt;
-        &lt;option name="port" value="54345"/&gt;
-        &lt;option name="slot" value="3"/&gt;
-      &lt;/options&gt;
+        &lt;enabled&gt;true&lt;/enabled&gt;
+        &lt;address&gt;192.168.1.107&lt;/address&gt;
+        &lt;username&gt;admin&lt;/username&gt;
+        &lt;password&gt;p@55w0Rd!&lt;/password&gt;
+        &lt;options&gt;
+            &lt;option name="secure" value="true"/&gt;
+            &lt;option name="port" value="54345"/&gt;
+            &lt;option name="slot" value="3"/&gt;
+        &lt;/options&gt;
     &lt;/power_management&gt;
     ...
 &lt;/host&gt;
@@ -924,7 +955,7 @@ POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/fence
 Content-Type: application/xml
 
 &lt;action&gt;
-  &lt;fence_type&gt;start&lt;/fence_type&gt;
+    &lt;fence_type&gt;start&lt;/fence_type&gt;
 &lt;/action&gt;
     </screen>
   </section>

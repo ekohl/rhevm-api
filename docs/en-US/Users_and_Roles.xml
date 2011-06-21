@@ -76,26 +76,26 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;roles&gt;
-  &lt;role id="00000000-0000-0000-0000-000000000001"
-        href="/rhevm-api/roles/00000000-0000-0000-0000-000000000001"&gt;
-    &lt;name&gt;SuperUser&lt;/name&gt;
-    &lt;description&gt;Roles management administrator&lt;/description&gt;
-  &lt;/role&gt;
-  &lt;role id="00000000-0000-0000-0001-000000000001"
-        href="/rhevm-api/roles/00000000-0000-0000-0001-000000000001"&gt;
-    &lt;name&gt;RHEVMUser&lt;/name&gt;
-    &lt;description&gt;RHEVM user&lt;/description&gt;
-  &lt;/role&gt;
-  &lt;role id="00000000-0000-0000-0001-000000000002"
-        href="/rhevm-api/roles/00000000-0000-0000-0001-000000000002"&gt;
-    &lt;name&gt;RHEVMPowerUser&lt;/name&gt;
-    &lt;description&gt;RHEVM power user&lt;/description&gt;
-  &lt;/role&gt;
-  &lt;role id="00000000-0000-0000-0001-000000000003"
-        href="/rhevm-api/roles/00000000-0000-0000-0001-000000000003"&gt;
-    &lt;name&gt;RHEVMVDIUser&lt;/name&gt;
-    &lt;description&gt;RHEVM VDI user&lt;/description&gt;
-  &lt;/role&gt;
+    &lt;role id="00000000-0000-0000-0000-000000000001"
+      href="/rhevm-api/roles/00000000-0000-0000-0000-000000000001"&gt;
+        &lt;name&gt;SuperUser&lt;/name&gt;
+        &lt;description&gt;Roles management administrator&lt;/description&gt;
+    &lt;/role&gt;
+    &lt;role id="00000000-0000-0000-0001-000000000001"
+      href="/rhevm-api/roles/00000000-0000-0000-0001-000000000001"&gt;
+        &lt;name&gt;RHEVMUser&lt;/name&gt;
+        &lt;description&gt;RHEVM user&lt;/description&gt;
+    &lt;/role&gt;
+    &lt;role id="00000000-0000-0000-0001-000000000002"
+      href="/rhevm-api/roles/00000000-0000-0000-0001-000000000002"&gt;
+        &lt;name&gt;RHEVMPowerUser&lt;/name&gt;
+        &lt;description&gt;RHEVM power user&lt;/description&gt;
+    &lt;/role&gt;
+    &lt;role id="00000000-0000-0000-0001-000000000003"
+      href="/rhevm-api/roles/00000000-0000-0000-0001-000000000003"&gt;
+        &lt;name&gt;RHEVMVDIUser&lt;/name&gt;
+        &lt;description&gt;RHEVM VDI user&lt;/description&gt;
+    &lt;/role&gt;
 &lt;/roles&gt;
     </screen>
 
@@ -119,15 +119,18 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;permits&gt;
-    &lt;permit id="1" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/1"&gt;
+    &lt;permit id="1"
+      href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/1"&gt;
         &lt;name&gt;CREATE_VM&lt;/name&gt;
         &lt;administrative&gt;false&lt;/administrative&gt;
         &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
     &lt;/permit&gt;
-    &lt;permit id="4" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/4"&gt;
+    &lt;permit id="4"
+      href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/4"&gt;
         &lt;name&gt;VM_BASIC_OPERATIONS&lt;/name&gt;
         &lt;administrative&gt;false&lt;/administrative&gt;
-        &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
+        &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"
+          href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
     &lt;/permit&gt;
 &lt;/permits&gt;
       </screen>
@@ -142,7 +145,8 @@ HTTP/1.1 201 Created
 Content-Type: application/xml
 
 &lt;permits&gt;
-    &lt;permit id="1" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/1"&gt;
+    &lt;permit id="1"
+      href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/1"&gt;
         &lt;name&gt;CREATE_VM&lt;/name&gt;
         &lt;administrative&gt;false&lt;/administrative&gt;
         &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
@@ -229,22 +233,25 @@ GET /rhevm-api/users HTTP/1.1
 Accept: application/xml
 
 &lt;users>
-  &lt;user id="225f15cd-e891-434d-8262-a66808fcb9b1" href="/rhevm-api/users/225f15cd-e891-434d-8262-a66808fcb9b1"&gt;
-    &lt;name&gt;RHEV-M Admin&lt;/name&gt;
-    &lt;actions/&gt;
-    &lt;link rel="roles" href="/rhevm-api/users/225f15cd-e891-434d-8262-a66808fcb9b1/roles"/&gt;
-    &lt;link rel="tags" href="/rhevm-api/users/225f15cd-e891-434d-8262-a66808fcb9b1/tags"/&gt;
-    &lt;domain&gt;domain.example.com&lt;/domain&gt;
-    &lt;logged_in&gt;false&lt;/logged_in&gt;
-    &lt;user_name&gt;rhevmadmin@domain.example.com&lt;/user_name&gt;
-    &lt;groups&gt;
-      &lt;group&gt;Group Policy Creator Owners@domain.example.com/Users&lt;/group&gt;
-      &lt;group&gt;Domain Admins@domain.example.com/Users&lt;/group&gt;
-      &lt;group&gt;Enterprise Admins@domain.example.com/Users&lt;/group&gt;
-      &lt;group&gt;Schema Admins@domain.example.com/Users&lt;/group&gt;
-      &lt;group&gt;Administrators@domain.example.com/Builtin&lt;/group&gt;
-    &lt;/groups&gt;
-  &lt;/user&gt;
+    &lt;user id="225f15cd-e891-434d-8262-a66808fcb9b1"
+      href="/rhevm-api/users/225f15cd-e891-434d-8262-a66808fcb9b1"&gt;
+        &lt;name&gt;RHEV-M Admin&lt;/name&gt;
+        &lt;actions/&gt;
+        &lt;link rel="roles"
+          href="/rhevm-api/users/225f15cd-e891-434d-8262-a66808fcb9b1/roles"/&gt;
+        &lt;link rel="tags"
+          href="/rhevm-api/users/225f15cd-e891-434d-8262-a66808fcb9b1/tags"/&gt;
+        &lt;domain&gt;domain.example.com&lt;/domain&gt;
+        &lt;logged_in&gt;false&lt;/logged_in&gt;
+        &lt;user_name&gt;rhevmadmin@domain.example.com&lt;/user_name&gt;
+        &lt;groups&gt;
+            &lt;group&gt;Group Policy Creator Owners@domain.example.com/Users&lt;/group&gt;
+            &lt;group&gt;Domain Admins@domain.example.com/Users&lt;/group&gt;
+            &lt;group&gt;Enterprise Admins@domain.example.com/Users&lt;/group&gt;
+            &lt;group&gt;Schema Admins@domain.example.com/Users&lt;/group&gt;
+            &lt;group&gt;Administrators@domain.example.com/Builtin&lt;/group&gt;
+        &lt;/groups&gt;
+    &lt;/user&gt;
 &lt;/users&gt;
     </screen>
 
@@ -258,13 +265,13 @@ Content-Type: application/xml
 Accept: application/xml
 
 &lt;user&gt;
-  &lt;user_name&gt;joe@domain.example.com&lt;/user_name&gt;
-  &lt;roles&gt;
-    &lt;role&gt;
-      &lt;name&gt;RHEVMPowerUser&lt;/name&gt;
-    &lt;/role&gt;
-    &lt;role id="00000000-0000-0000-0001-000000000003"/&gt;
-  &lt;/roles&gt;
+    &lt;user_name&gt;joe@domain.example.com&lt;/user_name&gt;
+    &lt;roles&gt;
+        &lt;role&gt;
+            &lt;name&gt;RHEVMPowerUser&lt;/name&gt;
+        &lt;/role&gt;
+        &lt;role id="00000000-0000-0000-0001-000000000003"/&gt;
+    &lt;/roles&gt;
 &lt;/user&gt;
     </screen>
 
@@ -304,7 +311,7 @@ Content-Type: application/xml
 Accept: application/xml
 
 &lt;role&gt;
-  &lt;name&gt;RHEVMVDIUser&lt;/name&gt;
+    &lt;name&gt;RHEVMVDIUser&lt;/name&gt;
 &lt;/role&gt;
     </screen>
 

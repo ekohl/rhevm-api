@@ -8,18 +8,20 @@
 	<para>The API provides the ability to access user and group information from the organization's Active Directory Service using the <literal>domains</literal> collection.</para>
 	<screen>
 &lt;domains&gt;
-  &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
+    &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
       href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"&gt;
-    &lt;name&gt;domain.example.com&lt;/name&gt;
-    &lt;link rel="users"
-        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users"/&gt;
-    &lt;link rel="groups"
-        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups"/&gt;
-    &lt;link rel="users/search"
-        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users?search={query}"/&gt;
-    &lt;link rel="groups/search"
-        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups?search={query}"/&gt;
-  &lt;/domain&gt;
+        &lt;name&gt;domain.example.com&lt;/name&gt;
+        &lt;link rel="users"
+          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users"/&gt;
+        &lt;link rel="groups"
+          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups"/&gt;
+        &lt;link rel="users/search"
+          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/
+          users?search={query}"/&gt;
+        &lt;link rel="groups/search"
+          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/
+          groups?search={query}"/&gt;
+    &lt;/domain&gt;
 &lt;/domains&gt;
   </screen>
   <note>
@@ -73,23 +75,24 @@
     <para>For example:</para>
 	  <screen>
 &lt;users&gt;
-  &lt;user id="225f15cd-e891-434d-8262-a66808fcb9b1"
-      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users/d3b4e7be-5f57-4dac-b937-21e1771a501f"&gt;
-    &lt;name&gt;RHEV-M Admin&lt;/name&gt;
-    &lt;user_name&gt;rhevmadmin@domain.example.com&lt;/user_name&gt;
-    &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
-        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"/&gt;
-    &lt;groups&gt;
-      &lt;group&gt;
-        &lt;name&gt;domain.example.com/Users/Enterprise Admins&lt;/name&gt;
-      &lt;/group&gt;
-      &lt;group&gt;
-        &lt;name&gt;domain.example.com/Users/Domain Admins&lt;/name&gt;
-      &lt;/group&gt;
-      ...
-    &lt;/groups&gt;
-  &lt;/user&gt;
-  ...
+    &lt;user id="225f15cd-e891-434d-8262-a66808fcb9b1"
+      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users/
+      d3b4e7be-5f57-4dac-b937-21e1771a501f"&gt;
+        &lt;name&gt;RHEV-M Admin&lt;/name&gt;
+        &lt;user_name&gt;rhevmadmin@domain.example.com&lt;/user_name&gt;
+        &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
+          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"/&gt;
+        &lt;groups&gt;
+            &lt;group&gt;
+                &lt;name&gt;domain.example.com/Users/Enterprise Admins&lt;/name&gt;
+            &lt;/group&gt;
+            &lt;group&gt;
+                &lt;name&gt;domain.example.com/Users/Domain Admins&lt;/name&gt;
+            &lt;/group&gt;
+            ...
+        &lt;/groups&gt;
+    &lt;/user&gt;
+    ...
 &lt;/users&gt;
 	  </screen>
 
@@ -130,13 +133,14 @@
     </informaltable>
 	  <screen>
 &lt;groups&gt;
-  &lt;group id="85bf8d97-273c-4a5c-b801-b17d58330dab"
-      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups/85bf8d97-273c-4a5c-b801-b17d58330dab"&gt;
-    &lt;name&gt;example.com/Users/Enterprise Admins&lt;/name&gt;
-    &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
-        href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"/&gt;
-  &lt;/group&gt;
-  ...
+    &lt;group id="85bf8d97-273c-4a5c-b801-b17d58330dab"
+      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups/
+      85bf8d97-273c-4a5c-b801-b17d58330dab"&gt;
+        &lt;name&gt;example.com/Users/Enterprise Admins&lt;/name&gt;
+        &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
+          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"/&gt;
+    &lt;/group&gt;
+    ...
 &lt;/groups&gt;
 	  </screen>
   </section>

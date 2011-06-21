@@ -57,9 +57,10 @@
   </para>
 
   <screen>
-&lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e" href="/rhevm-api/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"&gt;
-  &lt;name&gt;Finance&lt;/name&gt;
-  &lt;description&gt;Resources for the Finance department&lt;/description&gt;
+&lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"
+  href="/rhevm-api/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"&gt;
+    &lt;name&gt;Finance&lt;/name&gt;
+    &lt;description&gt;Resources for the Finance department&lt;/description&gt;
 &lt;/tag&gt;
   </screen>
 
@@ -87,16 +88,21 @@ POST /rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/tags HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
 
-&lt;tag&gt;&lt;name&gt;Finance&lt;/name&gt;&lt;/tag&gt;
+&lt;tag&gt;
+    &lt;name&gt;Finance&lt;/name&gt;
+&lt;/tag&gt;
 
 HTTP/1.1 201 Created
 Location: http://{host}/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e
 Content-Type: application/xml
 
-&lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e" href="/rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"&gt;
-  &lt;name&gt;Finance&lt;/name&gt;
-  &lt;description&gt;Resources for the Finance department&lt;/description&gt;
-  &lt;vm id="5114bb3e-a4e6-44b2-b783-b3eea7d84720" href="/rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720"/&gt;
+&lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"
+  href="/rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/tags/
+  f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"&gt;
+    &lt;name&gt;Finance&lt;/name&gt;
+    &lt;description&gt;Resources for the Finance department&lt;/description&gt;
+    &lt;vm id="5114bb3e-a4e6-44b2-b783-b3eea7d84720"
+      href="/rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720"/&gt;
 &lt;/tag&gt;
     </screen>
 
@@ -118,10 +124,11 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;vms&gt;
-  &lt;vm id="5114bb3e-a4e6-44b2-b783-b3eea7d84720" href="/rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720"&gt;
+    &lt;vm id="5114bb3e-a4e6-44b2-b783-b3eea7d84720"
+      href="/rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720"&gt;
+        ...
+    &lt;/vm&gt;
     ...
-  &lt;/vm&gt;
-  ...
 &lt;/vms&gt;
     </screen>
 
@@ -138,27 +145,30 @@ Content-Type: application/xml
   <para>This tag hierarchy is expressed in the following way:</para>
   <screen>
 &lt;tags&gt;
-  &lt;tag id="-1" href="/rhevm-api/tags/-1"&gt;
-    &lt;name&gt;root&lt;/name&gt;
-    &lt;description&gt;root&lt;/description&gt;
-    &lt;parent&gt;
-      &lt;tag id="-1" href="/rhevm-api/tags/-1"/&gt;
-    &lt;/parent&gt;
-  &lt;/tag&gt;
-  &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e" href="/rhevm-api/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"&gt;
-    &lt;name&gt;Finance&lt;/name&gt;
-    &lt;description&gt;Resources for the Finance department&lt;/description&gt;
-    &lt;parent&gt;
-      &lt;tag id="-1" href="/rhevm-api/tags/-1"/&gt;
-    &lt;/parent&gt;
-  &lt;/tag&gt;
-  &lt;tag id="ty38wobf-23n5-18we-v18j-5u8t348cs7rt" href="/rhevm-api/tags/ty38wobf-23n5-18we-v18j-5u8t348cs7rt"&gt;
-    &lt;name&gt;Billing&lt;/name&gt;
-    &lt;description&gt;Billing Resources&lt;/description&gt;
-    &lt;parent&gt;
-      &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e" href="/rhevm-api/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"/&gt;
-    &lt;/parent&gt;
-  &lt;/tag&gt;
+    &lt;tag id="-1" href="/rhevm-api/tags/-1"&gt;
+        &lt;name&gt;root&lt;/name&gt;
+        &lt;description&gt;root&lt;/description&gt;
+        &lt;parent&gt;
+            &lt;tag id="-1" href="/rhevm-api/tags/-1"/&gt;
+        &lt;/parent&gt;
+    &lt;/tag&gt;
+    &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"
+      href="/rhevm-api/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"&gt;
+        &lt;name&gt;Finance&lt;/name&gt;
+        &lt;description&gt;Resources for the Finance department&lt;/description&gt;
+        &lt;parent&gt;
+            &lt;tag id="-1" href="/rhevm-api/tags/-1"/&gt;
+        &lt;/parent&gt;
+    &lt;/tag&gt;
+    &lt;tag id="ty38wobf-23n5-18we-v18j-5u8t348cs7rt"
+      href="/rhevm-api/tags/ty38wobf-23n5-18we-v18j-5u8t348cs7rt"&gt;
+        &lt;name&gt;Billing&lt;/name&gt;
+        &lt;description&gt;Billing Resources&lt;/description&gt;
+        &lt;parent&gt;
+            &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"
+              href="/rhevm-api/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"/&gt;
+        &lt;/parent&gt;
+    &lt;/tag&gt;
 &lt;/tags&gt;
   </screen>
   <para>
@@ -166,20 +176,22 @@ Content-Type: application/xml
   </para>
   <screen>
 &lt;tag&gt;
-  &lt;name&gt;Billing&lt;/name&gt;
-  &lt;description&gt;Billing Resources&lt;/description&gt;
+    &lt;name&gt;Billing&lt;/name&gt;
+    &lt;description&gt;Billing Resources&lt;/description&gt;
     &lt;parent&gt;
-      &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5et"/&gt;
+        &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5et"/&gt;
     &lt;/parent&gt;
 &lt;/tag&gt;
   </screen>
   <para>Or using the <literal>name</literal> element:</para>
   <screen>
 &lt;tag&gt;
-  &lt;name&gt;Billing&lt;/name&gt;
-  &lt;description&gt;Billing Resources&lt;/description&gt;
+    &lt;name&gt;Billing&lt;/name&gt;
+    &lt;description&gt;Billing Resources&lt;/description&gt;
     &lt;parent&gt;
-      &lt;tag&gt;&lt;name&gt;Finance&lt;/name&gt;&lt;/tag&gt;
+        &lt;tag&gt;
+            &lt;name&gt;Finance&lt;/name&gt;
+        &lt;/tag&gt;
     &lt;/parent&gt;
 &lt;/tag&gt;
   </screen>
@@ -192,7 +204,9 @@ Accept: application/xml
 Content-Type: application/xml
 
 &lt;tag&gt;
-  &lt;parent&gt;&lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"/&gt;&lt;/parent&gt;
+    &lt;parent&gt;
+        &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"/&gt;
+    &lt;/parent&gt;
 &lt;/tag&gt;
   </screen>
 

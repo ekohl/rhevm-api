@@ -147,26 +147,29 @@ considered overloaded. The <literal>low</literal> attribute controls the lowest 
   </para>
 
   <screen>
-&lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"&gt;
-  &lt;name&gt;Default&lt;/name&gt;
-  &lt;description&gt;The default server cluster&lt;/description&gt;
-  &lt;cpu id="Intel Xeon 45nm Core2"/&gt;
-  &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
-  &lt;version major="3" minor="0"/&gt;
-  &lt;supported_versions&gt;
+&lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
+  href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"&gt;
+    &lt;name&gt;Default&lt;/name&gt;
+    &lt;description&gt;The default server cluster&lt;/description&gt;
+    &lt;cpu id="Intel Xeon 45nm Core2"/&gt;
+    &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"
+      href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
     &lt;version major="3" minor="0"/&gt;
-  &lt;/supported_versions&gt;
-  &lt;memory_policy&gt;
-    &lt;overcommit percent="200"/&gt;
-  &lt;/memory_policy&gt;
-  &lt;scheduling_policy&gt;
-    &lt;policy&gt;POWER_SAVING&lt;/policy&gt;
-    &lt;thresholds low="10" high="75" duration="120"/&gt;
-  &lt;/scheduling_policy&gt;
-  &lt;error_handling&gt;
-    &lt;on_error&gt;migrate&lt;/on_error&gt;
-  &lt;/error_handling&gt;
-  &lt;link rel="networks" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95/networks"/&gt;
+    &lt;supported_versions&gt;
+        &lt;version major="3" minor="0"/&gt;
+    &lt;/supported_versions&gt;
+    &lt;memory_policy&gt;
+        &lt;overcommit percent="200"/&gt;
+    &lt;/memory_policy&gt;
+    &lt;scheduling_policy&gt;
+        &lt;policy&gt;POWER_SAVING&lt;/policy&gt;
+        &lt;thresholds low="10" high="75" duration="120"/&gt;
+    &lt;/scheduling_policy&gt;
+    &lt;error_handling&gt;
+        &lt;on_error&gt;migrate&lt;/on_error&gt;
+    &lt;/error_handling&gt;
+    &lt;link rel="networks"
+      href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95/networks"/&gt;
 &lt;/cluster&gt;
   </screen>
 
@@ -202,12 +205,16 @@ HTTP/1.1 201 Created
 Location: http://{host}/clusters/99408929-82cf-4dc7-a532-9d998063fa95/networks/da05ac09-00be-45a1-b0b5-4a6a2438665f
 Content-Type: application/xml
 
-&lt;network id="da05ac09-00be-45a1-b0b5-4a6a2438665f" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95/networks/da05ac09-00be-45a1-b0b5-4a6a2438665f"&gt;
-  &lt;name&gt;display&lt;/name&gt;
-  &lt;status&gt;OPERATIONAL&lt;/status&gt;
-  &lt;description&gt;Display Network&lt;/description&gt;
-  &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95" href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
-  &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4" href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
+&lt;network id="da05ac09-00be-45a1-b0b5-4a6a2438665f"
+  href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95/networks/
+  da05ac09-00be-45a1-b0b5-4a6a2438665f"&gt;
+    &lt;name&gt;display&lt;/name&gt;
+    &lt;status&gt;OPERATIONAL&lt;/status&gt;
+    &lt;description&gt;Display Network&lt;/description&gt;
+    &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
+      href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
+    &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"
+      href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
 &lt;/network&gt;
     </screen>
 
