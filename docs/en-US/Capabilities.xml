@@ -82,8 +82,8 @@
           <entry>Affinities for a host's placement policy</entry>
         </row>
         <row>
-          <entry><literal>hooks_env</literal></entry>
-          <entry>Environment variables for a virtual machine's custom scripts (Hooks)</entry>
+          <entry><literal>custom_properties</literal></entry>
+          <entry>Environment variables for a virtual machine's custom scripts</entry>
         </row>
       </tbody>
     </tgroup>
@@ -201,6 +201,9 @@ Content-Type: application/xml
     &lt;vm_affinities&gt;
       ...
     &lt;/vm_affinities&gt;
+    &lt;custom_properties&gt;
+      ...
+    &lt;/custom_properties&gt;
     ...
   &lt;/version&gt;
   &lt;permits&gt;
