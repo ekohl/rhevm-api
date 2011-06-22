@@ -278,7 +278,7 @@
     </title>
 
     <para>
-      A VM's devices are represented and managed through a number of collections which behave similarly to other collections, as described by <xref linkend="chap-REST_API_Guide-Common_Idioms"/>.
+      A VM's devices are represented and managed through a number of collections which behave similarly to other collections, as described by <xref linkend="chap-REST_API_Guide-Common_Features"/>.
     </para>
 
     <para>
@@ -527,7 +527,7 @@
     </title>
 
     <para>
-      A VM may have any number of snapshots of its disk state and these are represented and managed through a collection which behaves similarly to other collections, as described by <xref linkend="chap-REST_API_Guide-Common_Idioms"/>.
+      A VM may have any number of snapshots of its disk state and these are represented and managed through a collection which behaves similarly to other collections, as described by <xref linkend="chap-REST_API_Guide-Common_Features"/>.
     </para>
 
     <para>

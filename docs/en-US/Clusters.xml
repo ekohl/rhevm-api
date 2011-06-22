@@ -191,7 +191,7 @@ considered overloaded. The <literal>low</literal> attribute controls the lowest 
     </para>
 
     <para>
-      The networks collection may be manipulated as described in <xref linkend="chap-REST_API_Guide-Common_Idioms"/>. Associating a network with the cluster is achieved by <literal>POST</literal>ing a network reference (identifying the network either by its <literal>id</literal> or <literal>name</literal>) to the collection. Removing an association is achieved by <literal>DELETE</literal>ing the appropriate element in the collection.
+      The networks collection may be manipulated as described in <xref linkend="chap-REST_API_Guide-Common_Features"/>. Associating a network with the cluster is achieved by <literal>POST</literal>ing a network reference (identifying the network either by its <literal>id</literal> or <literal>name</literal>) to the collection. Removing an association is achieved by <literal>DELETE</literal>ing the appropriate element in the collection.
     </para>
 
     <screen>
