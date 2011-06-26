@@ -26,6 +26,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import com.redhat.rhevm.api.mock.util.SimpleQueryEvaluator;
+import com.redhat.rhevm.api.model.Action;
 import com.redhat.rhevm.api.model.DataCenter;
 import com.redhat.rhevm.api.model.DataCenters;
 import com.redhat.rhevm.api.model.StorageType;
@@ -87,6 +88,10 @@ public class MockDataCentersResource extends AbstractMockQueryableResource<DataC
     @Override
     public void remove(String id) {
         dataCenters.remove(id);
+    }
+
+    @Override
+    public void remove(String id, Action action) {
     }
 
     @Override

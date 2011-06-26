@@ -29,6 +29,7 @@ import com.redhat.rhevm.api.common.util.DetailHelper;
 import com.redhat.rhevm.api.common.util.DetailHelper.Detail;
 import com.redhat.rhevm.api.common.util.ReflectionHelper;
 import com.redhat.rhevm.api.common.util.TimeZoneMapping;
+import com.redhat.rhevm.api.model.Action;
 import com.redhat.rhevm.api.model.CpuTopology;
 import com.redhat.rhevm.api.model.Display;
 import com.redhat.rhevm.api.model.DisplayType;
@@ -235,6 +236,10 @@ public class PowerShellVmsResource
     public void remove(String id) {
         PowerShellCmd.runCommand(getPool(), "remove-vm -vmid " + PowerShellUtils.escape(id));
         removeSubResource(id);
+    }
+
+    @Override
+    public void remove(String id, Action action) {
     }
 
     @Override

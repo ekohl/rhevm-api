@@ -28,6 +28,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import org.jboss.resteasy.annotations.providers.jaxb.Formatted;
 
+import com.redhat.rhevm.api.model.Action;
 import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.model.VMs;
 
@@ -57,6 +58,12 @@ public interface VmsResource {
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") String id);
+
+    @DELETE
+    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_X_YAML})
+    @Path("{id}")
+    public void remove(@PathParam("id") String id, Action action);
+
 
     /**
      * Sub-resource locator method, returns individual VmResource on which the

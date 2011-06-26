@@ -26,6 +26,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import com.redhat.rhevm.api.mock.util.SimpleQueryEvaluator;
+import com.redhat.rhevm.api.model.Action;
 import com.redhat.rhevm.api.model.Template;
 import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.model.VMs;
@@ -90,6 +91,10 @@ public class MockVmsResource extends AbstractMockQueryableResource<VM> implement
     @Override
     public void remove(String id) {
         vms.remove(id);
+    }
+
+    @Override
+    public void remove(String id, Action action) {
     }
 
     @Override
