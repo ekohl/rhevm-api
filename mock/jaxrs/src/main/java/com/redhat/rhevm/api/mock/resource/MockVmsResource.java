@@ -95,6 +95,7 @@ public class MockVmsResource extends AbstractMockQueryableResource<VM> implement
 
     @Override
     public void remove(String id, Action action) {
+        vms.remove(id);
     }
 
     @Override

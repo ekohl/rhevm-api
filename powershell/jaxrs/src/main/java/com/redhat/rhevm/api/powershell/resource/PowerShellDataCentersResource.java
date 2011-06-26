@@ -110,6 +110,8 @@ public class PowerShellDataCentersResource
 
     @Override
     public void remove(String id, Action action) {
+        PowerShellCmd.runCommand(getPool(), "remove-datacenter -datacenterid " + PowerShellUtils.escape(id));
+        removeSubResource(id);
     }
 
     @Override

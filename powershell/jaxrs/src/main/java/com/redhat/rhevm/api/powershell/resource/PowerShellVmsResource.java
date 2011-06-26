@@ -240,6 +240,13 @@ public class PowerShellVmsResource
 
     @Override
     public void remove(String id, Action action) {
+        StringBuffer cmd = new StringBuffer();
+        cmd.append("remove-vm -vmid " + PowerShellUtils.escape(id));
+        if (action !=null && action.isSetForce() && action.isForce()) {
+            cmd.append(" -force");
+        }
+        PowerShellCmd.runCommand(getPool(), cmd.toString());
+        removeSubResource(id);
     }
 
     @Override
