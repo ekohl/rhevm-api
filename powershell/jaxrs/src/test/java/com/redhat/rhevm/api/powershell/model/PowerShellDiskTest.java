@@ -49,8 +49,8 @@ public class PowerShellDiskTest extends PowerShellModelTest {
         assertEquals(parentId, d.getParentId());
         assertEquals(internalDriveMapping, d.getInternalDriveMapping());
         assertEquals(lastModified, d.getLastModified().toString());
-        assertNotNull(d.getStorageDomain());
-        assertEquals(storageDomainId, d.getStorageDomain().getId());
+        assertNotNull(d.getStorageDomains());
+        assertEquals(storageDomainId, d.getStorageDomains().getStorageDomains().get(0).getId());
     }
 
     @Test

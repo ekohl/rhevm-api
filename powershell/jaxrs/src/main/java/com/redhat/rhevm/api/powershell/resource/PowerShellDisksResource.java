@@ -105,8 +105,8 @@ public class PowerShellDisksResource
         buf.append("$v = get-vm " + PowerShellUtils.escape(parentId) + ";");
 
         buf.append("add-disk -diskobject $d -vmobject $v");
-        if (disk.getStorageDomain() != null) {
-            buf.append(" -storagedomainid " + disk.getStorageDomain().getId());
+        if (disk.isSetStorageDomains() && disk.getStorageDomains().isSetStorageDomains() && !disk.getStorageDomains().getStorageDomains().isEmpty()) {
+            buf.append(" -storagedomainid " + disk.getStorageDomains().getStorageDomains().get(0).getId());
         }
 
         boolean expectBlocking = expectBlocking();

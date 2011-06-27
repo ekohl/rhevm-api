@@ -27,6 +27,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import com.redhat.rhevm.api.common.util.SizeConverter;
 import com.redhat.rhevm.api.model.Disk;
 import com.redhat.rhevm.api.model.StorageDomain;
+import com.redhat.rhevm.api.model.StorageDomains;
 import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.powershell.enums.PowerShellDiskInterface;
 import com.redhat.rhevm.api.powershell.enums.PowerShellDiskType;
@@ -134,8 +135,10 @@ public class PowerShellDisk extends Disk {
         disk.getVm().setId(vmId);
 
         if (storageDomainId != null) {
-            disk.setStorageDomain(new StorageDomain());
-            disk.getStorageDomain().setId(storageDomainId);
+            disk.setStorageDomains(new StorageDomains());
+            StorageDomain storageDomain = new StorageDomain();
+            storageDomain.setId(storageDomainId);
+            disk.getStorageDomains().getStorageDomains().add(storageDomain);
         }
 
         disk.setSize(SizeConverter.gigasToBytes(entity.get("sizeingb", Long.class)));
