@@ -46,12 +46,12 @@ public class PowerShellFilesResource extends UriProviderWrapper implements Files
     @Override
     public Files list() {
         StringBuilder buf = new StringBuilder();
-        buf.append("$d = get-datacenter -storagedomainid " + PowerShellUtils.escape(storageDomainId));
-        buf.append("; ");
+        buf.append("foreach ($d in get-datacenter -storagedomainid " + PowerShellUtils.escape(storageDomainId) + ") {");
         buf.append("if ($d.status -eq \"Up\") { ");
         buf.append("get-isoimages");
-        buf.append(" -datacenterid $d.datacenterid");
-        buf.append("}");
+        buf.append(" -datacenterid $d.datacenterid;");
+        buf.append("break;");
+        buf.append("} }");
         Files ret = new Files();
         for (File file : PowerShellFile.parse(parser, PowerShellCmd.runCommand(getPool(), buf.toString()))) {
             ret.getFiles().add(addLinks(file, storageDomainId));
