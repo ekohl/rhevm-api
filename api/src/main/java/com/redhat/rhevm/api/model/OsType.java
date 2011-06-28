@@ -28,16 +28,16 @@ public enum OsType {
     RHEL_5,
     RHEL_4,
     RHEL_3,
-    WINDOWS_2003x64,
+    WINDOWS_2003X64,
     WINDOWS_7,
-    WINDOWS_7x64,
-    RHEL_5x64,
-    RHEL_4x64,
-    RHEL_3x64,
-    WINDOWS_2008x64,
-    WINDOWS_2008R2x64,
+    WINDOWS_7X64,
+    RHEL_5X64,
+    RHEL_4X64,
+    RHEL_3X64,
+    WINDOWS_2008X64,
+    WINDOWS_2008R2,
     RHEL_6,
-    RHEL_6x64;
+    RHEL_6X64;
 
     public String value() {
         return name().toLowerCase();

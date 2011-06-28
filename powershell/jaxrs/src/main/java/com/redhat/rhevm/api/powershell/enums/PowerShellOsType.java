@@ -33,16 +33,16 @@ public enum PowerShellOsType {
     RHEL5(OsType.RHEL_5),
     RHEL4(OsType.RHEL_4),
     RHEL3(OsType.RHEL_3),
-    Windows2003x64(OsType.WINDOWS_2003x64),
+    Windows2003x64(OsType.WINDOWS_2003X64),
     Windows7(OsType.WINDOWS_7),
-    Windows7x64(OsType.WINDOWS_7x64),
-    RHEL5x64(OsType.RHEL_5x64),
-    RHEL4x64(OsType.RHEL_4x64),
-    RHEL3x64(OsType.RHEL_3x64),
-    Windows2008x64(OsType.WINDOWS_2008x64),
-    Windows2008R2x64(OsType.WINDOWS_2008R2x64),
+    Windows7x64(OsType.WINDOWS_7X64),
+    RHEL5x64(OsType.RHEL_5X64),
+    RHEL4x64(OsType.RHEL_4X64),
+    RHEL3x64(OsType.RHEL_3X64),
+    Windows2008x64(OsType.WINDOWS_2008X64),
+    Windows2008R2x64(OsType.WINDOWS_2008R2),
     RHEL6(OsType.RHEL_6),
-    RHEL6x64(OsType.RHEL_6x64);
+    RHEL6x64(OsType.RHEL_6X64);
 
     private static HashMap<OsType, PowerShellOsType> mapping;
     static {
