@@ -47,11 +47,10 @@
 GET /rhevm-api/datacenters HTTP/1.1
 Accept: application/xml
       </screen>
-    </example>
-    <para>
-      The API returns the following representation:
-    </para>
-    <screen>
+      <para>
+        The API returns the following representation:
+      </para>
+      <screen>
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
@@ -73,7 +72,8 @@ Content-Type: application/xml
         &lt;status&gt;UP&lt;/status&gt;
     &lt;/data_center&gt;
 &lt;/data_centers&gt;
-    </screen>
+      </screen>
+    </example>
     <para>
       Note the <literal>id</literal> code of your <literal>Default</literal> data center. This code indentifies this data center in relation to other resources of your virtual environment.
     </para>
@@ -94,11 +94,10 @@ Content-Type: application/xml
 GET /rhevm-api/clusters HTTP/1.1
 Accept: application/xml
       </screen>
-    </example>
-    <para>
-      The API returns the following representation:
-    </para>
-    <screen>
+      <para>
+        The API returns the following representation:
+      </para>
+      <screen>
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
@@ -127,7 +126,8 @@ Content-Type: application/xml
         &lt;/error_handling&gt;
     &lt;/cluster&gt;
 &lt;/clusters&gt;
-    </screen>
+      </screen>
+    </example>
     <para>
       Note the <literal>id</literal> code of your <literal>Default</literal> host cluster. This code indentifies this host cluster in relation to other resources of your virtual environment.
     </para>
@@ -135,8 +135,7 @@ Content-Type: application/xml
       The <literal>networks</literal> sub-collection also contains a list of associated network resources for this cluster. The next section examines the <literal>networks</literal> collection in more detail.
     </para>
   </section>
-    
-    
+
   <section id="sect-REST_API_Guide-Example-List_Logical_Networks">
     <title>List Logical Networks Collection</title>
     <para>
@@ -151,11 +150,10 @@ Content-Type: application/xml
 GET /rhevm-api/networks HTTP/1.1
 Accept: application/xml
       </screen>
-    </example>
-    <para>
-      The API returns the following representation:
-    </para>
-    <screen>
+      <para>
+        The API returns the following representation:
+      </para>
+      <screen>
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
@@ -171,14 +169,14 @@ Content-Type: application/xml
         &lt;display&gt;false&lt;/display&gt;
     &lt;/network&gt;
 &lt;/networks&gt;
-    </screen>
+      </screen>
+    </example>
   </section>
-    
-    
+
   <section id="sect-REST_API_Guide-Example-List_Hosts">
     <title>List Host Collection</title>
     <para>
-        This example uses a Red Hat Enteprise Virtualization Hypervisor host. Red Hat Enteprise Virtualization Manager automatically registers any configured Red Hat Enteprise Virtualization Hypervisor. This example retrieves a representation of the hosts collection and shows a Red Hat Enteprise Virtualization Hypervisor host named <literal>hypervisor</literal> registered with the virtualization environment.
+      This example uses a Red Hat Enteprise Virtualization Hypervisor host. Red Hat Enteprise Virtualization Manager automatically registers any configured Red Hat Enteprise Virtualization Hypervisor. This example retrieves a representation of the hosts collection and shows a Red Hat Enteprise Virtualization Hypervisor host named <literal>hypervisor</literal> registered with the virtualization environment.
     </para>
     <example>
       <title>List hosts collection</title>
@@ -186,11 +184,10 @@ Content-Type: application/xml
 GET /rhevm-api/hosts HTTP/1.1
 Accept: application/xml
       </screen>
-    </example>
-    <para>
-      The API returns the following representation:
-    </para>
-    <screen>
+      <para>
+        The API returns the following representation:
+      </para>
+      <screen>
 HTTP/1.1 200 OK
 Accept: application/xml
 
@@ -257,7 +254,8 @@ Accept: application/xml
         &lt;/summary&gt;
     &lt;/host&gt;
 &lt;/hosts&gt;
-    </screen>
+      </screen>
+    </example>
     <para>
       Note the <literal>id</literal> code of your <literal>Default</literal> host. This code indentifies this host in relation to other resources of your virtual environment.
     </para>
@@ -285,7 +283,6 @@ Content-type: application/xml
     </para>
   </section>
 
-
   <section id="sect-REST_API_Guide-Example-Create_NFS_Data_Storage_Domain">
     <title>Create NFS Data Storage</title>
     <para>
@@ -311,11 +308,10 @@ Content-type: application/xml
   &lt;/host&gt;
 &lt;/storage_domain&gt;
       </screen>
-    </example>
-    <para>
-      The API creates a NFS data storage domain called <literal>data1</literal> with an export path of <uri>192.168.0.10:/data1</uri> and sets access to the storage domain through the <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
-    </para>
-    <screen>
+      <para>
+        The API creates a NFS data storage domain called <literal>data1</literal> with an export path of <uri>192.168.0.10:/data1</uri> and sets access to the storage domain through the <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
+      </para>
+      <screen>
 HTTP/1.1 200 OK
 Accept: application/xml
 
@@ -340,7 +336,8 @@ Accept: application/xml
         &lt;storage_format&gt;v1&lt;/storage_format&gt;
     &lt;/storage_domain&gt;
 &lt;/storage_domains&gt;
-    </screen>
+      </screen>
+    </example>
   </section>
   
   <section id="sect-REST_API_Guide-Example-Create_NFS_ISO_Storage_Domain">
@@ -368,11 +365,10 @@ Content-type: application/xml
   &lt;/host&gt;
 &lt;/storage_domain&gt;
       </screen>
-    </example>
-    <para>
-      The API creates a NFS data storage domain called <literal>iso1</literal> with an export path of <uri>192.168.0.10:/iso1</uri> and sets access to the storage domain through the <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
-    </para>
-    <screen>
+      <para>
+        The API creates a NFS data storage domain called <literal>iso1</literal> with an export path of <uri>192.168.0.10:/iso1</uri> and sets access to the storage domain through the <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
+      </para>
+      <screen>
 HTTP/1.1 200 OK
 Accept: application/xml
 
@@ -397,7 +393,8 @@ Accept: application/xml
         &lt;storage_format&gt;v1&lt;/storage_format&gt;
     &lt;/storage_domain&gt;
 &lt;/storage_domains&gt;
-    </screen>
+      </screen>
+    </example>
   </section>
  
  
@@ -436,7 +433,6 @@ Content-type: application/xml
     </example>
   </section>
   
-
   <section id="sect-REST_API_Guide-Example-Activate_Data_Storage">
     <title>Activate Storage Domains</title>
     <para>
@@ -461,7 +457,6 @@ Content-type: application/xml
       </screen>
     </example>
   </section>
-
 
   <section id="sect-REST_API_Guide-Example-Create_VM">
     <title>Create Virtual Machine</title>
@@ -489,11 +484,10 @@ Content-type: application/xml
   &lt;/os&gt;
 &lt;/vm&gt;
       </screen>
-    </example>
-    <para>
-      The API returns the following representation of the newly created virtual machine resource:
-    </para>
-    <screen>
+      <para>
+        The API returns the following representation of the newly created virtual machine resource:
+      </para>
+      <screen>
 HTTP/1.1 200 OK
 Accept: application/xml    
 
@@ -566,9 +560,9 @@ Accept: application/xml
         &lt;guaranteed&gt;536870912&lt;/guaranteed&gt;
     &lt;/memory_policy&gt;
 &lt;/vm&gt;
-    </screen>
+      </screen>
+    </example>
   </section>
-
 
   <section id="sect-REST_API_Guide-Example-Attach_NIC">
     <title>Attach NIC to Virtual Machine</title>
@@ -592,7 +586,6 @@ Content-type: application/xml
  	  </example>
   </section>
   
-
   <section id="sect-REST_API_Guide-Example-Attach_Disk">
     <title>Attach Storage Disk to Virtual Machine</title>
     <para>
@@ -634,11 +627,10 @@ Content-type: application/xml
 GET /rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/files HTTP/1.1
 Accept: application/xml
  	  	</screen>
- 	  </example>
-    <para>
-      The API returns the following representation of the files sub-collection:
-    </para>
-    <screen>
+      <para>
+        The API returns the following representation of the files sub-collection:
+      </para>
+      <screen>
 &lt;files&gt;
     &lt;file id="rhel-server-6.0-x86_64-dvd.iso"
       href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/
@@ -648,7 +640,8 @@ Accept: application/xml
           href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"/&gt;
     &lt;/file&gt;
 &lt;/files&gt;
-    </screen>
+      </screen>
+ 	  </example>
     <para>
       An API user attaches the <literal>rhel-server-6.0-x86_64-dvd.iso</literal> to our example virtual machine.
     </para>
@@ -666,7 +659,6 @@ Content-type: application/xml
  	  </example>
   </section>
 
-
   <section id="sect-REST_API_Guide-Example-Start_VM">
     <title>Start Virtual Machine</title>
     <para>The virtual environment is complete and the virtual machine contains all necessary components to function. This example starts the virtual machine using the <literal>start</literal> action.</para>
@@ -678,9 +670,99 @@ Accept: application/xml
 Content-type: application/xml
  	  	</screen>
  	  </example>
- 	  <para>
- 	    This concludes the REST API example for your Red Hat Virtualization environment.
- 	  </para>
+  </section>
+
+  <section id="sect-REST_API_Guide-Example-Events">
+    <title>Check System Events</title>
+    <para>The <literal>start</literal> action for the <literal>vm1</literal> creates several entries in the <literal>events</literal> collection. This example lists the events collection and identifies events specific to the API starting a virtual machine.</para>
+    <example>
+      <title>List the events collection</title>
+ 	  	<screen>
+GET /rhevm-api/events HTTP/1.1
+Accept: application/xml
+ 	  	</screen>
+ 	  	<para>
+        The API returns a representation that includes the following:
+      </para>
+ 	  	<screen>
+&lt;events&gt;
+    ...
+    &lt;event id="103" href="/rhevm-api/events/103"&gt;
+        &lt;description&gt;User admin logged out.&lt;/description&gt;
+        &lt;code&gt;31&lt;/code&gt;
+        &lt;severity&gt;NORMAL&lt;/severity&gt;
+        &lt;time&gt;2011-06-29T17:42:41.544+10:00&lt;/time&gt;
+        &lt;user id="80b71bae-98a1-11e0-8f20-525400866c73" 
+          href="/rhevm-api/users/80b71bae-98a1-11e0-8f20-525400866c73"/&gt;
+    &lt;/event&gt;
+    &lt;event id="102" href="/rhevm-api/events/102"&gt;
+        &lt;description&gt;vm1 was started by admin (Host: hypervisor).&lt;/description&gt;
+        &lt;code&gt;153&lt;/code&gt;
+        &lt;severity&gt;NORMAL&lt;/severity&gt;
+        &lt;time&gt;2011-06-29T17:42:41.499+10:00&lt;/time&gt;
+        &lt;user id="80b71bae-98a1-11e0-8f20-525400866c73"
+          href="/rhevm-api/users/80b71bae-98a1-11e0-8f20-525400866c73"/&gt;
+        &lt;vm id="6efc0cfa-8495-4a96-93e5-ee490328cf48"
+          href="/rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48"/&gt;
+        &lt;host id="0656f432-923a-11e0-ad20-5254004ac988"
+          href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988"/&gt;
+    &lt;/event&gt;
+    &lt;event id="101" href="/rhevm-api/events/101"&gt;
+        &lt;description&gt;User admin logged in.&lt;/description&gt;
+        &lt;code&gt;30&lt;/code&gt;
+        &lt;severity&gt;NORMAL&lt;/severity&gt;
+        &lt;time&gt;2011-06-29T17:42:40.505+10:00&lt;/time&gt;
+        &lt;user id="80b71bae-98a1-11e0-8f20-525400866c73"
+          href="/rhevm-api/users/80b71bae-98a1-11e0-8f20-525400866c73"/&gt;
+    &lt;/event&gt;
+    ...
+&lt;/events&gt;
+ 	  	</screen>
+   	  <para>
+   	    The following events have occured:
+   	  </para>
+   	  <itemizedlist>
+        <listitem>
+          <para>
+            <literal>id="101"</literal> - The API authenticates with the <literal>admin</literal> user's username and password.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>id="102"</literal> - The API, acting as the <literal>admin</literal> user, starts <literal>vm1</literal> on the <literal>hypervisor</literal> host.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <literal>id="103"</literal> - The API logs out of the <literal>admin</literal> user account.
+          </para>
+        </listitem>
+      </itemizedlist>
+ 	  </example>
+  </section>
+
+  <section id="sect-REST_API_Guide-Example-Errors">
+    <title>Error Handling</title>
+    <para>The following example attempts to update a read-only property, which creates an error.</para>
+    <example>
+      <title>Update the virtual machine's id code and create an error </title>
+ 	  	<screen>
+PUT /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48 HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;vm id="01010101-0101-0101-0101-010101010101"/&gt;
+      </screen>
+      <para>
+        The API returns the following error:
+      </para>
+      <screen>
+&lt;fault&gt;
+    &lt;reason&gt;Broken immutability constraint&lt;/reason&gt;
+    &lt;detail&gt;Attempt to set immutable field: id&lt;/detail&gt;
+&lt;/fault&gt;
+ 	  	</screen>
+ 	  </example>
   </section>
 
 </chapter>
