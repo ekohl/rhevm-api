@@ -4,10 +4,12 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-REST_API_Guide-VM_Pools">
-  <title>VM Pools</title>
-
+  <title>Virtual Machine Pools</title>
   <para>
-    The VM pool specific elements which may be contained in the VM pool description are as follows:
+    The <literal>vmpools</literal> collection provides information about the virtual machine pools in a Red Hat Enterprise Virtualization environment. An API user accesses this information through the <literal>rel="vmpools"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>).
+  </para>
+  <para>
+    The following table shows specific elements contained in a virtual machine pool resource representation.
   </para>
   <note>
     <title>Element property icons</title>
@@ -15,59 +17,67 @@
       The icons used in the properties column of this table are described in <xref linkend="table-Property_Icons" />
     </para>
   </note> 
-
-  <para>
-    <informaltable frame="none">
-      <tgroup cols="4">
-        <colspec colwidth="2*"/>
-        <colspec colwidth="4*"/>
-        <colspec colwidth="6*"/>
-        <colspec colwidth="3*" colname="prop"/>
-        <thead>
-          <row>
-            <entry>Element</entry>
-            <entry>Type</entry>
-            <entry>Description</entry>
-            <entry>Properties</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry><literal>size</literal></entry>
-            <entry>integer</entry>
-            <entry>The number of VMs in the pool</entry>
-            <entry> </entry>
-          </row>
-          <row>
-            <entry><literal>cluster</literal></entry>
-            <entry>Cluster resource</entry>
-            <entry>A reference to the cluster which VMs in this pool run on</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>template</literal></entry>
-            <entry>Template resource</entry>
-            <entry>A reference to the template which VMs in this pool are based on</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-
-    For example:
-  </para>
-
-  <screen>
+  <informaltable frame="none">
+    <tgroup cols="4">
+      <colspec colwidth="3*"/>
+      <colspec colwidth="3*"/>
+      <colspec colwidth="6*"/>
+      <colspec colwidth="3*" colname="prop"/>
+      <thead>
+        <row>
+          <entry>Element</entry>
+          <entry>Type</entry>
+          <entry>Description</entry>
+          <entry>Properties</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry><literal>name</literal></entry>
+          <entry>string</entry>
+          <entry>	A user-supplied human readable name for the pool. The <literal>name</literal> is unique across all pool resources.</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>description</literal></entry>
+          <entry>string</entry>
+          <entry>A free-form user-supplied human readable description of the pool</entry>
+          <entry></entry>
+        </row>
+        <row>
+          <entry><literal>size</literal></entry>
+          <entry>integer</entry>
+          <entry>The number of virtual machines in the pool</entry>
+          <entry> </entry>
+        </row>
+        <row>
+          <entry><literal>cluster</literal></entry>
+          <entry>complex</entry>
+          <entry>A reference to the cluster resource which virtual machines in this pool run on</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>template</literal></entry>
+          <entry>complex</entry>
+          <entry>A reference to the template resource which virtual machines in this pool are based on</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+  <example>
+    <title>An XML representation of a virtual machine pool</title>
+    <screen>
 &lt;vmpool id="00000000-0000-0000-0000-000000000000"
   href="/rhevm-api/vmpools/00000000-0000-0000-0000-000000000000"&gt;
-    &lt;name&gt;test&lt;/name&gt;
-    &lt;description&gt;Testing, Testing&lt;/description&gt;
-    &lt;size&gt;0&lt;/size&gt;
+    &lt;name&gt;VMPool1&lt;/name&gt;
+    &lt;description&gt;Virtual Machine Pool 1&lt;/description&gt;
+    &lt;size&gt;2&lt;/size&gt;
     &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
       href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
     &lt;template id="00000000-0000-0000-0000-000000000000"
       href="/rhevm-api/templates/00000000-0000-0000-0000-000000000000"/&gt;
-    &lt;actions/&gt;
 &lt;/vmpool&gt;
-  </screen>
+    </screen>
+  </example>
 </chapter>

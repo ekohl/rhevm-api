@@ -18,14 +18,42 @@
         The format for language tags is described in <ulink url="http://www.ietf.org/rfc/rfc1766.txt">RFC 1766</ulink>
       </para>
     </footnote>
-    Currently, limited content is available in German (de), Dutch (nl) and Italian (it). Support for wider localization is a work in progress.
   </para>
+  <para>
+    Localization support is currently available for:
+  </para>
+  <informaltable frame="none">
+    <tgroup cols="2">
+      <colspec colwidth="2*"/>
+      <colspec colwidth="5*"/>
+      <thead>
+        <row>
+          <entry>Language Code</entry>
+          <entry>Language </entry>
+        </row>
+      </thead>        
+      <tbody>
+        <row>
+          <entry><literal>de</literal></entry>
+          <entry>German</entry>
+        </row>
+        <row>
+          <entry><literal>nl</literal></entry>
+          <entry>Dutch</entry>
+        </row>
+        <row>
+          <entry><literal>it</literal></entry>
+          <entry>Italian</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
   <example>
-    <title>Using Accept-Language to request simplified Chinese output</title>
+    <title>Using Accept-Language to request German localization</title>
     <screen>
 GET {base} HTTP/1.1
 Host: {host}
-Accept-Language: zh-CN
+Accept-Language: de
     </screen>
   </example>
 </chapter>

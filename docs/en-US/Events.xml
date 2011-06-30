@@ -5,12 +5,19 @@
 ]>
 <chapter id="chap-REST_API_Guide-Events">
   <title>Events</title>
-  <para>The <literal>rel="events"</literal> link obtained from the entry point URI allows a user to query information on system events from Red Hat Enterprise Virtualisation Manager. The following table lists the events specific elements:</para>
-
+  <para>
+    The <literal>rel="events"</literal> link obtained from the entry point URI accesses the <literal>events</literal> collection and lists system events from Red Hat Enterprise Virtualisation Manager.
+  </para>
   <informaltable frame="none">
     <tgroup cols="2">
       <colspec colwidth="2*"/>
       <colspec colwidth="5*"/>
+      <thead>
+        <row>
+          <entry>Element</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
       <tbody>
         <row>
           <entry><literal>id=</literal></entry>
@@ -39,8 +46,9 @@
       </tbody>
     </tgroup>
   </informaltable>
-  <para>For example:</para>
-  <screen>
+  <example>
+    <title>An XML representation of the the events collection</title>
+    <screen>
 &lt;events&gt;
     &lt;event id="537" href="/rhevm-api/events/537"&gt;
         &lt;description&gt;User vdcadmin logged in.&lt;/description&gt;
@@ -52,5 +60,9 @@
     &lt;/event&gt;
     ...
 &lt;/events&gt;
-  </screen>
+    </screen>
+  </example>
+  <note>
+    <para>The <literal>events</literal> collection is read-only.</para>
+  </note>
 </chapter>

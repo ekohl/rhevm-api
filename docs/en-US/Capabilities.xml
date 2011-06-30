@@ -12,10 +12,13 @@
   <section id="chap-REST_API_Guide-Capabilities-Version">
     <title>Version-Dependent Capabilities</title>
     <para>
-      The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements which describe capabilities which are dependent on a compatiblity level.
+      The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements which describe capabilities that are dependent on a compatiblity level.
     </para>
     <para>
-      The <literal>version</literal> element includes attributes for <literal>major</literal> and <literal>minor</literal> version numbers. This indicates the version level. The following example indicates capabilities specific to Red Hat Enterprise Virtualization Manager&nbsp;3.0 and 2.2 respectively:
+      The <literal>version</literal> element includes attributes for <literal>major</literal> and <literal>minor</literal> version numbers. This indicates the current version level, which this document discusses in <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/>.
+    </para>
+    <para>
+      The following representation shows capabilities specific to Red Hat Enterprise Virtualization Manager&nbsp;<literal>3.0</literal> and <literal>2.2</literal> respectively:
     </para>
     <screen>
 &lt;capabilities&gt;
@@ -35,6 +38,12 @@
       <tgroup cols="2">
         <colspec colwidth="2*"/>
         <colspec colwidth="5*"/>
+        <thead>
+          <row>
+            <entry>Capability Element</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
         <tbody>
           <row>
             <entry><literal>current</literal></entry>
@@ -119,7 +128,7 @@
     <section id="sect-REST_API_Guide-Capabilities-Version-Current">
       <title>Current Version</title>
       <para>The <literal>current</literal> element signifies if the <literal>version</literal> specified is the most recent supported compatibility level. The value is either a boolean <literal>true</literal> or <literal>false</literal>.</para>
-  		<screen>
+      <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
 	      ...
@@ -127,12 +136,12 @@
         ...
     &lt;/version&gt;
 &lt;/capabilities&gt;
-    </screen>
+      </screen>
     </section>
    
     <section id="sect-REST_API_Guide-Capabilities-Version-Features">
       <title>Features</title>
-      <para>Each <literal>version</literal> contains a list of compatible <literal>features</literal>. These features include:</para>
+      <para>Each <literal>version</literal> contains a list of compatible <literal>features</literal>.</para>
       <informaltable frame="none">
         <tgroup cols="3">
           <colspec colwidth="4*"/>
@@ -140,7 +149,7 @@
           <colspec colwidth="6*"/>
           <thead>
             <row>
-              <entry>Element</entry>
+              <entry>Feature Element</entry>
               <entry>Type</entry>
               <entry>Description</entry>
             </row>
@@ -154,9 +163,7 @@
           </tbody>
         </tgroup>
       </informaltable>
-
-      <para>For example:</para>
-  		<screen>
+      <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
 	      ...
@@ -167,23 +174,26 @@
     &lt;/version&gt;
 &lt;/capabilities&gt;
     </screen>
-	</section>
+	  </section>
 
-  <section id="sect-REST_API_Guide-Capabilities-CPUs">
-    <title>CPUs</title>
-
-    <para>
-      Each cluster is configured with a minimal CPU type that all hosts in that cluster must support. Guests running on hosts within the cluster all run on this CPU type, ensuring that every guest can be live migrated to any host within the cluster.
-    </para>
-
-    <para>
-      Red Hat Enterprise Virtualization has a set of supported CPU types to choose from when configuring a cluster. Each CPU has the following properties:
-    </para>
-
+    <section id="sect-REST_API_Guide-Capabilities-CPUs">
+      <title>CPUs</title>
+      <para>
+        Each cluster is configured with a minimal CPU type that all hosts in that cluster must support. Guests running on hosts within the cluster all run on this CPU type, ensuring that every guest can be live migrated to any host within the cluster.
+      </para>
+      <para>
+        Red Hat Enterprise Virtualization has a set of supported CPU types to choose from when configuring a cluster. Each CPU has the following properties:
+      </para>
       <informaltable frame="none">
         <tgroup cols="2">
           <colspec colwidth="2*"/>
           <colspec colwidth="5*"/>
+          <thead>
+            <row>
+              <entry>Element</entry>
+              <entry>Description</entry>
+            </row>
+          </thead>
           <tbody>
             <row>
               <entry><literal>id</literal></entry>
@@ -196,30 +206,38 @@
           </tbody>
         </tgroup>
       </informaltable>
-
       <screen>
 &lt;capabilities&gt;
-    &lt;cpus&gt;
-        &lt;cpu id="Intel Xeon w/o XD/NX"&gt;
-            &lt;level&gt;2&lt;/level&gt;
-        &lt;/cpu&gt;
-        &lt;cpu id="Intel Xeon"&gt;
-            &lt;level&gt;3&lt;/level&gt;
-        &lt;/cpu&gt;
+    &lt;version major="3" minor="0"&gt;
         ...
-    &lt;/cpus&gt;
-    ...
+        &lt;cpus&gt;
+            &lt;cpu id="Intel Xeon w/o XD/NX"&gt;
+                &lt;level&gt;2&lt;/level&gt;
+            &lt;/cpu&gt;
+            &lt;cpu id="Intel Xeon"&gt;
+                &lt;level&gt;3&lt;/level&gt;
+            &lt;/cpu&gt;
+            ...
+        &lt;/cpus&gt;
+        ...
+    &lt;/version&gt;
 &lt;/capabilities&gt;
       </screen>
     </section>
 
     <section id="sect-REST_API_Guide-Capabilities-Power_Managers">
       <title>Power Managers</title>
-      <para>Red Hat Enterprise Virtualization platform provides a list of supported power managers for host fencing configuration. Each power manager contains the following properties:</para>
+      <para>Red Hat Enterprise Virtualization platform provides a list of supported <literal>power_managers</literal> for host fencing configuration. Each <literal>power_management</literal> option contains the following properties:</para>
       <informaltable frame="none">
         <tgroup cols="2">
           <colspec colwidth="2*"/>
           <colspec colwidth="5*"/>
+          <thead>
+            <row>
+              <entry>Element</entry>
+              <entry>Description</entry>
+            </row>
+          </thead>          
           <tbody>
             <row>
               <entry><literal>type</literal></entry>
@@ -232,7 +250,6 @@
           </tbody>
         </tgroup>
       </informaltable>
-      <para>For example:</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -268,7 +285,7 @@
     
     <section id="sect-REST_API_Guide-Capabilities-Version-Fence_Types">
       <title>Fence Types</title>
-      <para>The <literal>fence_types</literal> element defines option to fence a troublesome host and reduce power usage.</para>
+      <para>The <literal>fence_types</literal> element defines <literal>fence_type</literal> options to fence a troublesome host and reduce power usage.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -288,7 +305,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-Storage_Types">
       <title>Storage Types</title>
-      <para>The <literal>storage_types</literal> element defines the available physical storage types. </para>
+      <para>The <literal>storage_types</literal> element defines the available physical <literal>storage_type</literal> options. </para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -307,7 +324,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-Storage_Domain_Types">
       <title>Storage Domain Types</title>
-      <para>The <literal>storage_domain_types</literal> element shows the available types of storage domains a user creates in a virtualization environment. </para>
+      <para>The <literal>storage_domain_types</literal> element shows the available <literal>storage_domain_type</literal> options a user creates in a virtualization environment. </para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -325,7 +342,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-VM_Types">
       <title>Virtual Machine Types</title>
-      <para>The <literal>vm_types</literal> element defines the virtual machines type available for creation in a virtual environment.</para>
+      <para>The <literal>vm_types</literal> element defines each virtual machine type (<literal>vm_type</literal>) available for creation in a virtual environment.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -342,7 +359,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-Boot_Devices">
       <title>Boot Devices</title>
-      <para>Each virtual machine boots from a selected device. The <literal>boot_devices</literal> element lists such devices.</para>
+      <para>Each virtual machine boots from a selected device. The <literal>boot_devices</literal> element lists such <literal>boot_device</literal> options.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -360,14 +377,14 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-Display_Types">
       <title>Display Types</title>
-      <para>Access to a virtual machine through Red Hat Enterprise Virtualization Manager requires a display protocol. The <literal>display_devices</literal> element lists these protocols.</para>
+      <para>Access to a virtual machine through Red Hat Enterprise Virtualization Manager requires a display protocol. The <literal>display_types</literal> element lists each <literal>display_type</literal> protocol.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
 	      ...
         &lt;display_types&gt;
-            &lt;display_type>vnc&lt;/display_type&gt;
-            &lt;display_type>spice&lt;/display_type&gt;
+            &lt;display_type&gt;vnc&lt;/display_type&gt;
+            &lt;display_type&gt;spice&lt;/display_type&gt;
         &lt;/display_types&gt;
         ...
     &lt;/version&gt;
@@ -377,7 +394,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-NIC_Types">
       <title>NIC Types</title>
-      <para>A virtual machine requires a network interface to connect to a network. The <literal>nic_types</literal> element defines the supported NIC types available. The NIC type depends on the drivers available for different types of virtual machines. VirtIO drivers are available for Red Hat Enterprise Linux 4.8 and above, and for Windows virtual machines; while Windows supports rtl8139 without the need for any drivers. For other Linux machines, or earlier versions of Red Hat Enterprise Linux, use e1000 or rtl8139.</para>
+      <para>A virtual machine requires a network interface to connect to a network. The <literal>nic_types</literal> element defines the supported NIC types available. Each <literal>nic_type</literal> depends on the drivers available for different types of virtual machines. VirtIO drivers are available for Red Hat Enterprise Linux 4.8 and above, and for Windows virtual machines. Windows supports rtl8139 without the need for drivers. Other Linux machines, or earlier versions of Red Hat Enterprise Linux, use e1000 or rtl8139.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -396,7 +413,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-Disk_Types">
       <title>Disk Types</title>
-      <para>Each virtual machine requires a virtual disk for storage. The <literal>disk_types</literal> element lists the available virtual disk types.</para>
+      <para>Each virtual machine requires a virtual disk for storage. The <literal>disk_types</literal> element lists the available virtual <literal>disk_type</literal> options.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -416,7 +433,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-Disk_Formats">
       <title>Disk Formats</title>
-      <para>An API user selects the format for virtual disks. The <literal>disk_formats</literal> element defines the format types. Format types include pre-allocated (<literal>raw</literal>) or thin-provisioned (<literal>cow</literal>).</para>
+      <para>An API user selects the format for virtual disks. The <literal>disk_formats</literal> element defines the format types. The <literal>disk_format</literal> types include pre-allocated (<literal>raw</literal>) or thin-provisioned (Copy-On-Write or <literal>cow</literal>).</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -433,7 +450,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-Disk_Interfaces">
       <title>Disk Interfaces</title>
-      <para>The <literal>disk_interfaces</literal> element lists the types of emulated protocols for virtual disk access.</para>
+      <para>The <literal>disk_interfaces</literal> element lists <literal>disk_interface</literal> options for emulated protocols to interface with virtual disks.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -447,11 +464,11 @@
     &lt;/version&gt;
 &lt;/capabilities&gt;
       </screen>
-    </section>
+   </section>
 
     <section id="sect-REST_API_Guide-Capabilities-Version-VM_Affinities">
       <title>Virtual Machine Affinities</title>
-      <para>Virtual machines migrate between hosts in a cluster. The <literal>vm_affinities</literal> element defines available migration options for virtual machines.</para>
+      <para>Virtual machines migrate between hosts in a cluster. The <literal>vm_affinities</literal> element defines each available migration <literal>affinity</literal> for virtual machines.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -490,7 +507,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-Boot_Protocols">
       <title>Boot Protocols</title>
-      <para>The <literal>boot_protocol</literal> element lists the possible IP assignment protocols for hosts when booting.</para>
+      <para>The <literal>boot_protocol</literal> element lists each possible IP assignment <literal>boot_protocol</literal> for hosts when booting.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -525,7 +542,7 @@
 
     <section id="sect-REST_API_Guide-Capabilities-Version-Storage_Formats">
       <title>Storage Formats</title>
-      <para>The <literal>storage_formats</literal> element lists the available format versions for storage meta-data.</para>
+      <para>The <literal>storage_formats</literal> element lists the available <literal>format</literal> versions for storage meta-data.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -596,7 +613,7 @@
     </screen>
   </section>
   
-  <section id="sect-REST_API_Guide-Capabilities-Example">
+  <section id="sect-REST_API_Guide-Capabilities-Scheduling_Policies">
     <title>Scheduling Policies</title>
     <para>
       The <literal>scheduling_policies</literal> element defines the load-balancing and power sharing modes for hosts in the cluster.
@@ -611,18 +628,27 @@
     &lt;/scheduling_policies&gt;
     ...
 &lt;/capabilities&gt;
-    </screen>    
+    </screen>
   </section>
   
-    <section id="sect-REST_API_Guide-Capabilities-Scheduling_Policies">
+    <section id="sect-REST_API_Guide-Capabilities-Example">
     <title>Capabilities Example</title>
     <para>
-      The following example demonstrates a sample representation of <literal>capabilities</literal>:
+      The following example demonstrates a sample representation of <literal>capabilities</literal>.
     </para>
-    <screen>
+    <example>
+      <title>XML representation of capabilities</title>
+      <para>
+        An API user performs the following request:
+      </para>
+      <screen>
 GET /rhevm-api/capabilities HTTP/1.1
 Accept: application/xml
-
+      </screen>
+      <para>
+        The API returns the following representation:
+      </para>
+      <screen>
 HTTP/1.1 200 OK
 Content-Type: application/xml
 
@@ -750,7 +776,8 @@ Content-Type: application/xml
         &lt;policy&gt;power_saving&lt;/policy&gt;
     &lt;/scheduling_policies&gt;
 &lt;/capabilities&gt;
-    </screen>    
+      </screen>
+    </example>
   </section>
 
 </chapter>

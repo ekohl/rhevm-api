@@ -5,12 +5,19 @@
 ]>
 <chapter id="chap-REST_API_Guide-Statistics">
   <title>Statistics</title>
-  <para>The <literal>rel="statistics"</literal> link obtained from the entry point URI allows a user to query information on system events from Red Hat Enterprise Virtualisation Manager. The following table lists the statistics specific elements:</para>
-
+  <para>
+    The <literal>rel="statistics"</literal> link obtained from the entry point URI accesses the <literal>statistics</literal> collection and lists system statistics from Red Hat Enterprise Virtualisation Manager.
+  </para>
   <informaltable frame="none">
     <tgroup cols="2">
       <colspec colwidth="2*"/>
       <colspec colwidth="5*"/>
+      <thead>
+        <row>
+          <entry>Element</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
       <tbody>
         <row>
           <entry><literal>name</literal></entry>
@@ -43,8 +50,9 @@
       </tbody>
     </tgroup>
   </informaltable>
-  <para>For example:</para>
-  <screen>
+  <example>
+    <title>An XML representation of the the statistics collection</title>
+    <screen>
 &lt;statistics&gt;
     &lt;statistic&gt;
         &lt;name&gt;bytes.current.rx&lt;/name&gt;
@@ -70,6 +78,9 @@
     &lt;/statistic&gt;
     ...
 &lt;/statistics&gt;
-  </screen>
-
+    </screen>
+  </example>
+  <note>
+    <para>The <literal>statistics</literal> collection is read-only.</para>
+  </note>
 </chapter>

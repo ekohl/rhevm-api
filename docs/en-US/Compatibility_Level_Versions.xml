@@ -6,18 +6,23 @@
 <chapter id="chap-REST_API_Guide-Cluster_Level_Versions">
   <title>Compatibility Level Versions</title>
   <para>
-    Each host managed by Red Hat Enterprise Virtualization Manager has a version of <literal>VDSM</literal> installed. A more recent version of the Manager can manage hosts with a version of VDSM from an older version of Red Hat Enterprise Virtualization installed. However, since a VM may be migrated from host to host within a cluster, the Manager will not use features from a given version of VDSM until all hosts within a cluster have that VDSM version (or more recent) installed.
+    Each hosts connected to Red Hat Enterprise Virtualization Manager has a version of <literal>VDSM</literal> installed. A current version of the Manager controls hosts with current or older versions of VDSM.
   </para>
   <para>
-    This concept is represented in the API by each host being said to be at a <literal>compatibility level</literal>, corresponding to the version of VDSM installed. A <literal>version</literal> element containing <literal>major</literal> and <literal>minor</literal> attributes describes a compatibility level.
+    Virtual machines are migrated from host to host within a cluster. This means the Manager excludes certain features from a current version of VDSM until all hosts within a cluster have the same VDSM version, or more recent, installed.
   </para>
   <para>
-    Once all hosts within a cluster have been upgraded to a certain level, that level's <literal>version</literal> will appear under a <literal>supported_versions</literal> element. This indicates that the cluster's <literal>version</literal> may now be updated to that level. Likewise, once all clusters within a data center have been updated to a given level, the data center may then be updated to that level.
+    This concept is represented in the API as a <literal>compatibility level</literal> for each host, corresponding to the version of VDSM installed. A <literal>version</literal> element containing <literal>major</literal> and <literal>minor</literal> attributes describes a compatibility level.
   </para>
   <para>
-    For example, if you have a Red Hat Enterprise Virtualization Manager <literal>2.2</literal> instance and you update to <literal>3.0</literal>, the API will report:
+    Once all hosts within a cluster have been upgraded to a certain level, that level's <literal>version</literal> will appear under a <literal>supported_versions</literal> element. This indicates the cluster's <literal>version</literal> is now updatable to that level. Once all clusters within a data center are updated to a given level, the data center is updatable to that level.
   </para>
-  <screen>
+  <example>
+    <title>Upgrading compatibility levels from Red Hat Enterprise Virtualization Manager&nbsp;2.2 to 3.0</title>
+    <para>
+      The API reports the following compatibility levels for Red Hat Enterprise Virtualization Manager&nbsp;2.2 instance:
+    </para>
+    <screen>
 &lt;host ...&gt;
     ...
     &lt;version major="2" minor="2"/&gt;
@@ -37,11 +42,11 @@
     &lt;supported_versions/&gt;
     ...
 &lt;/data_center&gt;
-  </screen>
-  <para>
-    Once all hosts within a cluster have been updated to VDSM from <literal>3.0</literal>, the API will report:
-  </para>
-  <screen>
+    </screen>
+    <para>
+      All hosts within a cluster are updated to VDSM <literal>3.0</literal> and the API reports:
+    </para>
+    <screen>
 &lt;host ...&gt;
     ...
     &lt;version major="3" minor="0"/&gt;
@@ -63,11 +68,11 @@
     &lt;supported_versions/&gt;
     ...
 &lt;/data_center&gt;
-  </screen>
-  <para>
-    The cluster may then updated to <literal>3.0</literal> and the API will report:
-  </para>
-  <screen>
+    </screen>
+    <para>
+      The cluster is now updatable to <literal>3.0</literal> and the API reports:
+    </para>
+    <screen>
 &lt;cluster ...&gt;
     ...
     &lt;version major="3" minor="0"/&gt;
@@ -83,8 +88,9 @@
     &lt;/supported_versions&gt;
     ...
 &lt;/data_center&gt;
-  </screen>
-  <para>
-    This indicates that the data center may be updated to <literal>3.0</literal>
-  </para>
+    </screen>
+    <para>
+      The API user updates the data center to <literal>3.0</literal>. Once upgraded, the API exposes features available in Red Hat Enterprise Virtualization&nbsp;3.0
+    </para>
+  </example>
 </chapter>

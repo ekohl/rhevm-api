@@ -6,7 +6,10 @@
 <chapter id="chap-REST_API_Guide-Hosts">
   <title>Hosts</title>
   <para>
-    The host specific elements which may be contained in the host description are as follows:
+    The <literal>hosts</literal> collection provides information about the hosts in a Red Hat Enterprise Virtualization environment. An API user accesses this information through the <literal>rel="hosts"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>).
+  </para>
+  <para>
+    The following table shows specific elements contained in a host resource representation.
   </para>
   <note>
     <title>Element property icons</title>
@@ -14,128 +17,198 @@
       The icons used in the properties column of this table are described in <xref linkend="table-Property_Icons" />
     </para>
   </note>
-  <para>
-    <informaltable frame="none">
-      <tgroup cols="4">
-        <colspec colwidth="6*"/>
-        <colspec colwidth="2*"/>
-        <colspec colwidth="6*"/>
-        <colspec colwidth="2*" colname="prop"/>
-        <thead>
-          <row>
-            <entry>Element</entry>
-            <entry>Type</entry>
-            <entry>Description</entry>
-            <entry>Properties</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry><literal>type</literal></entry>
-            <entry>One of <literal>rhel</literal> or <literal>rhev-h</literal></entry>
-            <entry>The host type</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>status</literal></entry>
-            <entry>See below</entry>
-            <entry>The host status</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>address</literal></entry>
-            <entry>string</entry>
-            <entry>The IP address or hostname of the host</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>cluster</literal></entry>
-            <entry>complex</entry>
-            <entry>The cluster that includes this host</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>port</literal></entry>
-            <entry>integer</entry>
-            <entry>The listen port of the VDSM daemon running on this host</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>root_password</literal></entry>
-            <entry>string</entry>
-            <entry>The root password of this host, by convention only included in the client-provided host representation on creation</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>version</literal></entry>
-            <entry>complex</entry>
-            <entry>The compatibility level of the host (see <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/>)</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>storage_manager</literal></entry>
-            <entry>boolean: true or false</entry>
-            <entry><literal>true</literal> if the host is the storage pool manager (SPM)</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>power_management</literal></entry>
-            <entry>complex</entry>
-            <entry>Fencing options for host power management. (see <xref linkend="sect-REST_API_Guide-Hosts-Power_Management"/>)</entry>
-            <entry></entry>
-          </row>
-          <row>
-            <entry><literal>transparent_hugepages</literal></entry>
-            <entry>boolean: true or false</entry>
-            <entry><literal>true</literal> if transparent hugepages is enabled. (see <xref linkend="sect-REST_API_Guide-Hosts-Memory_Management"/>)</entry>
-            <entry></entry>
-          </row>
-          <row>
-            <entry><literal>ksm</literal></entry>
-            <entry>boolean: true or false</entry>
-            <entry><literal>true</literal> if Kernel SamePage Merging (KSM) is enabled. Is disabled if <literal>transparent_hugepages</literal> is enabled. (see <xref linkend="sect-REST_API_Guide-Hosts-Memory_Management"/>)</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>iscsi</literal></entry>
-            <entry>complex</entry>
-            <entry>The SCSI <literal>initiator</literal> for the host</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>cpu</literal></entry>
-            <entry>complex</entry>
-            <entry>Statistics for the host CPU. Includes sub-elements for the CPU's <literal>name</literal>, <literal>topology cores</literal> and <literal>speed</literal></entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>summary</literal></entry>
-            <entry>complex</entry>
-            <entry>Summary statistics of the virtual machines on the host. Includes sub-elements for numbers of <literal>active</literal>, <literal>migrating</literal> and <literal>total</literal> VMs</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-  </para>
+  <informaltable frame="none">
+    <tgroup cols="4">
+      <colspec colwidth="6*"/>
+      <colspec colwidth="2*"/>
+      <colspec colwidth="6*"/>
+      <colspec colwidth="2*" colname="prop"/>
+      <thead>
+        <row>
+          <entry>Element</entry>
+          <entry>Type</entry>
+          <entry>Description</entry>
+          <entry>Properties</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry><literal>name</literal></entry>
+          <entry>string</entry>
+          <entry>	A user-supplied human readable name for the host. The <literal>name</literal> is unique across all host resources.</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>link rel="storage"</literal></entry>
+          <entry>string</entry>
+          <entry>A link to the sub-collection for host storage.</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>link rel="nics"</literal></entry>
+          <entry>string</entry>
+          <entry>A link to the sub-collection for host network interfaces.</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>link rel="tags"</literal></entry>
+          <entry>string</entry>
+          <entry>A link to the sub-collection for host tags.</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>link rel="permissions"</literal></entry>
+          <entry>string</entry>
+          <entry>A link to the sub-collection for host permissions. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Permissions"/></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>link rel="statistics"</literal></entry>
+          <entry>string</entry>
+          <entry>A link to the sub-collection for host statistics.</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>type</literal></entry>
+          <entry>One of <literal>rhel</literal> or <literal>rhev-h</literal></entry>
+          <entry>The host type</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>address</literal></entry>
+          <entry>string</entry>
+          <entry>The IP address or hostname of the host</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>status</literal></entry>
+          <entry>See below</entry>
+          <entry>The host status</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>cluster id</literal></entry>
+          <entry>complex</entry>
+          <entry>The cluster that includes this host</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>port</literal></entry>
+          <entry>integer</entry>
+          <entry>The listen port of the VDSM daemon running on this host</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>storage_manager</literal></entry>
+          <entry>boolean: true or false</entry>
+          <entry><literal>true</literal> if the host is the storage pool manager (SPM)</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>power_management</literal></entry>
+          <entry>complex</entry>
+          <entry>Fencing options for host power management. (see <xref linkend="sect-REST_API_Guide-Hosts-Power_Management"/>)</entry>
+          <entry></entry>
+        </row>
+        <row>
+          <entry><literal>ksm</literal></entry>
+          <entry>boolean: true or false</entry>
+          <entry><literal>true</literal> if Kernel SamePage Merging (KSM) is enabled. Is disabled if <literal>transparent_hugepages</literal> is enabled. (see <xref linkend="sect-REST_API_Guide-Hosts-Memory_Management"/>)</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>transparent_hugepages</literal></entry>
+          <entry>boolean: true or false</entry>
+          <entry><literal>true</literal> if transparent hugepages is enabled. (see <xref linkend="sect-REST_API_Guide-Hosts-Memory_Management"/>)</entry>
+          <entry></entry>
+        </row>
+        <row>
+          <entry><literal>iscsi</literal></entry>
+          <entry>complex</entry>
+          <entry>The SCSI <literal>initiator</literal> for the host</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>cpu</literal></entry>
+          <entry>complex</entry>
+          <entry>Statistics for the host CPU. Includes sub-elements for the CPU's <literal>name</literal>, <literal>topology cores</literal> and <literal>speed</literal></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>summary</literal></entry>
+          <entry>complex</entry>
+          <entry>Summary statistics of the virtual machines on the host. Includes sub-elements for numbers of <literal>active</literal>, <literal>migrating</literal> and <literal>total</literal> VMs</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>version</literal></entry>
+          <entry>complex</entry>
+          <entry>The compatibility level of the host (see <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/>)</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>root_password</literal></entry>
+          <entry>string</entry>
+          <entry>The root password of this host, by convention only included in the client-provided host representation on creation</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
   <para>
     The <literal>status</literal> contains one of the following enumerative values: <literal>DOWN</literal>, <literal>ERROR</literal>, <literal>INITIALIZING</literal>, <literal>INSTALLING</literal>, <literal>INSTALL_FAILED</literal>, <literal>MAINTENANCE</literal>, <literal>NON_OPERATIONAL</literal>, <literal>NON_RESPONSIVE</literal>, <literal>PENDING_APPROVAL</literal>, <literal>PREPARING_FOR_MAINTENANCE</literal>, <literal>PROBLEMATIC</literal>, <literal>REBOOT</literal>, <literal>UNASSIGNED</literal> or <literal>UP</literal>.
   </para>
-  <para>
-    For example:
-  </para>
-
-  <screen>
+  <example>
+    <title>An XML representation of a host</title>
+    <screen>
 &lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
   href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
-    &lt;name&gt;zig&lt;/name&gt;
+    &lt;name&gt;host1&lt;/name&gt;
+    &lt;actions&gt;
+        &lt;link rel="install"
+          href="/rhevm-api/hosts/762f3276-9d1e-11e0-a27c-525400d75548/install"/&gt;
+        &lt;link rel="activate"
+          href="/rhevm-api/hosts/762f3276-9d1e-11e0-a27c-525400d75548/activate"/&gt;
+        &lt;link rel="fence"
+          href="/rhevm-api/hosts/762f3276-9d1e-11e0-a27c-525400d75548/fence"/&gt;
+        &lt;link rel="deactivate"
+          href="/rhevm-api/hosts/762f3276-9d1e-11e0-a27c-525400d75548/deactivate"/&gt;
+        &lt;link rel="approve"
+          href="/rhevm-api/hosts/762f3276-9d1e-11e0-a27c-525400d75548/approve"/&gt;
+        &lt;link rel="iscsilogin"
+          href="/rhevm-api/hosts/762f3276-9d1e-11e0-a27c-525400d75548/iscsilogin"/&gt;
+        &lt;link rel="iscsidiscover"
+          href="/rhevm-api/hosts/762f3276-9d1e-11e0-a27c-525400d75548/iscsidiscover"/&gt;
+        &lt;link rel="commitnetconfig"
+          href="/rhevm-api/hosts/762f3276-9d1e-11e0-a27c-525400d75548/commitnetconfig"/&gt;
+    &lt;/actions&gt;
+    &lt;link rel="storage"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage"/&gt;
+    &lt;link rel="nics"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics"/&gt;
+    &lt;link rel="tags"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/tags"/&gt;
+    &lt;link rel="permissions"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/permissions"/&gt;
+    &lt;link rel="statistics"
+      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/statistics"/&gt;
     &lt;type&gt;rhev-h&lt;/type&gt;
+    &lt;address&gt;host1.example.com&lt;/address&gt;
     &lt;status&gt;UP&lt;/status&gt;
-    &lt;version major="3" minor="0"/&gt;
     &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
       href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
     &lt;port&gt;54321&lt;/port&gt;
     &lt;storage_manager&gt;true&lt;/storage_manager&gt;
+    &lt;power_management&gt;
+        &lt;enabled&gt;false&lt;/enabled&gt;
+        &lt;options/&gt;
+    &lt;/power_management&gt;
+    &lt;ksm&gt;
+        &lt;enabled&gt;false&lt;/enabled&gt;
+    &lt;/ksm&gt;
+    &lt;transparent_hugepages&gt;
+        &lt;enabled&gt;true&lt;/enabled&gt;
+    &lt;/transparent_hugepages&gt;
     &lt;iscsi&gt;
         &lt;initiator&gt;iqn.2001-04.com.example:diskarrays-sn-a8675309&lt;/initiator&gt;
     &lt;/iscsi&gt;
@@ -149,52 +222,242 @@
         &lt;migrating&gt;0&lt;/migrating&gt;
         &lt;total&gt;3&lt;/total&gt;
     &lt;/summary&gt;
-    &lt;link rel="statistics"
-      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/statistics"/&gt;
-    &lt;link rel="nics"
-      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics"/&gt;
-    &lt;link rel="storage"
-      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage"/&gt;
-    &lt;link rel="tags"
-      href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/tags"/&gt;
-    &lt;actions&gt;
-        &lt;link rel="install"
-          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/install"/&gt;
-        &lt;link rel="approve"
-          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/approve"/&gt;
-        &lt;link rel="activate"
-          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/activate"/&gt;
-        &lt;link rel="deactivate"
-          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/deactivate"/&gt;
-        &lt;link rel="commitnetconfig"
-          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/commitnetconfig"/&gt;
-        &lt;link rel="iscsidiscover"
-          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsidiscover"/&gt;
-        &lt;link rel="iscsilogin"
-          href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsilogin"/&gt;
-    &lt;/actions&gt;
+    &lt;version major="3" minor="0"/&gt;
 &lt;/host&gt;
-  </screen>
-
+    </screen>
+  </example>
   <para>
-    When creating a new host, the <literal>name</literal>, <literal>address</literal> and <literal>root_password</literal> elements are required. The <literal>root_password</literal> element is by convention only included in the client-provided initial representation (i.e. is not reported in the representations returned from subsequent <literal>GET</literal>s and <literal>UPDATE</literal>s). Only the <literal>name</literal> element may be updated post-creation.
+    When creating a new host, the <literal>name</literal>, <literal>address</literal> and <literal>root_password</literal> elements are required. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
   </para>
+  <example>
+    <title>Creating a host</title>
+    <screen>
+POST /rhevm-api/hosts HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
 
-  <para>
-    There are four possible actions for hosts - <literal>install</literal>, <literal>approve</literal>, <literal>activate</literal> and <literal>deactivate</literal>.
+&lt;host&gt;
+  &lt;name&gt;host2&lt;/host&gt;
+  &lt;address&gt;host2.example.com&lt;/address&gt;
+  &lt;root_password&gt;p@55w0Rd!&lt;/root_password&gt;
+&lt;/host&gt;
+    </screen>
+  </example>
+  <para>  
+    The <literal>root_password</literal> element is only included in the client-provided initial representation and is not exposed in the representations returned from subsequent <literal>GET</literal>s and <literal>UPDATE</literal>s.
   </para>
+  <para>
+    The <literal>name</literal> element is updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
+  </para>
+  <example>
+    <title>Updating a host</title>
+    <screen>
+POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3 HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;host&gt;
+  &lt;name&gt;host3&lt;/host&gt;
+&lt;/host&gt;
+    </screen>
+  </example>
+  <section id="sect-REST_API_Guide-Hosts-Power_Management">
+    <title>Power Management</title>
+  	<para>
+  	  A recommended feature of the Red Hat Virtualization platform is the option to fence a host with a <literal>power_management</literal> configuration. Certain sub-elements are required when configuring <literal>power_management</literal>.
+  	</para>
+    <informaltable frame="none">
+      <tgroup cols="4">
+        <colspec colwidth="4*"/>
+        <colspec colwidth="4*"/>
+        <colspec colwidth="6*"/>
+        <colspec colwidth="2*" colname="prop"/>
+        <thead>
+          <row>
+            <entry>Element</entry>
+            <entry>Type</entry>
+            <entry>Description</entry>
+            <entry>Properties</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><literal>type=</literal></entry>
+            <entry>fencing device code</entry>
+            <entry>A list of valid fencing device codes are available in the <literal>capabilities</literal> collection. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/>.</entry>
+			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
+          <row>
+            <entry><literal>enabled</literal></entry>
+            <entry>boolean: true or false</entry>
+            <entry>Indicates whether power management configuration is enabled or disabled</entry>
+			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
+          <row>
+            <entry><literal>address</literal></entry>
+            <entry>string</entry>
+            <entry>The host name or IP address of the host</entry>
+			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
+          <row>
+            <entry><literal>username</literal></entry>
+            <entry>string</entry>
+            <entry>A valid user name for power management</entry>
+			<entry></entry>
+          </row>
+          <row>
+            <entry><literal>password</literal></entry>
+            <entry>string</entry>
+            <entry>A valid, robust password for power management</entry>
+			<entry></entry>
+          </row>
+          <row>
+            <entry><literal>options</literal></entry>
+            <entry>complex</entry>
+            <entry>Fencing options for the selected <literal>type=</literal></entry>
+			<entry></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      The <literal>options</literal> element requires a list of <literal>option</literal> sub-elements. Each <literal>option</literal> requires a <literal>name</literal> and <literal>type</literal> attributes. Certain options are only available for specific fencing types as defined in the <literal>capabilities</literal> collection (see <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/>) but can include options such as:
+    </para>
+    <informaltable frame="none">
+      <tgroup cols="4">
+        <colspec colwidth="2*"/>
+        <colspec colwidth="2*"/>
+        <colspec colwidth="4*"/>
+        <colspec colwidth="6*"/>
+        <thead>
+          <row>
+            <entry>name=</entry>
+            <entry>type=</entry>
+            <entry>Values</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry><literal>secure</literal></entry>
+            <entry><literal>bool</literal></entry>
+            <entry>boolean: true or false</entry>
+            <entry>Defines if SSH is enabled for power management device connection</entry>
+          </row>
+          <row>
+            <entry><literal>port</literal></entry>
+            <entry><literal>int</literal></entry>
+            <entry>integer</entry>
+            <entry>Defines the port for power management device connection</entry>
+          </row>
+          <row>
+            <entry><literal>slot</literal></entry>
+            <entry><literal>int</literal></entry>
+            <entry>integer</entry>
+            <entry>Defines the slot to use, specifically when using a Blade server</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+    <para>
+      A new host can include a <literal>power_management</literal> configuration when <literal>POST</literal>ing to the host resource. The <literal>power_management</literal> configuration can also update using <literal>PUT</literal>.
+    </para>
+    <example>
+      <title>An XML representation of a host's power management configuration</title>
+      <screen>
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+    &lt;name&gt;host1&lt;/name&gt;
+    ...
+    &lt;power_management type="ilo"&gt;
+        &lt;enabled&gt;true&lt;/enabled&gt;
+        &lt;address&gt;192.168.1.107&lt;/address&gt;
+        &lt;username&gt;admin&lt;/username&gt;
+        &lt;password&gt;p@55w0Rd!&lt;/password&gt;
+        &lt;options&gt;
+            &lt;option name="secure" value="true"/&gt;
+            &lt;option name="port" value="54345"/&gt;
+            &lt;option name="slot" value="3"/&gt;
+        &lt;/options&gt;
+    &lt;/power_management&gt;
+    ...
+&lt;/host&gt;
+      </screen>
+    </example>
+  </section>
+
+  <section id="sect-REST_API_Guide-Hosts-Memory_Management">
+  	<title>Memory Management</title>
+  	<para>The API provides two choices for a host's memory management:</para>
+  	<itemizedlist>
+	  	<listitem><para><emphasis role="bold">Kernel SamePage Merging (KSM)</emphasis> - The host kernel reduces references to memory pages from multiple identical pages to a single page reference. This helps with optimization for memory density.</para></listitem>
+	  	<listitem><para><emphasis role="bold">Transparent Hugepage support</emphasis> - Hugepage support expands the size of memory pages beyond the standard 4kB limit. This reduces memory consumption and increases host performance.</para></listitem> 
+  	</itemizedlist>
+  	<para>Kernel SamePage Merging (KSM) uses the <literal>ksm</literal> element, which is a read-only element.</para>
+    <example>
+      <title>KSM memory management</title>
+      <screen>
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+    &lt;name&gt;zig&lt;/name&gt;
+    &lt;status&gt;UP&lt;/status&gt;
+    ...
+    &lt;ksm&gt;true&lt;/ksm&gt;
+&lt;/host&gt;
+    	</screen>
+    </example>
+  	<para>Transparent Hugepage support uses the <literal>transparent_hugepages</literal> element and updates with a <literal>PUT</literal> request:</para>
+    <example>
+      <title>Transparent Hugepage memory management</title>
+      <screen>
+PUT /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3 HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+
+&lt;host&gt;
+    &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
+&lt;/host&gt;
+    	</screen>
+    </example>
+  	<para>This request also sets the status of <literal>ksm</literal> to the opposite status. For example, if <literal>transparent_hugepages</literal> is set to <literal>true</literal>, the API sets <literal>ksm</literal> to <literal>false</literal>.</para>
+    <example>
+      <title>Transparent Hugepage set to true, which sets KSM to false</title>
+      <screen>
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+    &lt;name&gt;zig&lt;/name&gt;
+    &lt;status&gt;UP&lt;/status&gt;
+    ...
+    &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
+    &lt;ksm&gt;false&lt;/ksm&gt;
+&lt;/host&gt;
+    	</screen>
+    </example>
+  	<para>If <literal>transparent_hugepages</literal> is set to <literal>false</literal>, the API sets <literal>ksm</literal> to <literal>true</literal>.</para>
+    <example>
+      <title>Transparent Hugepage set to false, which sets KSM to true</title>
+      <screen>
+&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
+  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
+    &lt;name&gt;zig&lt;/name&gt;
+    &lt;status&gt;UP&lt;/status&gt;
+    ...
+    &lt;transparent_hugepages&gt;false&lt;/transparent_hugepages&gt;
+    &lt;ksm&gt;true&lt;/ksm&gt;
+&lt;/host&gt;
+      </screen>
+    </example>
+    <para>
+      Availability of Transparent Hugepage support is found in the <literal>capabilities</literal> collection. See <xref linkend="sect-REST_API_Guide-Capabilities-Version-Features"/>.
+    </para>
+  </section>
 
   <section id="sect-REST_API_Guide-Hosts-Network_Interfaces">
     <title>
-      Network Interfaces
+      Network Interface Sub-Collection
     </title>
-
     <para>
-      A host's physical network interfaces are represented by a collection obtained via <literal>link rel="nics"</literal> in the host's representation.
-    </para>
-
-    <para>
-      Each network interface is represented by a <literal>host_nic</literal> element which may contain the following properties:
+      The <literal>nics</literal> sub-collection represents a host's physical network interfaces. Each <literal>host_nic</literal> element in the representation acts as a network interface and contains the following properties:
     </para>
   <note>
     <title>Element property icons</title>
@@ -243,15 +506,15 @@
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
-              <entry><literal>ip address/netmask/gateway</literal></entry>
+              <entry><literal>ip</literal></entry>
               <entry>complex</entry>
-              <entry>The IP level configuration of the interface</entry>
+              <entry>The IP level configuration of the interface. Contains <literal>address</literal>, <literal>netmask</literal> and <literal>gateway</literal> attributes.</entry>
               <entry></entry>
             </row>
             <row>
               <entry><literal>boot_protocol</literal></entry>
-              <entry>One of <literal>dhcp</literal>, <literal>static</literal> or <literal>none</literal></entry>
-              <entry>The protocol for IP address assignment when the host is booting</entry>
+              <entry>enumerated</entry>
+              <entry>The protocol for IP address assignment when the host is booting. A list of enumerated values is available in <literal>capabilities</literal>. See <xref linkend="sect-REST_API_Guide-Capabilities-Version-Boot_Protocols"/></entry>
               <entry></entry>
             </row>         
             <row>
@@ -275,7 +538,7 @@
             <row>
               <entry><literal>bonding</literal></entry>
               <entry>complex</entry>
-              <entry>A list of <literal>options</literal> and <literal>slave</literal> NICs for bonded interfaces. See below</entry>
+              <entry>A list of <literal>options</literal> and <literal>slave</literal> NICs for bonded interfaces</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when adding bonded interfaces. Other interfaces are read-only and cannot be added.</para></footnote><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>       
             <row>
@@ -288,11 +551,9 @@
         </tgroup>
       </informaltable>
     </para>
-    <para>
-      For example:
-    </para>
-
-    <screen>
+    <example>
+      <title>An XML representation of a network interface on a host</title>
+      <screen>
 &lt;host_nic id="e8f02fdf-3d7b-4135-86e1-1bf185570cd8"
   href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/
   e8f02fdf-3d7b-4135-86e1-1bf185570cd8"&gt;
@@ -324,21 +585,19 @@
           e8f02fdf-3d7b-4135-86e1-1bf185570cd8/detach"/&gt;
     &lt;/actions&gt;
 &lt;/host_nic&gt;
-    </screen>
-
+      </screen>
+    </example>
     <para>
-      An API user creates only bonded interfaces (see <xref linkend="sect-REST_API_Guide-Hosts-Network_Interfaces-Bonds"/>). All other network interfaces contain updatable <literal>network</literal>, <literal>ip address/netmask/gateway</literal> and <literal>boot_protocol</literal> properties using a <literal>PUT</literal> request.
+      An API user creates only bonded interfaces (see <xref linkend="sect-REST_API_Guide-Hosts-Network_Interfaces-Bonds"/>). All other network interfaces contain updatable <literal>network</literal>, <literal>ip</literal> and <literal>boot_protocol</literal> properties using a <literal>PUT</literal> request.
     </para>
 
     <section id="sect-REST_API_Guide-Hosts-Network_Interfaces-Bonds">
       <title>
         Bonded Interfaces
       </title>
-
       <para>
         A bonded interface is represented as a <literal>host_nic</literal> resource containing a <literal>bonded</literal> element, which contains the following properties:
       </para>
-
       <informaltable frame="none">
         <tgroup cols="4">
           <colspec colwidth="4*"/>
@@ -369,12 +628,12 @@
           </tbody>
         </tgroup>
       </informaltable>
-
       <para>
-        An API user creates a new bond when <literal>POST</literal>ing to a <literal>host_nic</literal> with bonding options and slave interfaces. For example:
+        An API user creates a new bond when <literal>POST</literal>ing to a <literal>host_nic</literal> with bonding options and slave interfaces. The <literal>name</literal>, <literal>network</literal> and <literal>bonded</literal> elements are required when creating a new bonded interface. The <literal>network</literal> and slave <literal>host_nic</literal>s may be identified by <literal>id</literal> or <literal>name</literal>.
       </para>
-
-      <screen>
+      <example>
+        <title>Creating a bonded interface</title>
+        <screen>
 POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
@@ -392,95 +651,84 @@ Content-Type: application/xml
         &lt;/slaves&gt;
     &lt;/bonded&gt;
 &lt;/host_nic&gt;
-      </screen>
-
-      <para>
-        The <literal>name</literal>, <literal>network</literal> and <literal>bonded</literal> elements are required when creating a new bonded interface. The <literal>network</literal> and slave <literal>host_nic</literal>s may be identified by <literal>id</literal> or <literal>name</literal>.
-      </para>
-
+        </screen>
+      </example>
       <note>
         <para>
           <literal>bond0</literal>, <literal>bond1</literal>, <literal>bond2</literal>, <literal>bond3</literal> and <literal>bond4</literal> are the only valid names for a bonded interface.
         </para>
       </note>
-
       <para>
         Like other resources, a bonded interface may be deleted by issuing a <literal>DELETE</literal> request to its URI.
       </para>
-
       <warning>
         <para>
           Changes to bonded interface configuration must be explicitly committed. See <xref linkend="sect-REST_API_Guide-Hosts-Commit_Network_Configuration"/>.
         </para>
       </warning>
-
     </section>
-
+    
     <section id="sect-REST_API_Guide-Hosts-Network_Interfaces-Attach">
       <title>
         Attach Action
       </title>
-
       <para>
         A host network interface may be attached to a network, indicating that the given network is accessible over the interface. The <literal>network</literal> may be identified by <literal>id</literal> or <literal>name</literal>.
       </para>
-
-      <screen>
+      <example>
+        <title>Action to attach a host network interface to a network</title>
+        <screen>
 POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/e8f02fdf-3d7b-4135-86e1-1bf185570cd8/attach HTTP/1.1
 Content-type: application/xml
 
 &lt;action&gt;
     &lt;network id="e657d631-657d-42bb-a536-73501a085d85"/&gt;
 &lt;/action&gt;
-      </screen>
-
+        </screen>
+      </example>
       <warning>
         <para>
           This networking configuration change must be explicitly committed. See <xref linkend="sect-REST_API_Guide-Hosts-Commit_Network_Configuration"/>.
         </para>
       </warning>
-
     </section>
 
     <section id="sect-REST_API_Guide-Hosts-Network_Interfaces-Detach">
       <title>
         Detach Action
       </title>
-
       <para>
         Detach an interface from a network. The <literal>network</literal> may be identified by <literal>id</literal> or <literal>name</literal>.
       </para>
-
-      <screen>
+      <example>
+        <title>Action to deattach a host network interface to a network</title>
+        <screen>
 POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/nics/e8f02fdf-3d7b-4135-86e1-1bf185570cd8/detach HTTP/1.1
 Content-type: application/xml
 
 &lt;action&gt;
     &lt;network id="e657d631-657d-42bb-a536-73501a085d85"/&gt;
 &lt;/action&gt;
-      </screen>
-
+        </screen>
+      </example>
       <warning>
         <para>
           This networking configuration change must be explicitly committed. See <xref linkend="sect-REST_API_Guide-Hosts-Commit_Network_Configuration"/>.
         </para>
       </warning>
-
     </section>
 
   </section>
-
+  
   <section id="sect-REST_API_Guide-Hosts-Storage">
     <title>
-      iSCSI and FCP Storage
+      Storage Sub-Collection
     </title>
-
     <para>
-      The collection referenced by <literal>link rel="storage"</literal> describes the iSCSI and FCP storage available on the host. This storage may be used to create storage domains, as described in <xref linkend="chap-REST_API_Guide-Storage_Domains"/>.
+      The <literal>storage</literal> sub-collection provides a list of the iSCSI and FCP storage representations available on the host. This storage may be used to create storage domains, as described in <xref linkend="chap-REST_API_Guide-Storage_Domains"/>.
     </para>
-
     <para>
-      Each <literal>storage</literal> description in the collection represents either a SCSI LUN or an LVM volume group. A <literal>logical_unit</literal> representation may contain:
+      Each <literal>storage</literal> representation in the sub-collection represents either a SCSI LUN or an LVM volume group. A <literal>logical_unit</literal> representation contains:
   </para>
   <note>
     <title>Element property icons</title>
@@ -544,11 +792,9 @@ Content-type: application/xml
         </tgroup>
       </informaltable>
     </para>
-
     <para>
-      A <literal>volume_group</literal> representation may contain:
+      A <literal>volume_group</literal> representation contains:
     </para>
-
     <para>
     <informaltable frame="none">
       <tgroup cols="4">
@@ -587,12 +833,9 @@ Content-type: application/xml
         </tgroup>
       </informaltable>
     </para>
-
-    <para>
-      For example:
-    </para>
-
-    <screen>
+    <example>
+      <title>An XML representation of the storage sub-collection on a host</title>
+      <screen>
 &lt;host_storage&gt;
     &lt;storage id="82fb123b-321e-40a1-9889-95dcd2654463"
       href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/storage/
@@ -622,342 +865,192 @@ Content-type: application/xml
         &lt;/volume_group&gt;
     &lt;/storage&gt;
 &lt;/host_storage&gt;
-    </screen>
-
+      </screen>
+    </example>
     <note>
       <para>
         The <literal>host_storage</literal> collection is read-only.
       </para>
     </note>
-
   </section>
-
-  <section id="sect-REST_API_Guide-Hosts-Memory_Management">
-  	<title>Memory Management</title>
-  	<para>The API provides two choices for a host's memory management:</para>
-  	<itemizedlist>
-	  	<listitem><para><emphasis role="bold">Kernel SamePage Merging (KSM)</emphasis> - The host kernel reduces references to memory pages from multiple identical pages to a single page reference. This helps with optimization for memory density.</para></listitem>
-	  	<listitem><para><emphasis role="bold">Transparent Hugepage support</emphasis> - Hugepage support expands the size of memory pages beyond the standard 4kB limit. This reduces memory consumption and increases host performance.</para></listitem> 
-  	</itemizedlist>
-  	<para>Kernel SamePage Merging (KSM) uses the <literal>ksm</literal> element, which is a read-only element:</para>
-  	<screen>
-&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
-  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
-    &lt;name&gt;zig&lt;/name&gt;
-    &lt;status&gt;UP&lt;/status&gt;
-    ...
-    &lt;ksm&gt;true&lt;/ksm&gt;
-&lt;/host&gt;
-  	</screen>
-  	<para>Transparent Hugepage support uses the <literal>transparent_hugepages</literal> element and updates with a <literal>PUT</literal> request:</para>
-  	<screen>
-PUT /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3 HTTP/1.1
-Accept: application/xml
-Content-Type: application/xml
-
-&lt;host&gt;
-    &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
-&lt;/host&gt;
-  	</screen>
-  	<para>This also sets the status of <literal>ksm</literal>. For example, if <literal>transparent_hugepages</literal> is set to <literal>true</literal>, the API sets <literal>ksm</literal> to <literal>false</literal>:</para>
-  	<screen>
-&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
-  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
-    &lt;name&gt;zig&lt;/name&gt;
-    &lt;status&gt;UP&lt;/status&gt;
-    ...
-    &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
-    &lt;ksm&gt;false&lt;/ksm&gt;
-&lt;/host&gt;
-  	</screen>
-  	<para>If <literal>transparent_hugepages</literal> is set to <literal>false</literal>, the API sets <literal>ksm</literal> to <literal>true</literal>.</para>
-  	<screen>
-&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
-  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
-    &lt;name&gt;zig&lt;/name&gt;
-    &lt;status&gt;UP&lt;/status&gt;
-    ...
-    &lt;transparent_hugepages&gt;false&lt;/transparent_hugepages&gt;
-    &lt;ksm&gt;true&lt;/ksm&gt;
-&lt;/host&gt;
-  </screen>
-  </section>
-
-  <section id="sect-REST_API_Guide-Hosts-Install">
+  
+  <section id="sect-REST_API_Guide-Hosts-Actions">    
     <title>
-      Install Action
+      Actions
     </title>
-
     <para>
-      Install VDSM and related software on the host. This requires the root password for the host to be supplied using the <literal>root_password</literal> element.
+      The following sections describe the actions associated with <literal>host</literal> resources.
     </para>
-
-    <screen>
-POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/install HTTP/1.1
-Content-type: application/xml
-
-&lt;action&gt;
-    &lt;root_password&gt;p@55w0Rd!&lt;/root_password&gt;
-&lt;/action&gt;
-    </screen>
-
-  </section>
-
-  <section id="sect-REST_API_Guide-Hosts-Approve">
-    <title>
-      Approve Action
-    </title>
-
     <para>
+      The API contains a number of possible actions for hosts: <literal>install</literal>, <literal>activate</literal>, <literal>fence</literal>, <literal>deactivate</literal>, <literal>approve</literal>, <literal>iscsilogin</literal>, <literal>iscsidiscover</literal> and <literal>commitnetconfig</literal>.
     </para>
-
-    <screen>
-POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/approve HTTP/1.1
-Content-type: application/xml
-    </screen>
-
-  </section>
-
-  <section id="sect-REST_API_Guide-Hosts-Activate">
-    <title>
-      Activate Action
-    </title>
-
-    <para>
-      Activate the host, allowing it to be used for e.g. running VMs.
-    </para>
-
-    <screen>
-POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/activate HTTP/1.1
-Content-type: application/xml
-    </screen>
-
-  </section>
-
-  <section id="sect-REST_API_Guide-Hosts-Deactivate">
-    <title>
-      Deactivate Action
-    </title>
-
-    <para>
-      Deactivate the host, allowing maintenance tasks to be performed.
-    </para>
-
-    <screen>
-POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/deactivate HTTP/1.1
-Content-type: application/xml
-    </screen>
-
-  </section>
-
-  <section id="sect-REST_API_Guide-Hosts-Commit_Network_Configuration">
-    <title>
-      Commit Network Configuration Action
-    </title>
-
-    <para>
-      In order to persist a host network interface attach or detach, or persist the creation/deletion of a bonded interface, the network configuration must explicitly be committed.
-    </para>
-
-    <screen>
-POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/commitnetconfig HTTP/1.1
-Content-type: application/xml
-    </screen>
-
-    <warning>
+    <section id="sect-REST_API_Guide-Hosts-Install">
+      <title>
+        Install Action
+      </title>
       <para>
-        Networking configuration should only be committed after it has been established that host connectivity has not been lost as a result of the configuration changes. If host connectivity has been lost, the host should be rebooted and will automatically revert to the previous networking configuration.
+        Install VDSM and related software on the host. This requires the root password for the host to be supplied using the <literal>root_password</literal> element.
       </para>
-    </warning>
+      <example>
+        <title>Action to install VDSM to a host</title>
+        <screen>
+  POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/install HTTP/1.1
+  Content-type: application/xml
 
-  </section>
+  &lt;action&gt;
+      &lt;root_password&gt;p@55w0Rd!&lt;/root_password&gt;
+  &lt;/action&gt;
+        </screen>
+      </example>
+    </section>
 
-  <section id="sect-REST_API_Guide-Hosts-iSCSI_Discovery">
-    <title>
-      iSCSI Discover Action
-    </title>
+    <section id="sect-REST_API_Guide-Hosts-Activate">
+      <title>
+        Activate Action
+      </title>
+      <para>
+        Activate the host, allowing it to be used for e.g. running VMs.
+      </para>
+      <example>
+        <title>Action to activate a host</title>
+        <screen>
+  POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/activate HTTP/1.1
+  Content-type: application/xml
+        </screen>
+      </example>
+    </section>
 
-    <para>
-      The <literal>iscsidiscover</literal> action enables an iSCSI portal to be query for its list of LUNs.
-    </para>
-
-    <screen>
-POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsidiscover HTTP/1.1
-Content-Type: application/xml
-Accept: application/xml
-
-&lt;action&gt;
-    &lt;iscsi&gt;
-        &lt;address&gt;mysan.example.com&lt;/address&gt;
-    &lt;/iscsi&gt;
-&lt;/action&gt;
-
-HTTP/1.1 202 Accept
-Content-Type: application/xml
-
-&lt;action id="e9126d04-0f74-4e1a-9139-13f11fcbb4ab"
-  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsidiscover/
-  e9126d04-0f74-4e1a-9139-13f11fcbb4ab"&gt;
-    &lt;iscsi_target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/iscsi_target&gt;
-    ...
-&lt;action&gt;
-    </screen>
-
-  </section>
-
-  <section id="sect-REST_API_Guide-Hosts-iSCSI_Login">
-    <title>
-      iSCSI Login Action
-    </title>
-
-    <para>
-      The <literal>iscsilogin</literal> action enables a host to login to an iSCSI target. Logging into a target makes the LUNs it contains available in the <literal>host_storage</literal> collection. See <xref linkend="sect-REST_API_Guide-Hosts-Storage"/>.
-    </para>
-
-    <screen>
-POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsilogin HTTP/1.1
-Content-Type: application/xml
-Accept: application/xml
-
-&lt;action&gt;
-    &lt;iscsi&gt;
-        &lt;address&gt;mysan.example.com&lt;/address&gt;
-        &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
-        &lt;username&gt;jimmy&lt;/username&gt;
-        &lt;password&gt;s3kr37&lt;/password&gt;
-    &lt;/iscsi&gt;
-&lt;/action&gt;
-    </screen>
-
-  </section>
-  <section id="sect-REST_API_Guide-Hosts-Power_Management">
-    <title>Power Management Configuration</title>
-	<para>A recommended feature of the Red Hat Virtualization platform is the option to fence a host with a <literal>power_management</literal> configuration. Certain sub-elements are required when configuring <literal>power_management</literal>.</para>
-    <informaltable frame="none">
-      <tgroup cols="4">
-        <colspec colwidth="4*"/>
-        <colspec colwidth="4*"/>
-        <colspec colwidth="6*"/>
-        <colspec colwidth="2*" colname="prop"/>
-        <thead>
-          <row>
-            <entry>Element</entry>
-            <entry>Type</entry>
-            <entry>Description</entry>
-            <entry>Properties</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry><literal>type=</literal></entry>
-            <entry>A valid fencing device</entry>
-            <entry>A list of valid fencing devices are available in system capabilities. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/> for more information.</entry>
-			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>enabled</literal></entry>
-            <entry>boolean: true or false</entry>
-            <entry>Indicates whether power management configuration is enabled or disabled</entry>
-			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>address</literal></entry>
-            <entry>string</entry>
-            <entry>The host name or IP address of the host</entry>
-			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>username</literal></entry>
-            <entry>string</entry>
-            <entry>A valid user name for power management</entry>
-			<entry></entry>
-          </row>
-          <row>
-            <entry><literal>password</literal></entry>
-            <entry>string</entry>
-            <entry>A valid, robust password for power management</entry>
-			<entry></entry>
-          </row>
-          <row>
-            <entry><literal>options</literal></entry>
-            <entry>complex</entry>
-            <entry>Fencing options for the selected <literal>type=</literal></entry>
-			<entry></entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-    <para>The <literal>options</literal> element requires a list of <literal>option</literal> sub-elements. Each <literal>option</literal> requires a <literal>name=</literal> and a <literal>type=</literal>. Certain options are only available for specific fencing types as defined in the system capabilities (see <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/>) but can include options such as:</para>
-    <informaltable frame="none">
-      <tgroup cols="4">
-        <colspec colwidth="2*"/>
-        <colspec colwidth="2*"/>
-        <colspec colwidth="4*"/>
-        <colspec colwidth="6*"/>
-        <thead>
-          <row>
-            <entry>name=</entry>
-            <entry>type=</entry>
-            <entry>Values</entry>
-            <entry>Description</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry><literal>secure</literal></entry>
-            <entry><literal>bool</literal></entry>
-            <entry>boolean: true or false</entry>
-            <entry>Defines if SSH is enabled for power management device connection</entry>
-          </row>
-          <row>
-            <entry><literal>port</literal></entry>
-            <entry><literal>int</literal></entry>
-            <entry>integer</entry>
-            <entry>Defines the port for power management device connection</entry>
-          </row>
-          <row>
-            <entry><literal>slot</literal></entry>
-            <entry><literal>int</literal></entry>
-            <entry>integer</entry>
-            <entry>Defines the slot to use, specifically when using a Blade server</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-    <para>A new host can include a <literal>power_management</literal> configuration when <literal>POST</literal>ing the host configuration. The <literal>power_management</literal> configuration can also update using <literal>PUT</literal>.</para>
-    <para>For example:</para>
-    <screen>
-&lt;host id="2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"
-  href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3"&gt;
-    &lt;name&gt;zig&lt;/name&gt;
-    ...
-    &lt;power_management type="ilo"&gt;
-        &lt;enabled&gt;true&lt;/enabled&gt;
-        &lt;address&gt;192.168.1.107&lt;/address&gt;
-        &lt;username&gt;admin&lt;/username&gt;
-        &lt;password&gt;p@55w0Rd!&lt;/password&gt;
-        &lt;options&gt;
-            &lt;option name="secure" value="true"/&gt;
-            &lt;option name="port" value="54345"/&gt;
-            &lt;option name="slot" value="3"/&gt;
-        &lt;/options&gt;
-    &lt;/power_management&gt;
-    ...
-&lt;/host&gt;
-    </screen>
-
-  <section id="sect-REST_API_Guide-Hosts-Fencing_Action">
-    <title>Fencing Action</title>
-    <para>The <literal>fence</literal> action enables the system to fence a troublesome host and reduce power usage. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/> for details on configuring a fencing device for a host.</para>
-    <para>The <literal>fence_type</literal> is one of <literal>manual</literal>, <literal>start</literal>, <literal>status</literal>, <literal>stop</literal>, or <literal>restart</literal>.</para>
-    <screen>
+    <section id="sect-REST_API_Guide-Hosts-Fencing_Action">
+      <title>Fence Action</title>
+      <para>
+        The <literal>fence</literal> action enables the system to fence a troublesome host and reduce power usage. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/> for details on configuring a fencing device for a host.
+      </para>
+      <para>
+        The <literal>fence_type</literal> is one of <literal>manual</literal>, <literal>start</literal>, <literal>status</literal>, <literal>stop</literal>, or <literal>restart</literal>.
+      </para>
+      <example>
+        <title>Action to fence a host</title>
+        <screen>
 POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/fence
 Content-Type: application/xml
 
 &lt;action&gt;
     &lt;fence_type&gt;start&lt;/fence_type&gt;
 &lt;/action&gt;
-    </screen>
-  </section>
+        </screen>
+      </example>
+    </section>
+
+    <section id="sect-REST_API_Guide-Hosts-Deactivate">
+      <title>
+        Deactivate Action
+      </title>
+      <para>
+        Deactivate the host, allowing maintenance tasks to be performed.
+      </para>
+      <example>
+        <title>Action to deactivate a host</title>
+        <screen>
+  POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/deactivate HTTP/1.1
+  Content-type: application/xml
+        </screen>
+      </example>
+    </section>
+
+    <section id="sect-REST_API_Guide-Hosts-Approve">
+      <title>
+        Approve Action
+      </title>
+      <para>
+      </para>
+      <example>
+        <title>Action to approve a host</title>
+        <screen>
+  POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/approve HTTP/1.1
+  Content-type: application/xml
+        </screen>
+      </example>
+    </section>
+
+    <section id="sect-REST_API_Guide-Hosts-iSCSI_Login">
+      <title>
+        iSCSI Login Action
+      </title>
+      <para>
+        The <literal>iscsilogin</literal> action enables a host to login to an iSCSI target. Logging into a target makes the LUNs it contains available in the <literal>host_storage</literal> collection. See <xref linkend="sect-REST_API_Guide-Hosts-Storage"/>.
+      </para>
+      <example>
+        <title>Action to enable a host to login to iSCSI target</title>
+        <screen>
+  POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsilogin HTTP/1.1
+  Content-Type: application/xml
+  Accept: application/xml
+
+  &lt;action&gt;
+      &lt;iscsi&gt;
+          &lt;address&gt;mysan.example.com&lt;/address&gt;
+          &lt;target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/target&gt;
+          &lt;username&gt;jimmy&lt;/username&gt;
+          &lt;password&gt;s3kr37&lt;/password&gt;
+      &lt;/iscsi&gt;
+  &lt;/action&gt;
+        </screen>
+      </example>
+    </section>
+
+    <section id="sect-REST_API_Guide-Hosts-iSCSI_Discovery">
+      <title>
+        iSCSI Discover Action
+      </title>
+      <para>
+        The <literal>iscsidiscover</literal> action enables an iSCSI portal to be query for its list of LUNs.
+      </para>
+      <example>
+        <title>Action to query a list of LUNs for iSCSI portal</title>
+        <screen>
+  POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsidiscover HTTP/1.1
+  Content-Type: application/xml
+  Accept: application/xml
+
+  &lt;action&gt;
+      &lt;iscsi&gt;
+          &lt;address&gt;mysan.example.com&lt;/address&gt;
+      &lt;/iscsi&gt;
+  &lt;/action&gt;
+
+  HTTP/1.1 202 Accept
+  Content-Type: application/xml
+
+  &lt;action id="e9126d04-0f74-4e1a-9139-13f11fcbb4ab"
+    href="/rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/iscsidiscover/
+    e9126d04-0f74-4e1a-9139-13f11fcbb4ab"&gt;
+      &lt;iscsi_target&gt;iqn.2009-08.com.example:mysan.foobar&lt;/iscsi_target&gt;
+      ...
+  &lt;action&gt;
+        </screen>
+      </example>
+    </section>
+
+    <section id="sect-REST_API_Guide-Hosts-Commit_Network_Configuration">
+      <title>
+        Commit Network Configuration Action
+      </title>
+      <para>
+        An API user commits the network configuration to persist a host network interface attachment or detachment, or persist the creation/deletion of a bonded interface.
+      </para>
+      <example>
+        <title>Action to commit network configuration</title>
+        <screen>
+  POST /rhevm-api/hosts/2ab5e1da-b726-4274-bbf7-0a42b16a0fc3/commitnetconfig HTTP/1.1
+  Content-type: application/xml
+        </screen>
+      </example>
+      <warning>
+        <para>
+          Networking configuration should only be committed after it has been established that host connectivity has not been lost as a result of the configuration changes. If host connectivity has been lost, the host should be rebooted and will automatically revert to the previous networking configuration.
+        </para>
+      </warning>
+    </section>
+        
   </section>
 </chapter>

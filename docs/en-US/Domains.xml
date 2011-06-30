@@ -5,30 +5,74 @@
 ]>
 <chapter id="chap-REST_API_Guide-Domains">
   <title>Domains</title>
-	<para>The API provides the ability to access user and group information from the organization's Active Directory Service using the <literal>domains</literal> collection.</para>
-	<screen>
-&lt;domains&gt;
-    &lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
-      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"&gt;
-        &lt;name&gt;domain.example.com&lt;/name&gt;
-        &lt;link rel="users"
-          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users"/&gt;
-        &lt;link rel="groups"
-          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups"/&gt;
-        &lt;link rel="users/search"
-          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/
-          users?search={query}"/&gt;
-        &lt;link rel="groups/search"
-          href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/
-          groups?search={query}"/&gt;
-    &lt;/domain&gt;
-&lt;/domains&gt;
-  </screen>
+	<para>The API provides the ability to access user and group information from the organization's Active Directory Service using the <literal>domains</literal> collection. Domain information is referenced with the <literal>rel="domains"</literal> link.
+  </para>
+  <para>
+    Each <literal>domain</literal> contains the following elements:
+  </para>
+  <informaltable frame="none">
+    <tgroup cols="4">
+      <colspec colwidth="4*"/>
+      <colspec colwidth="4*"/>
+      <colspec colwidth="6*"/>
+      <colspec colwidth="2*" colname="prop"/>
+      <thead>
+        <row>
+          <entry>Element</entry>
+          <entry>Type</entry>
+          <entry>Description</entry>
+          <entry>Properties</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry><literal>name</literal></entry>
+          <entry>string</entry>
+          <entry>The domain name</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>link rel="users"</literal></entry>
+          <entry>string</entry>
+          <entry>A link to the sub-collection for users associated with this domain</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>link rel="groups"</literal></entry>
+          <entry>string</entry>
+          <entry>A link to the sub-collection for groups associated with this domain</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+  <para>
+    The links to <literal>users</literal> and <literal>groups</literal> sub-collections also accept search queries. See <xref linkend="sect-REST_API_Guide-Common_Features-Collections-Querying_Collections"/> for more information.
+  </para>
+  <example>
+    <title>An XML representation of a domain resource</title>
+    <screen>
+&lt;domain id="77696e32-6b38-7268-6576-2e656e676c61"
+  href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61"&gt;
+    &lt;name&gt;domain.example.com&lt;/name&gt;
+    &lt;link rel="users"
+      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/users"/&gt;
+    &lt;link rel="groups"
+      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/groups"/&gt;
+    &lt;link rel="users/search"
+      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/
+      users?search={query}"/&gt;
+    &lt;link rel="groups/search"
+      href="/rhevm-api/domains/77696e32-6b38-7268-6576-2e656e676c61/
+      groups?search={query}"/&gt;
+&lt;/domain&gt;
+    </screen>
+  </example>
   <note>
     <para>The <literal>domains</literal> collection and its sub-collections are read-only.</para>
   </note>
 	<section id="chap-REST_API_Guide-Domains-Users">
-	  <title>Domains Users</title>
+	  <title>Domain Users Sub-Collection</title>
 	  <para>The <literal>users</literal> sub-collection contains all users in Active Directory. This information is used to add new users to the Red Hat Enterprise Virtualization environment as per <xref linkend="chap-REST_API_Guide-Users"/>.</para>
 	  <para>A domain <literal>user</literal> resource contains these main properties:</para>
     <informaltable frame="none">
@@ -98,7 +142,7 @@
 
   </section>
 	<section id="chap-REST_API_Guide-Domains-Groups">
-	  <title>Domains Groups</title>
+	  <title>Domain Groups Sub-Collection</title>
 	  <para>The <literal>groups</literal> sub-collection contains all groups in Active Directory. A domain <literal>group</literal> resource contains these main properties:</para>
     <informaltable frame="none">
       <tgroup cols="3">

@@ -58,10 +58,9 @@
       </tgroup>
     </informaltable>
   </para>
-  <para>
-    For example:
-  </para>   
-  <screen>
+  <example>
+    <title>An XML representation of the roles collection</title>
+    <screen>
 GET /rhevm-api/roles HTTP/1.1
 Accept: application/xml
 
@@ -90,17 +89,20 @@ Content-Type: application/xml
         &lt;description&gt;RHEVM VDI user&lt;/description&gt;
     &lt;/role&gt;
 &lt;/roles&gt;
-  </screen>
+    </screen>
+  </example>
   <note>
     <para>
-      Because the global roles form a static set in Red Hat Enterprise Virtualization Manager 2.2, the usual collection idioms are not followed in this case, <emphasis>i.e.</emphasis> a new role cannot be created via <literal>POST</literal>, nor can a role be destroyed via <literal>DELETE</literal> on the collection.
+      Because the global roles form a static set in Red Hat Enterprise Virtualization Manager 2.2, the usual collection idioms are not followed in this case, i.e. a new role cannot be created via <literal>POST</literal>, nor can a role be destroyed via <literal>DELETE</literal> on the collection.
     </para>
   </note>
 
   <section id="sect-REST_API_Guide-Roles-Permits">
     <title>Permits Sub-Collection</title>
     <para>
-      Each role contains a set of allowable actions, or <literal>permits</literal>, which are defined in <xref linkend="sect-REST_API_Guide-Capabilities-Permits"/>. A role's <literal>permits</literal> are listed as a sub-collection:
+      Each role contains a set of allowable actions, or <literal>permits</literal>, which are defined in <literal>capabilities</literal>. For more information on <literal>permits</literal>, see <xref linkend="sect-REST_API_Guide-Capabilities-Permits"/>.</para>
+    <para>
+      A role's <literal>permits</literal> are listed as a sub-collection:
     </para>
     <screen>
 GET /rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits HTTP/1.1
@@ -114,7 +116,8 @@ Content-Type: application/xml
       href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/1"&gt;
         &lt;name&gt;CREATE_VM&lt;/name&gt;
         &lt;administrative&gt;false&lt;/administrative&gt;
-        &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
+        &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"
+          href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
     &lt;/permit&gt;
     &lt;permit id="4"
       href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/4"&gt;
@@ -142,7 +145,8 @@ Content-Type: application/xml
       href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/1"&gt;
         &lt;name&gt;CREATE_VM&lt;/name&gt;
         &lt;administrative&gt;false&lt;/administrative&gt;
-        &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9" href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
+        &lt;role id="b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"
+          href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
     &lt;/permit&gt;
 &lt;/permits&gt;
     </screen>

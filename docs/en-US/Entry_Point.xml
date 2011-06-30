@@ -4,10 +4,10 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-REST_API_Guide-Entry_Point">
-  <title>API Entry Point</title>
+  <title>Entry Point</title>
 
   <para>
-    Users of the API should begin by issuing a <literal>GET</literal> request on the entry point URI (consisting of <varname>{host}</varname> and <varname>{base}</varname>).
+    A user begins interacting with the API through a <literal>GET</literal> request on the entry point URI consisting of a <varname>{host}</varname> and <varname>{base}</varname>.
   </para>
 
   <screen>
@@ -49,95 +49,107 @@ Content-Type: application/xml
 
   <note>
     <para>
-      For simplicity, in all other examples we omit the <literal>Host</literal> request header and assume <varname>{base}</varname> is <literal>/rhevm-api</literal>. This base path will differ depending on the implementation, for example it is <literal>/rhevm-api-powershell</literal> for the PowerShell-based implementation.
+      For simplicity, all other examples omit the <literal>Host</literal> request header and assume <varname>{base}</varname> is the default <literal>/rhevm-api</literal>. This base path will differ depending on your implementation.
     </para>
   </note>
   <section id="sect-REST_API_Guide-Entry_Point-Link">
     <title>Link elements</title>
-  <para>
-    The <literal>Link</literal> header
-    <footnote>
-      <para>
-        The Internet-Draft describing the format of the Link header is available at <ulink url="http://tools.ietf.org/html/draft-nottingham-http-link-header-10">http://tools.ietf.org/html/draft-nottingham-http-link-header-10</ulink>.
-      </para>
-    </footnote>
-    and the <literal>link</literal> elements in the response provides the client with URIs for all of the resource collections exposed by the API. Each collection is identified by a relation type which the client must use to find the URI it needs. The following relation types are available:
-  </para>
-  <para>
-    <informaltable frame="none">
-      <tgroup cols="2">
-        <colspec colwidth="2*"/>
-        <colspec colwidth="5*"/>
-        <tbody>
-          <row>
-            <entry><literal>capabilities</literal></entry>
-            <entry>Information about the supported capabilities of the Red Hat Enterprise Virtualization Manager</entry>
-          </row>
-          <row>
-            <entry><literal>clusters</literal></entry>
-            <entry>Host clusters</entry>
-          </row>
-          <row>
-            <entry><literal>datacenters</literal></entry>
-            <entry>Data centers</entry>
-          </row>
-          <row>
-            <entry><literal>hosts</literal></entry>
-            <entry>Hosts</entry>
-          </row>
-          <row>
-            <entry><literal>networks</literal></entry>
-            <entry>Virtual networks</entry>
-          </row>
-          <row>
-            <entry><literal>roles</literal></entry>
-            <entry>Roles</entry>
-          </row>
-          <row>
-            <entry><literal>storagedomains</literal></entry>
-            <entry>Storage domains</entry>
-          </row>
-          <row>
-            <entry><literal>tags</literal></entry>
-            <entry>tags</entry>
-          </row>
-          <row>
-            <entry><literal>templates</literal></entry>
-            <entry>Templates</entry>
-          </row>
-          <row>
-            <entry><literal>users</literal></entry>
-            <entry>Users</entry>
-          </row>
-          <row>
-            <entry><literal>vmpools</literal></entry>
-            <entry>Virtual machine pools</entry>
-          </row>
-          <row>
-            <entry><literal>vms</literal></entry>
-            <entry>Virtual machines</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-
-  </para>
-
-  <para>
-    <figure id="figu-REST_API_Guide_API">
-      <title> The relationship between the API entry point and the resource collections exposed by the API</title>
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/api_diag.png" format="PNG" />
-        </imageobject>
-      </mediaobject>
-    </figure>
-  </para>
+    <para>
+      Access to the Entry Point provides the <literal>Link</literal> header
+      <footnote>
+        <para>
+          The Internet-Draft describing the format of the Link header is available at <ulink url="http://tools.ietf.org/html/draft-nottingham-http-link-header-10">http://tools.ietf.org/html/draft-nottingham-http-link-header-10</ulink>.
+        </para>
+      </footnote>
+      , <literal>link</literal> elements and URIs for all of the resource collections exposed by the API. Each collection uses a relation type to identify the URI a client needs. The following relation types are available:
+    </para>
+  <informaltable frame="none">
+    <tgroup cols="2">
+      <colspec colwidth="2*"/>
+      <colspec colwidth="5*"/>
+      <thead>
+        <row>
+          <entry>Relationship</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>      
+      <tbody>
+        <row>
+          <entry><literal>capabilities</literal></entry>
+          <entry>Information about the supported capabilities of the Red Hat Enterprise Virtualization Manager</entry>
+        </row>
+        <row>
+          <entry><literal>datacenters</literal></entry>
+          <entry>Data centers</entry>
+        </row>
+        <row>
+          <entry><literal>clusters</literal></entry>
+          <entry>Host clusters</entry>
+        </row>
+        <row>
+          <entry><literal>networks</literal></entry>
+          <entry>Virtual networks</entry>
+        </row>
+        <row>
+          <entry><literal>storagedomains</literal></entry>
+          <entry>Storage domains</entry>
+        </row>
+        <row>
+          <entry><literal>hosts</literal></entry>
+          <entry>Hosts</entry>
+        </row>
+        <row>
+          <entry><literal>vms</literal></entry>
+          <entry>Virtual machines</entry>
+        </row>
+        <row>
+          <entry><literal>templates</literal></entry>
+          <entry>Templates</entry>
+        </row>
+        <row>
+          <entry><literal>vmpools</literal></entry>
+          <entry>Virtual machine pools</entry>
+        </row>
+        <row>
+          <entry><literal>roles</literal></entry>
+          <entry>Roles</entry>
+        </row>
+        <row>
+          <entry><literal>users</literal></entry>
+          <entry>Users</entry>
+        </row>
+        <row>
+            <entry><literal>domain</literal></entry>
+            <entry>Identity domain</entry>
+        </row>
+        <row>
+          <entry><literal>tags</literal></entry>
+          <entry>Tags</entry>
+        </row>
+        <row>
+            <entry><literal>events</literal></entry>
+            <entry>Events</entry>
+        </row>
+        <row>
+            <entry><literal>statistics</literal></entry>
+            <entry>Statistics</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+  <figure id="figu-REST_API_Guide_API">
+    <title> The relationship between the API entry point and the resource collections exposed by the API</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/api_diag.png" format="PNG" />
+      </imageobject>
+    </mediaobject>
+  </figure>
 
   <note>
     <title>URIs</title>
     <para>
-      All URIs shown in example responses are purely illustrative. The format of all URIs returned by the server is opaque and may change in future versions. Clients must navigate to any specific resources via the entry point URI.
+      All URIs shown in example responses are purely illustrative. The format of all URIs returned by the server is opaque. Clients must navigate to any specific resources through the entry point URI and use the relationship types to access the URIs.
     </para>
     <para>
       The server may choose to include absolute URIs or absolute paths
@@ -149,7 +161,6 @@ Content-Type: application/xml
       in the <literal>link</literal> element <literal>href</literal> attribute, so clients should be prepared to handle either form. <literal>Link</literal> headers will only contain absolute URIs.
     </para>
   </note>
-
   <para>
     In addition to the literal URIs described above, the <literal>Link</literal> header also contains a set of URI templates
     <footnote>
@@ -157,13 +168,13 @@ Content-Type: application/xml
         The Internet-Draft describing the format of a URI Template is available at <ulink url="http://tools.ietf.org/html/draft-gregorio-uritemplate-03">http://tools.ietf.org/html/draft-gregorio-uritemplate-03</ulink>.
       </para>
     </footnote>
-    which describe the form of URI to be used for querying the collections. Each URI template is identified by a relation type, named according to the convention <literal>"collection/search"</literal>.
+    , which describe the form of URI used for sending search queries to the collections. Each URI template is identified by a relation type, named according to the convention <literal>"collection/search"</literal>.
   </para>
 
   <note>
     <title>URI Templates</title>
     <para>
-      The purpose of the URI template is allow a search be expressed using the natural HTTP idiom of a query parameter, but without requiring that the client is aware <emphasis>a priori</emphasis> of the URI structure. Thus clients should treat these templates as being opaque, and instantiate them via a URI template library such as the Google Code <ulink url="http://code.google.com/p/uri-templates/">uri-templates</ulink> Python package or the Apache Abdera <ulink url="https://cwiki.apache.org/ABDERA/uri-templates.html">support for Java templates</ulink>.
+      The purpose of the URI template is to accept a search expression using the natural HTTP pattern of a query parameter. The client does not require prior knowledge of the URI structure. Thus clients should treat these templates as being opaque and instantiate them via a URI template library such as the Google Code <ulink url="http://code.google.com/p/uri-templates/">uri-templates</ulink> Python package or the Apache Abdera <ulink url="https://cwiki.apache.org/ABDERA/uri-templates.html">support for Java templates</ulink>.
     </para>
   </note>
 
@@ -172,45 +183,54 @@ Content-Type: application/xml
 
     <informaltable frame="none">
       <tgroup cols="2">
-        <colspec colwidth="2*"/>
-        <colspec colwidth="5*"/>
-        <tbody>
+        <colspec colwidth="3*"/>
+        <colspec colwidth="4*"/>
+        <thead>
           <row>
-            <entry><literal>clusters/search</literal></entry>
-            <entry>Query host clusters</entry>
+            <entry>Relationship</entry>
+            <entry>Description</entry>
           </row>
+        </thead>        
+        <tbody>
           <row>
             <entry><literal>datacenters/search</literal></entry>
             <entry>Query data centers</entry>
           </row>
           <row>
-            <entry><literal>hosts/search</literal></entry>
-            <entry>Query hosts</entry>
+            <entry><literal>clusters/search</literal></entry>
+            <entry>Query host clusters</entry>
           </row>
           <row>
             <entry><literal>storagedomains/search</literal></entry>
             <entry>Query storage domains</entry>
           </row>
           <row>
-            <entry><literal>templates/search</literal></entry>
-            <entry>Query templates</entry>
+            <entry><literal>hosts/search</literal></entry>
+            <entry>Query hosts</entry>
           </row>
           <row>
-            <entry><literal>users/search</literal></entry>
-            <entry>Query users</entry>
+            <entry><literal>vms/search</literal></entry>
+            <entry>Query virtual machines</entry>
+          </row>
+          <row>
+            <entry><literal>templates/search</literal></entry>
+            <entry>Query templates</entry>
           </row>
           <row>
             <entry><literal>vmpools/search</literal></entry>
             <entry>Query virtual machine pools</entry>
           </row>
           <row>
-            <entry><literal>vms/search</literal></entry>
-            <entry>Query virtual machines</entry>
+            <entry><literal>events/search</literal></entry>
+            <entry>Query events</entry>
+          </row>
+          <row>
+            <entry><literal>users/search</literal></entry>
+            <entry>Query users</entry>
           </row>
         </tbody>
       </tgroup>
     </informaltable>
-
   </para>
   </section>
   
@@ -223,6 +243,12 @@ Content-Type: application/xml
       <tgroup cols="2">
         <colspec colwidth="2*"/>
         <colspec colwidth="5*"/>
+        <thead>
+          <row>
+            <entry>Relationship</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>        
         <tbody>
           <row>
             <entry><literal>templates/blank</literal></entry>
@@ -246,6 +272,12 @@ Content-Type: application/xml
       <tgroup cols="2">
         <colspec colwidth="2*"/>
         <colspec colwidth="5*"/>
+        <thead>
+          <row>
+            <entry>Element</entry>
+            <entry>Description</entry>
+          </row>
+        </thead>        
         <tbody>
           <row>
             <entry><literal>vms</literal></entry>

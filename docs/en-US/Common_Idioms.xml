@@ -6,7 +6,7 @@
 <chapter id="chap-REST_API_Guide-Common_Features">
   <title>Common Features</title>
   <para>
-    This chapter examines these features common to all resources and collections. 
+    This chapter examines features common to resources and collections. 
   </para>
 
   <note>
@@ -36,7 +36,7 @@
         </row>
         <row>
           <entry>Non-updateable</entry>
-          <entry>These elements cannot have their value changed when updating a resource. They may only be included in a client-provided representation on update if their values have not been altered. Otherwise they should be omitted from an update action.</entry>
+          <entry>These elements cannot have their value changed when updating a resource. They are only included in a client-provided representation on update if their values are not altered. Otherwise they are omitted from an update action.</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
@@ -61,7 +61,7 @@
     ...
 &lt;/{resource}&gt;
       </screen>
-      For example:
+      In the context of a virtual machine, the representation appears as follows:
       <screen>
 &lt;vm id="5b9bbce5-0d72-4f56-b931-5d449181ee06"
   href="/rhevm-api/vms/5b9bbce5-0d72-4f56-b931-5d449181ee06"&gt;
@@ -93,7 +93,7 @@
             <row>
               <entry><literal>id</literal></entry>
               <entry>GUID</entry>
-              <entry>An opaque server-generated identifier for the resource which is guaranteed to be unique across all resources in this Red Hat Enterprise Virtualization Manager instance</entry>
+              <entry>An opaque server-generated identifier for the resource, which is guaranteed to be unique across all resources in this Red Hat Enterprise Virtualization Manager instance</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
@@ -118,7 +118,7 @@
    
     <section id="sect-REST_API_Guide-Common_Features-Collections-Listing_Resources">
       <title>
-        Listing All Resources
+        Listing All Resources in a Collection
       </title>
       <para>
         A listing of the resources in a collection is obtained by issuing a <literal>GET</literal> request on the collection URI obtained from the entry point.
@@ -190,7 +190,7 @@ HTTP/1.1 200 OK
 Content-Type: application/xml
 
 &lt;{collection}&gt;
-    &lt;{resource} id="{id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+    &lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
         ...
     &lt;/{resource}&gt;
     ...
@@ -252,7 +252,7 @@ Accept: application/xml
       <section id="sect-REST_API_Guide-Common_Features-Collections-Querying_Collections-Wildcard_Searches">
   		  <title>Wildcards</title>
   		  <para>
-  		    Search queries can substitute part of a value with an asterisk as a wildcard. For example:
+  		    Search queries substitute part of a value with an asterisk as a wildcard. For example:
   		  </para>
         <screen>
 GET /rhevm-api/vms?search=name%3Dvm* HTTP/1.1
@@ -287,7 +287,7 @@ Content-Type: application/xml
         Retrieving a Resource
       </title>
       <para>
-        The state of a resource can be retrieved using <literal>GET</literal> request on a URI obtained from the listing above.
+        The state of a resource is retrieved using <literal>GET</literal> request on a URI obtained from the listing above.
       </para>
       <screen>
 GET /rhevm-api/{collection}/{resource_id} HTTP/1.1
@@ -307,10 +307,10 @@ Content-Type: application/xml
         Creating a Resource
       </title>
       <para>
-        A new resource may be created by issueing a <literal>POST</literal> request to collection URI containing a representation of the new resource.
+        A new resource is created with a <literal>POST</literal> request to collection URI containing a representation of the new resource.
       </para>
       <para>
-        Each resource type has its own specific required properties which the client must supply when creating a new resource. Refer to the indiviual resource type documentation for more details. If a required property is absent, the creation will fail with a <literal>Fault</literal> representation indicating the missing elements.
+        Each resource type has its own specific required properties. The client supplies these properties when creating a new resource. Refer to the indiviual resource type documentation for more details. If a required property is absent, the creation will fail with a <literal>fault</literal> representation indicating the missing elements.
       </para>
       <screen>
 POST /rhevm-api/{collection} HTTP/1.1
@@ -325,18 +325,18 @@ HTTP/1.1 201 Created
 Location: http://{host}/rhevm-api/{collection}/{resource_id}
 Content-Type: application/xml
 
-&lt;resource id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
+&lt;{resource} id="{resource_id}" href="/rhevm-api/{collection}/{resource_id}"&gt;
     &lt;name&gt;Resource-Name&lt;/name&gt;
     ...
-&lt;/resource&gt;
+&lt;/{resource}&gt;
       </screen>
       <para>
-        The <literal>Location</literal> header in the response gives the URI from which the resource may be queried. The response body can contain a complete representation, partial representation or no representation of the resource, so clients should rely only on fetching the representation via the URI in the response header.
+        The <literal>Location</literal> header in the response gives the URI of the queried resource. The response body contains either a complete representation, partial representation or no representation of the resource. It is recommended that clients rely only on fetching the representation via the URI in the response header.
       </para>
     </section>
     <section id="sect-REST_API_Guide-Common_Features-Resources-Creating_Asynchronous_Resources">
       <title>
-        Creating Resources Asynchronously
+        Creating a Resource Asynchronously
       </title>
       <para>
         Certain resources, such as Virtual Machines, Disks, Snapshots and Templates, are created asynchronously. A request to create an asynchronous resources results in a <literal>202 Accepted</literal> status. The initial document structure for a <literal>202 Accepted</literal> resource also contains a <literal>creation_status</literal> element and link for creation status updates. For example:
@@ -359,7 +359,7 @@ Content-Type: application/xml
     &lt;creation_status&gt;PENDING&lt;/creation status&gt;
     &lt;link rel="creation_status" 
       href="/rhevm-api/{collection}/{resource_id}/creation_status/{creation_status_id}"/&gt;
-    ...
+      ...
 &lt;/{resource}&gt;
       </screen>
       <para>
@@ -374,7 +374,7 @@ Content-Type: application/xml
 
 &lt;creation id="{creation_status_id}"
   href="/rhevm-api/{collection}/{resource_id}/creation_status/{creation_status_id}"&gt;
-      &lt;status&gt;COMPLETE&lt;/status&gt;
+    &lt;status&gt;COMPLETE&lt;/status&gt;
 &lt;/creation&gt;
       </screen>
       <para>
@@ -397,7 +397,7 @@ Expect: 201-created
         Updating a Resource
       </title>
       <para>
-        Some resource properties can be modified by <literal>PUT</literal>ing an updated description to the resource URI. Details on which properties are modifiable can be found in the individual resource type documentation.
+        Some resource properties are modified with a <literal>PUT</literal> request containing an updated description for the resource URI. Details on modifiable properties are found in the individual resource type documentation.
       </para>
       <screen>
 PUT /rhevm-api/{collection}/{resource_id} HTTP/1.1
@@ -417,7 +417,7 @@ Content-Type: application/xml
 &lt;/{resource}&gt;
       </screen>
       <para>
-        If an attempt is made to modify a <emphasis>strictly</emphasis> immutable resource property, this is reported as <literal>409 Conflict</literal> error with a <literal>Fault</literal> representation in the response body. Other non-modifiable properties specified in the request entity-body may be silently ignored.
+        If an attempt is made to modify a <emphasis>strictly</emphasis> immutable resource property, this is reported as <literal>409 Conflict</literal> error with a <literal>fault</literal> representation in the response body. Other non-modifiable properties specified in the request entity-body are to be ignored.
       </para>
     </section>
 
@@ -459,7 +459,7 @@ Content-Type: application/xml
 &lt;/{resource}&gt;
       </screen>
       <para>
-        This means an API user can query the sub-collection at <uri>/rhevm-api/{collection}/{resource_id}/{subcollection}</uri>:
+        This means an API user queries the sub-collection at <uri>/rhevm-api/{collection}/{resource_id}/{subcollection}</uri>:
       </para>
       <screen>
 GET /rhevm-api/{collection}/{resource_id}/{subcollection} HTTP/1.1
@@ -520,7 +520,7 @@ Content-Type: application/xml
         Actions
       </title>
       <para>
-        Each resource description includes a list of action links describing operations which may be invoked on the resource.
+        Most resources include a list of action links.
       </para>
       <screen>
 &lt;{resource}&gt;
@@ -534,7 +534,7 @@ Content-Type: application/xml
 &lt;/resource&gt;
       </screen>
       <para>
-        An action may be invoked by <literal>POST</literal>ing to the supplied URI. The body of the POST must contain an <literal>Action</literal> representation encapsulating common and/or task-specific parameters. Common action parameters include:
+        An action is invoked with a <literal>POST</literal> request to the supplied URI. The body of the POST requires an <literal>action</literal> representation encapsulating common and/or task-specific parameters. Common action parameters include:
       </para>
       <informaltable frame="none">
         <tgroup cols="2">
@@ -543,7 +543,7 @@ Content-Type: application/xml
           <tbody>
             <row>
               <entry><literal>async</literal></entry>
-              <entry>true if the server should respond immediately with <literal>202 Accepted</literal> and an action representation containing a <literal>href</literal> link which may be polled for completion.</entry>
+              <entry><literal>true</literal> if the server should respond immediately with <literal>202 Accepted</literal> and an action representation contains a <literal>href</literal> link to be polled for completion.</entry>
             </row>
             <row>
               <entry><literal>grace_period</literal></entry>
@@ -553,12 +553,11 @@ Content-Type: application/xml
         </tgroup>
       </informaltable>
       <para>
-        Individual actions and their parameters are documented in the individual resource type's documentation. Some parameters are mandatory for specific actions, in which case their absence is indicated with a <literal>Fault</literal> response.
+        Individual actions and their parameters are documented in the individual resource type's documentation. Some parameters are mandatory for specific actions and their absence is indicated with a <literal>fault</literal> response.
       </para>
       <para>
-        When the action is initiated asychronously, the immediate <literal>202 Accepted</literal> response provides a link that may be polled to monitor the status of the task:
+        When the action is initiated asychronously, the immediate <literal>202 Accepted</literal> response provides a link to monitor the status of the task:
       </para>
-
       <screen>
 POST /rhevm-api/{collection}/{resource_id}/{action} HTTP/1.1
 Content-Type: application/xml
@@ -599,7 +598,7 @@ Content-Type: application/xml
             </row>
             <row>
               <entry><literal>FAILED</literal></entry>
-              <entry>task has failed, in which case the returned <literal>Action</literal> representation would contain a <literal>Fault</literal> describing the failure.</entry>
+              <entry>task has failed. The returned <literal>action</literal> representation would contain a <literal>fault</literal> describing the failure.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -622,7 +621,7 @@ Content-Type: application/xml
 &lt;action&gt;
       </screen>
       <para>
-        An action description may also include some links which are identified by their <literal>rel</literal> attribute:
+        An action representation also includes some links that are identified by the <literal>rel</literal> attribute:
       </para>
       <informaltable frame="none">
         <tgroup cols="2">
@@ -631,7 +630,7 @@ Content-Type: application/xml
           <tbody>
             <row>
               <entry><literal>parent</literal></entry>
-              <entry>A link back to the resource which this action was invoked upon</entry>
+              <entry>A link back to the resource of this action</entry>
             </row>
             <row>
               <entry><literal>replay</literal></entry>
@@ -695,7 +694,7 @@ Content-Type: application/xml
         Handling Errors
       </title>
       <para>
-        Some errors require further explanation beyond that provided by a standard HTTP status code. For example, an unsuccessful resource state update or action is reported with a <literal>Fault</literal> representation in the response entity-body. The fault contains reason and detail strings, which may be localized for the client's locale as specified via the <literal>Accept-Language</literal> HTTP header. Clients initiating a request which may fail in this way must be prepared to unmarshal either a <literal>Fault</literal> <emphasis>or</emphasis> the expected resource representation, depending on the response status code. Such cases are clearly indicated in the individual resource documentation.
+        Some errors require further explanation beyond that provided by a standard HTTP status code. For example, an unsuccessful resource state update or action is reported with a <literal>fault</literal> representation in the response entity-body. The fault contains reason and detail strings, which are also localized depending on the <literal>Accept-Language</literal> HTTP header. Clients initiating a request that fails in this way are to unmarshal either a <literal>fault</literal> <emphasis>or</emphasis> the expected resource representation, depending on the response status code. Such cases are clearly indicated in the individual resource documentation.
       </para>
       <screen>
 PUT /rhevm-api/{collection}/{resource_id} HTTP/1.1

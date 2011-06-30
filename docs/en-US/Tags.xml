@@ -5,7 +5,9 @@
 ]>
 <chapter id="chap-REST_API_Guide-Tags">
   <title>Tags</title>
-
+  <para>
+    The <literal>tags</literal> collection provides information about tags in a Red Hat Enterprise Virtualization environment. An API user accesses this information through the <literal>rel="tags"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>).
+  </para>
   <para>
     The tag specific elements which may be contained in the tag description are as follows:
   </para>
@@ -15,74 +17,67 @@
       The icons used in the properties column of this table are described in <xref linkend="table-Property_Icons" />
     </para>
   </note>
-  <para>
-    <informaltable frame="none">
-      <tgroup cols="4">
-        <colspec colwidth="4*"/>
-        <colspec colwidth="4*"/>
-        <colspec colwidth="6*"/>
-        <colspec colwidth="2*" colname="prop"/>
-        <thead>
-          <row>
-            <entry>Element</entry>
-            <entry>Type</entry>
-            <entry>Description</entry>
-            <entry>Properties</entry>
-          </row>
-        </thead>
-        <tbody>
-          <row>
-            <entry><literal>host</literal></entry>
-            <entry>complex</entry>
-            <entry>A reference to the host which the tag is attached. See <xref linkend="chap-REST_API_Guide-Hosts"/></entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>user</literal></entry>
-            <entry>complex</entry>
-            <entry>A reference to the user which the tag is attached. See <xref linkend="chap-REST_API_Guide-Users"/></entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
-            <entry><literal>vm</literal></entry>
-            <entry>complex</entry>
-            <entry>A reference to the VM which the tag is attached. See <xref linkend="chap-REST_API_Guide-VMs"/></entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </informaltable>
-
-    For example:
-  </para>
-
-  <screen>
+  <informaltable frame="none">
+    <tgroup cols="4">
+      <colspec colwidth="4*"/>
+      <colspec colwidth="4*"/>
+      <colspec colwidth="6*"/>
+      <colspec colwidth="2*" colname="prop"/>
+      <thead>
+        <row>
+          <entry>Element</entry>
+          <entry>Type</entry>
+          <entry>Description</entry>
+          <entry>Properties</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry><literal>host</literal></entry>
+          <entry>complex</entry>
+          <entry>A reference to the host which the tag is attached. See <xref linkend="chap-REST_API_Guide-Hosts"/></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>user</literal></entry>
+          <entry>complex</entry>
+          <entry>A reference to the user which the tag is attached. See <xref linkend="chap-REST_API_Guide-Users"/></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>vm</literal></entry>
+          <entry>complex</entry>
+          <entry>A reference to the VM which the tag is attached. See <xref linkend="chap-REST_API_Guide-VMs"/></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+  <example>
+    <title>An XML representation of a tag resource</title>
+    <screen>
 &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"
   href="/rhevm-api/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"&gt;
     &lt;name&gt;Finance&lt;/name&gt;
     &lt;description&gt;Resources for the Finance department&lt;/description&gt;
 &lt;/tag&gt;
-  </screen>
-
+    </screen>
+  </example>
   <para>
     When creating a new tag the <literal>name</literal> property is required. The <literal>name</literal> and <literal>description</literal> elements may be updated post-creation.
   </para>
 
   <section id="sect-REST_API_Guide-Tags-Hosts_Users_and_VMs">
     <title>Associating Tags With a Host, User or VM</title>
-
     <para>
       The collection referenced by <literal>link rel="tags"</literal> from a <literal>host</literal>, <literal>user</literal> or <literal>vms</literal> represents the set of tags associated with the entity.
     </para>
-
     <para>
       The <literal>tag</literal> representations are as described in <xref linkend="chap-REST_API_Guide-Tags"/>, except they also contain a <literal>host id</literal>, <literal>user id</literal> or <literal>vm id</literal> reference to the entity in question.
     </para>
-
     <para>
       Each tags collection may be manipulated as described in <xref linkend="chap-REST_API_Guide-Common_Features"/>. Associating a tag with an entity is achieved by <literal>POST</literal>ing a tag reference (identifying the tag either by its <literal>id</literal> or <literal>name</literal>) to the collection. Removing an association is achieved by <literal>DELETE</literal>ing the appropriate element in the collection.
     </para>
-
     <screen>
 POST /rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/tags HTTP/1.1
 Accept: application/xml
