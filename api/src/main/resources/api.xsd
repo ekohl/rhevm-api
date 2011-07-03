@@ -752,7 +752,7 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  
+
   <!-- Common to all resources -->
 
   <xs:complexType name="BaseResource">
@@ -1491,6 +1491,7 @@
           <xs:element name="stateless" type="xs:boolean" minOccurs="0"/>
           <xs:element name="timezone" type="xs:string" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="domain" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="usb" minOccurs="0" maxOccurs="1"/>
           <!-- also rel="cdroms/disks/nics" links, see Devices below -->
         </xs:sequence>
       </xs:extension>
@@ -1619,6 +1620,7 @@
           <xs:element name="placement_policy" type="VmPlacementPolicy" minOccurs="0" maxOccurs="1"/>
           <xs:element name="memory_policy" type="VmMemoryPolicy" minOccurs="0" maxOccurs="1"/>
           <xs:element name="guest_info" type="GuestInfo" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="usb" minOccurs="0" maxOccurs="1"/>
 
           <xs:element ref="vmpool" minOccurs="0" maxOccurs="1">
             <xs:annotation>
@@ -1996,4 +1998,11 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:element name="usb" type="Usb"/>
+
+  <xs:complexType name="Usb">
+    <xs:sequence>
+      <xs:element name="enabled" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>
