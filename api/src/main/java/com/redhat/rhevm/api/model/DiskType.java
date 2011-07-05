@@ -19,7 +19,7 @@
 package com.redhat.rhevm.api.model;
 
 public enum DiskType {
-    DATA, SHARED, SWAP, SYSTEM, TEMP;
+    DATA, SYSTEM;
 
     public String value() {
         return name().toLowerCase();

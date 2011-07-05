@@ -25,10 +25,7 @@ import com.redhat.rhevm.api.model.DiskType;
 public enum PowerShellDiskType {
     Unassigned(0, null),
     System(1, DiskType.SYSTEM),
-    Data(2, DiskType.DATA),
-    Shared(3, DiskType.SHARED),
-    Swap(4, DiskType.SWAP),
-    Temp(5, DiskType.TEMP);
+    Data(2, DiskType.DATA);
 
     private static HashMap<Integer, PowerShellDiskType> mapping;
     static {
