@@ -420,10 +420,7 @@
 	      ...
 	      &lt;disk_types&gt;
             &lt;disk_type&gt;data&lt;/disk_type&gt;
-            &lt;disk_type&gt;shared&lt;/disk_type&gt;
-            &lt;disk_type&gt;swap&lt;/disk_type&gt;
             &lt;disk_type&gt;system&lt;/disk_type&gt;
-            &lt;disk_type&gt;temp&lt;/disk_type&gt;
         &lt;disk_types
         ...
     &lt;/version&gt;
