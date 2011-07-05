@@ -260,7 +260,7 @@ class TestVM(BaseTest):
     def test_disk_attributes(self):
         disk = self.store.disk
         assert util.is_int(disk.size)
-        assert disk.type in ('data', 'shared', 'system', 'swap', 'TEMP')
+        assert disk.type in ('data', 'system')
         assert disk.status in ('ILLEGAL', 'INVALID', 'LOCKED', 'OK')
         assert disk.interface in ('ide', 'scsi', 'virtio')
         assert disk.format in ('cow', 'raw')
