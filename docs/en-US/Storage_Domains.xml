@@ -40,15 +40,15 @@
         </row>
         <row>
           <entry><literal>link rel="permissions"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for storage domain permissions. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Permissions"/></entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="files"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the files sub-collection for this storage domains</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>type</literal></entry>
@@ -78,19 +78,19 @@
           <entry><literal>available</literal></entry>
           <entry>integer</entry>
           <entry>Space available in bytes</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>used</literal></entry>
           <entry>integer</entry>
           <entry>Space used in bytes</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>committed</literal></entry>
           <entry>integer</entry>
           <entry>Space committed in bytes</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>storage_format</literal></entry>
@@ -128,7 +128,7 @@
     </screen>
   </example>
   <para>
-      When creating a new storage domain, the <literal>name</literal>, <literal>type</literal> and <literal>storage</literal> elements are required. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
+      Creation of a new storage domain requires the <literal>name</literal>, <literal>type</literal> and <literal>storage</literal> properties. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
   </para>
   <example>
     <title>
@@ -151,7 +151,7 @@ Content-type: application/xml
     </screen>
   </example>
   <para>
-    Only the <literal>name</literal> element may be updated post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
+    Only the <literal>name</literal> element is updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
   </para>
   <example>
     <title>
@@ -250,15 +250,15 @@ Content-type: application/xml
           </thead>
           <tbody>
             <row>
-              <entry><literal>logical_unit id</literal></entry>
+              <entry><literal>logical_unit id=</literal></entry>
               <entry>complex</entry>
-              <entry>A storage domain may be composed of multiple iSCSI or FCP logical units</entry>
+              <entry>The <literal>id</literal> of the logical unit. A storage domain also accepts multiple iSCSI or FCP logical units</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
-              <entry><literal>volume_group id</literal></entry>
+              <entry><literal>volume_group id=</literal></entry>
               <entry>complex</entry>
-              <entry>Alternatively, a storage domain may be based on a single LVM Volume Group which, in turn, may be composed of multiple iSCSI or FCP logical units</entry>
+              <entry>Alternatively, a single LVM Volume Group acts as a storage domain, which is composed of multiple iSCSI or FCP logical units</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
           </tbody>
@@ -268,7 +268,7 @@ Content-type: application/xml
         See <xref linkend="sect-REST_API_Guide-Hosts-Storage"/> for more details.
       </para>
       <para>
-        In the case of iSCSI, if a <literal>logical_unit</literal> description also contains details of the iSCSI target containing the LUN in question, the target will be automatically logged into when the storage domain is created.
+        In the case of iSCSI, if a <literal>logical_unit</literal> description also contains details of the iSCSI target with the LUN in question, the target performs an automatic login when the storage domain is created.
       </para>
     </section>
   
@@ -315,10 +315,10 @@ Content-type: application/xml
       Files Sub-Collection
     </title>
     <para>
-       The files sub-collection under each storage domain provides a way for clients to list available files. This sub-collection is specifically targeted to ISO storage domains, which contain ISO images and virtual floppy disks (VFDs) that an administrator uploads through Red Hat Enterprise Virtualization Manager.
+       The <literal>files</literal> sub-collection under each storage domain provides a way for clients to list available files. This sub-collection is specifically targeted to ISO storage domains, which contain ISO images and virtual floppy disks (VFDs) that an administrator uploads through Red Hat Enterprise Virtualization Manager.
     </para>
     <para>
-      The addition of a CD-ROM device to a VM requires an ISO image from the files sub-collection of an ISO storage domain.
+      The addition of a CD-ROM device to a VM requires an ISO image from the <literal>files</literal> sub-collection of an ISO storage domain.
     </para>
     <example>
       <title>Listing the files sub-collection of an ISO storage domain</title>
@@ -347,7 +347,7 @@ Accept: application/xml
       </screen>
     </example>
     <para>
-      Like other resources, files have opaque <literal>id</literal> and <literal>href</literal> attributes. The <literal>name</literal> element actually contains the filename.
+      Like other resources, files have opaque <literal>id</literal> and <literal>href</literal> attributes. The <literal>name</literal> element contains the filename.
     </para>
   </section>
 
@@ -356,7 +356,7 @@ Accept: application/xml
       Import Existing Storage Domain
     </title>
     <para>
-      API provides a user with the ability to remove an ISO or Export storage domain from one Red Hat Enterprise Virtualization Manager instance without re-formatting the underlying storage and import it into another instance. Importing is achieved similarly to adding a new storage domain, except that the <literal>name</literal> is ignored and not required.
+      The API provides a user with the ability to remove an ISO or Export storage domain from one Red Hat Enterprise Virtualization Manager instance without re-formatting the underlying storage and import it into another instance. Importing is achieved similarly to adding a new storage domain, except the <literal>name</literal> is not required and ignored.
     </para>
     <example>
       <title>Importing an Exisiting Export Storage Domain</title>
@@ -393,7 +393,7 @@ Content-Type: application/xml
       Delete Storage Domain
     </title>
     <para>
-      A <literal>storage_domain</literal> reference must be passed in the body of a <literal>DELETE</literal> request for a storage domain. The <literal>storage_domain</literal> reference must be in the form:
+      A <literal>storage_domain</literal> reference is passed in the body of a <literal>DELETE</literal> request for a storage domain. The <literal>storage_domain</literal> reference is in the following form:
     </para>
     <screen>
 &lt;storage_domain&gt;
@@ -411,7 +411,7 @@ Content-Type: application/xml
 &lt;/storage_domain&gt;
     </screen>
     <para>
-      Optionally, a <literal>format</literal> element may be passed to specify whether or not to format the storage domain after deletion.
+      The API passes a optional <literal>format</literal> element to specify whether or not to format the storage domain after deletion.
     </para>
     <example>
       <title>Formating a Storage Domain after Deletion</title>
@@ -423,7 +423,7 @@ Content-Type: application/xml
       </screen>
     </example>
     <para>  
-      If no <literal>format</literal> element is passed, the storage domain will not be formatted.
+      If no <literal>format</literal> element is passed, the storage domain remains unformatted.
     </para>
   </section>
 </chapter>

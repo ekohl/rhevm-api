@@ -180,7 +180,7 @@ Accept: application/xml; detail=statistics
         Search Queries
       </title>
       <para>
-        A collection is queried using a <literal>GET</literal> request on an appropriate <literal>"collection/search"</literal> URI template, instantiated with a query constraint expressed in the Red Hat Enterprise Virtualization Manager query language. Only those resources in the collection satisfying the constraint will be returned.
+        A <literal>GET</literal> request on an appropriate <literal>"{collection}/search"</literal> results in search query of that collection. The API only returns resources in the collection satisfying the search query constraints.
       </para>
       <screen>
 GET /rhevm-api/{collection}?search={query} HTTP/1.1
@@ -287,7 +287,7 @@ Content-Type: application/xml
         Retrieving a Resource
       </title>
       <para>
-        The state of a resource is retrieved using <literal>GET</literal> request on a URI obtained from the listing above.
+        The API retrieves the state of a resource with a <literal>GET</literal> request on a URI obtained from a collection listing.
       </para>
       <screen>
 GET /rhevm-api/{collection}/{resource_id} HTTP/1.1
@@ -307,10 +307,10 @@ Content-Type: application/xml
         Creating a Resource
       </title>
       <para>
-        A new resource is created with a <literal>POST</literal> request to collection URI containing a representation of the new resource.
+        The API creates a new resource with a <literal>POST</literal> request to the collection URI containing a representation of the new resource.
       </para>
       <para>
-        Each resource type has its own specific required properties. The client supplies these properties when creating a new resource. Refer to the indiviual resource type documentation for more details. If a required property is absent, the creation will fail with a <literal>fault</literal> representation indicating the missing elements.
+        Each resource type has its own specific required properties. The client supplies these properties when creating a new resource. Refer to the indiviual resource type documentation for more details. If a required property is absent, the creation fails with a <literal>fault</literal> representation indicating the missing elements.
       </para>
       <screen>
 POST /rhevm-api/{collection} HTTP/1.1
@@ -397,7 +397,7 @@ Expect: 201-created
         Updating a Resource
       </title>
       <para>
-        Some resource properties are modified with a <literal>PUT</literal> request containing an updated description for the resource URI. Details on modifiable properties are found in the individual resource type documentation.
+        The API modifies some resource properties with a <literal>PUT</literal> request containing an updated description for the resource URI. Details on modifiable properties are found in the individual resource type documentation.
       </para>
       <screen>
 PUT /rhevm-api/{collection}/{resource_id} HTTP/1.1
@@ -417,7 +417,7 @@ Content-Type: application/xml
 &lt;/{resource}&gt;
       </screen>
       <para>
-        If an attempt is made to modify a <emphasis>strictly</emphasis> immutable resource property, this is reported as <literal>409 Conflict</literal> error with a <literal>fault</literal> representation in the response body. Other non-modifiable properties specified in the request entity-body are to be ignored.
+        If an attempt is made to modify a <emphasis>strictly</emphasis> immutable resource property, the API reports a <literal>409 Conflict</literal> error with a <literal>fault</literal> representation in the response body. Other non-modifiable properties specified in the request entity-body are to be ignored.
       </para>
     </section>
 
@@ -426,7 +426,7 @@ Content-Type: application/xml
         Deleting a Resource
       </title>
       <para>
-        A resource is deleted by issuing a <literal>DELETE</literal> request to its URI.
+        The API deletes a resource with a <literal>DELETE</literal> request sent to its URI.
       </para>
       <screen>
 DELETE /rhevm-api/{collection}/{resource_id} HTTP/1.1
@@ -440,7 +440,7 @@ HTTP/1.1 204 No Content
         Sub-Collection Relationships
       </title>
       <para>
-        A sub-collection relationship defines hierarchical link between a resource and a sub-collection. The sub-collection exists, or at least has some meaning, in the context of a parent resource. For example, a virtual machine contains network interfaces, which means the API maps the relationship between the virtual machine resource and the network interfaces sub-collection.
+        A sub-collection relationship defines a hierarchical link between a resource and a sub-collection. The sub-collection exists, or at least has some meaning, in the context of a parent resource. For example, a virtual machine contains network interfaces, which means the API maps the relationship between the virtual machine resource and the network interfaces sub-collection.
       </para>
       <para>
         The API defines a relationship between a resource and a sub-collection using the <literal>link rel=</literal> attribute:
@@ -459,7 +459,7 @@ Content-Type: application/xml
 &lt;/{resource}&gt;
       </screen>
       <para>
-        This means an API user queries the sub-collection at <uri>/rhevm-api/{collection}/{resource_id}/{subcollection}</uri>:
+        The API user now queries the sub-collection.
       </para>
       <screen>
 GET /rhevm-api/{collection}/{resource_id}/{subcollection} HTTP/1.1
@@ -534,16 +534,22 @@ Content-Type: application/xml
 &lt;/resource&gt;
       </screen>
       <para>
-        An action is invoked with a <literal>POST</literal> request to the supplied URI. The body of the POST requires an <literal>action</literal> representation encapsulating common and/or task-specific parameters. Common action parameters include:
+        The API invokes an action with a <literal>POST</literal> request to the supplied URI. The body of the <literal>POST</literal> requires an <literal>action</literal> representation encapsulating common and task-specific parameters. Common action parameters include:
       </para>
       <informaltable frame="none">
         <tgroup cols="2">
           <colspec colwidth="2*"/>
           <colspec colwidth="5*"/>
+          <thead>
+            <row>
+              <entry>Element</entry>
+              <entry>Description</entry>
+        	  </row>
+       	  </thead>
           <tbody>
             <row>
               <entry><literal>async</literal></entry>
-              <entry><literal>true</literal> if the server should respond immediately with <literal>202 Accepted</literal> and an action representation contains a <literal>href</literal> link to be polled for completion.</entry>
+              <entry><literal>true</literal> if the server responds immediately with <literal>202 Accepted</literal> and an action representation contains a <literal>href</literal> link to be polled for completion.</entry>
             </row>
             <row>
               <entry><literal>grace_period</literal></entry>
@@ -583,22 +589,28 @@ Content-Type: application/xml
         <tgroup cols="2">
           <colspec colwidth="2*"/>
           <colspec colwidth="5*"/>
+          <thead>
+            <row>
+              <entry>Status</entry>
+              <entry>Description</entry>
+        	  </row>
+       	  </thead>
           <tbody>
             <row>
               <entry><literal>PENDING</literal></entry>
-              <entry>task has not yet started.</entry>
+              <entry>Task has not yet started</entry>
             </row>
             <row>
               <entry><literal>IN_PROGRESS</literal></entry>
-              <entry>task is in flight.</entry>
+              <entry>Task is in operation</entry>
             </row>
             <row>
               <entry><literal>COMPLETE</literal></entry>
-              <entry>task has completed successfully.</entry>
+              <entry>Task completed successfully</entry>
             </row>
             <row>
               <entry><literal>FAILED</literal></entry>
-              <entry>task has failed. The returned <literal>action</literal> representation would contain a <literal>fault</literal> describing the failure.</entry>
+              <entry>Task failed. The returned <literal>action</literal> representation would contain a <literal>fault</literal> describing the failure.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -634,7 +646,7 @@ Content-Type: application/xml
             </row>
             <row>
               <entry><literal>replay</literal></entry>
-              <entry>A link back to the original action URI. POSTing to this URI will causing the action to be re-initiated</entry>
+              <entry>A link back to the original action URI. POSTing to this URI causes the action to be re-initiated</entry>
             </row>
           </tbody>
         </tgroup>
@@ -694,7 +706,7 @@ Content-Type: application/xml
         Handling Errors
       </title>
       <para>
-        Some errors require further explanation beyond that provided by a standard HTTP status code. For example, an unsuccessful resource state update or action is reported with a <literal>fault</literal> representation in the response entity-body. The fault contains reason and detail strings, which are also localized depending on the <literal>Accept-Language</literal> HTTP header. Clients initiating a request that fails in this way are to unmarshal either a <literal>fault</literal> <emphasis>or</emphasis> the expected resource representation, depending on the response status code. Such cases are clearly indicated in the individual resource documentation.
+        Some errors require further explanation beyond a standard HTTP status code. For example, the API reports an unsuccessful resource state update or action with a <literal>fault</literal> representation in the response entity body. The fault contains a reason and detail strings, which the API localizesas per the <literal>Accept-Language</literal> HTTP header. Clients initiating a failed request in this way are to unmarshal either a <literal>fault</literal> <emphasis>or</emphasis> the expected resource representation, depending on the response status code. Such cases are clearly indicated in the individual resource documentation.
       </para>
       <screen>
 PUT /rhevm-api/{collection}/{resource_id} HTTP/1.1

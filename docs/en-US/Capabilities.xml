@@ -12,7 +12,7 @@
   <section id="chap-REST_API_Guide-Capabilities-Version">
     <title>Version-Dependent Capabilities</title>
     <para>
-      The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements which describe capabilities that are dependent on a compatiblity level.
+      The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements wthat describe capabilities dependent on a compatiblity level.
     </para>
     <para>
       The <literal>version</literal> element includes attributes for <literal>major</literal> and <literal>minor</literal> version numbers. This indicates the current version level, which this document discusses in <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/>.
@@ -179,7 +179,7 @@
     <section id="sect-REST_API_Guide-Capabilities-CPUs">
       <title>CPUs</title>
       <para>
-        Each cluster is configured with a minimal CPU type that all hosts in that cluster must support. Guests running on hosts within the cluster all run on this CPU type, ensuring that every guest can be live migrated to any host within the cluster.
+        Each cluster is configured with a minimal CPU type that all hosts in that cluster must support. Guests running on hosts within the cluster all run on this CPU type, ensuring that every guest is migratable to any host within the cluster.
       </para>
       <para>
         Red Hat Enterprise Virtualization has a set of supported CPU types to choose from when configuring a cluster. Each CPU has the following properties:

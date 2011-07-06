@@ -9,42 +9,51 @@
     The <literal>rel="statistics"</literal> link obtained from the entry point URI accesses the <literal>statistics</literal> collection and lists system statistics from Red Hat Enterprise Virtualisation Manager.
   </para>
   <informaltable frame="none">
-    <tgroup cols="2">
+    <tgroup cols="3">
+      <colspec colwidth="2*"/>
       <colspec colwidth="2*"/>
       <colspec colwidth="5*"/>
       <thead>
         <row>
           <entry>Element</entry>
+          <entry>Type</entry>          
           <entry>Description</entry>
         </row>
       </thead>
       <tbody>
         <row>
           <entry><literal>name</literal></entry>
+          <entry>string</entry>
           <entry>The unique identifier for the statistic entry</entry>
         </row>
         <row>
           <entry><literal>description</literal></entry>
+          <entry>string</entry>
           <entry>A plain text description of the statistic</entry>
         </row>
         <row>
           <entry><literal>unit</literal></entry>
+          <entry>string</entry>
           <entry>The unit or rate to measure the statistical values</entry>
         </row>
         <row>
           <entry><literal>type</literal></entry>
-          <entry>The type of statistic measures. Either <literal>GAUGE</literal> or <literal>COUNTER</literal>.</entry>
+          <entry>One of <literal>GAUGE</literal> or <literal>COUNTER</literal></entry>
+          <entry>The type of statistic measures</entry>
         </row>
         <row>
-          <entry><literal>values type=</literal></entry>
-          <entry>The data type for the statistical values that follow. Either <literal>INTEGER</literal> or <literal>DECIMAL</literal>.</entry>
+          <entry><literal>values type</literal></entry>
+          <entry>One of <literal>INTEGER</literal> or <literal>DECIMAL</literal></entry>
+          <entry>The data type for the statistical values that follow</entry>
         </row>
         <row>
           <entry><literal>value</literal></entry>
+          <entry>complex</entry>
           <entry>A data set that contains <literal>datum</literal></entry>
         </row>
         <row>
           <entry><literal>datum</literal></entry>
+          <entry>see <literal>values type</literal></entry>
           <entry>An individual piece of data from a <literal>value</literal></entry>
         </row>
       </tbody>

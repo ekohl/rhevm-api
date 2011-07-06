@@ -9,7 +9,7 @@
     The <literal>tags</literal> collection provides information about tags in a Red Hat Enterprise Virtualization environment. An API user accesses this information through the <literal>rel="tags"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>).
   </para>
   <para>
-    The tag specific elements which may be contained in the tag description are as follows:
+    The following table shows specific elements contained in a tag resource representation.
   </para>
   <note>
     <title>Element property icons</title>
@@ -34,21 +34,27 @@
       <tbody>
         <row>
           <entry><literal>host</literal></entry>
-          <entry>complex</entry>
+          <entry>GUID</entry>
           <entry>A reference to the host which the tag is attached. See <xref linkend="chap-REST_API_Guide-Hosts"/></entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>user</literal></entry>
-          <entry>complex</entry>
+          <entry>GUID</entry>
           <entry>A reference to the user which the tag is attached. See <xref linkend="chap-REST_API_Guide-Users"/></entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>vm</literal></entry>
-          <entry>complex</entry>
+          <entry>GUID</entry>
           <entry>A reference to the VM which the tag is attached. See <xref linkend="chap-REST_API_Guide-VMs"/></entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>parent</literal></entry>
+          <entry>complex</entry>
+          <entry>A reference to the VM which the tag is attached.</entry>
+          <entry></entry>
         </row>
       </tbody>
     </tgroup>
@@ -60,11 +66,14 @@
   href="/rhevm-api/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"&gt;
     &lt;name&gt;Finance&lt;/name&gt;
     &lt;description&gt;Resources for the Finance department&lt;/description&gt;
+    &lt;parent&gt;
+        &lt;tag id="-1" href="/rhevm-api/tags/-1"/&gt;
+    &lt;/parent&gt;
 &lt;/tag&gt;
     </screen>
   </example>
   <para>
-    When creating a new tag the <literal>name</literal> property is required. The <literal>name</literal> and <literal>description</literal> elements may be updated post-creation.
+    Creation of a new tag requires the <literal>name</literal> property. The <literal>name</literal> and <literal>description</literal> elements are updatable post-creation.
   </para>
 
   <section id="sect-REST_API_Guide-Tags-Hosts_Users_and_VMs">
@@ -76,9 +85,11 @@
       The <literal>tag</literal> representations are as described in <xref linkend="chap-REST_API_Guide-Tags"/>, except they also contain a <literal>host id</literal>, <literal>user id</literal> or <literal>vm id</literal> reference to the entity in question.
     </para>
     <para>
-      Each tags collection may be manipulated as described in <xref linkend="chap-REST_API_Guide-Common_Features"/>. Associating a tag with an entity is achieved by <literal>POST</literal>ing a tag reference (identifying the tag either by its <literal>id</literal> or <literal>name</literal>) to the collection. Removing an association is achieved by <literal>DELETE</literal>ing the appropriate element in the collection.
+      Each tags collection is manipulated as described in <xref linkend="chap-REST_API_Guide-Common_Features"/>. Associating a tag with an entity is achieved by <literal>POST</literal>ing a tag reference (identifying the tag either by its <literal>id</literal> or <literal>name</literal>) to the collection. 
     </para>
-    <screen>
+    <example>
+      <title>Associating a tag with a virtual machine</title>
+      <screen>
 POST /rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/tags HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
@@ -99,19 +110,26 @@ Content-Type: application/xml
     &lt;vm id="5114bb3e-a4e6-44b2-b783-b3eea7d84720"
       href="/rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720"/&gt;
 &lt;/tag&gt;
-    </screen>
-
-    <screen>
+      </screen>
+    </example>
+    <para>
+      Removing an association is achieved with a <literal>DELETE</literal> request to the appropriate element in the collection.
+    </para>
+    <example>
+      <title>Removing a tag from a virtual machine</title>
+      <screen>
 DELETE /rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/tags/f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e HTTP/1.1
 
 HTTP/1.1 204 No Content
     </screen>
-
+    </example>
     <para>
       To query the set of entities associated with a given tag, the <literal>collection/search</literal> URI template for the appropriate collection should be used to search for entities matching <literal>tag=MyTag</literal>.
     </para>
 
-    <screen>
+    <example>
+      <title>Querying a collection for tagged resources</title>
+      <screen>
 GET /rhevm-api/vms?search=tag%3DFinance HTTP/1.1
 Accept: application/xml
 
@@ -125,20 +143,22 @@ Content-Type: application/xml
     &lt;/vm&gt;
     ...
 &lt;/vms&gt;
-    </screen>
-
+      </screen>
+    </example>
   </section>
 
   <section id="sect-REST_API_Guide-Tags-Parent_Tags">
-  <title>Parent Tags</title>
-  <para>
-	A tag can contain a <literal>parent</literal> element, which creates a hierarchical link to a parent tag. The tags hierarchy is represented as a flat collection that decends from the <literal>root</literal> tag.</para>
-  <note>
-    <title>The <literal>root</literal> tag</title>
-    <para>The <literal>root</literal> tag is a special pseudo-tag assumed as the default tag if no parent tag is specified. The <literal>root</literal> tag cannot be deleted nor assigned a parent tag.</para>
-  </note>
-  <para>This tag hierarchy is expressed in the following way:</para>
-  <screen>
+    <title>Parent Tags</title>
+    <para>
+	    An API user assigns a <literal>parent</literal> element to a tag to create a hierarchical link to a parent tag. The tags hierarchy is represented as a flat collection that decends from the <literal>root</literal> tag.</para>
+    <note>
+      <title>The <literal>root</literal> tag</title>
+      <para>The <literal>root</literal> tag is a special pseudo-tag assumed as the default tag if no parent tag is specified. The <literal>root</literal> tag cannot be deleted nor assigned a parent tag.</para>
+    </note>
+    <para>This tag hierarchy is expressed in the following way:</para>
+    <example>
+      <title>Tag Hierarchy</title>
+      <screen>
 &lt;tags&gt;
     &lt;tag id="-1" href="/rhevm-api/tags/-1"&gt;
         &lt;name&gt;root&lt;/name&gt;
@@ -165,11 +185,30 @@ Content-Type: application/xml
         &lt;/parent&gt;
     &lt;/tag&gt;
 &lt;/tags&gt;
-  </screen>
-  <para>
-	<literal>POST</literal>ing a new tag with a <literal>parent</literal> element creates a link to a parent tag, using either the <literal>id=</literal> attribute in the <literal>tag</literal> element:
-  </para>
-  <screen>
+      </screen>
+      <para>
+        In this XML representation, the tags follows this heirarchy:
+      </para>
+      <screen>
+root              (id: -1)
+  - Finance       (id: f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e)
+      - Billing   (id: ty38wobf-23n5-18we-v18j-5u8t348cs7rt)
+      </screen>
+    </example>
+    <para>
+	  <literal>POST</literal>ing a new tag with a <literal>parent</literal> element creates an association with a parent tag, using either the <literal>id</literal> attribute or the <literal>name</literal> element to reference the parent tag
+    </para>
+
+    <example>
+      <title>Setting an association with a parent tag with the id attribute</title>
+      <screen>
+POST /rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/tags HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
 &lt;tag&gt;
     &lt;name&gt;Billing&lt;/name&gt;
     &lt;description&gt;Billing Resources&lt;/description&gt;
@@ -177,9 +216,19 @@ Content-Type: application/xml
         &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5et"/&gt;
     &lt;/parent&gt;
 &lt;/tag&gt;
-  </screen>
-  <para>Or using the <literal>name</literal> element:</para>
-  <screen>
+      </screen>
+    </example>
+
+    <example>
+      <title>Setting an association with a parent tag with the name element</title>
+      <screen>
+POST /rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/tags HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+
+HTTP/1.1 200 OK
+Content-Type: application/xml
+
 &lt;tag&gt;
     &lt;name&gt;Billing&lt;/name&gt;
     &lt;description&gt;Billing Resources&lt;/description&gt;
@@ -189,11 +238,15 @@ Content-Type: application/xml
         &lt;/tag&gt;
     &lt;/parent&gt;
 &lt;/tag&gt;
-  </screen>
-  <para>
-	A tag can change its parent using a <literal>PUT</literal> request:
-  </para>
-  <screen>
+      </screen>
+    </example>
+    <para>
+	  A tag changes a parent using a <literal>PUT</literal> request:
+    </para>
+    
+    <example>
+      <title>Changing the parent tag</title>
+      <screen>
 PUT /rhevm-api/tags/ty38wobf-23n5-18we-v18j-5u8t348cs7rt HTTP/1.1
 Accept: application/xml
 Content-Type: application/xml
@@ -203,8 +256,8 @@ Content-Type: application/xml
         &lt;tag id="f436ebfc-67f2-41bd-8ec6-902b6f7dcb5e"/&gt;
     &lt;/parent&gt;
 &lt;/tag&gt;
-  </screen>
-
+      </screen>
+    </example>
   </section>
 
 </chapter>

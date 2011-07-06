@@ -19,8 +19,8 @@
   </note>
   <informaltable frame="none">
     <tgroup cols="4">
-      <colspec colwidth="6*"/>
-      <colspec colwidth="2*"/>
+      <colspec colwidth="5*"/>
+      <colspec colwidth="3*"/>
       <colspec colwidth="6*"/>
       <colspec colwidth="2*" colname="prop"/>
       <thead>
@@ -40,33 +40,33 @@
         </row>
         <row>
           <entry><literal>link rel="storage"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for host storage.</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="nics"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for host network interfaces.</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="tags"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for host tags.</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="permissions"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for host permissions. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Permissions"/></entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="statistics"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for host statistics.</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>type</literal></entry>
@@ -84,12 +84,12 @@
           <entry><literal>status</literal></entry>
           <entry>See below</entry>
           <entry>The host status</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
-          <entry><literal>cluster id</literal></entry>
-          <entry>complex</entry>
-          <entry>The cluster that includes this host</entry>
+          <entry><literal>cluster id=</literal></entry>
+          <entry>GUID</entry>
+          <entry>A reference to the cluster that includes this host</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
@@ -131,17 +131,17 @@
         <row>
           <entry><literal>cpu</literal></entry>
           <entry>complex</entry>
-          <entry>Statistics for the host CPU. Includes sub-elements for the CPU's <literal>name</literal>, <literal>topology cores</literal> and <literal>speed</literal></entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry>Statistics for the host CPU. Includes sub-elements for the CPU's <literal>name</literal>, <literal>topology cores=</literal> and <literal>speed</literal></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>summary</literal></entry>
           <entry>complex</entry>
           <entry>Summary statistics of the virtual machines on the host. Includes sub-elements for numbers of <literal>active</literal>, <literal>migrating</literal> and <literal>total</literal> VMs</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
-          <entry><literal>version</literal></entry>
+          <entry><literal>version major= minor=</literal></entry>
           <entry>complex</entry>
           <entry>The compatibility level of the host (see <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/>)</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
@@ -227,7 +227,7 @@
     </screen>
   </example>
   <para>
-    When creating a new host, the <literal>name</literal>, <literal>address</literal> and <literal>root_password</literal> elements are required. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
+    Creation of a new host requires the <literal>name</literal>, <literal>address</literal> and <literal>root_password</literal> elements. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
   </para>
   <example>
     <title>Creating a host</title>
@@ -285,7 +285,7 @@ Content-type: application/xml
             <entry><literal>type=</literal></entry>
             <entry>fencing device code</entry>
             <entry>A list of valid fencing device codes are available in the <literal>capabilities</literal> collection. See <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/>.</entry>
-			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+			<entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
             <entry><literal>enabled</literal></entry>
@@ -321,7 +321,7 @@ Content-type: application/xml
       </tgroup>
     </informaltable>
     <para>
-      The <literal>options</literal> element requires a list of <literal>option</literal> sub-elements. Each <literal>option</literal> requires a <literal>name</literal> and <literal>type</literal> attributes. Certain options are only available for specific fencing types as defined in the <literal>capabilities</literal> collection (see <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/>) but can include options such as:
+      The <literal>options</literal> element requires a list of <literal>option</literal> sub-elements. Each <literal>option</literal> requires a <literal>name</literal> and <literal>type</literal> attributes. Certain options are only available for specific fencing types as defined in the <literal>capabilities</literal> collection (see <xref linkend="sect-REST_API_Guide-Capabilities-Power_Managers"/>) but includes options such as:
     </para>
     <informaltable frame="none">
       <tgroup cols="4">
@@ -360,7 +360,7 @@ Content-type: application/xml
       </tgroup>
     </informaltable>
     <para>
-      A new host can include a <literal>power_management</literal> configuration when <literal>POST</literal>ing to the host resource. The <literal>power_management</literal> configuration can also update using <literal>PUT</literal>.
+      A new host includes an optional <literal>power_management</literal> configuration when <literal>POST</literal>ing to the host resource. The <literal>power_management</literal> configuration is updatable using a <literal>PUT</literal> request.
     </para>
     <example>
       <title>An XML representation of a host's power management configuration</title>
@@ -488,27 +488,27 @@ Content-Type: application/xml
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when adding bonded interfaces. Other interfaces are read-only and cannot be added.</para></footnote><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
-              <entry><literal>host id</literal></entry>
+              <entry><literal>host id=</literal></entry>
               <entry>GUID</entry>
               <entry>A reference to the host</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
-              <entry><literal>network id</literal></entry>
+              <entry><literal>network id=</literal></entry>
               <entry>GUID</entry>
               <entry>A reference to the network, if any, that the interface is attached to</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when adding bonded interfaces. Other interfaces are read-only and cannot be added.</para></footnote></entry>
             </row>
             <row>
-              <entry><literal>mac address</literal></entry>
+              <entry><literal>mac address=</literal></entry>
               <entry>string</entry>
               <entry>The MAC address of the interface</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
-              <entry><literal>ip</literal></entry>
+              <entry><literal>ip address= netmask= gateway=</literal></entry>
               <entry>complex</entry>
-              <entry>The IP level configuration of the interface. Contains <literal>address</literal>, <literal>netmask</literal> and <literal>gateway</literal> attributes.</entry>
+              <entry>The IP level configuration of the interface</entry>
               <entry></entry>
             </row>
             <row>
@@ -543,7 +543,7 @@ Content-Type: application/xml
             </row>       
             <row>
               <entry><literal>link rel="master"</literal></entry>
-              <entry>complex</entry>
+              <entry>relationship</entry>
               <entry>A reference to the master bonded interface, if this is a slave interface</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
@@ -622,14 +622,14 @@ Content-Type: application/xml
             <row>
               <entry><literal>slaves</literal></entry>
               <entry>complex</entry>
-              <entry>A list of slave <literal>host_nic</literal> elements for a bonded interface</entry>
+              <entry>A list of slave <literal>host_nic id=</literal> elements for a bonded interface</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when adding bonded interfaces. Other interfaces are read-only and cannot be added.</para></footnote><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
       <para>
-        An API user creates a new bond when <literal>POST</literal>ing to a <literal>host_nic</literal> with bonding options and slave interfaces. The <literal>name</literal>, <literal>network</literal> and <literal>bonded</literal> elements are required when creating a new bonded interface. The <literal>network</literal> and slave <literal>host_nic</literal>s may be identified by <literal>id</literal> or <literal>name</literal>.
+        An API user creates a new bond when <literal>POST</literal>ing to a <literal>host_nic</literal> with bonding options and slave interfaces. The <literal>name</literal>, <literal>network</literal> and <literal>bonded</literal> elements are required when creating a new bonded interface. Either the <literal>id</literal> or <literal>name</literal> elements identify the <literal>network</literal> and slave <literal>host_nic</literal>s.
       </para>
       <example>
         <title>Creating a bonded interface</title>
@@ -659,7 +659,7 @@ Content-Type: application/xml
         </para>
       </note>
       <para>
-        Like other resources, a bonded interface may be deleted by issuing a <literal>DELETE</literal> request to its URI.
+        Like other resources, a <literal>DELETE</literal> request to a bonded interface URI deletes it.
       </para>
       <warning>
         <para>
@@ -673,7 +673,7 @@ Content-Type: application/xml
         Attach Action
       </title>
       <para>
-        A host network interface may be attached to a network, indicating that the given network is accessible over the interface. The <literal>network</literal> may be identified by <literal>id</literal> or <literal>name</literal>.
+        A host network interface is attached to a network, indicating the given network is accessible over the interface. Either the <literal>id</literal> or <literal>name</literal> elements identify the <literal>network</literal>.
       </para>
       <example>
         <title>Action to attach a host network interface to a network</title>
@@ -698,7 +698,7 @@ Content-type: application/xml
         Detach Action
       </title>
       <para>
-        Detach an interface from a network. The <literal>network</literal> may be identified by <literal>id</literal> or <literal>name</literal>.
+        Detach an interface from a network. Either the <literal>id</literal> or <literal>name</literal> elements identify the <literal>network</literal>.
       </para>
       <example>
         <title>Action to deattach a host network interface to a network</title>
@@ -725,7 +725,7 @@ Content-type: application/xml
       Storage Sub-Collection
     </title>
     <para>
-      The <literal>storage</literal> sub-collection provides a list of the iSCSI and FCP storage representations available on the host. This storage may be used to create storage domains, as described in <xref linkend="chap-REST_API_Guide-Storage_Domains"/>.
+      The <literal>storage</literal> sub-collection provides a list of the iSCSI and FCP storage representations available on the host. This storage is used to create storage domains, as described in <xref linkend="chap-REST_API_Guide-Storage_Domains"/>.
     </para>
     <para>
       Each <literal>storage</literal> representation in the sub-collection represents either a SCSI LUN or an LVM volume group. A <literal>logical_unit</literal> representation contains:
@@ -752,12 +752,6 @@ Content-type: application/xml
           </row>
         </thead>
         <tbody>
-            <row>
-              <entry><literal>id</literal></entry>
-              <entry>GUID</entry>
-              <entry>An opaque identifier for the logical unit</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
             <row>
               <entry><literal>address</literal></entry>
               <entry>string</entry>
@@ -812,19 +806,13 @@ Content-type: application/xml
         </thead>
         <tbody>
             <row>
-              <entry><literal>id</literal></entry>
-              <entry>GUID</entry>
-              <entry>An opaque identifier for the volume group</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
-            <row>
               <entry><literal>name</literal></entry>
               <entry>string</entry>
               <entry>An volume group name</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
-              <entry><literal>logical_unit</literal></entry>
+              <entry><literal>logical_unit id=</literal></entry>
               <entry>complex</entry>
               <entry>Details of any SCSI LUNs on which the volume group is based</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
@@ -889,7 +877,7 @@ Content-type: application/xml
         Install Action
       </title>
       <para>
-        Install VDSM and related software on the host. This requires the root password for the host to be supplied using the <literal>root_password</literal> element.
+        Install VDSM and related software on the host. This requires the root password for the host supplied with the <literal>root_password</literal> element.
       </para>
       <example>
         <title>Action to install VDSM to a host</title>
@@ -909,7 +897,7 @@ Content-type: application/xml
         Activate Action
       </title>
       <para>
-        Activate the host, allowing it to be used for e.g. running VMs.
+        Activate the host for use, such as running virtual machines.
       </para>
       <example>
         <title>Action to activate a host</title>
@@ -946,7 +934,7 @@ Content-Type: application/xml
         Deactivate Action
       </title>
       <para>
-        Deactivate the host, allowing maintenance tasks to be performed.
+        Deactivate the host for maintenance task performance.
       </para>
       <example>
         <title>Action to deactivate a host</title>
@@ -962,6 +950,7 @@ Content-Type: application/xml
         Approve Action
       </title>
       <para>
+        Approve a pre-installed host for usage in the vitualization environment.
       </para>
       <example>
         <title>Action to approve a host</title>
@@ -977,7 +966,7 @@ Content-Type: application/xml
         iSCSI Login Action
       </title>
       <para>
-        The <literal>iscsilogin</literal> action enables a host to login to an iSCSI target. Logging into a target makes the LUNs it contains available in the <literal>host_storage</literal> collection. See <xref linkend="sect-REST_API_Guide-Hosts-Storage"/>.
+        The <literal>iscsilogin</literal> action enables a host to login to an iSCSI target. Logging into a target makes the contained LUNs available in the <literal>host_storage</literal> collection. See <xref linkend="sect-REST_API_Guide-Hosts-Storage"/>.
       </para>
       <example>
         <title>Action to enable a host to login to iSCSI target</title>
@@ -1003,7 +992,7 @@ Content-Type: application/xml
         iSCSI Discover Action
       </title>
       <para>
-        The <literal>iscsidiscover</literal> action enables an iSCSI portal to be query for its list of LUNs.
+        The <literal>iscsidiscover</literal> action enables an iSCSI portal to be queried for its list of LUNs.
       </para>
       <example>
         <title>Action to query a list of LUNs for iSCSI portal</title>
@@ -1036,7 +1025,7 @@ Content-Type: application/xml
         Commit Network Configuration Action
       </title>
       <para>
-        An API user commits the network configuration to persist a host network interface attachment or detachment, or persist the creation/deletion of a bonded interface.
+        An API user commits the network configuration to persist a host network interface attachment or detachment, or persist the creation and deletion of a bonded interface.
       </para>
       <example>
         <title>Action to commit network configuration</title>
@@ -1047,7 +1036,7 @@ Content-Type: application/xml
       </example>
       <warning>
         <para>
-          Networking configuration should only be committed after it has been established that host connectivity has not been lost as a result of the configuration changes. If host connectivity has been lost, the host should be rebooted and will automatically revert to the previous networking configuration.
+          Networking configuration is only committed after the Manager has established that host connectivity is not lost as a result of the configuration changes. If host connectivity is lost, the host requires a reboot and automatically reverts to the previous networking configuration.
         </para>
       </warning>
     </section>

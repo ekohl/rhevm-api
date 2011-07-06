@@ -49,7 +49,7 @@ Content-Type: application/xml
 
   <note>
     <para>
-      For simplicity, all other examples omit the <literal>Host</literal> request header and assume <varname>{base}</varname> is the default <literal>/rhevm-api</literal>. This base path will differ depending on your implementation.
+      For simplicity, all other examples omit the <literal>Host</literal> request header and assume <varname>{base}</varname> is the default <literal>/rhevm-api</literal>. This base path differs depending on your implementation.
     </para>
   </note>
   <section id="sect-REST_API_Guide-Entry_Point-Link">
@@ -149,16 +149,16 @@ Content-Type: application/xml
   <note>
     <title>URIs</title>
     <para>
-      All URIs shown in example responses are purely illustrative. The format of all URIs returned by the server is opaque. Clients must navigate to any specific resources through the entry point URI and use the relationship types to access the URIs.
+      All URIs shown in example responses are illustrative. The format of all URIs returned by the server is opaque. Clients navigate to specific resources through the entry point URI and use the relationship types to access the URIs.
     </para>
     <para>
-      The server may choose to include absolute URIs or absolute paths
+      The server chooses to include absolute URIs or absolute paths
     <footnote>
       <para>
         The RFC describing Uniform Resource Locator Generic Syntax provides a <ulink url="http://tools.ietf.org/html/rfc3986#appendix-A">Collected ABNF for URI</ulink> that explains the difference between these forms. 
       </para>
     </footnote>
-      in the <literal>link</literal> element <literal>href</literal> attribute, so clients should be prepared to handle either form. <literal>Link</literal> headers will only contain absolute URIs.
+      in the <literal>link</literal> element <literal>href</literal> attribute, so clients should be prepared to handle either form. <literal>Link</literal> headers only contain absolute URIs.
     </para>
   </note>
   <para>

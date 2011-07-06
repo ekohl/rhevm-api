@@ -6,7 +6,7 @@
 <chapter id="chap-REST_API_Guide-Roles">
   <title>Roles</title>
   <para>
-    The <literal>rel="roles"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>) provides access to a static set of system roles. Each individual <literal>role</literal> elements contain the following:
+    The <literal>rel="roles"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>) provides access to a static set of system roles. Each individual <literal>role</literal> element contains the following:
   </para>
   <note>
     <title>Element property icons</title>
@@ -31,15 +31,9 @@
         </thead>
         <tbody>
           <row>
-            <entry><literal>id</literal></entry>
-            <entry>GUID</entry>
-            <entry>Globally unique identifier for this role</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-          </row>
-          <row>
             <entry><literal>name</literal></entry>
             <entry>string</entry>
-            <entry>The role name (may be used as a more convenient identifier in any role-specific operations)</entry>
+            <entry>The role name (used as a more convenient identifier in any role-specific operations)</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
@@ -69,7 +63,7 @@ Content-Type: application/xml
 
 &lt;roles&gt;
     &lt;role id="00000000-0000-0000-0000-000000000001"
-      href="/rhevm-api/roles/00000000-0000-0000-0000-000000000001"&gt;
+      href="/rhevm-api/roles/00000000-0000-0000-0000-000000000000"&gt;
         &lt;name&gt;SuperUser&lt;/name&gt;
         &lt;description&gt;Roles management administrator&lt;/description&gt;
     &lt;/role&gt;
@@ -93,7 +87,7 @@ Content-Type: application/xml
   </example>
   <note>
     <para>
-      Because the global roles form a static set in Red Hat Enterprise Virtualization Manager 2.2, the usual collection idioms are not followed in this case, i.e. a new role cannot be created via <literal>POST</literal>, nor can a role be destroyed via <literal>DELETE</literal> on the collection.
+      Because the global roles form a static set in Red Hat Enterprise Virtualization Manager, the standard common features are not followed in this case, i.e. roles cannot be created via <literal>POST</literal> nor destroyed via <literal>DELETE</literal> on the collection.
     </para>
   </note>
 
@@ -104,7 +98,9 @@ Content-Type: application/xml
     <para>
       A role's <literal>permits</literal> are listed as a sub-collection:
     </para>
-    <screen>
+    <example>
+      <title>Listing a role's permits</title>
+      <screen>
 GET /rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits HTTP/1.1
 Accept: application/xml
 
@@ -127,11 +123,14 @@ Content-Type: application/xml
           href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
     &lt;/permit&gt;
 &lt;/permits&gt;
-    </screen>
+      </screen>
+    </example>
     <para>
-      A <literal>permit</literal> is assigned to a <literal>role</literal> when <literal>POST</literal>ed to the <literal>permits</literal> sub-collection. Use either an <literal>id=</literal> attribute or a <literal>name</literal> element to specify the <literal>permit</literal> to assign. For example:
+      Assign a <literal>permit</literal> to a <literal>role</literal> with a <literal>POST</literal> request to the <literal>permits</literal> sub-collection. Use either an <literal>id</literal> attribute or a <literal>name</literal> element to specify the <literal>permit</literal> to assign.
     </para>
-    <screen>
+    <example>
+      <title>Assign a permit to a role</title>
+      <screen>
 POST /rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits HTTP/1.1
 Accept: application/xml
 
@@ -149,7 +148,8 @@ Content-Type: application/xml
           href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
     &lt;/permit&gt;
 &lt;/permits&gt;
-    </screen>
+      </screen>
+    </example>
   </section>
 
 </chapter>

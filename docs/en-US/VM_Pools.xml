@@ -51,14 +51,14 @@
           <entry> </entry>
         </row>
         <row>
-          <entry><literal>cluster</literal></entry>
-          <entry>complex</entry>
+          <entry><literal>cluster id=</literal></entry>
+          <entry>GUID</entry>
           <entry>A reference to the cluster resource which virtual machines in this pool run on</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
-          <entry><literal>template</literal></entry>
-          <entry>complex</entry>
+          <entry><literal>template id=</literal></entry>
+          <entry>GUID</entry>
           <entry>A reference to the template resource which virtual machines in this pool are based on</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
@@ -68,8 +68,8 @@
   <example>
     <title>An XML representation of a virtual machine pool</title>
     <screen>
-&lt;vmpool id="00000000-0000-0000-0000-000000000000"
-  href="/rhevm-api/vmpools/00000000-0000-0000-0000-000000000000"&gt;
+&lt;vmpool id="3t6y18o-44u3-e7h7-56j7-3k5d8g9w0t"
+  href="/rhevm-api/vmpools/3t6y18o-44u3-e7h7-56j7-3k5d8g9w0t"&gt;
     &lt;name&gt;VMPool1&lt;/name&gt;
     &lt;description&gt;Virtual Machine Pool 1&lt;/description&gt;
     &lt;size&gt;2&lt;/size&gt;
@@ -78,6 +78,41 @@
     &lt;template id="00000000-0000-0000-0000-000000000000"
       href="/rhevm-api/templates/00000000-0000-0000-0000-000000000000"/&gt;
 &lt;/vmpool&gt;
+    </screen>
+  </example>
+  <para>
+    A new pool requires the <literal>name</literal>, <literal>cluster</literal> and <literal>templates</literal> elements. Identify the <literal>cluster</literal> and <literal>cluster</literal> with the <literal>id</literal> attribute or <literal>name</literal> element. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
+  </para>
+  <example>
+    <title>Creating a template from a virtual machine</title>
+    <screen>
+POST /rhevm-api/pools HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;template&gt;
+    &lt;name&gt;template1&lt;/name&gt;
+    &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
+      href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
+    &lt;template id="00000000-0000-0000-0000-000000000000"
+      href="/rhevm-api/templates/00000000-0000-0000-0000-000000000000"/&gt;
+&lt;/vm&gt;
+    </screen>
+  </example>
+  <para>
+    The <literal>name</literal>, <literal>description</literal> and <literal>size</literal> are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
+  </para>
+  <example>
+    <title>Updating a virtual machine template to contain 1&nbsp;GB of memory</title>
+    <screen>
+PUT /rhevm-api/pools/3t6y18o-44u3-e7h7-56j7-3k5d8g9w0t HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;templates&gt;
+    &lt;description&gt;Virtual Machine Pool A&lt;/description&gt;
+    &lt;size&gt;3&lt;/size&gt;
+&lt;/templates&gt;
     </screen>
   </example>
 </chapter>

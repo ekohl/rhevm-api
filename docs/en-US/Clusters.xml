@@ -46,25 +46,25 @@
         </row>
         <row>
           <entry><literal>link rel="networks"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for networks associated with this cluster</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="permissions"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for cluster permissions. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Permissions"/></entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
-          <entry><literal>cpu</literal></entry>
+          <entry><literal>cpu id=</literal></entry>
           <entry>complex</entry>
           <entry>A server CPU reference that defines the CPU type all hosts must support in the cluster. See <xref linkend="sect-REST_API_Guide-Capabilities-CPUs"/></entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
-          <entry><literal>data_center id</literal></entry>
-          <entry>complex</entry>
+          <entry><literal>data_center id=</literal></entry>
+          <entry>GUID</entry>
           <entry>A reference to the data center membership of this cluster. See <xref linkend="chap-REST_API_Guide-Data_Centers"/></entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
@@ -81,7 +81,7 @@
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
-          <entry><literal>version</literal></entry>
+          <entry><literal>version major= minor=</literal></entry>
           <entry>complex</entry>
           <entry>The compatibility level of the cluster (see <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/>)</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
@@ -90,7 +90,7 @@
           <entry><literal>supported_versions</literal></entry>
           <entry>complex</entry>
           <entry>A list of possible <literal>version</literal> levels for the cluster. See <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/></entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>error_handling</literal></entry>
@@ -102,7 +102,7 @@
     </tgroup>
   </informaltable>
   <para>
-    The <literal>memory_policy</literal> element can contain the following specific elements:
+    The <literal>memory_policy</literal> element contains the following elements:
   </para>
   <informaltable frame="none">
     <tgroup cols="4">
@@ -120,7 +120,7 @@
       </thead>
       <tbody>
         <row>
-          <entry><literal>overcommit</literal></entry>
+          <entry><literal>overcommit percent=</literal></entry>
           <entry>complex</entry>
           <entry>The percentage of host memory allowed in use before no more virtual machines can start on a host. Virtual machines can use more than the available host memory due to memory sharing under KSM. Recommended values include <literal>100</literal> (None), <literal>150</literal> (Server Load) and <literal>200</literal> (Desktop Load).</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
@@ -135,7 +135,7 @@
     </tgroup>
   </informaltable>
   <para>
-    The <literal>scheduling_policy</literal> element can contain the following specific elements:
+    The <literal>scheduling_policy</literal> element contains the following elements:
   </para>
   <informaltable frame="none">
     <tgroup cols="4">
@@ -159,7 +159,7 @@
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
-          <entry><literal>thresholds</literal></entry>
+          <entry><literal>thresholds low= high= duration=</literal></entry>
           <entry>complex</entry>
           <entry>Defines CPU limits for the host. The <literal>high</literal> attribute controls the highest CPU usage percentage the host can have before being
 considered overloaded. The <literal>low</literal> attribute controls the lowest CPU usage percentage the host can have before being considered underutilized. The <literal>duration</literal> attribute refers to the number of seconds the host needs to be overloaded before the scheduler starts and moves the load to another host.</entry>
@@ -205,7 +205,7 @@ considered overloaded. The <literal>low</literal> attribute controls the lowest 
     </screen>
   </example>
   <para>
-    When creating a new cluster, the <literal>name</literal>, <literal>cpu id</literal> and <literal>datacenter</literal> properties are required. The <literal>datacenter</literal> is identified with either <literal>name</literal> or <literal>id</literal>. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
+    Creation of a new cluster requires the <literal>name</literal>, <literal>cpu id</literal> and <literal>datacenter</literal> properties. Identify the <literal>datacenter</literal> with either the <literal>id</literal> attribute or <literal>name</literal> element. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
   </para>
   <example>
     <title>Creating a host cluster</title>
@@ -241,7 +241,7 @@ Content-type: application/xml
       Networks Sub-Collection
     </title>  
     <para>
-      Networks are associated with clusters and are represented with the <literal>networks</literal> sub-collection. Every host within the cluster must have a network interface attached to that network in order for the network to be operational.
+      Networks associated with a cluster are represented with the <literal>networks</literal> sub-collection. Every host within the cluster requires a network interface attached to that network for an operational network.
     </para>
     <para>
       The representation of a cluster's <literal>network</literal> sub-collection is the same as a standard <literal>network</literal> resource with an additional <literal>cluster id</literal> to signify a relationship to the cluster.
@@ -279,7 +279,7 @@ Content-Type: application/xml
     </example>
     
     <para>
-      An association is removed with a <literal>DELETE</literal> request to  the appropriate element in the collection.
+      An association is removed with a <literal>DELETE</literal> request to the appropriate element in the collection.
     </para>
     
     <example>

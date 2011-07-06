@@ -6,7 +6,7 @@
 <chapter id="chap-REST_API_Guide-Localization">
   <title>Localization</title>
   <para>
-    The API supports localization of error messages and other content returned as part of a HTTP response. A client can request that content be localized into a particular language by providing the <parameter>Accept-Language</parameter> header with a request.
+    The API supports localization of error messages and other content returned as part of a HTTP response. A client requests localization of content into a particular language using the <parameter>Accept-Language</parameter> header with a request.
     <footnote>
       <para>
         The Accept-Language header is described in section 14.4 of <ulink url="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4">RFC 2616</ulink>

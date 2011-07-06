@@ -46,51 +46,51 @@
         </row>
         <row>
           <entry><literal>link rel="disks"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the disks sub-collection for virtual machine resources</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="nics"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the network interface sub-collection for virtual machine resources</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="cdroms"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the cdroms sub-collection for virtual machine resources</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="snapshots"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the snapshots sub-collection for virtual machine resources</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="users"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the users sub-collection for virtual machine resources</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="tags"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the tags sub-collection for virtual machine resources</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="permissions"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for virtual machine permissions. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Permissions"/></entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="statistics"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the statistics sub-collection for virtual machine resources</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>type</literal></entry>
@@ -102,7 +102,7 @@
           <entry><literal>status</literal></entry>
           <entry>See below</entry>
           <entry>The virtual machine status</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>memory</literal></entry>
@@ -117,7 +117,7 @@
           <entry> </entry>
         </row>
         <row>
-          <entry><literal>os</literal> <literal>type</literal></entry>
+          <entry><literal>os</literal> <literal>type=</literal></entry>
           <entry>string, e.g. <literal>RHEL5</literal> or <literal>WindowsXP</literal></entry>
           <entry>The guest operating system type</entry>
           <entry> </entry>
@@ -150,23 +150,23 @@
           <entry><literal>high_availability</literal></entry>
           <entry>complex</entry>
           <entry>Set <literal>enabled</literal> to <literal>true</literal> if the virtual machine should be automatically restarted if the host crashes. A <literal>priority</literal> element controls the order in which Virtual Machines are re-started</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>display</literal></entry>
           <entry>complex</entry>
           <entry>The display <literal>type</literal> (either <literal>vnc</literal> or <literal>spice</literal>), port, and the number of <literal>monitors</literal></entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
-          <entry><literal>cluster</literal></entry>
-          <entry>complex</entry>
-          <entry>A reference to the cluster on which this virtual machine will run. See <xref linkend="chap-REST_API_Guide-Clusters"/></entry>
+          <entry><literal>cluster id=</literal></entry>
+          <entry>GUID</entry>
+          <entry>A reference to the virtual machine's host cluster. See <xref linkend="chap-REST_API_Guide-Clusters"/></entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
-          <entry><literal>template</literal></entry>
-          <entry>complex</entry>
+          <entry><literal>template id=</literal></entry>
+          <entry>GUID</entry>
           <entry>A reference to the template on which this virtual machine is based.</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
@@ -174,13 +174,13 @@
           <entry><literal>start_time</literal></entry>
           <entry><literal>xsd:dateTime</literal> format: <literal>YYYY-MM-DDThh:mm:ss</literal></entry>
           <entry>The date and time at which this virtual machine was started</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>creation_time</literal></entry>
           <entry><literal>xsd:dateTime</literal> format: <literal>YYYY-MM-DDThh:mm:ss</literal></entry>
           <entry>The date and time at which this virtual machine was created</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>timezone</literal></entry>
@@ -197,13 +197,13 @@
         <row>
           <entry><literal>stateless</literal></entry>
           <entry>boolean: true or false</entry>
-          <entry><literal>true</literal> if the virtual machine is stateless. A stateless virtual machine has a snapshot of its disk image taken at boot and deleted at shutdown, meaning state changes will not persist after a reboot. One of true or false.</entry>
-          <entry> </entry>
+          <entry><literal>true</literal> if the virtual machine is stateless. A stateless virtual machine contains a snapshot of its disk image taken at boot and deleted at shutdown. This means state changes do not persist after a reboot.</entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>placement_policy</literal></entry>
           <entry>complex</entry>
-          <entry>Sets the placement policy for virtual machine migration. Requires a default <literal>host</literal> and an <literal>affinity</literal> (one of <literal>migratable</literal>, <literal>user_migratable</literal> or <literal>pinned</literal>).</entry>
+          <entry>Sets the placement policy for virtual machine migration. Requires a default <literal>host=</literal> and an <literal>affinity</literal> (one of <literal>migratable</literal>, <literal>user_migratable</literal> or <literal>pinned</literal>).</entry>
           <entry></entry>
         </row>
         <row>
@@ -216,18 +216,18 @@
           <entry><literal>custom_properties</literal></entry>
           <entry>complex</entry>
           <entry>A set of user-defined environment variable passed as parameters to custom scripts. Each <literal>custom_property</literal> contains <literal>name</literal> and <literal>value</literal> attributes. A list of enumerated values are available in <literal>capabilities</literal>. See <xref linkend="sect-REST_API_Guide-Capabilities-Version-Custom_Properties"/></entry>
-          <entry> </entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>guest_info</literal></entry>
           <entry>complex</entry>
-          <entry>A reference to the guest client information. Includes an <literal>ip</literal> element with an <literal>address</literal> attribute.</entry>
+          <entry>A reference to the guest client information. Includes an <literal>ip</literal> element with an <literal>address=</literal> attribute.</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>vmpool</literal></entry>
           <entry>complex</entry>
-          <entry>A reference to the pool for this virtual machine. See <xref linkend="chap-REST_API_Guide-VM_Pools"/></entry>
+          <entry>A reference to the virtual machine pool. This element only appears for virtual machines part of a pool.</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
       </tbody>
@@ -287,7 +287,7 @@
     &lt;cpu&gt;
         &lt;topology cores="1" sockets="1"/&gt;
     &lt;/cpu&gt;
-    &lt;os&gt;
+    &lt;os type="RHEL5"&gt;
         &lt;boot dev="hd"/&gt;
         &lt;kernel/&gt;
         &lt;initrd/&gt;
@@ -328,7 +328,7 @@
     </screen>
   </example>
   <para>
-    When creating a new virtual machine, the <literal>name</literal>, <literal>template</literal> and <literal>cluster</literal> elements are required. The <literal>template</literal> and <literal>cluster</literal> are identified with <literal>id</literal> or <literal>name</literal>. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
+    Creation of a new virtual machine requires the <literal>name</literal>, <literal>template</literal> and <literal>cluster</literal> properties. Identify the <literal>template</literal> and <literal>cluster</literal> elements with the <literal>id</literal> attribute or <literal>name</literal> element. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
   </para>
   <example>
     <title>Creating a virtual machine with 512&nbsp;MB and boots from the virtual hard disk</title>
@@ -401,7 +401,7 @@ Content-type: application/xml
             <entry><literal>size</literal></entry>
             <entry>integer</entry>
             <entry>Size of the disk in bytes</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata   fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
             <entry><literal>type</literal></entry>
@@ -413,7 +413,7 @@ Content-type: application/xml
             <entry><literal>status</literal></entry>
             <entry>One of <literal>ILLEGAL</literal>, <literal>INVALID</literal>, <literal>LOCKED</literal> or <literal>OK</literal></entry>
             <entry>The status of the disk device</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
             <entry><literal>interface</literal></entry>
@@ -452,7 +452,13 @@ Content-type: application/xml
             <entry></entry>
           </row>
           <row>
-            <entry><literal>storage_domain</literal></entry>
+            <entry><literal>vm id=</literal></entry>
+            <entry>GUID</entry>
+            <entry>The ID of the containing virtual machine</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>        
+          <row>
+            <entry><literal>storage_domain id=</literal></entry>
             <entry>GUID</entry>
             <entry>The ID of the associated storage domain, only used when adding the first disk to a virtual machine that was not itself created from a template</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><footnote><para>Only required when the first disk is   being added to a virtual machine that was not itself created from a template.</para></footnote><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
@@ -460,9 +466,6 @@ Content-type: application/xml
         </tbody>
       </tgroup>
     </informaltable>
-    <para>
-      When adding a new disk, the <literal>size</literal> property is required. Also the <literal>storage_domain</literal> ID is needed in the case of the first disk being added to a virtual machine that was not itself created from a template.
-    </para>
     <example>
       <title>An XML representation of a disk device</title>
       <screen>
@@ -482,6 +485,9 @@ Content-type: application/xml
 &lt;/disk&gt;
       </screen>
     </example>
+    <para>
+      When adding a new disk, the <literal>size</literal> property is required. Also the <literal>storage_domain</literal> ID is needed in the case of the first disk being added to a virtual machine that was not itself created from a template.
+    </para>
   </section>
   
   <section id="sect-REST_API_Guide-VMs-NICs">
@@ -521,7 +527,7 @@ Content-type: application/xml
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
-              <entry><literal>network id</literal></entry>
+              <entry><literal>network id=</literal></entry>
               <entry>GUID</entry>
               <entry>A reference to the network which the interface should be connected</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
@@ -533,7 +539,7 @@ Content-type: application/xml
               <entry></entry>
             </row>
             <row>
-              <entry><literal>mac address</literal></entry>
+              <entry><literal>mac address=</literal></entry>
               <entry>string</entry>
               <entry>The MAC address of the interface</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
@@ -541,9 +547,6 @@ Content-type: application/xml
           </tbody>
         </tgroup>
       </informaltable>
-    </para>
-    <para>
-      When adding a new network interface, the <literal>name</literal> and <literal>network id</literal> properties are required.
     </para>
     <example>
       <title>An XML representation of a network interface</title>
@@ -561,6 +564,9 @@ Content-type: application/xml
 &lt;/nic&gt;
       </screen>
     </example>
+    <para>
+      When adding a new network interface, the <literal>name</literal> and <literal>network id</literal> properties are required.
+    </para>
   </section>
 
   <section id="sect-REST_API_Guide-VMs-CDROMs">
@@ -586,22 +592,14 @@ Content-type: application/xml
         </thead>
         <tbody>
           <row>
-            <entry><literal>file id</literal></entry>
+            <entry><literal>file id=</literal></entry>
             <entry>string/filename</entry>
             <entry>A reference to an ISO image. See <xref linkend="sect-REST_API_Guide-Data_Centers-Files"/></entry>
-            <entry></entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
         </tbody>
       </tgroup>
     </informaltable>
-    <para>
-      When adding a new CD-ROM, the <literal>file id</literal> property is required.
-    </para>
-    <note>
-      <para>
-        Note that a virtual machine may currently only have a single CD-ROM and it is not possible to modify the CD-ROM properties using <literal>PUT</literal>.
-      </para>
-    </note>
     <example>
       <title>An XML representation of a CD-ROM device</title>
       <screen>
@@ -614,19 +612,25 @@ Content-type: application/xml
 &lt;/cdrom&gt;
       </screen>
     </example>
+    <para>
+      When adding a new CD-ROM, the <literal>file id</literal> property is required.
+    </para>
+    <note>
+      <para>
+        A virtual machine only contains a single CD-ROM device. It is not possible to modify the CD-ROM properties with <literal>PUT</literal>.
+      </para>
+    </note>
   </section>
 
   <section id="sect-REST_API_Guide-VMs-Snapshots">
     <title>
       Snapshots Sub-Collection
     </title>
-
     <para>
-      A virtual machine may have any number of snapshots of its disk state and these are represented and managed through a collection which behaves similarly to other collections, as described by <xref linkend="chap-REST_API_Guide-Common_Features"/>.
+      A virtual machine saves and restores disk state as a number of snapshots. These are represented and managed through a <literal>rel="snapshot"</literal> sub-collection that behaves similar to other collections, as described in <xref linkend="chap-REST_API_Guide-Common_Features"/>.
     </para>
-
     <para>
-      Virtual machine snapshots are represented by a <literal>snapshot</literal> element containing the following snapshot-specific properties:
+      Virtual machine snapshots are represented with <literal>snapshot</literal> elements that contain the following properties:
     </para>
     <note>
       <title>Element property icons</title>
@@ -651,8 +655,14 @@ Content-type: application/xml
           </thead>
           <tbody>
             <row>
-              <entry><literal>vm</literal></entry>
-              <entry>complex</entry>
+              <entry><literal>description</literal></entry>
+              <entry>string</entry>
+              <entry>A free-form user-supplied human readable description of the snapshot</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>vm id=</literal></entry>
+              <entry>GUID</entry>
               <entry>The ID and URI of the virtual machine to which this snapshot pertains</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
@@ -660,20 +670,20 @@ Content-type: application/xml
               <entry><literal>date</literal></entry>
               <entry><literal>xsd:dateTime</literal> format: <literal>YYYY-MM-DDThh:mm:ss</literal></entry>
               <entry>The date and time at which this snapshot was created.</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
             <row>
               <entry><literal>link rel="prev"</literal></entry>
-              <entry>complex</entry>
+              <entry>relationship</entry>
               <entry>A link to the previous snapshot of this virtual machine</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
     </para>
     <para>
-      When adding a new snapshot, only the <literal>description</literal> property may be specified.
+      When adding a new snapshot, only the <literal>description</literal> property is specified.
     </para>
     <note>
       <para>
@@ -686,7 +696,7 @@ Content-type: application/xml
 &lt;snapshot id="f5288fd5-5178-4b7d-b87c-c01a40e40168"
   href="/rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/snapshots/
   f5288fd5-5178-4b7d-b87c-c01a40e40168"&gt;
-    &lt;description&gt;foobar&lt;/description&gt;
+    &lt;description&gt;Virtual Machine 1 - Snapshot A&lt;/description&gt;
     &lt;actions&gt;
         &lt;link rel="restore"
         href="/rhevm-api/vms/5114bb3e-a4e6-44b2-b783-b3eea7d84720/snapshots/
@@ -715,11 +725,11 @@ Content-type: application/xml
       Users Sub-Collection
     </title>
     <para>
-      A desktop virtual machine may have a set of users attached to it, represented  via the <literal>users</literal> sub-collection. As per the usual idiom, <literal>POST</literal>ing to this collection attaches a user to the virtual machine, whereas <literal>DELETE</literal>ing from it has the effect of detaching that user.
+      A desktop virtual machine contains a sub-collection of attached <literal>users</literal>. Sending a <literal>POST</literal> request to this collection attaches a user to the virtual machine and sending a <literal>DELETE</literal> request has the effect of detaching that user.
     </para>
     <note>
       <para>
-      Users referenced in this way must already exist in the Red Hat Enterprise Virtualization Manager user database, and may be identified either via their ID or by user prinicpal name (see <xref linkend="chap-REST_API_Guide-Users"/>). In the example below, the latter approach is taken.
+        Users already existing in the Red Hat Enterprise Virtualization Manager user database are identified either via their ID or user principal name. In the example below, the latter approach is taken.
       </para>
     </note>
     <example>
@@ -744,9 +754,11 @@ Accept: application/xml
       The following sections describe the actions associated with <literal>vm</literal> resources. 
     </para>
     <para>
-      The API contains a number of possible actions for virtual machines: <literal>start</literal>, <literal>stop</literal>, <literal>shutdown</literal>, <literal>suspend</literal>, <literal>detach</literal>, <literal>migrate</literal>, <literal>export</literal>, <literal>import</literal>, <literal>move</literal> and <literal>ticket</literal>.
+      The API contains a number of possible actions for virtual machines: <literal>start</literal>, <literal>stop</literal>, <literal>shutdown</literal>, <literal>suspend</literal>, <literal>detach</literal>, <literal>migrate</literal>, <literal>export</literal>, <literal>move</literal> and <literal>ticket</literal>.
     </para>
-
+    <para>
+      Information on the action for importing virtual machines is found in <xref linkend="sect-REST_API_Guide-Storage_Domains-Listing"/>.
+    </para>
     <section id="sect-REST_API_Guide-VMs-Start">
       <title>
         Start Action
@@ -764,7 +776,7 @@ Content-type: application/xml
         </screen>
       </example>
       <para>
-        The start action allows a <literal>vm</literal> element to be provided as a parameter. If a <literal>vm</literal> element is provided, boot-specific properties of the VM will be overridden at start time, using the values from the provided element. The properties will only be overriden for this boot of the virtual machine, and will not be persisted for the next boot.
+        The start action allows a <literal>vm</literal> element to be provided as a parameter. If a <literal>vm</literal> element is provided, the VM uses the values from the provided element and overrides boot-specific properties at start time. The properties are only overriden for this boot of the virtual machine and do not persist for the next boot.
       </para>
       <example>
         <title>Action to start a virtual machine with overridden parameters</title>
@@ -896,7 +908,7 @@ Content-type: application/xml
         Export Action
       </title>
       <para>
-        The export action exports a virtual machine to an <literal>export</literal> storage domain. A destination storage domain must be specified with a <literal>storage_domain</literal> reference. By default, the export action will not overwrite any existing virtual machine of the same name in the destination domain. An API user changes this behaviour by setting the <literal>overwrite</literal> parameter to <literal>true</literal>. Finally, if snapshots of the virtual machine should not be included in the exported virtual machine, the <literal>discard_snapshots</literal> parameter may be set to <literal>true</literal>.
+        The export action exports a virtual machine to an <literal>export</literal> storage domain. A destination storage domain must be specified with a <literal>storage_domain</literal> reference. By default, the export action overwrites any existing virtual machine of the same name in the destination domain. An API user changes this behaviour by setting the <literal>overwrite</literal> parameter to <literal>true</literal>. Finally, if snapshots of the virtual machine are not included with the exported virtual machine, the <literal>discard_snapshots</literal> parameter is set to <literal>true</literal>.
       </para>
       <example>
         <title>Action to export a virtual machine to an export storage domain</title>
@@ -910,36 +922,6 @@ Content-type: application/xml
     &lt;/storage_domain&gt;
     &lt;overwrite&gt;true&lt;overwrite/&gt;
     &lt;discard_snapshots&gt;true&lt;discard_snapshots/&gt;
-&lt;/action&gt;
-        </screen>
-      </example>
-    </section>
-
-    <section id="sect-REST_API_Guide-VMs-Import">
-      <title>
-        Import Action
-      </title>
-      <para>
-        The import action imports a virtual machine from an <literal>Export</literal> storage domain. The destination cluster and storage domain must be specified via <literal>cluster</literal> and <literal>storage_domain</literal> references.
-      </para>
-      <note>
-        <para>
-          The import action is only available on virtual machines listed under an <literal>export</literal> storage domain. See <xref linkend="sect-REST_API_Guide-Storage_Domains-Listing"/>.
-        </para>
-      </note>
-      <example>
-        <title>Action to import a virtual machine from an export storage domain</title>
-        <screen>
-POST /rhevm-api/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed/vms/082c794b-771f-452f-83c9-b2b5a19c0399/import HTTP/1.1
-Content-type: application/xml
-
-&lt;action&gt;
-    &lt;storage_domain&gt;
-        &lt;name&gt;images0&lt;/name&gt;
-    &lt;/storage_domain&gt;
-    &lt;cluster&gt;
-        &lt;name&gt;Default&lt;/name&gt;
-    &lt;/cluster&gt;
 &lt;/action&gt;
         </screen>
       </example>
@@ -972,7 +954,7 @@ Content-type: application/xml
         Ticket Action
       </title>
       <para>
-        The ticket action generates a time-sensitive authentication token for accessing a virtual machine's display. The client-provided <literal>action</literal> may optionally include a <literal>ticket</literal> representation containing a <literal>value</literal> (if the token string needs to take on a particular form), and/or an <literal>expiry</literal> time in minutes. In any case, the completion response will specify the actual ticket value and expiry used.
+        The ticket action generates a time-sensitive authentication token for accessing a virtual machine's display. The client-provided <literal>action</literal> optionally includes a <literal>ticket</literal> representation containing a <literal>value</literal> (if the token string needs to take on a particular form), and/or an <literal>expiry</literal> time in minutes. In any case, the completion response specifies the actual ticket value and expiry used.
       </para>
       <example>
         <title>Action to generate authentication token for a virtual machine</title>

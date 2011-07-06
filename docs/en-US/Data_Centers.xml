@@ -46,15 +46,15 @@
         </row>
         <row>
           <entry><literal>link rel="storagedomains"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for storage domains attached to this data center</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>link rel="permissions"</literal></entry>
-          <entry>string</entry>
+          <entry>relationship</entry>
           <entry>A link to the sub-collection for data center permissions. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Permissions"/></entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>storage_type</literal></entry>
@@ -69,7 +69,7 @@
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
-          <entry><literal>version</literal></entry>
+          <entry><literal>version major= minor=</literal></entry>
           <entry>complex</entry>
           <entry>The compatibility level of the data center. See <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/></entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
@@ -78,13 +78,13 @@
           <entry><literal>supported_versions</literal></entry>
           <entry>complex</entry>
           <entry>A list of possible <literal>version</literal> levels for the data center. See <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/></entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>status</literal></entry>
           <entry>see below</entry>
           <entry>The data center status</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>         
       </tbody>
     </tgroup>
@@ -117,7 +117,7 @@
     </screen>
   </example>
   <para>
-    When creating a new data center, the <literal>name</literal>, <literal>storage_type</literal> and <literal>version</literal> elements are required. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
+    Creation of a new data center requires the <literal>name</literal>, <literal>storage_type</literal> and <literal>version</literal> properties. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
   </para>
   <example>
     <title>Creating a data center</title>
@@ -240,10 +240,7 @@ Content-type: application/xml
         Export Storage Domains
       </title>
       <para>
-        Storage domains with <literal>type</literal> set to <literal>export</literal> contain <literal>vms</literal> and <literal>templates</literal> sub-collections which list the import candidate VMs and templates stored on that particular storage domain.
-      </para>
-      <para>
-        VMs and templates in these collections have a similar representation to their counterparts in the top-level VMs and templates collection, except they also contain a <literal>storage_domain</literal> reference and an <literal>import</literal> action (see <xref linkend="sect-REST_API_Guide-VMs-Import"/>).
+        Storage domains with <literal>type</literal> set to <literal>export</literal> contain <literal>vms</literal> and <literal>templates</literal> sub-collections, which list the import candidate VMs and templates stored on that particular storage domain.
       </para>
       <example>
         <title>Listing the virtual machines sub-collection of an export storage domain on a datacenter</title>
@@ -269,7 +266,52 @@ Accept: application/xml
     &lt;/vm&gt;
 &lt;/vms&gt;
         </screen>
-      </example>      
+      </example>
+      <para>
+        VMs and templates in these collections have a similar representation to their counterparts in the top-level VMs and templates collection, except they also contain a <literal>storage_domain</literal> reference and an <literal>import</literal> action.
+      </para>
+      <para>
+        The <literal>import</literal> action imports a virtual machine or a template from an <literal>Export</literal> storage domain. The destination cluster and storage domain is specified with <literal>cluster</literal> and <literal>storage_domain</literal> references.
+      </para>
+      <example>
+        <title>Action to import a virtual machine from an export storage domain</title>
+        <screen>
+POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
+fabe0451-701f-4235-8f7e-e20e458819ed/vms/082c794b-771f-452f-83c9-b2b5a19c0399/import HTTP/1.1
+Content-type: application/xml
+
+&lt;action&gt;
+    &lt;storage_domain&gt;
+        &lt;name&gt;images0&lt;/name&gt;
+    &lt;/storage_domain&gt;
+    &lt;cluster&gt;
+        &lt;name&gt;Default&lt;/name&gt;
+    &lt;/cluster&gt;
+&lt;/action&gt;
+        </screen>
+      </example>
+      
+    <example>
+      <title>Action to import a template from an export storage domain</title>
+      <screen>
+POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
+fabe0451-701f-4235-8f7e-e20e458819ed/templates/082c794b-771f-452f-83c9-b2b5a19c0399/import HTTP/1.1
+Content-type: application/xml
+
+&lt;action&gt;
+    &lt;storage_domain&gt;
+        &lt;name&gt;images0&lt;/name&gt;
+    &lt;/storage_domain&gt;
+    &lt;cluster&gt;
+        &lt;name&gt;Default&lt;/name&gt;
+    &lt;/cluster&gt;
+&lt;/action&gt;
+      </screen>
+    </example>
+
+
+      
+      
     </section>
     
   </section>

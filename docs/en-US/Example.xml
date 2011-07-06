@@ -26,9 +26,12 @@
     </listitem>
   </itemizedlist>
   <note>
-    <title>Identifier Codes</title>
+    <title>Globally Unique Identifier Codes</title>
     <para>
-      Red Hat Enterprise Virtualization Manager generates an opaque identifier code, or <literal>id</literal>, for each resource. Identifier codes in this example might appear different to the identifier codes in your Red Hat Enterprise Virtualization environment.
+      Each resource in the virtualization infrastructure contains an <literal>id</literal>, which acts as a globally unique identifier (GUID). The GUID is the primary method of resource identifcation. The API also allows the use of the <literal>name</literal> element as a secondary identifcation method for some resources within the scope of their collections.
+    </para>    
+    <para>
+      Red Hat Enterprise Virtualization Manager generates the GUID for the <literal>id</literal> attribute for each resource. Identifier codes in this example might appear different to the identifier codes in your Red Hat Enterprise Virtualization environment.
     </para>
   </note>
 
@@ -150,6 +153,7 @@ Content-Type: application/xml
 &lt;/data_centers&gt;
       </screen>
     </example>
+
     <para>
       Note the <literal>id</literal> code of your <literal>Default</literal> data center. This code indentifies this data center in relation to other resources of your virtual environment.
     </para>
@@ -218,7 +222,10 @@ Content-Type: application/xml
   <section id="sect-REST_API_Guide-Example-List_Logical_Networks">
     <title>List Logical Networks Collection</title>
     <para>
-      Red Hat Enteprise Virtualization Manager creates a default <literal>rhevm</literal> network on installation. This network is associated with our <literal>Default</literal> cluster and is a member of the <literal>Default</literal> data center. This example uses the <literal>rhevm</literal> network to connect our virtual machines.
+      Red Hat Enteprise Virtualization Manager creates a default <literal>rhevm</literal> network on installation. This network acts as the management network for Red Hat Enterprise Virtualization Manager to access hypervisor hosts.
+    </para>
+    <para>
+      This network is associated with our <literal>Default</literal> cluster and is a member of the <literal>Default</literal> data center. This example uses the <literal>rhevm</literal> network to connect our virtual machines.
     </para>
     <para>
       The following request retrieves a representation of the logical networks collection:
@@ -362,8 +369,16 @@ Accept: application/xml
 POST /rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/approve HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
+
+&lt;action/&lg;
       </screen>
     </example>
+    <para>
+      The POST request requires a body for the message entities to initiate an action. Since the action does not require additional parameters, the body contains an empty <literal>action</literal> element.
+    </para>
+    <para>
+      Use the <literal>approve</literal> action only for Red Hat Enterprise Virtualization Hypervisor hosts. Red Hat Enterprise Linux hosts require a different process to connect to the virtualization environment.
+    </para>    
     <para>
       This approves and activates the host for use in your virtual environment. The <literal>status</literal> for <literal>hypervisor</literal> changes from <literal>NON OPERATIONAL</literal> to <literal>UP</literal>. 
     </para>
@@ -678,7 +693,7 @@ Content-type: application/xml
   <section id="sect-REST_API_Guide-Example-Attach_Disk">
     <title>Attach Storage Disk to Virtual Machine</title>
     <para>
-      The following example creates an 8&nbsp;GB storage disk for the example virtual machine.
+      The following example creates an 8&nbsp;GB Copy-On-Write storage disk for the example virtual machine.
     </para>
     <example>
       <title>Create a Storage Disk on the virtual machine</title>
@@ -691,7 +706,7 @@ Content-type: application/xml
   &lt;size&gt;8589934592&lt;/size&gt;
   &lt;type&gt;system&lt;/type&gt;
   &lt;interface&gt;virtio&lt;/interface&gt;
-  &lt;format&gt;raw&lt;/format&gt;
+  &lt;format&gt;cow&lt;/format&gt;
   &lt;bootable&gt;true&lt;/bootable&gt;
 &lt;/disk&gt;
  	  	</screen>

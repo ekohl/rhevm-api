@@ -46,8 +46,8 @@
           <entry></entry>
         </row>      
         <row>
-          <entry><literal>data_center id</literal></entry>
-          <entry>complex</entry>
+          <entry><literal>data_center id=</literal></entry>
+          <entry>GUID</entry>
           <entry>A reference to the data center of which this cluster is a member. See <xref linkend="chap-REST_API_Guide-Data_Centers"/></entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
@@ -73,7 +73,7 @@
           <entry><literal>status</literal></entry>
           <entry>One of <literal>OPERATIONAL</literal> or <literal>NON_OPERATIONAL</literal></entry>
           <entry>The status of the network</entry>
-          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>display</literal></entry>
@@ -100,7 +100,7 @@
     </screen>
   </example>
   <para>
-    When creating a new data center, the <literal>name</literal> and <literal>datacenter</literal> are required. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
+    Creation of a new data center requires the <literal>name</literal> and <literal>datacenter</literal> properties. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
   </para>
   <example>
     <title>Creating a network resource</title>
@@ -116,7 +116,7 @@ Content-type: application/xml
     </screen>
   </example>
   <para>
-    the <literal>name</literal>, <literal>description</literal>, <literal>ip</literal>, <literal>vlan</literal>, <literal>stp</literal> and <literal>display</literal> elements are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
+    The <literal>name</literal>, <literal>description</literal>, <literal>ip</literal>, <literal>vlan</literal>, <literal>stp</literal> and <literal>display</literal> elements are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
   </para>
   <example>
     <title>Updating a network resource</title>

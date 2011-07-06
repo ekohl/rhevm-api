@@ -9,38 +9,41 @@
     The <literal>rel="events"</literal> link obtained from the entry point URI accesses the <literal>events</literal> collection and lists system events from Red Hat Enterprise Virtualisation Manager.
   </para>
   <informaltable frame="none">
-    <tgroup cols="2">
-      <colspec colwidth="2*"/>
+    <tgroup cols="3">
+      <colspec colwidth="3*"/>
+      <colspec colwidth="2*"/>      
       <colspec colwidth="5*"/>
       <thead>
         <row>
           <entry>Element</entry>
+          <entry>Type</entry>
           <entry>Description</entry>
         </row>
       </thead>
       <tbody>
         <row>
-          <entry><literal>id=</literal></entry>
-          <entry>An opaque identifier for the event entry</entry>
-        </row>
-        <row>
           <entry><literal>description</literal></entry>
+          <entry>string</entry>          
           <entry>A description of the system event</entry>
         </row>
         <row>
           <entry><literal>code</literal></entry>
+          <entry>integer</entry>
           <entry>The integer event code. See <xref linkend="appe-REST_API_Guide-Event_Codes"/> for a full list of event codes with descriptions.</entry>
         </row>
         <row>
           <entry><literal>severity</literal></entry>
-          <entry>The level of severity for the event. One of <literal>NORMAL</literal>, <literal>WARNING</literal>, <literal>ERROR</literal> or <literal>ALERT</literal>.</entry>
+          <entry> One of <literal>NORMAL</literal>, <literal>WARNING</literal>, <literal>ERROR</literal> or <literal>ALERT</literal></entry>          
+          <entry>The level of severity for the event</entry>
         </row>
         <row>
           <entry><literal>time</literal></entry>
+          <entry><literal>xsd:dateTime</literal> format: <literal>YYYY-MM-DDThh:mm:ss</literal></entry>
           <entry>The timestamp indicating when the event happened</entry>
         </row>
         <row>
-          <entry><literal>user id=</literal></entry>
+          <entry><literal>user id</literal></entry>
+          <entry>GUID</entry>
           <entry>The identification code for the user who triggered the event</entry>
         </row>
       </tbody>
