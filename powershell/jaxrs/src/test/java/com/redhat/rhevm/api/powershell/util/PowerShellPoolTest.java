@@ -52,7 +52,7 @@ public class PowerShellPoolTest extends Assert {
 
         ControllableExecutor executor = new ControllableExecutor();
 
-        PowerShellPool pool = new PowerShellPool(executor, principal, setupExpectations(principal), 10, 20);
+        PowerShellPool pool = new PowerShellPool(executor, principal, setupExpectations(principal), 10, 20, 10*1000);
 
         assertEquals(10, executor.taskCount());
 

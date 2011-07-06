@@ -18,6 +18,8 @@
  */
 package com.redhat.rhevm.api.powershell.util;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -27,11 +29,9 @@ import com.redhat.rhevm.api.common.security.auth.Principal;
 
 public class PowerShellPool {
 
-    // REVISIT: add a timeout after which we will reduce
-    //          the pool to the low watermark
-
     private static final int DEFAULT_SIZE_LOW = 2;
     private static final int DEFAULT_SIZE_HIGH = 6;
+    private static final long CLEAN_INTERVAL = 300 * 1000;
 
     private ExecutorService executor;
     private Principal principal;
@@ -43,7 +43,7 @@ public class PowerShellPool {
     private int highSize;
     private int spawned;
 
-    public PowerShellPool(ExecutorService executor, Principal principal, Current current, int lowSize, int highSize) {
+    public PowerShellPool(ExecutorService executor, Principal principal, Current current, int lowSize, int highSize, long cleanInterval) {
         this.executor = executor;
         this.principal = principal;
         this.current = current;
@@ -53,10 +53,13 @@ public class PowerShellPool {
         for (int i = 0; i < lowSize; i++) {
             spawn();
         }
+
+        Timer timer = new Timer();
+        timer.schedule(new PowerShellPoolCleaner(), cleanInterval, cleanInterval);
     }
 
     public PowerShellPool(ExecutorService executor, Principal principal, Current current) {
-        this(executor, principal, current, DEFAULT_SIZE_LOW, DEFAULT_SIZE_HIGH);
+        this(executor, principal, current, DEFAULT_SIZE_LOW, DEFAULT_SIZE_HIGH, CLEAN_INTERVAL);
     }
 
     private void spawn() {
@@ -84,12 +87,30 @@ public class PowerShellPool {
         cmds.offer(cmd);
     }
 
+    public void cleanEmpty() {
+        PowerShellCmd cmd;
+        while (spawned > lowSize && cmds.size() > lowSize) {
+            cmd = cmds.poll();
+            if (cmd != null) {
+                cmd.stop();
+                spawned--;
+            }
+        }
+    }
+
     public void shutdown() {
         executor.shutdown();
 
         PowerShellCmd cmd;
         while ((cmd = cmds.poll()) != null) {
             cmd.stop();
+        }
+    }
+
+    private class PowerShellPoolCleaner extends TimerTask {
+        @Override
+        public void run() {
+            cleanEmpty();
         }
     }
 
