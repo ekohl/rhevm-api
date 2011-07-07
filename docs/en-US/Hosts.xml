@@ -42,7 +42,7 @@
           <entry><literal>link rel="storage"</literal></entry>
           <entry>relationship</entry>
           <entry>A link to the sub-collection for host storage.</entry>
-          <entry></entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
           <entry><literal>link rel="nics"</literal></entry>
@@ -728,99 +728,8 @@ Content-type: application/xml
       The <literal>storage</literal> sub-collection provides a list of the iSCSI and FCP storage representations available on the host. This storage is used to create storage domains, as described in <xref linkend="chap-REST_API_Guide-Storage_Domains"/>.
     </para>
     <para>
-      Each <literal>storage</literal> representation in the sub-collection represents either a SCSI LUN or an LVM volume group. A <literal>logical_unit</literal> representation contains:
+      Each <literal>storage</literal> representation in the sub-collection represents either a SCSI LUN or an LVM volume group.
   </para>
-  <note>
-    <title>Element property icons</title>
-    <para>
-      The icons used in the properties column of this table are described in <xref linkend="table-Property_Icons" />
-    </para>
-  </note>
-  <para>
-    <informaltable frame="none">
-      <tgroup cols="4">
-        <colspec colwidth="4*"/>
-        <colspec colwidth="4*"/>
-        <colspec colwidth="6*"/>
-        <colspec colwidth="2*" colname="prop"/>
-        <thead>
-          <row>
-            <entry>Element</entry>
-            <entry>Type</entry>
-            <entry>Description</entry>
-            <entry>Properties</entry>
-          </row>
-        </thead>
-        <tbody>
-            <row>
-              <entry><literal>address</literal></entry>
-              <entry>string</entry>
-              <entry>The address of the iSCSI portal containing the LUN, in the case of iSCSI</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
-            <row>
-              <entry><literal>port</literal></entry>
-              <entry>integer</entry>
-              <entry>The port number of the iSCSI portal</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
-            <row>
-              <entry><literal>target</literal></entry>
-              <entry>string</entry>
-              <entry>The iSCSI target IQN</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
-            <row>
-              <entry><literal>username</literal></entry>
-              <entry>string</entry>
-              <entry>A CHAP user name for logging into an iSCSI target</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
-            <row>
-              <entry><literal>password</literal></entry>
-              <entry>string</entry>
-              <entry>A CHAP password for logging into an iSCSI target</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </informaltable>
-    </para>
-    <para>
-      A <literal>volume_group</literal> representation contains:
-    </para>
-    <para>
-    <informaltable frame="none">
-      <tgroup cols="4">
-        <colspec colwidth="4*"/>
-        <colspec colwidth="4*"/>
-        <colspec colwidth="6*"/>
-        <colspec colwidth="2*" colname="prop"/>
-        <thead>
-          <row>
-            <entry>Element</entry>
-            <entry>Type</entry>
-            <entry>Description</entry>
-            <entry>Properties</entry>
-          </row>
-        </thead>
-        <tbody>
-            <row>
-              <entry><literal>name</literal></entry>
-              <entry>string</entry>
-              <entry>An volume group name</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
-            <row>
-              <entry><literal>logical_unit id=</literal></entry>
-              <entry>complex</entry>
-              <entry>Details of any SCSI LUNs on which the volume group is based</entry>
-              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
-            </row>
-          </tbody>
-        </tgroup>
-      </informaltable>
-    </para>
     <example>
       <title>An XML representation of the storage sub-collection on a host</title>
       <screen>

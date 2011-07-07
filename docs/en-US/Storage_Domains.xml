@@ -234,6 +234,7 @@ Content-type: application/xml
       <para>
         The <literal>iscsi</literal> and <literal>fcp</literal> specific elements in a <literal>storage</literal> description are:
       </para>
+
       <informaltable frame="none">
         <tgroup cols="4">
           <colspec colwidth="4*"/>
@@ -248,7 +249,8 @@ Content-type: application/xml
               <entry>Properties</entry>
             </row>
           </thead>
-          <tbody>
+          <tbody>          
+
             <row>
               <entry><literal>logical_unit id=</literal></entry>
               <entry>complex</entry>
@@ -258,15 +260,88 @@ Content-type: application/xml
             <row>
               <entry><literal>volume_group id=</literal></entry>
               <entry>complex</entry>
-              <entry>Alternatively, a single LVM Volume Group acts as a storage domain, which is composed of multiple iSCSI or FCP logical units</entry>
+              <entry>Alternatively, a single LVM Volume Group acts as a storage domain, which is composed of multiple iSCSI or FCP <literal>logical_unit</literal> entities</entry>
               <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
             </row>
           </tbody>
         </tgroup>
       </informaltable>
       <para>
-        See <xref linkend="sect-REST_API_Guide-Hosts-Storage"/> for more details.
+        The <literal>logical_unit</literal> contains the following elements:
       </para>
+
+    <informaltable frame="none">
+      <tgroup cols="4">
+        <colspec colwidth="4*"/>
+        <colspec colwidth="4*"/>
+        <colspec colwidth="6*"/>
+        <colspec colwidth="2*" colname="prop"/>
+        <thead>
+          <row>
+            <entry>Element</entry>
+            <entry>Type</entry>
+            <entry>Description</entry>
+            <entry>Properties</entry>
+          </row>
+        </thead>
+        <tbody>
+            <row>
+              <entry><literal>address</literal></entry>
+              <entry>string</entry>
+              <entry>The address of the server containing the storage device</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>port</literal></entry>
+              <entry>integer</entry>
+              <entry>The port number of the server</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>target</literal></entry>
+              <entry>string</entry>
+              <entry>The target IQN for the storage device</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>username</literal></entry>
+              <entry>string</entry>
+              <entry>A CHAP user name for logging into a target</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>password</literal></entry>
+              <entry>string</entry>
+              <entry>A CHAP password for logging into a target</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>serial</literal></entry>
+              <entry>string</entry>
+              <entry>The serial ID for the target</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>vendor_id</literal></entry>
+              <entry>string</entry>
+              <entry>The vendor name for the target</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>product_id</literal></entry>
+              <entry>string</entry>
+              <entry>The product code for the target</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+            <row>
+              <entry><literal>lun_mapping</literal></entry>
+              <entry>integer</entry>
+              <entry>The Logical Unit Number device mapping for the target</entry>
+              <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
       <para>
         In the case of iSCSI, if a <literal>logical_unit</literal> description also contains details of the iSCSI target with the LUN in question, the target performs an automatic login when the storage domain is created.
       </para>
