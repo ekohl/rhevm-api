@@ -119,7 +119,7 @@ Content-Type: application/xml
           <entry>Users</entry>
         </row>
         <row>
-            <entry><literal>domain</literal></entry>
+            <entry><literal>domains</literal></entry>
             <entry>Identity domain</entry>
         </row>
         <row>
