@@ -89,6 +89,8 @@
 &lt;/statistics&gt;
     </screen>
   </example>
+  <para>
+    Individual <literal>host</literal> and <literal>vm</literal> resources contain a <literal>statistics</literal> that follows the same representation.
   <note>
     <para>The <literal>statistics</literal> collection is read-only.</para>
   </note>
