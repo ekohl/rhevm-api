@@ -271,13 +271,14 @@ Accept: application/xml
         VMs and templates in these collections have a similar representation to their counterparts in the top-level VMs and templates collection, except they also contain a <literal>storage_domain</literal> reference and an <literal>import</literal> action.
       </para>
       <para>
-        The <literal>import</literal> action imports a virtual machine or a template from an <literal>Export</literal> storage domain. The destination cluster and storage domain is specified with <literal>cluster</literal> and <literal>storage_domain</literal> references.
+        The <literal>import</literal> action imports a virtual machine or a template from an <literal>export</literal> storage domain. The destination cluster and storage domain is specified with <literal>cluster</literal> and <literal>storage_domain</literal> references.
       </para>
       <example>
         <title>Action to import a virtual machine from an export storage domain</title>
         <screen>
 POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
 fabe0451-701f-4235-8f7e-e20e458819ed/vms/082c794b-771f-452f-83c9-b2b5a19c0399/import HTTP/1.1
+Accept: application/xml
 Content-type: application/xml
 
 &lt;action&gt;
@@ -291,11 +292,12 @@ Content-type: application/xml
         </screen>
       </example>
       
-    <example>
-      <title>Action to import a template from an export storage domain</title>
-      <screen>
+      <example>
+        <title>Action to import a template from an export storage domain</title>
+        <screen>
 POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
 fabe0451-701f-4235-8f7e-e20e458819ed/templates/082c794b-771f-452f-83c9-b2b5a19c0399/import HTTP/1.1
+Accept: application/xml
 Content-type: application/xml
 
 &lt;action&gt;
@@ -306,11 +308,23 @@ Content-type: application/xml
         &lt;name&gt;Default&lt;/name&gt;
     &lt;/cluster&gt;
 &lt;/action&gt;
-      </screen>
-    </example>
+        </screen>
+      </example>
 
+      <para>
+        Delete a virtual machine or template from an <literal>export</literal> storage domain with a <literal>DELETE</literal> request.
+      </para>
 
-      
+      <example>
+        <title>Delete virtual machine from an export storage domain</title>
+        <screen>
+DELETE /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
+fabe0451-701f-4235-8f7e-e20e458819ed/vms/082c794b-771f-452f-83c9-b2b5a19c0399/import HTTP/1.1
+Accept: application/xml
+
+HTTP/1.1 204 No Content
+        </screen>
+      </example>
       
     </section>
     
