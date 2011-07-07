@@ -417,7 +417,7 @@ Content-Type: application/xml
 &lt;/{resource}&gt;
       </screen>
       <para>
-        If an attempt is made to modify a <emphasis>strictly</emphasis> immutable resource property, the API reports a <literal>409 Conflict</literal> error with a <literal>fault</literal> representation in the response body. Other non-modifiable properties specified in the request entity-body are to be ignored.
+        A <literal>PUT<literal> request also accepts a modified resource representation obtained from a <literal>GET<literal> request, except for modified immutable resource properties. Such immutable properties remain unchanged when using a representation from a prior <literal>GET<literal> request. If an attempt is made to modify a <emphasis>strictly</emphasis> immutable resource property, the API reports a <literal>409 Conflict</literal> error with a <literal>fault</literal> representation in the response body. Other non-modifiable properties specified in the request entity-body are to be ignored.
       </para>
     </section>
 
