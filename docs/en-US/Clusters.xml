@@ -205,7 +205,7 @@ considered overloaded. The <literal>low</literal> attribute controls the lowest 
     </screen>
   </example>
   <para>
-    Creation of a new cluster requires the <literal>name</literal>, <literal>cpu id</literal> and <literal>datacenter</literal> properties. Identify the <literal>datacenter</literal> with either the <literal>id</literal> attribute or <literal>name</literal> element. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
+    Creation of a new cluster requires the <literal>name</literal>, <literal>cpu id=</literal> and <literal>datacenter</literal> properties. Identify the <literal>datacenter</literal> with either the <literal>id</literal> attribute or <literal>name</literal> element. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
   </para>
   <example>
     <title>Creating a host cluster</title>
@@ -222,7 +222,7 @@ Content-type: application/xml
     </screen>
   </example>
   <para>
-    The <literal>name</literal>, <literal>description</literal> and <literal>cpu id</literal> elements are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
+    The <literal>name</literal>, <literal>description</literal>, <literal>cpu id=</literal> and <literal>error_handling</literal> elements are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
   </para>
   <example>
     <title>Updating a host cluster</title>
@@ -244,7 +244,7 @@ Content-type: application/xml
       Networks associated with a cluster are represented with the <literal>networks</literal> sub-collection. Every host within the cluster requires a network interface attached to that network for an operational network.
     </para>
     <para>
-      The representation of a cluster's <literal>network</literal> sub-collection is the same as a standard <literal>network</literal> resource with an additional <literal>cluster id</literal> to signify a relationship to the cluster.
+      The representation of a cluster's <literal>network</literal> sub-collection is the same as a standard <literal>network</literal> resource with an additional <literal>cluster id=</literal> to signify a relationship to the cluster.
     </para>
     <para>
       An API user manipulates the networks sub-collection as described in <xref linkend="chap-REST_API_Guide-Common_Features"/>. <literal>POST</literal>ing a network <literal>id</literal> or <literal>name</literal> reference to the <literal>networks</literal> sub-collection associates the network with the cluster. 

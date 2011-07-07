@@ -239,7 +239,7 @@ Content-type: application/xml
     </screen>
   </example>
   <para>
-    The <literal>name</literal>, <literal>description</literal>, <literal>type</literal>, <literal>memory</literal>, <literal>cpu topology</literal>, <literal>os</literal> and <literal>stateless</literal> properties are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
+    The <literal>name</literal>, <literal>description</literal>, <literal>type</literal>, <literal>memory</literal>, <literal>cpu topology</literal>, <literal>os</literal>, <literal>high_availaility</literal>, <literal>display</literal>, <literal>stateless</literal>, <literal>timezone</literal> properties are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
   </para>
   <example>
     <title>Updating a virtual machine template to contain 1&nbsp;GB of memory</title>

@@ -33,6 +33,18 @@
       </thead>
       <tbody>
         <row>
+          <entry><literal>name</literal></entry>
+          <entry>string</entry>
+          <entry>	A user-supplied human readable name for the tag. The <literal>name</literal> is unique across all tag resources.</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
+          <entry><literal>description</literal></entry>
+          <entry>string</entry>
+          <entry>A free-form user-supplied human readable description of the tag</entry>
+          <entry></entry>
+        </row>
+        <row>
           <entry><literal>host</literal></entry>
           <entry>GUID</entry>
           <entry>A reference to the host which the tag is attached. See <xref linkend="chap-REST_API_Guide-Hosts"/></entry>
@@ -73,7 +85,7 @@
     </screen>
   </example>
   <para>
-    Creation of a new tag requires the <literal>name</literal> property. The <literal>name</literal> and <literal>description</literal> elements are updatable post-creation.
+    Creation of a new tag requires the <literal>name</literal> property. The <literal>name</literal>, <literal>description</literal> and <literal>parent</literal> elements are updatable post-creation.
   </para>
 
   <section id="sect-REST_API_Guide-Tags-Hosts_Users_and_VMs">

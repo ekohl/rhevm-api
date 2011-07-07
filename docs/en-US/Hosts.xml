@@ -244,10 +244,10 @@ Content-type: application/xml
     </screen>
   </example>
   <para>  
-    The <literal>root_password</literal> element is only included in the client-provided initial representation and is not exposed in the representations returned from subsequent <literal>GET</literal>s and <literal>UPDATE</literal>s.
+    The <literal>root_password</literal> element is only included in the client-provided initial representation and is not exposed in the representations returned from subsequent requests.
   </para>
   <para>
-    The <literal>name</literal> element is updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
+    The <literal>name</literal>, <literal>name</literal>, <literal>power_management</literal> and <literal>transparent_hugepages</literal> elements are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
   </para>
   <example>
     <title>Updating a host</title>
