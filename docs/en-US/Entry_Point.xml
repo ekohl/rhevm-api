@@ -141,7 +141,7 @@ Content-Type: application/xml
     <title> The relationship between the API entry point and the resource collections exposed by the API</title>
     <mediaobject>
       <imageobject>
-        <imagedata fileref="images/api_diag.png" format="PNG" />
+        <imagedata fileref="images/CollectionsEntryPoint.png" format="PNG" />
       </imageobject>
     </mediaobject>
   </figure>
