@@ -86,7 +86,6 @@ public abstract class AbstractPowerShellCollectionResourceTest<R extends BaseRes
                 "\" -description \"" + NEW_DESCRIPTION + "\"";
 
     private static final String REMOVE_COMMAND = "remove-{0} -{0}id \"" + "eris".hashCode() + "\"";
-    private static final String REMOVE_FORCED_COMMAND = REMOVE_COMMAND + " -force";
 
     private static final String SEARCH_OPTION = " -searchtext ";
 
@@ -278,10 +277,6 @@ public abstract class AbstractPowerShellCollectionResourceTest<R extends BaseRes
 
     protected String getRemoveCommand() {
         return MessageFormat.format(REMOVE_COMMAND, individualName);
-    }
-
-    protected String getRemoveForcedCommand() {
-        return MessageFormat.format(REMOVE_FORCED_COMMAND, individualName);
     }
 
     protected R getModel(String name, String description) {

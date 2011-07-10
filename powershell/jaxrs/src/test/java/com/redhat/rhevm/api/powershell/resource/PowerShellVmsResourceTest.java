@@ -26,7 +26,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
 import com.redhat.rhevm.api.common.util.DetailHelper.Detail;
-import com.redhat.rhevm.api.model.Action;
 import com.redhat.rhevm.api.model.Cluster;
 import com.redhat.rhevm.api.model.Display;
 import com.redhat.rhevm.api.model.DisplayType;
@@ -198,12 +197,6 @@ public class PowerShellVmsResourceTest extends AbstractPowerShellCollectionResou
     public void testRemove() throws Exception {
         setUpResourceExpectations(getRemoveCommand(), null);
         resource.remove(Integer.toString(NAMES[1].hashCode()));
-    }
-
-    @Test
-    public void testForcedRemove() throws Exception {
-        setUpResourceExpectations(getRemoveForcedCommand(), null);
-        resource.remove(Integer.toString(NAMES[1].hashCode()), new Action(){{setForce(true);}});
     }
 
     @Test
