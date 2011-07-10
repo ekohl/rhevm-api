@@ -19,7 +19,7 @@
 package com.redhat.rhevm.api.model;
 
 public enum DiskInterface {
-    IDE, SCSI, VIRTIO;
+    IDE, VIRTIO;
 
     public String value() {
         return name().toLowerCase();

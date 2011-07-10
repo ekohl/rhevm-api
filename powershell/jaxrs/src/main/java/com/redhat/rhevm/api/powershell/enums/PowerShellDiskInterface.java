@@ -24,7 +24,6 @@ import com.redhat.rhevm.api.model.DiskInterface;
 
 public enum PowerShellDiskInterface {
     IDE(DiskInterface.IDE),
-    SCSI(DiskInterface.SCSI),
     VirtIO(DiskInterface.VIRTIO);
 
     private static HashMap<DiskInterface, PowerShellDiskInterface> mapping;
