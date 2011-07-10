@@ -34,6 +34,18 @@
       <email>eglynn@redhat.com</email>
       <organization>Red Hat</organization>
     </developer>
+	<developer>
+      <id>mpastern</id>
+      <name>Michael Pasternak</name>
+      <email>mpastern@redhat.com</email>
+      <organization>Red Hat</organization>
+    </developer>
+    <developer>
+      <id>oliel</id>
+      <name>Ori Liel</name>
+      <email>oliel@redhat.com</email>
+      <organization>Red Hat</organization>
+    </developer>
   </developers>
 
   <scm>
