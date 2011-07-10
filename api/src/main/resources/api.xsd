@@ -347,6 +347,7 @@
       <xs:enumeration value="LOCKED"/>
       <xs:enumeration value="MIXED"/>
       <xs:enumeration value="UNATTACHED"/>
+      <xs:enumeration value="UNKNOWN"/>
     </xs:restriction>
   </xs:simpleType>
 

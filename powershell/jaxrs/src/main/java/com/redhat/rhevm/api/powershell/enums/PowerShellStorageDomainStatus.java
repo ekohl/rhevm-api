@@ -54,7 +54,7 @@ public enum PowerShellStorageDomainStatus {
         case Locked:
             return StorageDomainStatus.LOCKED;
         case Unknown:
-            return null;
+            return StorageDomainStatus.UNKNOWN;
         default:
             assert false : null;
             return null;
