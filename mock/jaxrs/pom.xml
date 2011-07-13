@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.redhat.rhevm.api</groupId>
     <artifactId>mock-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-rc1.5</version>
   </parent>
 
   <artifactId>rhevm-api-mock-jaxrs</artifactId>
