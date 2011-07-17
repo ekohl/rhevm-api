@@ -24,7 +24,7 @@ import javax.ws.rs.core.UriBuilder;
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.model.NIC;
 import com.redhat.rhevm.api.model.Nics;
-import com.redhat.rhevm.api.model.NicType;
+import com.redhat.rhevm.api.model.NicInterface;
 import com.redhat.rhevm.api.powershell.enums.PowerShellVmInterfaceType;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
@@ -63,8 +63,8 @@ public class PowerShellNicsResource
         buf.append(" -vmobject $v");
         buf.append(" -interfacename " + PowerShellUtils.escape(nic.getName()));
         buf.append(" -networkname $n.name");
-        if (nic.getType() != null) {
-            NicType type = NicType.fromValue(nic.getType());
+        if (nic.getInterface() != null) {
+            NicInterface type = NicInterface.fromValue(nic.getInterface());
             if (type != null) {
                 buf.append(" -interfacetype " + PowerShellVmInterfaceType.forModel(type).name());
             }

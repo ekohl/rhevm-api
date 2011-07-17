@@ -18,14 +18,14 @@
  */
 package com.redhat.rhevm.api.model;
 
-public enum NicType {
+public enum NicInterface {
     E1000, VIRTIO, RTL8139, RTL8139_VIRTIO;
 
     public String value() {
         return name().toLowerCase();
     }
 
-    public static NicType fromValue(String value) {
+    public static NicInterface fromValue(String value) {
         try {
             return valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {

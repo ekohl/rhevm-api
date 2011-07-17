@@ -35,8 +35,8 @@ import com.redhat.rhevm.api.model.DisplayType;
 import com.redhat.rhevm.api.model.DisplayTypes;
 import com.redhat.rhevm.api.model.FenceType;
 import com.redhat.rhevm.api.model.FenceTypes;
-import com.redhat.rhevm.api.model.NicType;
-import com.redhat.rhevm.api.model.NicTypes;
+import com.redhat.rhevm.api.model.NicInterface;
+import com.redhat.rhevm.api.model.NicInterfaces;
 import com.redhat.rhevm.api.model.OsType;
 import com.redhat.rhevm.api.model.OsTypes;
 import com.redhat.rhevm.api.model.SchedulingPolicies;
@@ -141,11 +141,11 @@ public class PowerShellCapabilitiesResourceTest extends BasePowerShellResourceTe
         }
     }
 
-    private void checkNicTypes(NicTypes nicTypes, NicType... expected) {
-        assertNotNull(nicTypes);
-        assertEquals(expected.length, nicTypes.getNicTypes().size());
+    private void checkNicTypes(NicInterfaces nicInterfaces, NicInterface... expected) {
+        assertNotNull(nicInterfaces);
+        assertEquals(expected.length, nicInterfaces.getNicInterfaces().size());
         for (int i = 0; i < expected.length; i++) {
-            assertEquals(expected[i].value(), nicTypes.getNicTypes().get(i));
+            assertEquals(expected[i].value(), nicInterfaces.getNicInterfaces().get(i));
         }
     }
 
@@ -240,8 +240,8 @@ public class PowerShellCapabilitiesResourceTest extends BasePowerShellResourceTe
 
     @Test
     public void testNicTypes() {
-        checkNicTypes(caps.getVersions().get(0).getNicTypes(), NicType.values());
-        checkNicTypes(caps.getVersions().get(1).getNicTypes(), NicType.values());
+        checkNicTypes(caps.getVersions().get(0).getNicInterfaces(), NicInterface.values());
+        checkNicTypes(caps.getVersions().get(1).getNicInterfaces(), NicInterface.values());
     }
 
     @Test

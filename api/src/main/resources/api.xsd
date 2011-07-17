@@ -499,7 +499,7 @@
           <xs:element ref="vm_types" minOccurs="0"/>
           <xs:element ref="boot_devices" minOccurs="0"/>
           <xs:element ref="display_types" minOccurs="0"/>
-          <xs:element ref="nic_types" minOccurs="0"/>
+          <xs:element ref="nic_interfaces" minOccurs="0"/>
           <xs:element ref="disk_types" minOccurs="0"/>
           <xs:element ref="os_types" minOccurs="0"/>
           <xs:element ref="disk_formats" minOccurs="0"/>
@@ -628,14 +628,14 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:element name="nic_types" type="NicTypes"/>
+  <xs:element name="nic_interfaces" type="NicInterfaces"/>
 
-  <xs:complexType name="NicTypes">
+  <xs:complexType name="NicInterfaces">
     <xs:sequence>
-      <xs:element name="nic_type" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="nic_interfaces" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="NicTypes"/>
+            <jaxb:property name="NicInterfaces"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -1822,7 +1822,7 @@
       <xs:extension base="BaseDevice">
         <xs:sequence>
           <xs:element ref="network" minOccurs="0" maxOccurs="1"/>
-          <xs:element name="type" type="xs:string" minOccurs="0"/>
+          <xs:element name="interface" type="xs:string" minOccurs="0"/>
           <xs:element ref="mac" minOccurs="0"/>
           <xs:element name="statistics" type="Statistics" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>

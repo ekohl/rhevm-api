@@ -37,7 +37,7 @@ import com.redhat.rhevm.api.model.File;
 import com.redhat.rhevm.api.model.Network;
 import com.redhat.rhevm.api.model.NIC;
 import com.redhat.rhevm.api.model.Nics;
-import com.redhat.rhevm.api.model.NicType;
+import com.redhat.rhevm.api.model.NicInterface;
 import com.redhat.rhevm.api.model.Status;
 import com.redhat.rhevm.api.model.VM;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
@@ -316,7 +316,7 @@ public class PowerShellDevicesResourceTest
 
         NIC nic = new NIC();
         nic.setName(NIC_NAME);
-        nic.setType(NicType.E1000.value());
+        nic.setInterface(NicInterface.E1000.value());
         nic.setNetwork(new Network());
         nic.getNetwork().setId(NETWORK_ID);
 

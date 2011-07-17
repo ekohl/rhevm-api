@@ -33,8 +33,8 @@ import com.redhat.rhevm.api.model.DisplayType;
 import com.redhat.rhevm.api.model.DisplayTypes;
 import com.redhat.rhevm.api.model.FenceType;
 import com.redhat.rhevm.api.model.FenceTypes;
-import com.redhat.rhevm.api.model.NicType;
-import com.redhat.rhevm.api.model.NicTypes;
+import com.redhat.rhevm.api.model.NicInterface;
+import com.redhat.rhevm.api.model.NicInterfaces;
 import com.redhat.rhevm.api.model.OsType;
 import com.redhat.rhevm.api.model.OsTypes;
 import com.redhat.rhevm.api.model.PowerManagement;
@@ -221,16 +221,16 @@ public class DefaultCapabilitiesResource implements CapabilitiesResource {
         addDisplayTypes(VERSION22, DisplayType.values());
     }
 
-    private void addNicTypes(VersionCaps version, NicType... types) {
-        version.setNicTypes(new NicTypes());
-        for (NicType type : types) {
-            version.getNicTypes().getNicTypes().add(type.value());
+    private void addNicInterfaces(VersionCaps version, NicInterface... types) {
+        version.setNicInterfaces(new NicInterfaces());
+        for (NicInterface type : types) {
+            version.getNicInterfaces().getNicInterfaces().add(type.value());
         }
     }
 
     {
-        addNicTypes(VERSION21, NicType.values());
-        addNicTypes(VERSION22, NicType.values());
+        addNicInterfaces(VERSION21, NicInterface.values());
+        addNicInterfaces(VERSION22, NicInterface.values());
     }
 
     private void addDiskTypes(VersionCaps version, DiskType... types) {

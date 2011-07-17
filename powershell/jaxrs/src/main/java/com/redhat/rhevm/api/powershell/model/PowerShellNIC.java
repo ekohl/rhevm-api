@@ -58,7 +58,7 @@ public class PowerShellNIC {
         network.setName(entity.get("network"));
         nic.setNetwork(network);
 
-        nic.setType(PowerShellVmInterfaceType.valueOf(entity.get("type")).map().value());
+        nic.setInterface(PowerShellVmInterfaceType.valueOf(entity.get("type")).map().value());
 
         MAC mac = new MAC();
         mac.setAddress(entity.get("macaddress"));

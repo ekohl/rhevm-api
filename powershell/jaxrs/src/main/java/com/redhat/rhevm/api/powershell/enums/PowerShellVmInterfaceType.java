@@ -20,33 +20,33 @@ package com.redhat.rhevm.api.powershell.enums;
 
 import java.util.HashMap;
 
-import com.redhat.rhevm.api.model.NicType;
+import com.redhat.rhevm.api.model.NicInterface;
 
 public enum PowerShellVmInterfaceType {
-    rtl8139_pv(NicType.RTL8139_VIRTIO),
-    rtl8139(NicType.RTL8139),
-    e1000(NicType.E1000),
-    pv(NicType.VIRTIO);
+    rtl8139_pv(NicInterface.RTL8139_VIRTIO),
+    rtl8139(NicInterface.RTL8139),
+    e1000(NicInterface.E1000),
+    pv(NicInterface.VIRTIO);
 
-    private static HashMap<NicType, PowerShellVmInterfaceType> mapping;
+    private static HashMap<NicInterface, PowerShellVmInterfaceType> mapping;
     static {
-        mapping = new HashMap<NicType, PowerShellVmInterfaceType>();
+        mapping = new HashMap<NicInterface, PowerShellVmInterfaceType>();
         for (PowerShellVmInterfaceType value : values()) {
             mapping.put(value.model, value);
         }
     }
 
-    private NicType model;
+    private NicInterface model;
 
-    private PowerShellVmInterfaceType(NicType model) {
+    private PowerShellVmInterfaceType(NicInterface model) {
         this.model = model;
     }
 
-    public NicType map() {
+    public NicInterface map() {
         return model;
     }
 
-    public static PowerShellVmInterfaceType forModel(NicType model) {
+    public static PowerShellVmInterfaceType forModel(NicInterface model) {
         return mapping.get(model);
     }
 }
