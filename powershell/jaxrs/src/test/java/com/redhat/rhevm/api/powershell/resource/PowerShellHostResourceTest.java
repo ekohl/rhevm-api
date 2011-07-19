@@ -243,7 +243,7 @@ public class PowerShellHostResourceTest extends AbstractPowerShellResourceTest<H
         Response response = resource.fence(action);
         Action actionResult = (Action)response.getEntity();
         assertNotNull(actionResult.getPowerManagement());
-        assertEquals(actionResult.getPowerManagement().getStatus(), PowerManagementStatus.ON);
+        assertEquals(actionResult.getPowerManagement().getStatus(), PowerManagementStatus.ON.value());
         verifyActionResponse(response, false);
     }
 
@@ -257,7 +257,7 @@ public class PowerShellHostResourceTest extends AbstractPowerShellResourceTest<H
                                           "<Objects><Object Type=\"System.String\">Test Failed, Host Status is: off. Host burned by a madman.</Object></Objects>"));
         Response response = resource.fence(action);
         Action actionResult = (Action)response.getEntity();
-        assertEquals(actionResult.getStatus(), Status.FAILED);
+        assertEquals(actionResult.getStatus(), Status.FAILED.value());
         assertNotNull(actionResult.getFault());
         assertEquals(actionResult.getFault().getReason(),
                      "Powershell command \"get-powermanagementstatus -hostid \"109313413\"\" failed with Host burned by a madman.");

@@ -65,7 +65,7 @@ public class PowerShellEvent {
         event.setId(Long.toString(entity.get("id", Long.class)));
         event.setDescription(entity.get("message"));
         event.setCode(entity.get("logtype", Integer.class));
-        event.setSeverity(entity.get("severity", PowerShellLogSeverity.class).map());
+        event.setSeverity(entity.get("severity", PowerShellLogSeverity.class).map().value());
 
         if (dates.containsKey(entity.get("logtime"))) {
             event.setTime(dates.get(entity.get("logtime")));

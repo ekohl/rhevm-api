@@ -248,7 +248,7 @@ public class PowerShellDevicesResourceTest
         Disk created = (Disk)response.getEntity();
         verifyDisk(created);
         assertEquals(202, response.getStatus());
-        assertEquals(Status.PENDING, created.getCreationStatus());
+        assertEquals(Status.PENDING.value(), created.getCreationStatus());
         verifyLink(created, "creation_status");
     }
 

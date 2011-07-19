@@ -65,7 +65,7 @@ public class PowerShellCreationResourceTest extends AbstractPowerShellResourceTe
 
     private void verifyCreation(Creation creation) {
         assertNotNull(creation);
-        assertEquals(Status.FAILED, creation.getStatus());
+        assertEquals(Status.FAILED.value(), creation.getStatus());
         verifyLinks(creation);
     }
 }

@@ -161,7 +161,7 @@ public class PowerShellEventsResourceTest extends BasePowerShellResourceTest {
         assertEquals(IDS[index], model.getId());
         assertEquals(DESCRIPTIONS[index], model.getDescription());
         assertEquals(CODE, model.getCode());
-        assertEquals(SEVERITY, model.getSeverity());
+        assertEquals(SEVERITY.value(), model.getSeverity());
     }
 
     protected void verifySubResource(PowerShellEventResource subResource, String id) {

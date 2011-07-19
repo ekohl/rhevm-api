@@ -109,8 +109,9 @@ public class PowerShellAsyncTask {
 
         for (PowerShellParser.Entity entity : parser.parse(output)) {
             if (isStatus(entity)) {
-                creation.setStatus(parseStatus(entity, creation.getStatus()));
-                if (Status.FAILED == creation.getStatus()) {
+                String status = creation.getStatus();
+                creation.setStatus(parseStatus(entity, status==null ? Status.FAILED : Status.fromValue(status)).value());
+                if (Status.FAILED.value().equals(status)) {
                     creation.setFault(new Fault());
                     creation.getFault().setReason(FAILURE_REASON);
                     creation.getFault().setDetail(entity.isSet("exception") ? entity.get("exception") : entity.get("message"));

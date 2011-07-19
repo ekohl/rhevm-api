@@ -7,7 +7,7 @@
     <Property Name="Type" Type="VdcDAL.StorageType">
       <Property Name="value__" Type="System.Int32">1</Property>
     </Property>
-    <Property Name="Status" Type="System.String">Up</Property>
+    <Property Name="Status" Type="System.String">up</Property>
     <Property Name="CompatibilityVersion" Type="RhevmCmd.CLICompatibilityVersion">
       <Property Name="MinorRevision" Type="System.Int16">-1</Property>
       <Property Name="MajorRevision" Type="System.Int16">-1</Property>

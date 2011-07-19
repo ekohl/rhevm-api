@@ -88,7 +88,7 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
         Response.Status status = null;
         final ActionResource actionResource = new BaseActionResource<R>(uriInfo, task.action, getModel());
         if (action.isSetAsync() && action.isAsync()) {
-            action.setStatus(com.redhat.rhevm.api.model.Status.PENDING);
+            action.setStatus(com.redhat.rhevm.api.model.Status.PENDING.value());
             actions.put(action.getId(), actionResource);
             executor.execute(new Runnable() {
                 public void run() {
@@ -141,7 +141,7 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
     }
 
     private void perform(AbstractActionTask task) {
-        task.action.setStatus(com.redhat.rhevm.api.model.Status.IN_PROGRESS);
+        task.action.setStatus(com.redhat.rhevm.api.model.Status.IN_PROGRESS.value());
         if (task.action.getGracePeriod() != null) {
             try {
                 Thread.sleep(task.action.getGracePeriod().getExpiry());
@@ -168,8 +168,8 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
         public void run() {
             try {
                 execute();
-                if (action.getStatus() != com.redhat.rhevm.api.model.Status.FAILED) {
-                    action.setStatus(com.redhat.rhevm.api.model.Status.COMPLETE);
+                if (!action.getStatus().equals(com.redhat.rhevm.api.model.Status.FAILED.value())) {
+                    action.setStatus(com.redhat.rhevm.api.model.Status.COMPLETE.value());
                 }
             } catch (Throwable t) {
                 String message = t.getMessage() != null ? t.getMessage() : t.getClass().getName();
@@ -184,7 +184,7 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
             fault.setReason(reason);
             fault.setDetail(trace(t));
             action.setFault(fault);
-            action.setStatus(com.redhat.rhevm.api.model.Status.FAILED);
+            action.setStatus(com.redhat.rhevm.api.model.Status.FAILED.value());
         }
 
         protected static String trace(Throwable t) {

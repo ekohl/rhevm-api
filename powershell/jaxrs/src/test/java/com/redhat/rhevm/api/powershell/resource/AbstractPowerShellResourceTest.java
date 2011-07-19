@@ -160,18 +160,18 @@ public abstract class AbstractPowerShellResourceTest<R /* extends BaseResource *
         assertNotNull(action.getId());
         assertNotNull(action.getLinks());
         assertEquals(async, action.isAsync());
-        if (action.getStatus() == Status.FAILED && reason == null) {
+        if (action.getStatus().equals(Status.FAILED.value()) && reason == null) {
             assertNotNull(action.getFault());
             System.out.println(action.getStatus() + " : " + action.getFault().getReason());
             System.out.println(action.getFault().getDetail());
         }
         assertTrue("unexpected status", async
-                   ? action.getStatus().equals(Status.PENDING)
-                     || action.getStatus().equals(Status.IN_PROGRESS)
-                     || action.getStatus().equals(Status.COMPLETE)
+                   ? action.getStatus().equals(Status.PENDING.value())
+                     || action.getStatus().equals(Status.IN_PROGRESS.value())
+                     || action.getStatus().equals(Status.COMPLETE.value())
                    : reason == null
-                     ? action.getStatus().equals(Status.COMPLETE)
-                     : action.getStatus().equals(Status.FAILED));
+                     ? action.getStatus().equals(Status.COMPLETE.value())
+                     : action.getStatus().equals(Status.FAILED.value()));
         assertTrue(action.getLinks().size() == 2);
         assertEquals("expected parent link", "parent", action.getLinks().get(0).getRel());
         assertNotNull(action.getLinks().get(0).getHref());

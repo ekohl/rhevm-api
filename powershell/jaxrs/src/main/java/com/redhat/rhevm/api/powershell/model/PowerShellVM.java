@@ -39,6 +39,7 @@ import com.redhat.rhevm.api.model.Domain;
 import com.redhat.rhevm.api.model.NIC;
 import com.redhat.rhevm.api.model.Nics;
 import com.redhat.rhevm.api.model.OsType;
+import com.redhat.rhevm.api.model.Status;
 import com.redhat.rhevm.api.model.Tag;
 import com.redhat.rhevm.api.model.Tags;
 import com.redhat.rhevm.api.model.Display;
@@ -178,7 +179,8 @@ public class PowerShellVM extends VM {
             } else if (PowerShellAsyncTask.isTask(entity)) {
                 last(ret).setTaskIds(PowerShellAsyncTask.parseTask(entity, last(ret).getTaskIds()));
             } else if (PowerShellAsyncTask.isStatus(entity)) {
-                last(ret).setCreationStatus(PowerShellAsyncTask.parseStatus(entity, last(ret).getCreationStatus()));
+                String creationStatus = last(ret).getCreationStatus();
+                last(ret).setCreationStatus(PowerShellAsyncTask.parseStatus(entity, creationStatus==null ? null : Status.fromValue(creationStatus)).value());
             } else if (hasDetail(details, Detail.STATISTICS) && PowerShellVmStatisticsParser.isMemory(entity)) {
                 getStatistics(ret).addAll(PowerShellVmStatisticsParser.parseMemoryStats(entity));
             } else if (hasDetail(details, Detail.STATISTICS) && PowerShellVmStatisticsParser.isCpu(entity)) {
@@ -223,7 +225,7 @@ public class PowerShellVM extends VM {
 
         VmStatus status = parseStatus(entity.get("status"));
         if (status != null) {
-            vm.setStatus(status);
+            vm.setStatus(status.value());
         }
 
         Integer defaultHostId = entity.get("defaulthostid", Integer.class);

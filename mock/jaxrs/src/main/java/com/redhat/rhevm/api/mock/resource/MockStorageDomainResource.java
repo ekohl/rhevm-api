@@ -47,7 +47,7 @@ public class MockStorageDomainResource extends AbstractMockResource<StorageDomai
      */
     MockStorageDomainResource(String id, Executor executor,  UriInfoProvider uriProvider) {
         super(id, executor, uriProvider);
-        getModel().setStatus(StorageDomainStatus.UNATTACHED);
+        getModel().setStatus(StorageDomainStatus.UNATTACHED.value());
     }
 
     // FIXME: this needs to be atomic

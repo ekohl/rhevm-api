@@ -31,7 +31,7 @@ public class PowerShellEventTest extends PowerShellModelTest {
         assertEquals(id, e.getId());
         assertEquals(description, e.getDescription());
         assertEquals(code, e.getCode());
-        assertEquals(sev, e.getSeverity());
+        assertEquals(sev.value(), e.getSeverity());
         assertEquals(time, e.getTime().toString());
         if (userId != null) {
             assertNotNull(e.getUser());

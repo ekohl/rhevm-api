@@ -114,7 +114,7 @@ public class PowerShellHost {
         host.setAddress(entity.get("address"));
         host.setPort(entity.get("port", Integer.class));
         host.setName(entity.get("name"));
-        host.setStatus(parseStatus(entity.get("status")));
+        host.setStatus(parseStatus(entity.get("status")).value());
         host.setType(PowerShellVdsType.valueOf(entity.get("hosttype")).map());
         host.setStorageManager(entity.get("spmstatus", PowerShellVdsSpmStatus.class).map());
         host.setPowerManagement(parsePowerManagement(entity.get("powermanagement",

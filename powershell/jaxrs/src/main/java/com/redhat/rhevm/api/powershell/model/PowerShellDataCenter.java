@@ -39,7 +39,7 @@ public class PowerShellDataCenter {
             dataCenter.setName(entity.get("name"));
             dataCenter.setDescription(entity.get("description"));
             dataCenter.setStorageType(entity.get("type", PowerShellStorageType.class).map().value());
-            dataCenter.setStatus(parseStatus(entity.get("status")));
+            dataCenter.setStatus(entity.get("status"));
             dataCenter.setVersion(entity.get("compatibilityversion", Version.class));
 
             ret.add(dataCenter);

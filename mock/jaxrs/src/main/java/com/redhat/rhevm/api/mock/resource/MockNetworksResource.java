@@ -50,7 +50,7 @@ public class MockNetworksResource extends AbstractMockQueryableResource<Network>
             while (networks.size() < 4) {
                 MockNetworkResource resource = new MockNetworkResource(allocateId(Network.class), getExecutor(), this);
                 resource.getModel().setName("network" + resource.getModel().getId());
-                resource.getModel().setStatus((networks.size() % 2) == 0 ? NetworkStatus.OPERATIONAL : NetworkStatus.NON_OPERATIONAL);
+                resource.getModel().setStatus((networks.size() % 2) == 0 ? NetworkStatus.OPERATIONAL.value() : NetworkStatus.NON_OPERATIONAL.value());
                 DataCenter dataCenter = new DataCenter();
                 dataCenter.setId(resource.getModel().getId());
                 resource.getModel().setDataCenter(dataCenter);

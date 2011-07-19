@@ -43,7 +43,7 @@ public class PowerShellVmTest extends PowerShellModelTest {
         assertEquals(name, v.getName());
         assertEquals(description, v.getDescription());
         assertEquals(type.value(), v.getType());
-        assertEquals(status, v.getStatus());
+        assertEquals(status.value(), v.getStatus());
         assertEquals(memory, v.getMemory());
         assertNotNull(v.getCpu());
         assertNotNull(v.getCpu().getTopology());
@@ -164,10 +164,10 @@ public class PowerShellVmTest extends PowerShellModelTest {
                                  BigDecimal datum) {
         assertEquals(name, statistic.getName());
         assertEquals(description, statistic.getDescription());
-        assertEquals(type, statistic.getType());
-        assertEquals(unit, statistic.getUnit());
+        assertEquals(type.value(), statistic.getType());
+        assertEquals(unit.value(), statistic.getUnit());
         assertTrue(statistic.isSetValues());
-        assertEquals(valueType, statistic.getValues().getType());
+        assertEquals(valueType.value(), statistic.getValues().getType());
         assertTrue(statistic.getValues().isSetValues());
         assertEquals(1, statistic.getValues().getValues().size());
         assertEquals(datum, statistic.getValues().getValues().get(0).getDatum());

@@ -108,7 +108,7 @@ public class CompletenessAssertorTest extends Assert {
     public void testCompleteParameters() throws Exception {
         VM vm = new VM();
         vm.setName("foo");
-        vm.setStatus(VmStatus.UP);
+        vm.setStatus(VmStatus.UP.value());
         vm.setHost(new Host());
         CompletenessAssertor.validateParameters(vm, "name", "host", "status");
     }
@@ -125,7 +125,7 @@ public class CompletenessAssertorTest extends Assert {
     public void testCompleteParametersAlternativesSecond() throws Exception {
         VM vm = new VM();
         vm.setName("foo");
-        vm.setStatus(VmStatus.UP);
+        vm.setStatus(VmStatus.UP.value());
         CompletenessAssertor.validateParameters(vm, "name", "host|status");
     }
 

@@ -51,7 +51,7 @@ public class PowerShellHostTest extends PowerShellModelTest {
     private void testHost(Host h, String id, String name, HostStatus status, String clusterId, Boolean storageManager, String address, int port, HostType type) {
         assertEquals(h.getId(), id);
         assertEquals(h.getName(), name);
-        assertEquals(h.getStatus(), status);
+        assertEquals(h.getStatus(), status.value());
         assertTrue(h.isSetCluster());
         assertEquals(clusterId, h.getCluster().getId());
         assertEquals(type.value(), h.getType());
@@ -164,10 +164,10 @@ public class PowerShellHostTest extends PowerShellModelTest {
             BigDecimal datum) {
         assertEquals(name, statistic.getName());
         assertEquals(description, statistic.getDescription());
-        assertEquals(type, statistic.getType());
-        assertEquals(unit, statistic.getUnit());
+        assertEquals(type.value(), statistic.getType());
+        assertEquals(unit.value(), statistic.getUnit());
         assertTrue(statistic.isSetValues());
-        assertEquals(valueType, statistic.getValues().getType());
+        assertEquals(valueType.value(), statistic.getValues().getType());
         assertTrue(statistic.getValues().isSetValues());
         assertEquals(1, statistic.getValues().getValues().size());
         assertEquals(datum, statistic.getValues().getValues().get(0).getDatum());

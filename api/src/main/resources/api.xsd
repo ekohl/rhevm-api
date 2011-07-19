@@ -158,7 +158,7 @@
           <!-- The following, and the BaseResource href/id attributes
                are used by the server when responding after an
                asynchronous operation or status query -->
-            <xs:element name="status" type="Status" minOccurs="0"/>
+            <xs:element name="status" type="xs:string" minOccurs="0"/>
             <!-- Fault describing failure case -->
             <xs:element ref="fault" minOccurs="0" maxOccurs="1"/>
             <!-- action-specific response(s) for the operation
@@ -170,22 +170,6 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-
-  <xs:simpleType name="Status">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="PENDING"/>
-      <xs:enumeration value="IN_PROGRESS"/>
-      <xs:enumeration value="COMPLETE"/>
-      <xs:enumeration value="FAILED"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="PowerManagementStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="ON"/>
-      <xs:enumeration value="OFF"/>
-    </xs:restriction>
-  </xs:simpleType>
 
   <xs:complexType name="Actions">
     <xs:sequence>
@@ -206,7 +190,7 @@
     <xs:complexContent>
       <xs:extension base="BaseResource">
         <xs:sequence>
-          <xs:element name="status" type="Status" minOccurs="0"/>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
           <!-- Fault describing failure case -->
           <xs:element ref="fault" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
@@ -225,8 +209,8 @@
       <xs:extension base="BaseResource">
         <xs:sequence>
           <xs:element ref="values" minOccurs="1" maxOccurs="1"/>
-          <xs:element name="type" type="StatisticType" minOccurs="1" maxOccurs="1"/>
-          <xs:element name="unit" type="StatisticUnit" minOccurs="1" maxOccurs="1"/>
+          <xs:element name="type" type="xs:string" minOccurs="1" maxOccurs="1"/>
+          <xs:element name="unit" type="xs:string" minOccurs="1" maxOccurs="1"/>
           <!-- only one of the following entity references is set -->
           <xs:element ref="disk" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="host" minOccurs="0" maxOccurs="1"/>
@@ -274,131 +258,8 @@
       </xs:annotation>
       <xs:element ref="value" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="type" type="ValueType"/>
+    <xs:attribute name="type" type="xs:string"/>
   </xs:complexType>
-
-  <xs:simpleType name="ValueType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="INTEGER"/>
-      <xs:enumeration value="DECIMAL"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="StatisticType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="GAUGE"/>
-      <xs:enumeration value="COUNTER"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="StatisticUnit">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NONE"/>
-      <xs:enumeration value="PERCENT"/>
-      <xs:enumeration value="BYTES"/>
-      <xs:enumeration value="SECONDS"/>
-      <xs:enumeration value="BYTES_PER_SECOND"/>
-      <xs:enumeration value="BITS_PER_SECOND"/>
-      <xs:enumeration value="COUNT_PER_SECOND"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <!-- Enums -->
-
-  <xs:simpleType name="DiskStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="ILLEGAL"/>
-      <xs:enumeration value="INVALID"/>
-      <xs:enumeration value="LOCKED"/>
-      <xs:enumeration value="OK"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="HostStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="DOWN"/>
-      <xs:enumeration value="ERROR"/>
-      <xs:enumeration value="INITIALIZING"/>
-      <xs:enumeration value="INSTALLING"/>
-      <xs:enumeration value="INSTALL_FAILED"/>
-      <xs:enumeration value="MAINTENANCE"/>
-      <xs:enumeration value="NON_OPERATIONAL"/>
-      <xs:enumeration value="NON_RESPONSIVE"/>
-      <xs:enumeration value="PENDING_APPROVAL"/>
-      <xs:enumeration value="PREPARING_FOR_MAINTENANCE"/>
-      <xs:enumeration value="PROBLEMATIC"/>
-      <xs:enumeration value="REBOOT"/>
-      <xs:enumeration value="UNASSIGNED"/>
-      <xs:enumeration value="UP"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="NetworkStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="OPERATIONAL"/>
-      <xs:enumeration value="NON_OPERATIONAL"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="StorageDomainStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="ACTIVE"/>
-      <xs:enumeration value="INACTIVE"/>
-      <xs:enumeration value="LOCKED"/>
-      <xs:enumeration value="MIXED"/>
-      <xs:enumeration value="UNATTACHED"/>
-      <xs:enumeration value="UNKNOWN"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="TemplateStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="ILLEGAL"/>
-      <xs:enumeration value="LOCKED"/>
-      <xs:enumeration value="OK"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="VmStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="UNASSIGNED"/>
-      <xs:enumeration value="DOWN"/>
-      <xs:enumeration value="UP"/>
-      <xs:enumeration value="POWERING_UP"/>
-      <xs:enumeration value="POWERED_DOWN"/>
-      <xs:enumeration value="PAUSED"/>
-      <xs:enumeration value="MIGRATING_FROM"/>
-      <xs:enumeration value="MIGRATING_TO"/>
-      <xs:enumeration value="UNKNOWN"/>
-      <xs:enumeration value="NOT_RESPONDING"/>
-      <xs:enumeration value="WAIT_FOR_LAUNCH"/>
-      <xs:enumeration value="REBOOT_IN_PROGRESS"/>
-      <xs:enumeration value="SAVING_STATE"/>
-      <xs:enumeration value="RESTORING_STATE"/>
-      <xs:enumeration value="SUSPENDED"/>
-      <xs:enumeration value="IMAGE_ILLEGAL"/>
-      <xs:enumeration value="IMAGE_LOCKED"/>
-      <xs:enumeration value="POWERING_DOWN"/>
-    </xs:restriction>
-  </xs:simpleType>
-  
-  <xs:simpleType name="NicStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="DOWN"/>
-      <xs:enumeration value="UP"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="DataCenterStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="UNINITIALIZED"/>
-      <xs:enumeration value="UP"/>
-      <xs:enumeration value="MAINTENANCE"/>
-      <xs:enumeration value="NOT_OPERATIONAL"/>
-      <xs:enumeration value="PROBLEMATIC"/>
-      <xs:enumeration value="CONTEND"/>
-    </xs:restriction>
-  </xs:simpleType>
 
   <!-- CPUs -->
 
@@ -761,7 +622,7 @@
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="description" type="xs:string" minOccurs="0"/>
       <xs:element name="actions" type="Actions" minOccurs="0"/>
-      <xs:element name="creation_status" type="Status" minOccurs="0"/>
+      <xs:element name="creation_status" type="xs:string" minOccurs="0"/>
       <!-- also rel="creation_status" link for monitoring async creation -->
       <!-- further link relation types may be defined by specific resources -->
       <xs:element ref="link" minOccurs="0" maxOccurs="unbounded">
@@ -817,7 +678,7 @@
           <xs:element name="storage_format" type="xs:string" minOccurs="0"/>
           <xs:element name="version" type="Version" minOccurs="0"/>
           <xs:element name="supported_versions" type="SupportedVersions" minOccurs="0"/>
-          <xs:element name="status" type="DataCenterStatus" minOccurs="0"/>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
           <!-- also rel="files" and rel="storagedomains" links -->
         </xs:sequence>
       </xs:extension>
@@ -917,7 +778,7 @@
       <xs:element name="username" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="options" type="Options" minOccurs="0"/>
-      <xs:element name="status" type="PowerManagementStatus" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="status" type="xs:string" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute name="type" type="xs:string"/>
   </xs:complexType>
@@ -961,7 +822,7 @@
       <xs:extension base="BaseResource">
         <xs:sequence>
           <xs:element name="address" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="HostStatus" minOccurs="0"/>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
           <xs:element name="cluster" type="Cluster" minOccurs="0"/>
           <!-- unsigned to avoid issues with port values greater than 32767,
                e.g. the standard VDSM port 54321 -->
@@ -1216,21 +1077,12 @@
   <xs:element name="event" type="Event" />
   <xs:element name="events" type="Events" />
 
-  <xs:simpleType name="LogSeverity">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NORMAL" />
-      <xs:enumeration value="WARNING" />
-      <xs:enumeration value="ERROR" />
-      <xs:enumeration value="ALERT" />
-    </xs:restriction>
-  </xs:simpleType>
-
   <xs:complexType name="Event">
     <xs:complexContent>
       <xs:extension base="BaseResource">
         <xs:sequence>
           <xs:element name="code" type="xs:int" minOccurs="0" maxOccurs="1" />
-          <xs:element name="severity" type="LogSeverity" minOccurs="0" maxOccurs="1" />
+          <xs:element name="severity" type="xs:string" minOccurs="0" maxOccurs="1" />
           <xs:element name="time" type="xs:dateTime" minOccurs="0" maxOccurs="1" />
           <xs:element ref="user" minOccurs="0" />
           <xs:element ref="vm" minOccurs="0" />
@@ -1324,7 +1176,7 @@
           <xs:element ref="ip" minOccurs="0"/>
           <xs:element ref="vlan" minOccurs="0"/>
           <xs:element name="stp" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="status" type="NetworkStatus" minOccurs="0"/>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
           <xs:element name="display" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
@@ -1437,7 +1289,7 @@
         <xs:sequence>
           <xs:element ref="data_center" minOccurs="0"/>
           <xs:element name="type" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="StorageDomainStatus" minOccurs="0"/>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
           <xs:element name="master" type="xs:boolean" minOccurs="0"/>
           <xs:element ref="storage" minOccurs="0"/>
           <!-- host is only relevant at creation and deletion time -->
@@ -1479,7 +1331,7 @@
         <xs:sequence>
           <xs:element ref="vm" minOccurs="0" maxOccurs="1"/>
           <xs:element name="type" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="TemplateStatus" minOccurs="0"/>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
           <xs:element name="memory" type="xs:long" minOccurs="0"/>
           <xs:element name="cpu" type="CPU" minOccurs="0"/>
           <xs:element name="os" type="OperatingSystem" minOccurs="0"/>
@@ -1598,7 +1450,7 @@
       <xs:extension base="BaseResource">
         <xs:sequence>
           <xs:element name="type" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="VmStatus" minOccurs="0"/>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
           <xs:element name="memory" type="xs:long" minOccurs="0"/>
           <xs:element name="cpu" type="CPU" minOccurs="0"/>
           <xs:element name="os" type="OperatingSystem" minOccurs="0"/>
@@ -1787,7 +1639,7 @@
           <xs:element ref="storage_domains" minOccurs="0" maxOccurs="1"/>
           <xs:element name="size" type="xs:long" minOccurs="0"/>
           <xs:element name="type" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="DiskStatus" minOccurs="0"/>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
           <xs:element name="interface" type="xs:string" minOccurs="0"/>
           <xs:element name="format" type="xs:string" minOccurs="0"/>
           <xs:element name="sparse" type="xs:boolean" minOccurs="0"/>
@@ -1899,7 +1751,7 @@
           <xs:element name="statistics" type="Statistics" minOccurs="0" maxOccurs="1"/>
           <xs:element name="check_connectivity" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
           <xs:element name="speed" type="xs:long" minOccurs="0" maxOccurs="1"/>
-          <xs:element name="status" type="NicStatus" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="status" type="xs:string" minOccurs="0" maxOccurs="1"/>
           <!-- Also a rel="master" link for bonded nics -->
         </xs:sequence>
       </xs:extension>

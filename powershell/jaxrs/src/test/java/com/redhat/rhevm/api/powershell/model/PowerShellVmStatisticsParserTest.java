@@ -87,10 +87,10 @@ public class PowerShellVmStatisticsParserTest extends PowerShellModelTest {
                                  BigDecimal datum) {
         assertEquals(name, statistic.getName());
         assertEquals(description, statistic.getDescription());
-        assertEquals(type, statistic.getType());
-        assertEquals(unit, statistic.getUnit());
+        assertEquals(type.value(), statistic.getType());
+        assertEquals(unit.value(), statistic.getUnit());
         assertTrue(statistic.isSetValues());
-        assertEquals(valueType, statistic.getValues().getType());
+        assertEquals(valueType.value(), statistic.getValues().getType());
         assertTrue(statistic.getValues().isSetValues());
         assertEquals(1, statistic.getValues().getValues().size());
         assertEquals(datum, statistic.getValues().getValues().get(0).getDatum());

@@ -65,7 +65,7 @@ public class PowerShellAsyncTaskTest extends PowerShellModelTest {
         Creation creation = PowerShellAsyncTask.parse(getParser(), data);
 
         assertNotNull(creation);
-        assertEquals(Status.FAILED, creation.getStatus());
+        assertEquals(Status.FAILED.value(), creation.getStatus());
         assertTrue(creation.isSetFault());
         assertTrue(creation.getFault().isSetReason());
         assertEquals("Barfed...", creation.getFault().getDetail());

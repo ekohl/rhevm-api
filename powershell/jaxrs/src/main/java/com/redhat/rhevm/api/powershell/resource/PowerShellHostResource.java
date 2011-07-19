@@ -221,9 +221,9 @@ public class PowerShellHostResource extends AbstractPowerShellActionableResource
                     } else {
                         PowerShellPowerManagementStatus status = statuses.get(0); //there can be only one status
                         if (status.isSuccess() && status.getStatus() != null) {
-                            action.setStatus(Status.COMPLETE);
+                            action.setStatus(Status.COMPLETE.value());
                             PowerManagement pm = new PowerManagement();
-                            pm.setStatus(status.getStatus());
+                            pm.setStatus(status.getStatus().value());
                             action.setPowerManagement(pm);
                         } else {
                             handleFailure(status.getMessage());
@@ -233,7 +233,7 @@ public class PowerShellHostResource extends AbstractPowerShellActionableResource
              }
 
             private void handleFailure(String message) {
-                action.setStatus(Status.FAILED);
+                action.setStatus(Status.FAILED.value());
                 action.setFault(new Fault());
                 action.getFault().setReason(MessageFormat.format(reason, message == null ? "" : message));
             }

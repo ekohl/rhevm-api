@@ -30,4 +30,12 @@ public enum HostType {
     public String value() {
         return value;
     }
+
+    public static HostType fromValue(String v) {
+        try {
+            return valueOf(v.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
 }

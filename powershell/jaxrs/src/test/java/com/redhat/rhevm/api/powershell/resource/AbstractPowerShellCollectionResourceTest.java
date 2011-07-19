@@ -312,7 +312,7 @@ public abstract class AbstractPowerShellCollectionResourceTest<R extends BaseRes
     protected void verifyCreated(Response response, Class<R> clz, String name, String description) {
         R created = clz.cast(response.getEntity());
         assertEquals(202, response.getStatus());
-        assertEquals(Status.PENDING, created.getCreationStatus());
+        assertEquals(Status.PENDING.value(), created.getCreationStatus());
         verifyLink(created, "creation_status");
         assertEquals(Integer.toString(name.hashCode()), created.getId());
         assertEquals(name, created.getName());

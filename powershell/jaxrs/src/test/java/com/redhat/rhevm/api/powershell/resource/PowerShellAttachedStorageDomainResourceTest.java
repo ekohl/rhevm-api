@@ -123,7 +123,7 @@ public class PowerShellAttachedStorageDomainResourceTest
         assertEquals(storageDomain.getName(), STORAGE_DOMAIN_NAME);
         assertNotNull(storageDomain.getDataCenter());
         assertEquals(storageDomain.getDataCenter().getId(), DATA_CENTER_ID);
-        assertEquals(storageDomain.getStatus(), StorageDomainStatus.ACTIVE);
+        assertEquals(storageDomain.getStatus(), StorageDomainStatus.ACTIVE.value());
         assert(storageDomain.isMaster());
         verifyLinks(storageDomain);
     }

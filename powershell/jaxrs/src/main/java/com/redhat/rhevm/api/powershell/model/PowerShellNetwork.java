@@ -39,7 +39,7 @@ public class PowerShellNetwork {
             network.setId(entity.get("networkid"));
             network.setName(entity.get("name"));
             network.setDescription(entity.get("description"));
-            network.setStatus(entity.get("status", PowerShellNetworkStatus.class).map());
+            network.setStatus(entity.get("status", PowerShellNetworkStatus.class).map().value());
 
             DataCenter dataCenter = new DataCenter();
             dataCenter.setId(entity.get("datacenterid"));

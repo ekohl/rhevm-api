@@ -35,6 +35,7 @@ import com.redhat.rhevm.api.model.HighAvailability;
 import com.redhat.rhevm.api.model.OperatingSystem;
 import com.redhat.rhevm.api.model.Boot;
 import com.redhat.rhevm.api.model.OsType;
+import com.redhat.rhevm.api.model.Status;
 import com.redhat.rhevm.api.model.Template;
 import com.redhat.rhevm.api.powershell.enums.PowerShellBootSequence;
 import com.redhat.rhevm.api.powershell.enums.PowerShellOriginType;
@@ -83,7 +84,8 @@ public class PowerShellTemplate extends Template {
                 last(ret).setTaskIds(PowerShellAsyncTask.parseTask(entity, last(ret).getTaskIds()));
                 continue;
             } else if (PowerShellAsyncTask.isStatus(entity)) {
-                last(ret).setCreationStatus(PowerShellAsyncTask.parseStatus(entity, last(ret).getCreationStatus()));
+                String creationStatus = last(ret).getCreationStatus();
+                last(ret).setCreationStatus(PowerShellAsyncTask.parseStatus(entity, creationStatus==null ? null : Status.fromValue(creationStatus)).value());
                 continue;
             }
 
@@ -95,7 +97,7 @@ public class PowerShellTemplate extends Template {
             template.setType(entity.get("vmtype", PowerShellVmType.class).map().value());
             template.setMemory(entity.get("memsizemb", Integer.class) * 1024L * 1024L);
             template.setCdIsoPath(entity.get("cdisopath"));
-            template.setStatus(entity.get("status", PowerShellVmTemplateStatus.class).map());
+            template.setStatus(entity.get("status", PowerShellVmTemplateStatus.class).map().value());
 
             CpuTopology topo = new CpuTopology();
             topo.setSockets(entity.get("numofsockets", Integer.class));
