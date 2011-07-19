@@ -5,7 +5,7 @@
 ]>
 <preface id="pref-REST_API_Guide-Preface">
 	<title>Preface</title>
-	<para>The Red Hat Enterprise Virtualization platform is a richly featured virtualization management solution providing fully integrated management across virtual machines. It is based on the leading open source virtualization platform and provides superior technical capabilities. The platform offers scalability in the management of large numbers of virtual machines.</para>
+	<para>The Red Hat Enterprise Virtualization platform is a richly featured virtualization solution providing fully integrated management across virtual machines with multiple hosts. It is based on Kernel-based Virtual Machine (KVM), the leading open source virtualization platform, and provides superior technical capabilities. The platform offers scalability in the management of a large number of physical hosts and virtual machines.</para>
 	<section id="pref-REST_API_Guide-Preface-About-This_Guide">
   <title>About This Guide</title>
 	<para>

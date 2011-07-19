@@ -33,6 +33,7 @@
         </row>
       </thead>
       <tbody>
+<!--
         <row>
           <entry><literal>name</literal></entry>
           <entry>string</entry>
@@ -44,22 +45,23 @@
           <entry>string</entry>
           <entry>A free-form user-supplied human readable description of the network</entry>
           <entry></entry>
-        </row>      
+        </row>
+-->
         <row>
           <entry><literal>data_center id=</literal></entry>
           <entry>GUID</entry>
           <entry>A reference to the data center of which this cluster is a member. See <xref linkend="chap-REST_API_Guide-Data_Centers"/></entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
-        <row>
+<!--    <row>
           <entry><literal>ip address= netmask= gateway=</literal></entry>
           <entry>complex</entry>
           <entry>Static IP configuration for the network</entry>
           <entry> </entry>
-        </row>
+        </row> -->
         <row>
           <entry><literal>vlan id=</literal></entry>
-          <entry>GUID</entry>
+          <entry>integer</entry>
           <entry>A VLAN tag</entry>
           <entry> </entry>
         </row>
@@ -75,12 +77,12 @@
           <entry>The status of the network</entry>
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
-        <row>
+<!--    <row>
           <entry><literal>display</literal></entry>
           <entry>boolean: true or false</entry>
           <entry><literal>true</literal> if this network is the display network</entry>
           <entry> </entry>
-        </row>
+        </row> -->
       </tbody>
     </tgroup>
   </informaltable>
@@ -130,4 +132,12 @@ Content-type: application/xml
 &lt;/network&gt;
     </screen>
   </example>
+  <example>
+    <title>Removing a network</title>
+    <screen>
+DELETE /rhevm-api/networks/e6575a87-377c-4f67-9c1b-7b94eff76b17 HTTP/1.1
+
+HTTP/1.1 204 No Content
+    </screen>
+  </example>  
 </chapter>

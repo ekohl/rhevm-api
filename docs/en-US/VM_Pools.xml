@@ -32,6 +32,7 @@
         </row>
       </thead>
       <tbody>
+<!--
         <row>
           <entry><literal>name</literal></entry>
           <entry>string</entry>
@@ -44,6 +45,7 @@
           <entry>A free-form user-supplied human readable description of the pool</entry>
           <entry></entry>
         </row>
+-->
         <row>
           <entry><literal>size</literal></entry>
           <entry>integer</entry>
@@ -84,35 +86,48 @@
     A new pool requires the <literal>name</literal>, <literal>cluster</literal> and <literal>templates</literal> elements. Identify the <literal>cluster</literal> and <literal>cluster</literal> with the <literal>id</literal> attribute or <literal>name</literal> element. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
   </para>
   <example>
-    <title>Creating a template from a virtual machine</title>
+    <title>Creating a virtual machine pool</title>
     <screen>
-POST /rhevm-api/pools HTTP/1.1
+POST /rhevm-api/vmpools HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
 
-&lt;template&gt;
-    &lt;name&gt;template1&lt;/name&gt;
+&lt;vmpool&gt;
+    &lt;name&gt;VM Pool A&lt;/name&gt;
     &lt;cluster id="99408929-82cf-4dc7-a532-9d998063fa95"
       href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
     &lt;template id="00000000-0000-0000-0000-000000000000"
       href="/rhevm-api/templates/00000000-0000-0000-0000-000000000000"/&gt;
-&lt;/vm&gt;
+&lt;/vmpool&gt;
     </screen>
   </example>
   <para>
     The <literal>name</literal>, <literal>description</literal> and <literal>size</literal> are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
   </para>
   <example>
-    <title>Updating a virtual machine template to contain 1&nbsp;GB of memory</title>
+    <title>Updating a virtual machine pool</title>
     <screen>
-PUT /rhevm-api/pools/3t6y18o-44u3-e7h7-56j7-3k5d8g9w0t HTTP/1.1
+PUT /rhevm-api/vmpools/3t6y18o-44u3-e7h7-56j7-3k5d8g9w0t HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
 
-&lt;templates&gt;
-    &lt;description&gt;Virtual Machine Pool A&lt;/description&gt;
+&lt;vmpool&gt;
+    &lt;name&gt;VM Pool B&lt;/name&gt;
+    &lt;description&gt;Virtual Machine Pool B&lt;/description&gt;
     &lt;size&gt;3&lt;/size&gt;
-&lt;/templates&gt;
+&lt;/vmpool&gt;
     </screen>
   </example>
+  
+  <para>
+    Removal of a virtual machine pool requires a <literal>DELETE</literal> request.
+  </para>
+  <example>
+    <title>Removing a virtual machine</title>
+    <screen>
+DELETE /rhevm-api/vmpools/3t6y18o-44u3-e7h7-56j7-3k5d8g9w0t HTTP/1.1
+
+HTTP/1.1 204 No Content
+    </screen>
+  </example>    
 </chapter>

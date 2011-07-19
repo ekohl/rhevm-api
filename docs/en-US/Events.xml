@@ -50,7 +50,7 @@
     </tgroup>
   </informaltable>
   <example>
-    <title>An XML representation of the the events collection</title>
+    <title>An XML representation of the events collection</title>
     <screen>
 &lt;events&gt;
     &lt;event id="537" href="/rhevm-api/events/537"&gt;
@@ -64,6 +64,29 @@
     ...
 &lt;/events&gt;
     </screen>
+  </example>
+  <para>
+    In addition to <literal>user</literal>, an <literal>event</literal> representation also contains a set of XML element relationships to resources relevant to the event.
+  </para>
+  <example>
+    <title>An XML representation of a virtual machine creation event</title>
+    <screen>
+&lt;event id="635" href="/rhevm-api/events/635"&gt;
+    &lt;description&gt;VM bar was created by rhevadmin.&lt;/description&gt;
+    &lt;code&gt;34&lt;/code&gt;
+    &lt;severity&gt;NORMAL&lt;/severity&gt;
+    &lt;time&gt;2011-07-11T16:32:03.172+02:00&lt;/time&gt;
+    &lt;user id="4621b611-43eb-4d2b-ae5f-1180850268c4"
+      href="/rhevm-api/users/4621b611-43eb-4d2b-ae5f-1180850268c4"/&gt;
+    &lt;vm id="9b22d423-e16b-4dd8-9c06-c8e9358fbc66"
+      href="/rhevm-api/vms/9b22d423-e16b-4dd8-9c06-c8e9358fbc66"/&gt;
+    &lt;storage_domain id="a8a0e93d-c570-45ab-9cd6-3c68ab31221f"
+      href="/rhevm-api/storagedomains/a8a0e93d-c570-45ab-9cd6-3c68ab31221f"/&gt;
+&lt;/event&gt;
+    </screen>
+    <para>
+      This example representation provides XML element relationships to a virtual machine resource and a storage domain resource.
+    </para>
   </example>
   <note>
     <para>The <literal>events</literal> collection is read-only.</para>

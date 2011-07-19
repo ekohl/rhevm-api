@@ -10,7 +10,7 @@
 	<xi:include href="Authentication.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="Example.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="Entry_Point.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="Localization.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	<!-- <xi:include href="Localization.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
 	<xi:include href="Compatibility_Level_Versions.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="Capabilities.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="Common_Idioms.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -22,13 +22,14 @@
 	<xi:include href="VMs.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="Templates.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="VM_Pools.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	<xi:include href="Domains.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+	<xi:include href="Groups.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="Roles.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="Users.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	<xi:include href="Domains.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<!-- <xi:include href="Search.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />	-->
 	<xi:include href="Tags.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 	<xi:include href="Events.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
-	<xi:include href="Statistics.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <!-- <xi:include href="Statistics.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/> -->
 	<!-- <xi:include href="HTTP_Libraries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>  -->
 	<xi:include href="Event_Codes.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
   <xi:include href="Timezones.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>

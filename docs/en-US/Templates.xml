@@ -32,6 +32,7 @@
         </row>
       </thead>
       <tbody>
+<!--
         <row>
           <entry><literal>name</literal></entry>
           <entry>string</entry>
@@ -44,6 +45,7 @@
           <entry>A free-form user-supplied human readable description of the template</entry>
           <entry></entry>
         </row>
+-->
         <row>
           <entry><literal>link rel="disks"</literal></entry>
           <entry>relationship</entry>
@@ -135,6 +137,12 @@
           <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
         </row>
         <row>
+          <entry><literal>domain id=</literal></entry>
+          <entry>GUID</entry>
+          <entry>A reference to the template's domain.</entry>
+          <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+        </row>
+        <row>
           <entry><literal>creation_time</literal></entry>
           <entry><literal>xsd:dateTime</literal> format: <literal>YYYY-MM-DDThh:mm:ss</literal></entry>
           <entry>The date and time at which this template was created</entry>
@@ -163,6 +171,12 @@
           <entry>boolean: true or false</entry>
           <entry>A stateless template contains a snapshot of its disk image taken at boot and deleted at shutdown. This means state changes do not persist after a reboot</entry>
           <entry> </entry>
+        </row>
+        <row>
+          <entry><literal>usb</literal></entry>
+          <entry>complex</entry>
+          <entry>Defines the USB policy for a virtual machine template. Requires an <literal>enabled</literal> element set to a boolean value.</entry>
+          <entry></entry>
         </row>
         <row>
           <entry><literal>timezone</literal></entry>
@@ -218,6 +232,9 @@
         &lt;monitors&gt;1&lt;/monitors&gt;
     &lt;/display&gt;
     &lt;stateless&gt;false&lt;/stateless&gt;
+    &lt;usb&gt;
+        &lt;enabled&gt;true&lt;/enabled&gt;
+    &lt;/usb&gt;
     &lt;timezone&gt;Europe/London&lt;/timezone&gt;
 &lt;/template&gt;
     </screen>
@@ -235,11 +252,11 @@ Content-type: application/xml
 &lt;template&gt;
     &lt;name&gt;template1&lt;/name&gt;
     &lt;vm id="082c794b-771f-452f-83c9-b2b5a19c0399"/&gt;
-&lt;/vm&gt;
+&lt;/template&gt;
     </screen>
   </example>
   <para>
-    The <literal>name</literal>, <literal>description</literal>, <literal>type</literal>, <literal>memory</literal>, <literal>cpu topology</literal>, <literal>os</literal>, <literal>high_availaility</literal>, <literal>display</literal>, <literal>stateless</literal>, <literal>timezone</literal> properties are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
+    The <literal>name</literal>, <literal>description</literal>, <literal>type</literal>, <literal>memory</literal>, <literal>cpu topology</literal>, <literal>os</literal>, <literal>high_availaility</literal>, <literal>display</literal>, <literal>stateless</literal>, <literal>usb</literal> and <literal>timezone</literal> properties are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
   </para>
   <example>
     <title>Updating a virtual machine template to contain 1&nbsp;GB of memory</title>
@@ -248,11 +265,22 @@ PUT /rhevm-api/templates/284t367e-332y-935u-26u9-u9n3l56e8429 HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
 
-&lt;templates&gt;
+&lt;template&gt;
     &lt;memory&gt;1073741824&lt;/memory&gt;
-&lt;/templates&gt;
+&lt;/template&gt;
     </screen>
   </example>
+  <para>
+    Removal of a virtual machine template requires a <literal>DELETE</literal> request.
+  </para>
+  <example>
+    <title>Removing a virtual machine template</title>
+    <screen>
+DELETE /rhevm-api/templates/284t367e-332y-935u-26u9-u9n3l56e8429 HTTP/1.1
+
+HTTP/1.1 204 No Content
+    </screen>
+  </example>    
   <para>
     Templates contains a number of read-only device collections that follow the same XML representation structure as devices in the <literal>vms</literal> collection:
   </para>

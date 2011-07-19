@@ -32,6 +32,7 @@
         </row>
       </thead>
       <tbody>
+<!--
         <row>
           <entry><literal>name</literal></entry>
           <entry>string</entry>
@@ -44,6 +45,7 @@
           <entry>A free-form user-supplied human readable description of the data center</entry>
           <entry></entry>
         </row>
+-->
         <row>
           <entry><literal>link rel="storagedomains"</literal></entry>
           <entry>relationship</entry>
@@ -149,12 +151,23 @@ Content-type: application/xml
 &lt;/data_centers&gt;
     </screen>
   </example>
+  <para>
+    Removal of a data center requires a <literal>DELETE</literal> request.
+  </para>
+  <example>
+    <title>Removing a data center</title>
+    <screen>
+DELETE /rhevm-api/datacenters/01a45ff0-915a-11e0-8b87-5254004ac988 HTTP/1.1
+
+HTTP/1.1 204 No Content
+    </screen>
+  </example>  
   <section id="sect-REST_API_Guide-Data_Centers-Attached_Storage_Domains">
     <title>
       Storage Domains Sub-Collection
     </title>
     <para>
-      Each data center contains a sub-collection for attached storages domain. A data center is only ready for use when at least one storage domain is attached, which an API user accomplishes when <literal>POST</literal>ing a representation of the desired storage domain to the data center's storage domains sub-collection.
+      Each data center contains a sub-collection for attached storages domain. A data center is only ready for use when at least one storage domain is attached, which an API user <literal>POST</literal>s to the data center's storage domains sub-collection.
     </para>
     <para>
       An attached storage domain has a similar representation to a top-level storage domain, with the exception that it has a data center specific status and set of actions.
@@ -208,13 +221,15 @@ Content-Type: application/xml
         Activate Action
       </title>
       <para>
-        An attached storage domain is activated on a data center before use. The activate action does not take any action specific parameters.
+        An attached storage domain requires activatation on a data center before use. The activate action does not take any action specific parameters.
       </para>
       <example>
         <title>Action to active a storage domain on a datacenter</title>
         <screen>
 POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed/activate HTTP/1.1
 Content-type: application/xml
+
+&lt;action/&gt;
         </screen>
       </example>
     </section>
@@ -229,103 +244,12 @@ Content-type: application/xml
       <example>
         <title>Action to deactive a storage domain on a datacenter</title>
         <screen>
-  POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed/deactivate HTTP/1.1
-  Content-type: application/xml
-        </screen>
-      </example>
-    </section>
-    
-    <section id="sect-REST_API_Guide-Storage_Domains-Listing">
-      <title>
-        Export Storage Domains
-      </title>
-      <para>
-        Storage domains with <literal>type</literal> set to <literal>export</literal> contain <literal>vms</literal> and <literal>templates</literal> sub-collections, which list the import candidate VMs and templates stored on that particular storage domain.
-      </para>
-      <example>
-        <title>Listing the virtual machines sub-collection of an export storage domain on a datacenter</title>
-        <screen>
-GET /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed/vms
-Accept: application/xml
-
-&lt;vms&gt;
-    &lt;vm id="082c794b-771f-452f-83c9-b2b5a19c0399"
-      href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
-      fabe0451-701f-4235-8f7e-e20e458819ed/vms/082c794b-771f-452f-83c9-b2b5a19c0399"&gt;
-        &lt;name&gt;vm1&lt;/name&gt;
-        ...
-        &lt;storage_domain id="082c794b-771f-452f-83c9-b2b5a19c0399"
-          href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/
-          storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed"/&gt;
-        &lt;actions&gt;
-            &lt;link rel="import" href="/rhevm-api/datacenters/
-              d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
-              fabe0451-701f-4235-8f7e-e20e458819ed/vms/
-              082c794b-771f-452f-83c9-b2b5a19c0399/import"/&gt;
-        &lt;/actions&gt;
-    &lt;/vm&gt;
-&lt;/vms&gt;
-        </screen>
-      </example>
-      <para>
-        VMs and templates in these collections have a similar representation to their counterparts in the top-level VMs and templates collection, except they also contain a <literal>storage_domain</literal> reference and an <literal>import</literal> action.
-      </para>
-      <para>
-        The <literal>import</literal> action imports a virtual machine or a template from an <literal>export</literal> storage domain. The destination cluster and storage domain is specified with <literal>cluster</literal> and <literal>storage_domain</literal> references.
-      </para>
-      <example>
-        <title>Action to import a virtual machine from an export storage domain</title>
-        <screen>
-POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
-fabe0451-701f-4235-8f7e-e20e458819ed/vms/082c794b-771f-452f-83c9-b2b5a19c0399/import HTTP/1.1
-Accept: application/xml
+POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/fabe0451-701f-4235-8f7e-e20e458819ed/deactivate HTTP/1.1
 Content-type: application/xml
 
-&lt;action&gt;
-    &lt;storage_domain&gt;
-        &lt;name&gt;images0&lt;/name&gt;
-    &lt;/storage_domain&gt;
-    &lt;cluster&gt;
-        &lt;name&gt;Default&lt;/name&gt;
-    &lt;/cluster&gt;
-&lt;/action&gt;
+&lt;action/&gt;
         </screen>
       </example>
-      
-      <example>
-        <title>Action to import a template from an export storage domain</title>
-        <screen>
-POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
-fabe0451-701f-4235-8f7e-e20e458819ed/templates/082c794b-771f-452f-83c9-b2b5a19c0399/import HTTP/1.1
-Accept: application/xml
-Content-type: application/xml
-
-&lt;action&gt;
-    &lt;storage_domain&gt;
-        &lt;name&gt;images0&lt;/name&gt;
-    &lt;/storage_domain&gt;
-    &lt;cluster&gt;
-        &lt;name&gt;Default&lt;/name&gt;
-    &lt;/cluster&gt;
-&lt;/action&gt;
-        </screen>
-      </example>
-
-      <para>
-        Delete a virtual machine or template from an <literal>export</literal> storage domain with a <literal>DELETE</literal> request.
-      </para>
-
-      <example>
-        <title>Delete virtual machine from an export storage domain</title>
-        <screen>
-DELETE /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
-fabe0451-701f-4235-8f7e-e20e458819ed/vms/082c794b-771f-452f-83c9-b2b5a19c0399/import HTTP/1.1
-Accept: application/xml
-
-HTTP/1.1 204 No Content
-        </screen>
-      </example>
-      
     </section>
     
   </section>

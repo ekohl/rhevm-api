@@ -63,7 +63,7 @@
           <row>
             <entry><literal>domain</literal></entry>
             <entry>string</entry>
-            <entry>The containing Active Directory domain</entry>
+            <entry>The containing directory service domain</entry>
             <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
@@ -104,10 +104,10 @@ Accept: application/xml
     </screen>
   </example>
   <para>
-    The API adds an existing Active Directory user to the Red Hat Enterprise Virtualization Manager database with a <literal>POST</literal> request to the <literal>users</literal> collection. The client-provided new user representation includes an embedded <literal>roles</literal> list with at least one initial <literal>role</literal> to assign to the user. For example, the following request assigns two initial roles to the user <literal>joe@domain.example.com</literal>:
+    The API adds an existing directory service user to the Red Hat Enterprise Virtualization Manager database with a <literal>POST</literal> request to the <literal>users</literal> collection. The client-provided new user representation includes an embedded <literal>roles</literal> list with at least one initial <literal>role</literal> to assign to the user. For example, the following request assigns two initial roles to the user <literal>joe@domain.example.com</literal>:
   </para>
   <example>
-    <title>Adding a user from Active Directory and assigning two roles</title>
+    <title>Adding a user from directory service and assigning two roles</title>
     <screen>
 POST /rhevm-api/users HTTP/1.1
 Content-Type: application/xml
@@ -125,7 +125,7 @@ Accept: application/xml
     </screen>
   </example>
   <para>
-      The new user is identified either by Red Hat Enterprise Virtualization Manager user ID or via the Active Directory user principal name (UPN). The user ID format reported from the Active Directory domain might be different to the expected Red Hat Enterprise Virtualization Manager format, such as in LDIF
+      The new user is identified either by Red Hat Enterprise Virtualization Manager user ID or via the Active Directory user principal name (UPN). The user ID format reported from the directory service domain might be different to the expected Red Hat Enterprise Virtualization Manager format, such as in LDIF
     <footnote>
       <para>
         The LDAP Data Interchange Format is described in <ulink url="http://tools.ietf.org/html/rfc2849">RFC 2849</ulink>.
@@ -135,7 +135,7 @@ Accept: application/xml
   </para>
   <note>
     <para>
-       The user exists in the Active Directory domain before it is added to the Red Hat Enterprise Virtualization Manager database. An API user has the option to query this domain through the <literal>domains</literal> collection prior to creation of the user.
+       The user exists in the directory service domain before it is added to the Red Hat Enterprise Virtualization Manager database. An API user has the option to query this domain through the <literal>domains</literal> collection prior to creation of the user.
     </para>
   </note>
   <para>
@@ -167,6 +167,6 @@ Accept: application/xml
     </para>
   </note>
   <para>
-    The API removes users from the Red Hat Enterprise Virtualization Manager database with a <literal>DELETE</literal> request on the <literal>users</literal> collection. The Active Directory domain remains unchanged after such a deletion.
+    The API removes users from the Red Hat Enterprise Virtualization Manager database with a <literal>DELETE</literal> request on the <literal>users</literal> collection. The directory service domain remains unchanged after such a deletion.
   </para>
 </chapter>

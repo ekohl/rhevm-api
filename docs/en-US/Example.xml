@@ -9,12 +9,9 @@
     This chapter provides an example to demonstrate the REST API's ability to create virtual machine within a basic Red Hat Enterprise Virtualization environment. This example is intended for users with some proficiency with REST architectural style and some experience with Red Hat Enterprise Virtualization infrastructure.
   </para>
   <para>
-    This example requires the following:
+    In addition to the standard prerequisites (see <xref linkend="sect-REST_API_Guide-Introduction-Prerequisites"/>), this example requires the following:
   </para>
   <itemizedlist>
-    <listitem>
-      <para>A networked installation of Red Hat Enterprise Virtualization Manager;</para>
-    </listitem>
     <listitem>
       <para>A networked and configured host containing Red Hat Enterprise Virtualization Hypervisor;</para>
     </listitem>
@@ -28,12 +25,16 @@
   <note>
     <title>Globally Unique Identifier Codes</title>
     <para>
-      Each resource in the virtualization infrastructure contains an <literal>id</literal>, which acts as a globally unique identifier (GUID). The GUID is the primary method of resource identifcation. The API also allows the use of the <literal>name</literal> element as a secondary identifcation method for some resources within the scope of their collections.
-    </para>    
-    <para>
-      Red Hat Enterprise Virtualization Manager generates the GUID for the <literal>id</literal> attribute for each resource. Identifier codes in this example might appear different to the identifier codes in your Red Hat Enterprise Virtualization environment.
+      Red Hat Enterprise Virtualization Manager generates a globally unique identifier (GUID) for the <literal>id</literal> attribute for each resource. Identifier codes in this example might appear different to the identifier codes in your Red Hat Enterprise Virtualization environment.
     </para>
   </note>
+  
+  <note>
+    <title>Headers</title>
+    <para>
+      For simplicity, the HTTP request headers in this example omit the <literal>Host:</literal> and <literal>Authorization:</literal> fields. However, these fields are mandatory and require data specific to your installation of Red Hat Enterprise Virtualization Manager.
+    </para>
+  </note>  
 
   <section id="sect-REST_API_Guide-Example-Access_API_Entry_Point">
     <title>Access API Entry Point</title>
@@ -108,6 +109,9 @@ Content-Type: application/xml
     <para>
       The entry point provides a user with links to the collections in a virtualization environment. The <literal>rel=</literal> attribute of each collection link provides a reference point for each link. The next step in this example examines the <literal>datacenter</literal> collection, which is available through the <literal>rel="datacenter"</literal> link.
     </para>
+    <para>
+      The entry point also contains other data such as <literal>special_objects</literal> and <literal>summary</literal>. This data is covered in chapters outside this example.
+    </para>
   </section>
   
   
@@ -163,7 +167,7 @@ Content-Type: application/xml
   <section id="sect-REST_API_Guide-Example-List_Clusters">
     <title>List Host Cluster Collection</title>
     <para>
-      Red Hat Enteprise Virtualization Manager creates a <literal>Default</literal> host cluster on installation. This example uses the <literal>Default</literal> cluster to group virtual machines in your Red Hat Enteprise Virtualization environment.
+      Red Hat Enteprise Virtualization Manager creates a <literal>Default</literal> host cluster on installation. This example uses the <literal>Default</literal> cluster to group resources in your Red Hat Enteprise Virtualization environment.
     </para>
     <para>
       The following request retrieves a representation of the cluster collection:
@@ -212,7 +216,7 @@ Content-Type: application/xml
       Note the <literal>id</literal> code of your <literal>Default</literal> host cluster. This code indentifies this host cluster in relation to other resources of your virtual environment.
     </para>
     <para>
-      The <literal>Default</literal> cluster is associated with the <literal>Default</literal> data center through a relationship using the data center's <literal>id</literal> code.
+      The <literal>Default</literal> cluster is associated with the <literal>Default</literal> data center through athrough a relationship using the <literal>id</literal> and <literal>href</literal> attributes of the <literal>data_center</literal> element.
     </para>
     <para>
       The <literal>networks</literal> sub-collection contains a list of associated network resources for this cluster. The next section examines the <literal>networks</literal> collection in more detail.
@@ -350,7 +354,7 @@ Accept: application/xml
       </screen>
     </example>
     <para>
-      Note the <literal>id</literal> code of your <literal>Default</literal> host. This code indentifies this host in relation to other resources of your virtual environment.
+      Note the <literal>id</literal> code of your <literal>Default</literal> host. This code identifies this host in relation to other resources of your virtual environment.
     </para>
     <para>
       This host is a member of the <literal>Default</literal> cluster and accessing the <literal>nics</literal> sub-collection shows this host has a connection to the <literal>rhevm</literal> network.
@@ -370,7 +374,7 @@ POST /rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988/approve HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
 
-&lt;action/&lg;
+&lt;action/&gt;
       </screen>
     </example>
     <para>
@@ -387,7 +391,7 @@ Content-type: application/xml
   <section id="sect-REST_API_Guide-Example-Create_NFS_Data_Storage_Domain">
     <title>Create NFS Data Storage</title>
     <para>
-      An NFS data storage domain is a mounted NFS share attached to a data center and provides storage for virtualized guest images.
+      An NFS data storage domain is an exported NFS share attached to a data center and provides storage for virtualized guest images. Creation of a new storage domain requires a <literal>POST</literal> request, with the storage domain representation included, sent to the URL of the storage domain collection.
     </para>
     <example>
       <title>Create an NFS data storage domain</title>
@@ -416,30 +420,29 @@ Content-type: application/xml
 HTTP/1.1 200 OK
 Accept: application/xml
 
-&lt;storage_domains&gt;
-    &lt;storage_domain id="9ca7cb40-9a2a-4513-acef-dc254af57aac"
-      href="/rhevm-api/storagedomains/9ca7cb40-9a2a-4513-acef-dc254af57aac"&gt;
-        &lt;name&gt;data1&lt;/name&gt;
-        &lt;link rel="permissions"
-          href="/rhevm-api/storagedomains/9ca7cb40-9a2a-4513-acef-dc254af57aac/
-          permissions"/&gt;
-        &lt;link rel="files"
-          href="/rhevm-api/storagedomains/9ca7cb40-9a2a-4513-acef-dc254af57aac/files"/&gt;
-        &lt;type&gt;data&lt;/type&gt;
-        &lt;master&gt;false&lt;/master&gt;
-        &lt;storage&gt;
-            &lt;type&gt;nfs&lt;/type&gt;
-            &lt;address&gt;192.168.0.10&lt;/address&gt;
-            &lt;path&gt;/data1&lt;/path&gt;
-        &lt;/storage&gt;
-        &lt;available&gt;175019917312&lt;/available&gt;
-        &lt;used&gt;27917287424&lt;/used&gt;
-        &lt;committed&gt;10737418240&lt;/committed&gt;
-        &lt;storage_format&gt;v1&lt;/storage_format&gt;
-        &lt;host id="0656f432-923a-11e0-ad20-5254004ac988"
-          href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988"&gt;
-    &lt;/storage_domain&gt;
-&lt;/storage_domains&gt;
+&lt;storage_domain id="9ca7cb40-9a2a-4513-acef-dc254af57aac"
+  href="/rhevm-api/storagedomains/9ca7cb40-9a2a-4513-acef-dc254af57aac"&gt;
+    &lt;name&gt;data1&lt;/name&gt;
+    &lt;link rel="permissions"
+      href="/rhevm-api/storagedomains/9ca7cb40-9a2a-4513-acef-dc254af57aac/
+      permissions"/&gt;
+    &lt;link rel="files"
+      href="/rhevm-api/storagedomains/9ca7cb40-9a2a-4513-acef-dc254af57aac/files"/&gt;
+    &lt;type&gt;data&lt;/type&gt;
+    &lt;master&gt;false&lt;/master&gt;
+    &lt;storage&gt;
+        &lt;type&gt;nfs&lt;/type&gt;
+        &lt;address&gt;192.168.0.10&lt;/address&gt;
+        &lt;path&gt;/data1&lt;/path&gt;
+    &lt;/storage&gt;
+    &lt;available&gt;175019917312&lt;/available&gt;
+    &lt;used&gt;27917287424&lt;/used&gt;
+    &lt;committed&gt;10737418240&lt;/committed&gt;
+    &lt;storage_format&gt;v1&lt;/storage_format&gt;
+    &lt;host id="0656f432-923a-11e0-ad20-5254004ac988"
+      href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988"&gt;
+&lt;/storage_domain&gt;
+
       </screen>
     </example>
   </section>
@@ -447,7 +450,7 @@ Accept: application/xml
   <section id="sect-REST_API_Guide-Example-Create_NFS_ISO_Storage_Domain">
     <title>Create NFS ISO Storage</title>
     <para>
-      An NFS ISO storage domain is a mounted NFS share attached to a data center and provides storage for CD-ROM and DVD image files.
+      An NFS ISO storage domain is a mounted NFS share attached to a data center and provides storage for DVD/CD-ROM ISO and virtual floppy disk (VFD) image files. Creation of a new storage domain requires a <literal>POST</literal> request, with the storage domain representation included, sent to the URL of the storage domain collection.
     </para>
     <example>
       <title>Create an NFS ISO storage domain</title>
@@ -470,37 +473,35 @@ Content-type: application/xml
 &lt;/storage_domain&gt;
       </screen>
       <para>
-        The API creates a NFS data storage domain called <literal>iso1</literal> with an export path of <uri>192.168.0.10:/iso1</uri> and sets access to the storage domain through the <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
+        The API creates a NFS data storage domain called <literal>iso1</literal> with an export path of <uri>192.168.0.10:/iso1</uri> and gets access to the storage domain through the <literal>hypervisor</literal> host. The API also returns the following representation of the newly created storage domain resource:
       </para>
       <screen>
 HTTP/1.1 200 OK
 Accept: application/xml
 
-&lt;storage_domains&gt;
-    &lt;storage_domain id="00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"
-      href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"&gt;
-        &lt;name&gt;iso1&lt;/name&gt;
-        &lt;link rel="permissions"
-          href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/
-          permissions"/&gt;
-        &lt;link rel="files"
-          href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/files"/&gt;
-        &lt;type&gt;iso&lt;/type&gt;
-        &lt;host id="" href=""&gt;
-        &lt;master&gt;false&lt;/master&gt;
-        &lt;storage&gt;
-            &lt;type&gt;nfs&lt;/type&gt;
-            &lt;address&gt;192.168.0.10&lt;/address&gt;
-            &lt;path&gt;/iso1&lt;/path&gt;
-        &lt;/storage&gt;
-        &lt;available&gt;82678120448&lt;/available&gt;
-        &lt;used&gt;18253611008&lt;/used&gt;
-        &lt;committed&gt;0&lt;/committed&gt;
-        &lt;storage_format&gt;v1&lt;/storage_format&gt;
-        &lt;host id="0656f432-923a-11e0-ad20-5254004ac988"
-          href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988"&gt;        
-    &lt;/storage_domain&gt;
-&lt;/storage_domains&gt;
+&lt;storage_domain id="00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"
+  href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da"&gt;
+    &lt;name&gt;iso1&lt;/name&gt;
+    &lt;link rel="permissions"
+      href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/
+      permissions"/&gt;
+    &lt;link rel="files"
+      href="/rhevm-api/storagedomains/00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/files"/&gt;
+    &lt;type&gt;iso&lt;/type&gt;
+    &lt;host id="" href=""&gt;
+    &lt;master&gt;false&lt;/master&gt;
+    &lt;storage&gt;
+        &lt;type&gt;nfs&lt;/type&gt;
+        &lt;address&gt;192.168.0.10&lt;/address&gt;
+        &lt;path&gt;/iso1&lt;/path&gt;
+    &lt;/storage&gt;
+    &lt;available&gt;82678120448&lt;/available&gt;
+    &lt;used&gt;18253611008&lt;/used&gt;
+    &lt;committed&gt;0&lt;/committed&gt;
+    &lt;storage_format&gt;v1&lt;/storage_format&gt;
+    &lt;host id="0656f432-923a-11e0-ad20-5254004ac988"
+      href="/rhevm-api/hosts/0656f432-923a-11e0-ad20-5254004ac988"&gt;        
+&lt;/storage_domain&gt;
       </screen>
     </example>
   </section>
@@ -535,6 +536,9 @@ Content-type: application/xml
 &lt;/storage_domain&gt;
       </screen>
     </example>
+    <para>
+      These <literal>POST</literal> requests places our two new <literal>storage_domain</literal> resources in the <literal>storagedomains</literal> sub-collection of the <literal>Default</literal> data center. This means the <literal>storagedomain</literal> sub-collection contains attached storage domains of the data center. 
+    </para>
   </section>
   
   <section id="sect-REST_API_Guide-Example-Activate_Data_Storage">
@@ -549,6 +553,8 @@ POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
 9ca7cb40-9a2a-4513-acef-dc254af57aac/activate HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
+
+&lt;/action&gt;
       </screen>
     </example>
     <example>
@@ -558,8 +564,13 @@ POST /rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4/storagedomains/
 00f0d9ce-da15-4b9e-9e3e-3c898fa8b6da/activate HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
+
+&lt;/action&gt;
       </screen>
     </example>
+    <para>
+      This activates both storage domains for use with the data center.
+    </para>
   </section>
 
   <section id="sect-REST_API_Guide-Example-Create_VM">
@@ -573,7 +584,7 @@ Content-type: application/xml
 POST /rhevm-api/vms HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
- 	  	
+
 &lt;vm&gt;
   &lt;name&gt;vm1&lt;/name&gt;
   &lt;cluster&gt;
@@ -669,12 +680,12 @@ Accept: application/xml
   </section>
 
   <section id="sect-REST_API_Guide-Example-Attach_NIC">
-    <title>Attach NIC to Virtual Machine</title>
+    <title>Create Virtual Machine NIC</title>
     <para>
       The following example creates a virtual network interface to connect the example virtual machine to the <literal>rhevm</literal> network.
     </para>
     <example>
-      <title>Attach a NIC to the virtual machine</title>
+      <title>Create a virtual machine NIC</title>
  	  	<screen>
 POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/nics HTTP/1.1
 Accept: application/xml
@@ -691,12 +702,12 @@ Content-type: application/xml
   </section>
   
   <section id="sect-REST_API_Guide-Example-Attach_Disk">
-    <title>Attach Storage Disk to Virtual Machine</title>
+    <title>Create Virtual Machine Storage Disk</title>
     <para>
       The following example creates an 8&nbsp;GB Copy-On-Write storage disk for the example virtual machine.
     </para>
     <example>
-      <title>Create a Storage Disk on the virtual machine</title>
+      <title>Create a virtual machine storage disk</title>
  	  	<screen>
 POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/disks HTTP/1.1
 Accept: application/xml
@@ -773,11 +784,13 @@ POST /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48/start HTTP/1.1
 Accept: application/xml
 Content-type: application/xml
 
-&lt;vm&gt;
-  &lt;os&gt;
-    &lt;boot dev="cdrom"/&gt;
-  &lt;/os&gt;
-&lt;/vm&gt;
+&lt;action&gt;
+  &lt;vm&gt;
+    &lt;os&gt;
+      &lt;boot dev="cdrom"/&gt;
+    &lt;/os&gt;
+  &lt;/vm&gt;
+&lt;/action&gt;  
  	  	</screen>
  	  </example>
     <para>
@@ -854,28 +867,8 @@ Accept: application/xml
  	  </example>
   </section>
 
-  <section id="sect-REST_API_Guide-Example-Errors">
-    <title>Error Handling</title>
-    <para>The following example attempts to update a read-only property, which creates an error.</para>
-    <example>
-      <title>Update the virtual machine's id code and create an error </title>
- 	  	<screen>
-PUT /rhevm-api/vms/6efc0cfa-8495-4a96-93e5-ee490328cf48 HTTP/1.1
-Accept: application/xml
-Content-type: application/xml
-
-&lt;vm id="01010101-0101-0101-0101-010101010101"/&gt;
-      </screen>
-      <para>
-        The API returns the following error:
-      </para>
-      <screen>
-&lt;fault&gt;
-    &lt;reason&gt;Broken immutability constraint&lt;/reason&gt;
-    &lt;detail&gt;Attempt to set immutable field: id&lt;/detail&gt;
-&lt;/fault&gt;
- 	  	</screen>
- 	  </example>
+  <section id="sect-REST_API_Guide-Example-Completion">
+    <title>Example Completion</title>
+    <para>This example demonstrates how the API creates a virtual machine within a basic virtualization environment. The remainder of this guide provides specific details on the complete REST API featureset, including virtualization tasks of a higher complexity.</para>
   </section>
-
 </chapter>

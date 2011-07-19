@@ -5,7 +5,7 @@
 ]>
 <chapter id="chap-REST_API_Guide-Domains">
   <title>Domains</title>
-	<para>The API provides the ability to access user and group information from the organization's Active Directory Service using the <literal>domains</literal> collection. Domain information is referenced with the <literal>rel="domains"</literal> link.
+	<para>The API provides the ability to access user and group information from the organization's directory service using the <literal>domains</literal> collection. Domain information is referenced with the <literal>rel="domains"</literal> link.
   </para>
   <para>
     Each <literal>domain</literal> contains the following elements:
@@ -68,7 +68,7 @@
   </note>
 	<section id="chap-REST_API_Guide-Domains-Users">
 	  <title>Domain Users Sub-Collection</title>
-	  <para>The <literal>users</literal> sub-collection contains all users in Active Directory. This information is used to add new users to the Red Hat Enterprise Virtualization environment as per <xref linkend="chap-REST_API_Guide-Users"/>.</para>
+	  <para>The <literal>users</literal> sub-collection contains all users in the directory service. This information is used to add new users to the Red Hat Enterprise Virtualization environment as per <xref linkend="chap-REST_API_Guide-Users"/>.</para>
 	  <para>A domain <literal>user</literal> resource contains these main properties:</para>
     <informaltable frame="none">
       <tgroup cols="3">
@@ -91,17 +91,17 @@
           <row>
             <entry><literal>user_name</literal></entry>
             <entry>string</entry>
-            <entry>The username from Active Directory</entry>
+            <entry>The username from directory service</entry>
           </row>
           <row>
             <entry><literal>domain id</literal></entry>
             <entry>GUID</entry>
-            <entry>The containing Active Directory domain</entry>
+            <entry>The containing directory service domain</entry>
           </row>
           <row>
             <entry><literal>groups</literal></entry>
             <entry>complex</entry>
-            <entry>A list of Active Directory groups for this user</entry>
+            <entry>A list of directory service groups for this user</entry>
           </row>
         </tbody>
       </tgroup>
@@ -131,7 +131,7 @@
   </section>
 	<section id="chap-REST_API_Guide-Domains-Groups">
 	  <title>Domain Groups Sub-Collection</title>
-	  <para>The <literal>groups</literal> sub-collection contains all groups in Active Directory. A domain <literal>group</literal> resource contains these main properties:</para>
+	  <para>The <literal>groups</literal> sub-collection contains all groups in the directory service. A domain <literal>group</literal> resource contains these main properties:</para>
     <informaltable frame="none">
       <tgroup cols="3">
         <colspec colwidth="2*"/>
@@ -153,7 +153,7 @@
           <row>
             <entry><literal>domain id</literal></entry>
             <entry>GUID</entry>
-            <entry>The containing Active Directory domain</entry>
+            <entry>The containing directory service domain</entry>
           </row>
         </tbody>
       </tgroup>

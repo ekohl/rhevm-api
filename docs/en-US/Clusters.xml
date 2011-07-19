@@ -32,6 +32,7 @@
         </row>
       </thead>
       <tbody>
+      <!--
         <row>
           <entry><literal>name</literal></entry>
           <entry>string</entry>
@@ -44,6 +45,7 @@
           <entry>A free-form user-supplied human readable description of the cluster</entry>
           <entry></entry>
         </row>
+        -->
         <row>
           <entry><literal>link rel="networks"</literal></entry>
           <entry>relationship</entry>
@@ -236,6 +238,17 @@ Content-type: application/xml
 &lt;/cluster&gt;
     </screen>
   </example>
+  <para>
+    Removal of a cluster requires a <literal>DELETE</literal> request.
+  </para>
+  <example>
+    <title>Removing a cluster</title>
+    <screen>
+DELETE /rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95 HTTP/1.1
+
+HTTP/1.1 204 No Content
+    </screen>
+  </example>  
   <section id="sect-REST_API_Guide-Clusters-Networks">
     <title>
       Networks Sub-Collection
@@ -244,7 +257,7 @@ Content-type: application/xml
       Networks associated with a cluster are represented with the <literal>networks</literal> sub-collection. Every host within the cluster requires a network interface attached to that network for an operational network.
     </para>
     <para>
-      The representation of a cluster's <literal>network</literal> sub-collection is the same as a standard <literal>network</literal> resource with an additional <literal>cluster id=</literal> to signify a relationship to the cluster.
+      The representation of a cluster's <literal>network</literal> sub-collection is the same as a standard <literal>network</literal> resource with an additional <literal>cluster id=</literal> to signify a relationship to the cluster and a <literal>display</literal> element to represent the display network status in the cluster.
     </para>
     <para>
       An API user manipulates the networks sub-collection as described in <xref linkend="chap-REST_API_Guide-Common_Features"/>. <literal>POST</literal>ing a network <literal>id</literal> or <literal>name</literal> reference to the <literal>networks</literal> sub-collection associates the network with the cluster. 
@@ -274,16 +287,30 @@ Content-Type: application/xml
       href="/rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95"/&gt;
     &lt;data_center id="d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"
       href="/rhevm-api/datacenters/d70d5e2d-b8ad-494a-a4d2-c7a5631073c4"/&gt;
+    &lt;display&gt;true&lt;/display&gt;
 &lt;/network&gt;
       </screen>
     </example>
-    
+    <para>
+      The display network status is set using a <literal>PUT</literal> request to specify the boolean value (true or false) of the <literal>display</literal> element.
+    </para>
+    <example>
+      <title>Setting the display network status</title>
+      <screen>
+PUT /rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95/networks/da05ac09-00be-45a1-b0b5-4a6a2438665f HTTP/1.1
+Accept: application/xml
+Content-Type: application/xml
+
+&lt;network&gt;
+    &lt;display&gt;false&lt;/display&gt;
+&lt;/network&gt;
+      </screen>
+    </example>
     <para>
       An association is removed with a <literal>DELETE</literal> request to the appropriate element in the collection.
     </para>
-    
     <example>
-      <title>Removing an network association to a cluster</title>    
+      <title>Removing a network association from a cluster</title>    
       <screen>
 DELETE /rhevm-api/clusters/99408929-82cf-4dc7-a532-9d998063fa95/networks/da05ac09-00be-45a1-b0b5-4a6a2438665f HTTP/1.1
 

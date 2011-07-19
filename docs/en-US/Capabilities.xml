@@ -6,13 +6,13 @@
 <chapter id="chap-REST_API_Guide-Capabilities">
   <title>Capabilities</title>
   <para>
-    The <literal>capabilities</literal> collection provides information about the supported capabilities of a Red Hat Enterprise Virtualization Manager. These capabilities include active features and available enumerated values for specific properties. An API user accesses this information through the <literal>rel="capabilities"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>).
+    The <literal>capabilities</literal> collection provides information about the supported capabilities of a Red Hat Enterprise Virtualization Manager version. These capabilities include active features and available enumerated values for specific properties. An API user accesses this information through the <literal>rel="capabilities"</literal> link obtained from the entry point URI (see <xref linkend="chap-REST_API_Guide-Entry_Point"/>).
   </para>
 
   <section id="chap-REST_API_Guide-Capabilities-Version">
     <title>Version-Dependent Capabilities</title>
     <para>
-      The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements wthat describe capabilities dependent on a compatiblity level.
+      The <literal>capabilities</literal> element contains any number of <literal>version</literal> elements that describe capabilities dependent on a compatiblity level.
     </para>
     <para>
       The <literal>version</literal> element includes attributes for <literal>major</literal> and <literal>minor</literal> version numbers. This indicates the current version level, which this document discusses in <xref linkend="chap-REST_API_Guide-Cluster_Level_Versions"/>.
@@ -201,7 +201,7 @@
             </row>
             <row>
               <entry><literal>level</literal></entry>
-              <entry>An indication as to the relative priority/preference for the CPUs in the list. Higher is better</entry>
+              <entry>An indication as to the relative priority/preference for the CPUs in the list</entry>
             </row>
           </tbody>
         </tgroup>
@@ -285,7 +285,7 @@
     
     <section id="sect-REST_API_Guide-Capabilities-Version-Fence_Types">
       <title>Fence Types</title>
-      <para>The <literal>fence_types</literal> element defines <literal>fence_type</literal> options to fence a troublesome host and reduce power usage.</para>
+      <para>The <literal>fence_types</literal> element defines <literal>fence_type</literal> options to fence a host and reduce power usage.</para>
       <screen>
 &lt;capabilities&gt;
     &lt;version major="3" minor="0"&gt;
@@ -314,7 +314,7 @@
             &lt;storage_type&gt;iscsi&lt;/storage_type&gt;
             &lt;storage_type&gt;fcp&lt;/storage_type&gt;
             &lt;storage_type&gt;nfs&lt;/storage_type&gt;
-            &lt;storage_type&gt;local&lt;/storage_type&gt;
+            &lt;storage_type&gt;localfs&lt;/storage_type&gt;
         &lt;/storage_types&gt;
         ...
     &lt;/version&gt;
@@ -428,6 +428,40 @@
       </screen>
     </section>
 
+    <section id="sect-REST_API_Guide-Capabilities-Version-OS_Types">
+      <title>OS Types</title>
+      <para>Each virtual machine contains an <literal>os_type</literal> value to define the virtual machine operating system. The default is <literal>unassigned</literal>.</para>
+      <screen>
+&lt;capabilities&gt;
+    &lt;version major="3" minor="0"&gt;
+	      ...
+	      &lt;os_types&gt;
+            &lt;os_type&gt;unassigned&lt;/os_type&gt;
+            &lt;os_type&gt;windows_xp&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2003&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2008&lt;/os_type&gt;
+            &lt;os_type&gt;other_linux&lt;/os_type&gt;
+            &lt;os_type&gt;other&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_5&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_4&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_3&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2003x64&lt;/os_type&gt;
+            &lt;os_type&gt;windows_7&lt;/os_type&gt;
+            &lt;os_type&gt;windows_7x64&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_5x64&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_4x64&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_3x64&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2008x64&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2008r2x64&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_6&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_6x64&lt;/os_type&gt;
+        &lt;os_types&gt;
+        ...
+    &lt;/version&gt;
+&lt;/capabilities&gt;
+      </screen>
+    </section>
+
     <section id="sect-REST_API_Guide-Capabilities-Version-Disk_Formats">
       <title>Disk Formats</title>
       <para>An API user selects the format for virtual disks. The <literal>disk_formats</literal> element defines the format types. The <literal>disk_format</literal> types include pre-allocated (<literal>raw</literal>) or thin-provisioned (Copy-On-Write or <literal>cow</literal>).</para>
@@ -454,7 +488,6 @@
 	      ...
         &lt;disk_interfaces&gt;
             &lt;disk_interface&gt;ide&lt;/disk_interface&gt;
-            &lt;disk_interface&gt;scsi&lt;/disk_interface&gt;
             &lt;disk_interface&gt;virtio&lt;/disk_interface&gt;
         &lt;/disk_interfaces&gt;
         ...
@@ -595,7 +628,7 @@
 &lt;capabilities&gt;
     ...  
     &lt;permits&gt;
-	      &lt;permit id="1"&gt;
+        &lt;permit id="1"&gt;
             &lt;name&gt;CREATE_VM&lt;/name&gt;
             &lt;administrative&gt;false&lt;/administrative&gt;
         &lt;/permit&gt;
@@ -653,7 +686,7 @@ Content-Type: application/xml
     &lt;version minor="0" major="3"&gt;
         &lt;current&gt;true&lt;/current&gt;
         &lt;features&gt;
-            &lt;transparent_hugepages&gt;true&lt;/transparent_hugepages&gt;
+            &lt;transparent_hugepages/&gt;
         &lt;/features&gt;
         &lt;cpus&gt;
             &lt;cpu id="Intel Conroe Family"&gt;
@@ -662,7 +695,21 @@ Content-Type: application/xml
             &lt;cpu id="Intel Penryn Family"&gt;
                 &lt;level&gt;4&lt;/level&gt;
             &lt;/cpu&gt;
-            ...
+            &lt;cpu id="Intel Nehalem Family"&gt;
+                &lt;level&gt;5&lt;/level&gt;
+            &lt;/cpu&gt;
+            &lt;cpu id="Intel Westmere Family"&gt;
+                &lt;level&gt;6&lt;/level&gt;
+            &lt;/cpu&gt;
+            &lt;cpu id="AMD Opteron G1"&gt;
+                &lt;level&gt;2&lt;/level&gt;
+            &lt;/cpu&gt;
+            &lt;cpu id="AMD Opteron G2"&gt;
+                &lt;level&gt;3&lt;/level&gt;
+            &lt;/cpu&gt;
+            &lt;cpu id="AMD Opteron G3"&gt;
+                &lt;level&gt;4&lt;/level&gt;
+            &lt;/cpu&gt;
         &lt;/cpus&gt;
         &lt;power_managers&gt;
             &lt;power_management type="alom"&gt;
@@ -672,6 +719,13 @@ Content-Type: application/xml
                 &lt;/options&gt;
             &lt;/power_management&gt;
             &lt;power_management type="apc"&gt;
+                &lt;options&gt;
+                    &lt;option type="bool" name="secure"/&gt;
+                    &lt;option type="int" name="port"/&gt;
+                    &lt;option type="int" name="slot"/&gt;
+                &lt;/options&gt;
+            &lt;/power_management&gt;
+            &lt;power_management type="bladecenter"&gt;
                 &lt;options&gt;
                     &lt;option type="bool" name="secure"/&gt;
                     &lt;option type="int" name="port"/&gt;
@@ -691,7 +745,7 @@ Content-Type: application/xml
             &lt;storage_type&gt;iscsi&lt;/storage_type&gt;
             &lt;storage_type&gt;fcp&lt;/storage_type&gt;
             &lt;storage_type&gt;nfs&lt;/storage_type&gt;
-            &lt;storage_type&gt;local&lt;/storage_type&gt;
+            &lt;storage_type&gt;localfs&lt;/storage_type&gt;
         &lt;/storage_types&gt;
         &lt;storage_domain_types&gt;
             &lt;storage_domain_type&gt;data&lt;/storage_domain_type&gt;
@@ -719,18 +773,35 @@ Content-Type: application/xml
         &lt;/nic_types&gt;
         &lt;disk_types&gt;
             &lt;disk_type&gt;data&lt;/disk_type&gt;
-            &lt;disk_type&gt;shared&lt;/disk_type&gt;
-            &lt;disk_type&gt;swap&lt;/disk_type&gt;
             &lt;disk_type&gt;system&lt;/disk_type&gt;
-            &lt;disk_type&gt;temp&lt;/disk_type&gt;
         &lt;/disk_types&gt;
+        &lt;os_types&gt;
+            &lt;os_type&gt;unassigned&lt;/os_type&gt;
+            &lt;os_type&gt;windows_xp&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2003&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2008&lt;/os_type&gt;
+            &lt;os_type&gt;other_linux&lt;/os_type&gt;
+            &lt;os_type&gt;other&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_5&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_4&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_3&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2003x64&lt;/os_type&gt;
+            &lt;os_type&gt;windows_7&lt;/os_type&gt;
+            &lt;os_type&gt;windows_7x64&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_5x64&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_4x64&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_3x64&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2008x64&lt;/os_type&gt;
+            &lt;os_type&gt;windows_2008r2x64&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_6&lt;/os_type&gt;
+            &lt;os_type&gt;rhel_6x64&lt;/os_type&gt;
+        &lt;/os_types&gt;
         &lt;disk_formats&gt;
             &lt;disk_format&gt;cow&lt;/disk_format&gt;
             &lt;disk_format&gt;raw&lt;/disk_format&gt;
         &lt;/disk_formats&gt;
         &lt;disk_interfaces&gt;
             &lt;disk_interface&gt;ide&lt;/disk_interface&gt;
-            &lt;disk_interface&gt;scsi&lt;/disk_interface&gt;
             &lt;disk_interface&gt;virtio&lt;/disk_interface&gt;
         &lt;/disk_interfaces&gt;
         &lt;vm_affinities&gt;
@@ -738,10 +809,13 @@ Content-Type: application/xml
             &lt;affinity&gt;user_migratable&lt;/affinity&gt;
             &lt;affinity&gt;pinned&lt;/affinity&gt;
         &lt;/vm_affinities&gt;
-       &lt;custom_properties&gt;
-            &lt;custom_property name="sap_agent" regexp="^(true|false)$"/&gt;
-            &lt;custom_property name="sndbuf" regexp="^[0-9]+$"/&gt;
-            ...
+        &lt;custom_properties&gt;
+            &lt;custom_property regexp="^(true|false)$" name="sap_agent"/&gt;
+            &lt;custom_property regexp="^[0-9]+$" name="sndbuf"/&gt;
+            &lt;custom_property
+              regexp="^(([a-zA-Z0-9_]*):(true|false))(,(([a-zA-Z0-9_]*):(true|false)))*$" name="vhost"/&gt;
+            &lt;custom_property
+              regexp="^(none|writeback|writethrough)$" name="viodiskcache"/&gt;
         &lt;/custom_properties&gt;
         &lt;boot_protocols&gt;
             &lt;boot_protocol&gt;dhcp&lt;/boot_protocol&gt;
@@ -757,6 +831,7 @@ Content-Type: application/xml
             &lt;format&gt;v2&lt;/format&gt;
         &lt;/storage_formats&gt;
     &lt;/version&gt;
+    ...
     &lt;permits&gt;
         &lt;permit id="1"&gt;
             &lt;name&gt;CREATE_VM&lt;/name&gt;
@@ -764,6 +839,14 @@ Content-Type: application/xml
         &lt;/permit&gt;
         &lt;permit id="2"&gt;
             &lt;name&gt;DELETE_VM&lt;/name&gt;
+            &lt;administrative&gt;false&lt;/administrative&gt;
+        &lt;/permit&gt;
+        &lt;permit id="3"&gt;
+            &lt;name&gt;EDIT_VM_PROPERTIES&lt;/name&gt;
+            &lt;administrative&gt;false&lt;/administrative&gt;
+        &lt;/permit&gt;
+        &lt;permit id="4"&gt;
+            &lt;name&gt;VM_BASIC_OPERATIONS&lt;/name&gt;
             &lt;administrative&gt;false&lt;/administrative&gt;
         &lt;/permit&gt;
         ...

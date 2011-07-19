@@ -42,7 +42,7 @@
           <entry>The type of statistic measures</entry>
         </row>
         <row>
-          <entry><literal>values type</literal></entry>
+          <entry><literal>values type=</literal></entry>
           <entry>One of <literal>INTEGER</literal> or <literal>DECIMAL</literal></entry>
           <entry>The data type for the statistical values that follow</entry>
         </row>

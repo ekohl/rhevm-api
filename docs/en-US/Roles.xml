@@ -30,22 +30,36 @@
           </row>
         </thead>
         <tbody>
+<!--
           <row>
             <entry><literal>name</literal></entry>
             <entry>string</entry>
-            <entry>The role name (used as a more convenient identifier in any role-specific operations)</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            <entry>The role name used as a convenient identifier in any role-specific operations</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
             <entry><literal>description</literal></entry>
             <entry>string</entry>
             <entry>A free-text description of the role</entry>
-            <entry><inlinemediaobject><imageobject><imagedata fileref="images/locked.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+            <entry></entry>
+          </row>
+-->
+          <row>
+            <entry><literal>link="permits"</literal></entry>
+            <entry>relationship</entry>
+            <entry>A link to the sub-collection for role permits.</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/required.png" format="PNG" /></imageobject></inlinemediaobject></entry>
           </row>
           <row>
-            <entry><literal>user</literal></entry>
-            <entry>complex</entry>
-            <entry>A reference to the associated user (only present in the context of the role represented being assigned to an individual user)</entry>
+            <entry><literal>mutable</literal></entry>
+            <entry>boolean: true or false</entry>
+            <entry>Defines the ability to update or delete the role. Roles with <literal>mutable</literal> set to <literal>false</literal> are roles built into the Red Hat Enterprise Virtualization environment.</entry>
+            <entry><inlinemediaobject><imageobject><imagedata fileref="images/readonly.png" format="PNG" /></imageobject></inlinemediaobject></entry>
+          </row>
+          <row>
+            <entry><literal>administrative</literal></entry>
+            <entry>boolean: true or false</entry>
+            <entry>Defines the role as administrative-only</entry>
             <entry> </entry>
           </row>
         </tbody>
@@ -55,46 +69,89 @@
   <example>
     <title>An XML representation of the roles collection</title>
     <screen>
-GET /rhevm-api/roles HTTP/1.1
-Accept: application/xml
-
-HTTP/1.1 200 OK
-Content-Type: application/xml
-
 &lt;roles&gt;
     &lt;role id="00000000-0000-0000-0000-000000000001"
-      href="/rhevm-api/roles/00000000-0000-0000-0000-000000000000"&gt;
+      href="/rhevm-api/roles/00000000-0000-0000-0000-000000000001"&gt;
         &lt;name&gt;SuperUser&lt;/name&gt;
         &lt;description&gt;Roles management administrator&lt;/description&gt;
+        &lt;link rel="permits"
+          href="/rhevm-api/roles/00000000-0000-0000-0000-000000000001/permits"/&gt;
+        &lt;mutable&gt;false&lt;/mutable&gt;
+        &lt;administrative&gt;true&lt;/administrative&gt;
     &lt;/role&gt;
     &lt;role id="00000000-0000-0000-0001-000000000001"
       href="/rhevm-api/roles/00000000-0000-0000-0001-000000000001"&gt;
         &lt;name&gt;RHEVMUser&lt;/name&gt;
         &lt;description&gt;RHEVM user&lt;/description&gt;
+        &lt;link rel="permits"
+          href="/rhevm-api/roles/00000000-0000-0000-0001-000000000001/permits"/&gt;
+        &lt;mutable&gt;false&lt;/mutable&gt;
+        &lt;administrative&gt;false&lt;/administrative&gt;
     &lt;/role&gt;
     &lt;role id="00000000-0000-0000-0001-000000000002"
-      href="/rhevm-api/roles/00000000-0000-0000-0001-000000000002"&gt;
+       href="/rhevm-api/roles/00000000-0000-0000-0001-000000000002"&gt;
         &lt;name&gt;RHEVMPowerUser&lt;/name&gt;
         &lt;description&gt;RHEVM power user&lt;/description&gt;
+        &lt;link rel="permits"
+          href="/rhevm-api/roles/00000000-0000-0000-0001-000000000002/permits"/&gt;
+        &lt;mutable&gt;false&lt;/mutable&gt;
+        &lt;administrative&gt;false&lt;/administrative&gt;
     &lt;/role&gt;
-    &lt;role id="00000000-0000-0000-0001-000000000003"
-      href="/rhevm-api/roles/00000000-0000-0000-0001-000000000003"&gt;
-        &lt;name&gt;RHEVMVDIUser&lt;/name&gt;
-        &lt;description&gt;RHEVM VDI user&lt;/description&gt;
-    &lt;/role&gt;
-&lt;/roles&gt;
+&lt;/roles&gt;        
     </screen>
   </example>
-  <note>
-    <para>
-      Because the global roles form a static set in Red Hat Enterprise Virtualization Manager, the standard common features are not followed in this case, i.e. roles cannot be created via <literal>POST</literal> nor destroyed via <literal>DELETE</literal> on the collection.
-    </para>
-  </note>
+  <para>
+    Creation of a role requires values for <literal>name</literal>, <literal>administrative</literal> and a list of initial <literal>permits</literal>. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Creating_Resources"/> for more information.
+  </para>
+  <example>
+    <title>Creating a role</title>
+    <screen>
+POST /rhevm-api/roles HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;role&gt;
+    &lt;name&gt;RoleA&lt;/name&gt;
+    &lt;administrative&gt;true&lt;/administrative&gt;
+    &lt;permits&gt;
+        &lt;permit id="1"/&gt;
+    &lt;/permits&gt;
+&lt;/role&gt;
+    </screen>
+  </example>
+  <para>
+    The <literal>name</literal>, <literal>description</literal> and <literal>administrative</literal> elements are updatable post-creation. See <xref linkend="sect-REST_API_Guide-Common_Features-Resources-Updating_Resources"/> for more information.
+  </para>
+  <example>
+    <title>Updating a role</title>
+    <screen>
+PUT /rhevm-api/roles/8de42ad7-f307-408b-80e8-9d28b85adfd7 HTTP/1.1
+Accept: application/xml
+Content-type: application/xml
+
+&lt;role&gt;
+    &lt;name&gt;RoleB&lt;/name&gt;
+    &lt;description&gt;Standard users in Role B&lt;/description&gt;
+    &lt;administrative&gt;false&lt;/administrative&gt;
+&lt;/role&gt;
+    </screen>
+  </example>
+  <para>
+    Removal of a role requires a <literal>DELETE</literal> request.
+  </para>
+  <example>
+    <title>Removing a role</title>
+    <screen>
+DELETE /rhevm-api/roles/8de42ad7-f307-408b-80e8-9d28b85adfd7 HTTP/1.1
+
+HTTP/1.1 204 No Content
+    </screen>
+  </example>  
 
   <section id="sect-REST_API_Guide-Roles-Permits">
     <title>Permits Sub-Collection</title>
     <para>
-      Each role contains a set of allowable actions, or <literal>permits</literal>, which are defined in <literal>capabilities</literal>. For more information on <literal>permits</literal>, see <xref linkend="sect-REST_API_Guide-Capabilities-Permits"/>.</para>
+      Each role contains a set of allowable actions, or <literal>permits</literal>, which the API lists in <literal>capabilities</literal>. For more information on access to <literal>permits</literal>, see <xref linkend="sect-REST_API_Guide-Capabilities-Permits"/>.</para>
     <para>
       A role's <literal>permits</literal> are listed as a sub-collection:
     </para>
@@ -126,7 +183,7 @@ Content-Type: application/xml
       </screen>
     </example>
     <para>
-      Assign a <literal>permit</literal> to a <literal>role</literal> with a <literal>POST</literal> request to the <literal>permits</literal> sub-collection. Use either an <literal>id</literal> attribute or a <literal>name</literal> element to specify the <literal>permit</literal> to assign.
+      Assign a <literal>permit</literal> to a role with a <literal>POST</literal> request to the <literal>permits</literal> sub-collection. Use either an <literal>id</literal> attribute or a <literal>name</literal> element to specify the <literal>permit</literal> to assign.
     </para>
     <example>
       <title>Assign a permit to a role</title>
@@ -148,6 +205,17 @@ Content-Type: application/xml
           href="/rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9"/&gt;
     &lt;/permit&gt;
 &lt;/permits&gt;
+      </screen>
+    </example>
+    <para>
+      Remove a <literal>permit</literal> from a role with a <literal>DELETE</literal> request to the <literal>permit</literal> resource.
+    </para>
+    <example>
+      <title>Remove a permit from a role</title>
+      <screen>
+DELETE /rhevm-api/roles/b67dfbe2-0dbc-41e4-86d3-a2fbef02cfa9/permits/1 HTTP/1.1
+
+HTTP/1.1 204 No Content
       </screen>
     </example>
   </section>

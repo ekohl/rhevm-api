@@ -32,6 +32,7 @@
         </row>
       </thead>
       <tbody>
+<!--
         <row>
           <entry><literal>name</literal></entry>
           <entry>string</entry>
@@ -44,6 +45,7 @@
           <entry>A free-form user-supplied human readable description of the tag</entry>
           <entry></entry>
         </row>
+-->
         <row>
           <entry><literal>host</literal></entry>
           <entry>GUID</entry>
