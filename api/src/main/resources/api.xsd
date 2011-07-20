@@ -158,7 +158,7 @@
           <!-- The following, and the BaseResource href/id attributes
                are used by the server when responding after an
                asynchronous operation or status query -->
-            <xs:element name="status" type="xs:string" minOccurs="0"/>
+            <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
             <!-- Fault describing failure case -->
             <xs:element ref="fault" minOccurs="0" maxOccurs="1"/>
             <!-- action-specific response(s) for the operation
@@ -182,6 +182,15 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:element name="status" type="Status"/>
+
+  <xs:complexType name="Status">
+    <xs:sequence>
+      <xs:element name="state" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="detail" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <!-- Represents an asynchronous resource creation -->
 
   <xs:element name="creation" type="Creation"/>
@@ -190,7 +199,7 @@
     <xs:complexContent>
       <xs:extension base="BaseResource">
         <xs:sequence>
-          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
           <!-- Fault describing failure case -->
           <xs:element ref="fault" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
@@ -622,7 +631,7 @@
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="description" type="xs:string" minOccurs="0"/>
       <xs:element name="actions" type="Actions" minOccurs="0"/>
-      <xs:element name="creation_status" type="xs:string" minOccurs="0"/>
+      <xs:element name="creation_status" type="Status" minOccurs="0"/>      
       <!-- also rel="creation_status" link for monitoring async creation -->
       <!-- further link relation types may be defined by specific resources -->
       <xs:element ref="link" minOccurs="0" maxOccurs="unbounded">
@@ -678,7 +687,7 @@
           <xs:element name="storage_format" type="xs:string" minOccurs="0"/>
           <xs:element name="version" type="Version" minOccurs="0"/>
           <xs:element name="supported_versions" type="SupportedVersions" minOccurs="0"/>
-          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
           <!-- also rel="files" and rel="storagedomains" links -->
         </xs:sequence>
       </xs:extension>
@@ -778,7 +787,7 @@
       <xs:element name="username" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="password" type="xs:string" minOccurs="0" maxOccurs="1"/>
       <xs:element name="options" type="Options" minOccurs="0"/>
-      <xs:element name="status" type="xs:string" minOccurs="0" maxOccurs="1"/>
+      <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
     <xs:attribute name="type" type="xs:string"/>
   </xs:complexType>
@@ -822,7 +831,7 @@
       <xs:extension base="BaseResource">
         <xs:sequence>
           <xs:element name="address" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
           <xs:element name="cluster" type="Cluster" minOccurs="0"/>
           <!-- unsigned to avoid issues with port values greater than 32767,
                e.g. the standard VDSM port 54321 -->
@@ -1176,7 +1185,7 @@
           <xs:element ref="ip" minOccurs="0"/>
           <xs:element ref="vlan" minOccurs="0"/>
           <xs:element name="stp" type="xs:boolean" minOccurs="0"/>
-          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
           <xs:element name="display" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
@@ -1289,7 +1298,7 @@
         <xs:sequence>
           <xs:element ref="data_center" minOccurs="0"/>
           <xs:element name="type" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
           <xs:element name="master" type="xs:boolean" minOccurs="0"/>
           <xs:element ref="storage" minOccurs="0"/>
           <!-- host is only relevant at creation and deletion time -->
@@ -1331,7 +1340,7 @@
         <xs:sequence>
           <xs:element ref="vm" minOccurs="0" maxOccurs="1"/>
           <xs:element name="type" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
           <xs:element name="memory" type="xs:long" minOccurs="0"/>
           <xs:element name="cpu" type="CPU" minOccurs="0"/>
           <xs:element name="os" type="OperatingSystem" minOccurs="0"/>
@@ -1450,7 +1459,7 @@
       <xs:extension base="BaseResource">
         <xs:sequence>
           <xs:element name="type" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
           <xs:element name="memory" type="xs:long" minOccurs="0"/>
           <xs:element name="cpu" type="CPU" minOccurs="0"/>
           <xs:element name="os" type="OperatingSystem" minOccurs="0"/>
@@ -1639,7 +1648,7 @@
           <xs:element ref="storage_domains" minOccurs="0" maxOccurs="1"/>
           <xs:element name="size" type="xs:long" minOccurs="0"/>
           <xs:element name="type" type="xs:string" minOccurs="0"/>
-          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
           <xs:element name="interface" type="xs:string" minOccurs="0"/>
           <xs:element name="format" type="xs:string" minOccurs="0"/>
           <xs:element name="sparse" type="xs:boolean" minOccurs="0"/>
@@ -1751,7 +1760,7 @@
           <xs:element name="statistics" type="Statistics" minOccurs="0" maxOccurs="1"/>
           <xs:element name="check_connectivity" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
           <xs:element name="speed" type="xs:long" minOccurs="0" maxOccurs="1"/>
-          <xs:element name="status" type="xs:string" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="status" minOccurs="0" maxOccurs="1"/>
           <!-- Also a rel="master" link for bonded nics -->
         </xs:sequence>
       </xs:extension>

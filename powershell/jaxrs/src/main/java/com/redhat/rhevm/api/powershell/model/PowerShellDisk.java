@@ -25,8 +25,8 @@ import java.util.Map;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.redhat.rhevm.api.common.util.SizeConverter;
+import com.redhat.rhevm.api.common.util.StatusUtils;
 import com.redhat.rhevm.api.model.Disk;
-import com.redhat.rhevm.api.model.Status;
 import com.redhat.rhevm.api.model.StorageDomain;
 import com.redhat.rhevm.api.model.StorageDomains;
 import com.redhat.rhevm.api.model.VM;
@@ -110,8 +110,8 @@ public class PowerShellDisk extends Disk {
             } else if (PowerShellAsyncTask.isTask(entity)) {
                 last(ret).setTaskIds(PowerShellAsyncTask.parseTask(entity, last(ret).getTaskIds()));
             } else if (PowerShellAsyncTask.isStatus(entity)) {
-                String creationStatus = last(ret).getCreationStatus();
-                last(ret).setCreationStatus(PowerShellAsyncTask.parseStatus(entity, creationStatus==null ? null : Status.fromValue(creationStatus)).value());
+                String creationStatus = last(ret).getCreationStatus()!=null ? last(ret).getCreationStatus().getState() : null;
+                last(ret).setCreationStatus(StatusUtils.create(PowerShellAsyncTask.parseStatus(entity, StatusUtils.getRequestStatus(creationStatus))));
             } else if (isDisk(entity)) {
                 ret.add(parseEntity(vmId, entity, storageDomainId, dates));
             }
@@ -145,7 +145,7 @@ public class PowerShellDisk extends Disk {
 
         disk.setSize(SizeConverter.gigasToBytes(entity.get("sizeingb", Long.class)));
         disk.setType(entity.get("disktype", PowerShellDiskType.class).map().value());
-        disk.setStatus(entity.get("status", PowerShellImageStatus.class).map().value());
+        disk.setStatus(StatusUtils.create(entity.get("status", PowerShellImageStatus.class).map().value()));
         disk.setInterface(PowerShellDiskInterface.valueOf(entity.get("diskinterface")).map().value());
         disk.setFormat(entity.get("volumeformat", PowerShellVolumeFormat.class).map().value());
         disk.setSparse(entity.get("volumetype", PowerShellVolumeType.class).map());

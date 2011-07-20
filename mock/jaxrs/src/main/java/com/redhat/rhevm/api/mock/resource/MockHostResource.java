@@ -34,6 +34,7 @@ import com.redhat.rhevm.api.resource.StatisticsResource;
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.common.util.JAXBHelper;
 import com.redhat.rhevm.api.common.util.LinkHelper;
+import com.redhat.rhevm.api.common.util.StatusUtils;
 
 
 public class MockHostResource extends AbstractMockResource<Host> implements HostResource {
@@ -129,7 +130,7 @@ public class MockHostResource extends AbstractMockResource<Host> implements Host
             if (status.equals(MockHostResource.this.getModel().getStatus())) {
                 throw new IllegalStateException("Host status already: " + status);
             }
-            MockHostResource.this.getModel().setStatus(status.value());
+            MockHostResource.this.getModel().setStatus(StatusUtils.create(status));
         }
     }
 

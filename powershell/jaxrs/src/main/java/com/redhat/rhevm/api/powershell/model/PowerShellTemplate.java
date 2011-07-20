@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.redhat.rhevm.api.common.util.StatusUtils;
 import com.redhat.rhevm.api.common.util.TimeZoneMapping;
 import com.redhat.rhevm.api.model.Cluster;
 import com.redhat.rhevm.api.model.CPU;
@@ -35,7 +36,6 @@ import com.redhat.rhevm.api.model.HighAvailability;
 import com.redhat.rhevm.api.model.OperatingSystem;
 import com.redhat.rhevm.api.model.Boot;
 import com.redhat.rhevm.api.model.OsType;
-import com.redhat.rhevm.api.model.Status;
 import com.redhat.rhevm.api.model.Template;
 import com.redhat.rhevm.api.powershell.enums.PowerShellBootSequence;
 import com.redhat.rhevm.api.powershell.enums.PowerShellOriginType;
@@ -84,8 +84,8 @@ public class PowerShellTemplate extends Template {
                 last(ret).setTaskIds(PowerShellAsyncTask.parseTask(entity, last(ret).getTaskIds()));
                 continue;
             } else if (PowerShellAsyncTask.isStatus(entity)) {
-                String creationStatus = last(ret).getCreationStatus();
-                last(ret).setCreationStatus(PowerShellAsyncTask.parseStatus(entity, creationStatus==null ? null : Status.fromValue(creationStatus)).value());
+                String creationStatus = last(ret).getCreationStatus()!=null ? last(ret).getCreationStatus().getState() : null;
+                last(ret).setCreationStatus(StatusUtils.create(PowerShellAsyncTask.parseStatus(entity, StatusUtils.getRequestStatus(creationStatus))));
                 continue;
             }
 
@@ -97,7 +97,7 @@ public class PowerShellTemplate extends Template {
             template.setType(entity.get("vmtype", PowerShellVmType.class).map().value());
             template.setMemory(entity.get("memsizemb", Integer.class) * 1024L * 1024L);
             template.setCdIsoPath(entity.get("cdisopath"));
-            template.setStatus(entity.get("status", PowerShellVmTemplateStatus.class).map().value());
+            template.setStatus(StatusUtils.create(entity.get("status", PowerShellVmTemplateStatus.class).map().value()));
 
             CpuTopology topo = new CpuTopology();
             topo.setSockets(entity.get("numofsockets", Integer.class));

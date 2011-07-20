@@ -44,7 +44,8 @@ import com.redhat.rhevm.api.resource.HostStorageResource;
 import com.redhat.rhevm.api.resource.StatisticsResource;
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.common.util.LinkHelper;
-import com.redhat.rhevm.api.model.Status;
+import com.redhat.rhevm.api.common.util.StatusUtils;
+import com.redhat.rhevm.api.model.CreationStatus;
 import com.redhat.rhevm.api.powershell.model.PowerShellHost;
 import com.redhat.rhevm.api.powershell.model.PowerShellHostStatisticsParser;
 import com.redhat.rhevm.api.powershell.model.PowerShellPowerManagementStatus;
@@ -221,9 +222,9 @@ public class PowerShellHostResource extends AbstractPowerShellActionableResource
                     } else {
                         PowerShellPowerManagementStatus status = statuses.get(0); //there can be only one status
                         if (status.isSuccess() && status.getStatus() != null) {
-                            action.setStatus(Status.COMPLETE.value());
+                            action.setStatus(StatusUtils.create(CreationStatus.COMPLETE));
                             PowerManagement pm = new PowerManagement();
-                            pm.setStatus(status.getStatus().value());
+                            pm.setStatus(StatusUtils.create(status.getStatus()));
                             action.setPowerManagement(pm);
                         } else {
                             handleFailure(status.getMessage());
@@ -233,7 +234,7 @@ public class PowerShellHostResource extends AbstractPowerShellActionableResource
              }
 
             private void handleFailure(String message) {
-                action.setStatus(Status.FAILED.value());
+                action.setStatus(StatusUtils.create(CreationStatus.FAILED));
                 action.setFault(new Fault());
                 action.getFault().setReason(MessageFormat.format(reason, message == null ? "" : message));
             }

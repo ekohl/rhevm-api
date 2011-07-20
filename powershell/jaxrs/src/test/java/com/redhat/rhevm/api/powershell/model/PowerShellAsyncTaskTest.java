@@ -21,7 +21,7 @@ package com.redhat.rhevm.api.powershell.model;
 import org.junit.Test;
 
 import com.redhat.rhevm.api.model.Creation;
-import com.redhat.rhevm.api.model.Status;
+import com.redhat.rhevm.api.model.CreationStatus;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
 
 public class PowerShellAsyncTaskTest extends PowerShellModelTest {
@@ -32,7 +32,7 @@ public class PowerShellAsyncTaskTest extends PowerShellModelTest {
         assertNotNull(data);
 
         String taskIds = null;
-        Status status = null;
+        CreationStatus status = null;
 
         for (PowerShellParser.Entity entity : getParser().parse(data)) {
             if (PowerShellAsyncTask.isTask(entity)) {
@@ -43,7 +43,7 @@ public class PowerShellAsyncTaskTest extends PowerShellModelTest {
                 continue;
             } else if (PowerShellAsyncTask.isStatus(entity)) {
                 if (status != null) {
-                    assertEquals(Status.PENDING, status);
+                    assertEquals(CreationStatus.PENDING, status);
                 }
                 status = PowerShellAsyncTask.parseStatus(entity, status);
                 continue;
@@ -54,7 +54,7 @@ public class PowerShellAsyncTaskTest extends PowerShellModelTest {
         assertNotNull(taskIds);
         assertEquals("9d29775d-b685-411f-b304-07acc2fb7528%2C0b9318b4-e426-4380-9e6a-bb7f3a38a2ce", taskIds);
         assertNotNull(status);
-        assertEquals(Status.FAILED, status);
+        assertEquals(CreationStatus.FAILED, status);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class PowerShellAsyncTaskTest extends PowerShellModelTest {
         Creation creation = PowerShellAsyncTask.parse(getParser(), data);
 
         assertNotNull(creation);
-        assertEquals(Status.FAILED.value(), creation.getStatus());
+        assertEquals(CreationStatus.FAILED.value(), creation.getStatus().getState());
         assertTrue(creation.isSetFault());
         assertTrue(creation.getFault().isSetReason());
         assertEquals("Barfed...", creation.getFault().getDetail());

@@ -28,7 +28,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.model.Action;
-import com.redhat.rhevm.api.model.Status;
+import com.redhat.rhevm.api.model.CreationStatus;
 import com.redhat.rhevm.api.powershell.util.ControllableExecutor;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
@@ -160,18 +160,18 @@ public abstract class AbstractPowerShellResourceTest<R /* extends BaseResource *
         assertNotNull(action.getId());
         assertNotNull(action.getLinks());
         assertEquals(async, action.isAsync());
-        if (action.getStatus().equals(Status.FAILED.value()) && reason == null) {
+        if (action.getStatus().equals(CreationStatus.FAILED.value()) && reason == null) {
             assertNotNull(action.getFault());
-            System.out.println(action.getStatus() + " : " + action.getFault().getReason());
+            System.out.println(action.getStatus().getState() + " : " + action.getFault().getReason());
             System.out.println(action.getFault().getDetail());
         }
         assertTrue("unexpected status", async
-                   ? action.getStatus().equals(Status.PENDING.value())
-                     || action.getStatus().equals(Status.IN_PROGRESS.value())
-                     || action.getStatus().equals(Status.COMPLETE.value())
+                   ? action.getStatus().getState().equals(CreationStatus.PENDING.value())
+                     || action.getStatus().getState().equals(CreationStatus.IN_PROGRESS.value())
+                     || action.getStatus().getState().equals(CreationStatus.COMPLETE.value())
                    : reason == null
-                     ? action.getStatus().equals(Status.COMPLETE.value())
-                     : action.getStatus().equals(Status.FAILED.value()));
+                     ? action.getStatus().getState().equals(CreationStatus.COMPLETE.value())
+                     : action.getStatus().getState().equals(CreationStatus.FAILED.value()));
         assertTrue(action.getLinks().size() == 2);
         assertEquals("expected parent link", "parent", action.getLinks().get(0).getRel());
         assertNotNull(action.getLinks().get(0).getHref());

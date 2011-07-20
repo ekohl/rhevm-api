@@ -20,9 +20,10 @@ package com.redhat.rhevm.api.powershell.model;
 
 import java.net.URLEncoder;
 
+import com.redhat.rhevm.api.common.util.StatusUtils;
 import com.redhat.rhevm.api.model.Creation;
 import com.redhat.rhevm.api.model.Fault;
-import com.redhat.rhevm.api.model.Status;
+import com.redhat.rhevm.api.model.CreationStatus;
 import com.redhat.rhevm.api.powershell.enums.PowerShellAsyncTaskResult;
 import com.redhat.rhevm.api.powershell.enums.PowerShellAsyncTaskStatus;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
@@ -54,8 +55,8 @@ public class PowerShellAsyncTask {
         return taskIds.split(ID_SEPARATOR);
     }
 
-    public static Status parseStatus(PowerShellParser.Entity entity, Status cumlative) {
-        Status ret = cumlative;
+    public static CreationStatus parseStatus(PowerShellParser.Entity entity, CreationStatus cumlative) {
+        CreationStatus ret = cumlative;
         if (isStatus(entity)) {
             Boolean statusPresent =
                 entity.isSet("statusspecified")
@@ -77,27 +78,27 @@ public class PowerShellAsyncTask {
             switch(status) {
                 case unknown:
                 case init:
-                    ret = cumlative != Status.FAILED ? Status.PENDING : cumlative;
+                    ret = cumlative != CreationStatus.FAILED ? CreationStatus.PENDING : cumlative;
                     break;
                 case running:
-                    ret = cumlative != Status.FAILED ? Status.IN_PROGRESS : cumlative;
+                    ret = cumlative != CreationStatus.FAILED ? CreationStatus.IN_PROGRESS : cumlative;
                     break;
                 case finished:
                     if (result == PowerShellAsyncTaskResult.success) {
-                        ret = cumlative != null ? cumlative : Status.COMPLETE;
+                        ret = cumlative != null ? cumlative : CreationStatus.COMPLETE;
                     } else {
-                        ret = Status.FAILED;
+                        ret = CreationStatus.FAILED;
                     }
                     break;
                 case cleaning:
                     if (result == PowerShellAsyncTaskResult.cleanSuccess) {
-                        ret = cumlative != null ? cumlative : Status.COMPLETE;
+                        ret = cumlative != null ? cumlative : CreationStatus.COMPLETE;
                     } else {
-                        ret = Status.FAILED;
+                        ret = CreationStatus.FAILED;
                     }
                     break;
                 case aborting:
-                    ret = Status.FAILED;
+                    ret = CreationStatus.FAILED;
                     break;
             }
         }
@@ -109,9 +110,9 @@ public class PowerShellAsyncTask {
 
         for (PowerShellParser.Entity entity : parser.parse(output)) {
             if (isStatus(entity)) {
-                String status = creation.getStatus();
-                creation.setStatus(parseStatus(entity, status==null ? Status.FAILED : Status.fromValue(status)).value());
-                if (Status.FAILED.value().equals(status)) {
+                String status = creation.getStatus()!=null ? creation.getStatus().getState() : null;
+                creation.setStatus(StatusUtils.create(parseStatus(entity, status==null ? CreationStatus.FAILED : CreationStatus.fromValue(status))));
+                if (CreationStatus.FAILED.value().equals(status)) {
                     creation.setFault(new Fault());
                     creation.getFault().setReason(FAILURE_REASON);
                     creation.getFault().setDetail(entity.isSet("exception") ? entity.get("exception") : entity.get("message"));

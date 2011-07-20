@@ -30,6 +30,7 @@ import javax.ws.rs.core.Response.Status;
 
 import com.redhat.rhevm.api.common.util.LinkHelper;
 import com.redhat.rhevm.api.common.util.ReapedMap;
+import com.redhat.rhevm.api.common.util.StatusUtils;
 import com.redhat.rhevm.api.model.Action;
 import com.redhat.rhevm.api.model.BaseResource;
 import com.redhat.rhevm.api.model.Fault;
@@ -88,7 +89,7 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
         Response.Status status = null;
         final ActionResource actionResource = new BaseActionResource<R>(uriInfo, task.action, getModel());
         if (action.isSetAsync() && action.isAsync()) {
-            action.setStatus(com.redhat.rhevm.api.model.Status.PENDING.value());
+            action.setStatus(StatusUtils.create(com.redhat.rhevm.api.model.CreationStatus.PENDING));
             actions.put(action.getId(), actionResource);
             executor.execute(new Runnable() {
                 public void run() {
@@ -141,7 +142,7 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
     }
 
     private void perform(AbstractActionTask task) {
-        task.action.setStatus(com.redhat.rhevm.api.model.Status.IN_PROGRESS.value());
+        task.action.setStatus(StatusUtils.create(com.redhat.rhevm.api.model.CreationStatus.IN_PROGRESS));
         if (task.action.getGracePeriod() != null) {
             try {
                 Thread.sleep(task.action.getGracePeriod().getExpiry());
@@ -168,8 +169,8 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
         public void run() {
             try {
                 execute();
-                if (!action.getStatus().equals(com.redhat.rhevm.api.model.Status.FAILED.value())) {
-                    action.setStatus(com.redhat.rhevm.api.model.Status.COMPLETE.value());
+                if (!action.getStatus().getState().equals(com.redhat.rhevm.api.model.CreationStatus.FAILED.value())) {
+                    action.setStatus(StatusUtils.create(com.redhat.rhevm.api.model.CreationStatus.COMPLETE));
                 }
             } catch (Throwable t) {
                 String message = t.getMessage() != null ? t.getMessage() : t.getClass().getName();
@@ -184,7 +185,7 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
             fault.setReason(reason);
             fault.setDetail(trace(t));
             action.setFault(fault);
-            action.setStatus(com.redhat.rhevm.api.model.Status.FAILED.value());
+            action.setStatus(StatusUtils.create(com.redhat.rhevm.api.model.CreationStatus.FAILED));
         }
 
         protected static String trace(Throwable t) {

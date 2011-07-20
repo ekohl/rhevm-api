@@ -97,7 +97,7 @@ public class MockStorageDomainResourceTest extends MockTestBase {
         StorageDomain domain = service.list(null).getStorageDomains().get(0);
         assertNotNull(domain);
 
-        assertEquals(domain.getStatus(), StorageDomainStatus.UNATTACHED.value());
+        assertEquals(domain.getStatus().getState(), StorageDomainStatus.UNATTACHED.value());
 
 /* FIXME
         createActionResource(getActionUri(domain, "attach")).post(action);

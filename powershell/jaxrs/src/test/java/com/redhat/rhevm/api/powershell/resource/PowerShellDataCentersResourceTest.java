@@ -55,7 +55,7 @@ public class PowerShellDataCentersResourceTest extends AbstractPowerShellCollect
                                formatVersion(MAJOR, MINOR) };
         resource.setUriInfo(setUpResourceExpectations(4, commands, returns, false, null, NAMES));
         List<DataCenter> datacenters = resource.list().getDataCenters();
-        assertEquals(datacenters.get(0).getStatus().toLowerCase(), DataCenterStatus.UP.value());
+        assertEquals(datacenters.get(0).getStatus().getState().toLowerCase(), DataCenterStatus.UP.value());
         verifyCollection(datacenters, NAMES, DESCRIPTIONS);
     }
 

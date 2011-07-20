@@ -43,7 +43,7 @@ public class PowerShellVmTest extends PowerShellModelTest {
         assertEquals(name, v.getName());
         assertEquals(description, v.getDescription());
         assertEquals(type.value(), v.getType());
-        assertEquals(status.value(), v.getStatus());
+        assertEquals(status.value(), v.getStatus().getState());
         assertEquals(memory, v.getMemory());
         assertNotNull(v.getCpu());
         assertNotNull(v.getCpu().getTopology());

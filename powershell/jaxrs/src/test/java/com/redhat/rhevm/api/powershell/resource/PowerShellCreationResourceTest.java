@@ -24,7 +24,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.redhat.rhevm.api.common.resource.UriInfoProvider;
 import com.redhat.rhevm.api.model.Creation;
-import com.redhat.rhevm.api.model.Status;
+import com.redhat.rhevm.api.model.CreationStatus;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
 import com.redhat.rhevm.api.powershell.util.PowerShellPoolMap;
@@ -65,7 +65,7 @@ public class PowerShellCreationResourceTest extends AbstractPowerShellResourceTe
 
     private void verifyCreation(Creation creation) {
         assertNotNull(creation);
-        assertEquals(Status.FAILED.value(), creation.getStatus());
+        assertEquals(CreationStatus.FAILED.value(), creation.getStatus().getState());
         verifyLinks(creation);
     }
 }

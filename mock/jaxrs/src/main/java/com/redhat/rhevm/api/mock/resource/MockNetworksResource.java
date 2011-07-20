@@ -32,6 +32,7 @@ import com.redhat.rhevm.api.model.Networks;
 import com.redhat.rhevm.api.model.NetworkStatus;
 import com.redhat.rhevm.api.resource.NetworkResource;
 import com.redhat.rhevm.api.resource.NetworksResource;
+import com.redhat.rhevm.api.common.util.StatusUtils;
 
 import static com.redhat.rhevm.api.mock.resource.AbstractMockResource.allocateId;
 
@@ -50,7 +51,7 @@ public class MockNetworksResource extends AbstractMockQueryableResource<Network>
             while (networks.size() < 4) {
                 MockNetworkResource resource = new MockNetworkResource(allocateId(Network.class), getExecutor(), this);
                 resource.getModel().setName("network" + resource.getModel().getId());
-                resource.getModel().setStatus((networks.size() % 2) == 0 ? NetworkStatus.OPERATIONAL.value() : NetworkStatus.NON_OPERATIONAL.value());
+                resource.getModel().setStatus((networks.size() % 2) == 0 ? StatusUtils.create(NetworkStatus.OPERATIONAL) : StatusUtils.create(NetworkStatus.NON_OPERATIONAL));
                 DataCenter dataCenter = new DataCenter();
                 dataCenter.setId(resource.getModel().getId());
                 resource.getModel().setDataCenter(dataCenter);

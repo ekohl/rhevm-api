@@ -1,7 +1,7 @@
 
 package com.redhat.rhevm.api.model;
 
-public enum Status {
+public enum CreationStatus {
 
     PENDING,
     IN_PROGRESS,
@@ -12,7 +12,7 @@ public enum Status {
         return name().toLowerCase();
     }
 
-    public static Status fromValue(String v) {
+    public static CreationStatus fromValue(String v) {
         try {
             return valueOf(v.toUpperCase());
         } catch (IllegalArgumentException e) {

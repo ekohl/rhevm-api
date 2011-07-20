@@ -51,7 +51,7 @@ public class PowerShellHostTest extends PowerShellModelTest {
     private void testHost(Host h, String id, String name, HostStatus status, String clusterId, Boolean storageManager, String address, int port, HostType type) {
         assertEquals(h.getId(), id);
         assertEquals(h.getName(), name);
-        assertEquals(h.getStatus(), status.value());
+        assertEquals(h.getStatus().getState(), status.value());
         assertTrue(h.isSetCluster());
         assertEquals(clusterId, h.getCluster().getId());
         assertEquals(type.value(), h.getType());

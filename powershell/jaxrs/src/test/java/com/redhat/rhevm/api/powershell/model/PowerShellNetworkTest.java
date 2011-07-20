@@ -50,7 +50,7 @@ public class PowerShellNetworkTest extends PowerShellModelTest {
         }
         assertEquals(n.isStp(), stp);
         assertEquals(n.isDisplay(), display);
-        assertEquals(n.getStatus(), status.value());
+        assertEquals(n.getStatus().getState(), status.value());
     }
 
     @Test

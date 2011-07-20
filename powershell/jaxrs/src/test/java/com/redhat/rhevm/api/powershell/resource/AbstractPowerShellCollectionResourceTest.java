@@ -32,7 +32,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.core.UriBuilder;
 
 import com.redhat.rhevm.api.model.BaseResource;
-import com.redhat.rhevm.api.model.Status;
+import com.redhat.rhevm.api.model.CreationStatus;
 import com.redhat.rhevm.api.common.resource.AbstractActionableResource;
 import com.redhat.rhevm.api.common.resource.AbstractUpdatableResource;
 import com.redhat.rhevm.api.common.util.QueryHelper;
@@ -312,7 +312,7 @@ public abstract class AbstractPowerShellCollectionResourceTest<R extends BaseRes
     protected void verifyCreated(Response response, Class<R> clz, String name, String description) {
         R created = clz.cast(response.getEntity());
         assertEquals(202, response.getStatus());
-        assertEquals(Status.PENDING.value(), created.getCreationStatus());
+        assertEquals(CreationStatus.PENDING.value(), created.getCreationStatus().getState());
         verifyLink(created, "creation_status");
         assertEquals(Integer.toString(name.hashCode()), created.getId());
         assertEquals(name, created.getName());

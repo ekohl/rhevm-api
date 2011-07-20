@@ -36,7 +36,7 @@ import com.redhat.rhevm.api.model.PowerManagement;
 import com.redhat.rhevm.api.model.Option;
 import com.redhat.rhevm.api.model.Options;
 import com.redhat.rhevm.api.model.PowerManagementStatus;
-import com.redhat.rhevm.api.model.Status;
+import com.redhat.rhevm.api.model.CreationStatus;
 import com.redhat.rhevm.api.powershell.util.PowerShellCmd;
 import com.redhat.rhevm.api.powershell.util.PowerShellParser;
 import com.redhat.rhevm.api.powershell.util.PowerShellPoolMap;
@@ -243,7 +243,7 @@ public class PowerShellHostResourceTest extends AbstractPowerShellResourceTest<H
         Response response = resource.fence(action);
         Action actionResult = (Action)response.getEntity();
         assertNotNull(actionResult.getPowerManagement());
-        assertEquals(actionResult.getPowerManagement().getStatus(), PowerManagementStatus.ON.value());
+        assertEquals(actionResult.getPowerManagement().getStatus().getState(), PowerManagementStatus.ON.value());
         verifyActionResponse(response, false);
     }
 
@@ -257,7 +257,7 @@ public class PowerShellHostResourceTest extends AbstractPowerShellResourceTest<H
                                           "<Objects><Object Type=\"System.String\">Test Failed, Host Status is: off. Host burned by a madman.</Object></Objects>"));
         Response response = resource.fence(action);
         Action actionResult = (Action)response.getEntity();
-        assertEquals(actionResult.getStatus(), Status.FAILED.value());
+        assertEquals(actionResult.getStatus().getState(), CreationStatus.FAILED.value());
         assertNotNull(actionResult.getFault());
         assertEquals(actionResult.getFault().getReason(),
                      "Powershell command \"get-powermanagementstatus -hostid \"109313413\"\" failed with Host burned by a madman.");

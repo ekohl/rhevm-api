@@ -36,6 +36,7 @@ import com.redhat.rhevm.api.resource.AssignedPermissionsResource;
 import com.redhat.rhevm.api.resource.StorageDomainContentsResource;
 import com.redhat.rhevm.api.resource.StorageDomainResource;
 import com.redhat.rhevm.api.resource.FilesResource;
+import com.redhat.rhevm.api.common.util.StatusUtils;
 
 public class MockStorageDomainResource extends AbstractMockResource<StorageDomain> implements StorageDomainResource {
 
@@ -47,7 +48,7 @@ public class MockStorageDomainResource extends AbstractMockResource<StorageDomai
      */
     MockStorageDomainResource(String id, Executor executor,  UriInfoProvider uriProvider) {
         super(id, executor, uriProvider);
-        getModel().setStatus(StorageDomainStatus.UNATTACHED.value());
+        getModel().setStatus(StatusUtils.create(StorageDomainStatus.UNATTACHED));
     }
 
     // FIXME: this needs to be atomic

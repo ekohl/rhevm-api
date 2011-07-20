@@ -22,6 +22,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.redhat.rhevm.api.common.util.StatusUtils;
 import com.redhat.rhevm.api.model.Storage;
 import com.redhat.rhevm.api.model.StorageDomain;
 import com.redhat.rhevm.api.model.StorageDomainType;
@@ -76,7 +77,7 @@ public class PowerShellStorageDomain extends StorageDomain {
         PowerShellStorageDomainStatus status =
             entity.get("status", PowerShellStorageDomainStatus.class);
         if (status != null) {
-            storageDomain.setStatus(status.map()==null ? null : status.map().value());
+            storageDomain.setStatus(status.map()==null ? null : StatusUtils.create(status.map()));
         }
 
         Storage storage = new Storage();

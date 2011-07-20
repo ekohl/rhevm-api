@@ -28,6 +28,7 @@ import java.util.Set;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.redhat.rhevm.api.common.util.DetailHelper.Detail;
+import com.redhat.rhevm.api.common.util.StatusUtils;
 import com.redhat.rhevm.api.common.util.TimeZoneMapping;
 import com.redhat.rhevm.api.model.BootDevice;
 import com.redhat.rhevm.api.model.Cluster;
@@ -39,7 +40,6 @@ import com.redhat.rhevm.api.model.Domain;
 import com.redhat.rhevm.api.model.NIC;
 import com.redhat.rhevm.api.model.Nics;
 import com.redhat.rhevm.api.model.OsType;
-import com.redhat.rhevm.api.model.Status;
 import com.redhat.rhevm.api.model.Tag;
 import com.redhat.rhevm.api.model.Tags;
 import com.redhat.rhevm.api.model.Display;
@@ -179,8 +179,8 @@ public class PowerShellVM extends VM {
             } else if (PowerShellAsyncTask.isTask(entity)) {
                 last(ret).setTaskIds(PowerShellAsyncTask.parseTask(entity, last(ret).getTaskIds()));
             } else if (PowerShellAsyncTask.isStatus(entity)) {
-                String creationStatus = last(ret).getCreationStatus();
-                last(ret).setCreationStatus(PowerShellAsyncTask.parseStatus(entity, creationStatus==null ? null : Status.fromValue(creationStatus)).value());
+                String creationStatus = last(ret).getCreationStatus()!=null ? last(ret).getCreationStatus().getState() : null;
+                last(ret).setCreationStatus(StatusUtils.create(PowerShellAsyncTask.parseStatus(entity, StatusUtils.getRequestStatus(creationStatus))));
             } else if (hasDetail(details, Detail.STATISTICS) && PowerShellVmStatisticsParser.isMemory(entity)) {
                 getStatistics(ret).addAll(PowerShellVmStatisticsParser.parseMemoryStats(entity));
             } else if (hasDetail(details, Detail.STATISTICS) && PowerShellVmStatisticsParser.isCpu(entity)) {
@@ -225,7 +225,7 @@ public class PowerShellVM extends VM {
 
         VmStatus status = parseStatus(entity.get("status"));
         if (status != null) {
-            vm.setStatus(status.value());
+            vm.setStatus(StatusUtils.create(status));
         }
 
         Integer defaultHostId = entity.get("defaulthostid", Integer.class);

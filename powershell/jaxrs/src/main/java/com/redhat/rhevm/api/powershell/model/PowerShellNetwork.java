@@ -21,6 +21,7 @@ package com.redhat.rhevm.api.powershell.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.redhat.rhevm.api.common.util.StatusUtils;
 import com.redhat.rhevm.api.model.DataCenter;
 import com.redhat.rhevm.api.model.IP;
 import com.redhat.rhevm.api.model.Network;
@@ -39,7 +40,7 @@ public class PowerShellNetwork {
             network.setId(entity.get("networkid"));
             network.setName(entity.get("name"));
             network.setDescription(entity.get("description"));
-            network.setStatus(entity.get("status", PowerShellNetworkStatus.class).map().value());
+            network.setStatus(StatusUtils.create(entity.get("status", PowerShellNetworkStatus.class).map()));
 
             DataCenter dataCenter = new DataCenter();
             dataCenter.setId(entity.get("datacenterid"));
