@@ -207,6 +207,20 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:element name="creation_statuses" type="CreationStatuses"/>
+
+  <xs:complexType name="CreationStatuses">
+    <xs:sequence>
+      <xs:element name="creation_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="CreationStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>  
+  </xs:complexType>
+
   <!-- Statictics -->
 
   <xs:element name="statistic" type="Statistic"/>
@@ -379,6 +393,16 @@
           <xs:element ref="boot_protocols" minOccurs="0"/>
           <xs:element ref="error_handling" minOccurs="0"/>
           <xs:element ref="storage_formats" minOccurs="0"/>
+          <xs:element ref="creation_statuses" minOccurs="0"/>
+          <xs:element ref="power_management_statuses" minOccurs="0"/>
+          <xs:element ref="host_statuses" minOccurs="0"/>
+          <xs:element ref="network_statuses" minOccurs="0"/>
+          <xs:element ref="storage_domain_statuses" minOccurs="0"/>
+          <xs:element ref="template_statuses" minOccurs="0"/>
+          <xs:element ref="vm_statuses" minOccurs="0"/>
+          <xs:element ref="disk_statuses" minOccurs="0"/>
+          <xs:element ref="host_nic_statuses" minOccurs="0"/>
+          <xs:element ref="data_center_statuses" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -539,7 +563,7 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  
+
   <xs:element name="disk_formats" type="DiskFormats"/>
 
   <xs:complexType name="DiskFormats">
@@ -709,6 +733,20 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:element name="data_center_statuses" type="DataCenterStatuses"/>
+
+  <xs:complexType name="DataCenterStatuses">
+    <xs:sequence>
+      <xs:element name="data_center_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="DataCenterStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>  
+  </xs:complexType>
+
   <!-- Clusters -->
 
   <xs:element name="cluster" type="Cluster"/>
@@ -792,6 +830,20 @@
     <xs:attribute name="type" type="xs:string"/>
   </xs:complexType>
 
+  <xs:element name="power_management_statuses" type="PowerManagementStatuses"/>
+
+  <xs:complexType name="PowerManagementStatuses">
+    <xs:sequence>
+      <xs:element name="power_management_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="PowerManagementStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:element name="power_managers" type="PowerManagers"/>
 
   <xs:complexType name="PowerManagers">
@@ -852,6 +904,20 @@
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="host_statuses" type="HostStatuses"/>
+
+  <xs:complexType name="HostStatuses">
+    <xs:sequence>
+      <xs:element name="host_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="HostStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>  
   </xs:complexType>
 
   <xs:complexType name="VmSummary">
@@ -1192,6 +1258,20 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:element name="network_statuses" type="NetworkStatuses"/>
+
+  <xs:complexType name="NetworkStatuses">
+    <xs:sequence>
+      <xs:element name="network_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="NetworkStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>  
+  </xs:complexType>
+
   <xs:complexType name="Networks">
     <xs:complexContent>
       <xs:extension base="BaseResources">
@@ -1314,6 +1394,20 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:element name="storage_domain_statuses" type="StorageDomainStatuses"/>
+
+  <xs:complexType name="StorageDomainStatuses">
+    <xs:sequence>
+      <xs:element name="storage_domain_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="StorageDomainStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>  
+  </xs:complexType>
+
   <xs:complexType name="StorageDomains">
     <xs:complexContent>
       <xs:extension base="BaseResources">
@@ -1373,6 +1467,20 @@
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="template_statuses" type="TemplateStatuses"/>
+
+  <xs:complexType name="TemplateStatuses">
+    <xs:sequence>
+      <xs:element name="template_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="TemplateStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>  
   </xs:complexType>
 
   <!-- Virtual Machines -->
@@ -1518,6 +1626,20 @@
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="vm_statuses" type="VmStatuses"/>
+
+  <xs:complexType name="VmStatuses">
+    <xs:sequence>
+      <xs:element name="vm_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="VmStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
   </xs:complexType>
 
   <!-- Virtual Machine Pools -->
@@ -1678,6 +1800,20 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:element name="disk_statuses" type="DiskStatuses"/>
+
+  <xs:complexType name="DiskStatuses">
+    <xs:sequence>
+      <xs:element name="disk_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="DiskStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>  
+  </xs:complexType>
+
   <xs:complexType name="NIC">
     <xs:complexContent>
       <xs:extension base="BaseDevice">
@@ -1781,6 +1917,20 @@
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="host_nic_statuses" type="HostNICStatuses"/>
+
+  <xs:complexType name="HostNICStatuses">
+    <xs:sequence>
+      <xs:element name="host_nic_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="HostNICStatuses"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>  
   </xs:complexType>
 
   <xs:element name="slaves" type="Slaves"/>
