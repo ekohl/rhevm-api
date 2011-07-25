@@ -21,6 +21,7 @@ package com.redhat.rhevm.api.powershell.model;
 import java.net.URLEncoder;
 
 import com.redhat.rhevm.api.common.util.StatusUtils;
+import com.redhat.rhevm.api.common.util.StringUtils;
 import com.redhat.rhevm.api.model.Creation;
 import com.redhat.rhevm.api.model.Fault;
 import com.redhat.rhevm.api.model.CreationStatus;
@@ -111,7 +112,7 @@ public class PowerShellAsyncTask {
         for (PowerShellParser.Entity entity : parser.parse(output)) {
             if (isStatus(entity)) {
                 String status = creation.getStatus()!=null ? creation.getStatus().getState() : null;
-                creation.setStatus(StatusUtils.create(parseStatus(entity, status==null ? CreationStatus.FAILED : CreationStatus.fromValue(status))));
+                creation.setStatus(StatusUtils.create(parseStatus(entity, StringUtils.isNullOrEmpty(status) ? CreationStatus.FAILED : CreationStatus.fromValue(status))));
                 if (CreationStatus.FAILED.value().equals(status)) {
                     creation.setFault(new Fault());
                     creation.getFault().setReason(FAILURE_REASON);

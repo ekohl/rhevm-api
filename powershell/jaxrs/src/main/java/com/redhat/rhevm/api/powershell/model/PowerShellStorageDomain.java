@@ -77,7 +77,7 @@ public class PowerShellStorageDomain extends StorageDomain {
         PowerShellStorageDomainStatus status =
             entity.get("status", PowerShellStorageDomainStatus.class);
         if (status != null) {
-            storageDomain.setStatus(status.map()==null ? null : StatusUtils.create(status.map()));
+            storageDomain.setStatus(StatusUtils.create(status.map()));
         }
 
         Storage storage = new Storage();

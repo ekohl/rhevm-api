@@ -33,6 +33,7 @@ import com.redhat.rhevm.api.common.util.ReapedMap;
 import com.redhat.rhevm.api.common.util.StatusUtils;
 import com.redhat.rhevm.api.model.Action;
 import com.redhat.rhevm.api.model.BaseResource;
+import com.redhat.rhevm.api.model.CreationStatus;
 import com.redhat.rhevm.api.model.Fault;
 import com.redhat.rhevm.api.resource.ActionResource;
 
@@ -89,7 +90,7 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
         Response.Status status = null;
         final ActionResource actionResource = new BaseActionResource<R>(uriInfo, task.action, getModel());
         if (action.isSetAsync() && action.isAsync()) {
-            action.setStatus(StatusUtils.create(com.redhat.rhevm.api.model.CreationStatus.PENDING));
+            action.setStatus(StatusUtils.create(CreationStatus.PENDING));
             actions.put(action.getId(), actionResource);
             executor.execute(new Runnable() {
                 public void run() {
@@ -142,7 +143,7 @@ public abstract class AbstractActionableResource<R extends BaseResource> extends
     }
 
     private void perform(AbstractActionTask task) {
-        task.action.setStatus(StatusUtils.create(com.redhat.rhevm.api.model.CreationStatus.IN_PROGRESS));
+        task.action.setStatus(StatusUtils.create(CreationStatus.IN_PROGRESS));
         if (task.action.getGracePeriod() != null) {
             try {
                 Thread.sleep(task.action.getGracePeriod().getExpiry());

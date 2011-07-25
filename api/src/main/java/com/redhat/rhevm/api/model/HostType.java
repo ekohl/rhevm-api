@@ -33,7 +33,16 @@ public enum HostType {
 
     public static HostType fromValue(String v) {
         try {
-            return valueOf(v.toUpperCase());
+            if (v==null) {
+                return null;
+            }
+            if (v.equals("rhel")) {
+                return RHEL;
+            } else if (v.equals("rhev-h")) {
+                return RHEV_H;
+            } else {
+                return valueOf(v.toUpperCase());
+            }
         } catch (IllegalArgumentException e) {
             return null;
         }

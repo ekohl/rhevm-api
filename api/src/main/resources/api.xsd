@@ -207,14 +207,14 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:element name="creation_statuses" type="CreationStatuses"/>
+  <xs:element name="creation_states" type="CreationStates"/>
 
-  <xs:complexType name="CreationStatuses">
+  <xs:complexType name="CreationStates">
     <xs:sequence>
-      <xs:element name="creation_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="creation_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="CreationStatuses"/>
+            <jaxb:property name="CreationStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -232,8 +232,8 @@
       <xs:extension base="BaseResource">
         <xs:sequence>
           <xs:element ref="values" minOccurs="1" maxOccurs="1"/>
-          <xs:element name="type" type="xs:string" minOccurs="1" maxOccurs="1"/>
-          <xs:element name="unit" type="xs:string" minOccurs="1" maxOccurs="1"/>
+          <xs:element name="type" type="StatisticType" minOccurs="1" maxOccurs="1"/>
+		  <xs:element name="unit" type="StatisticUnit" minOccurs="1" maxOccurs="1"/>
           <!-- only one of the following entity references is set -->
           <xs:element ref="disk" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="host" minOccurs="0" maxOccurs="1"/>
@@ -244,6 +244,25 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+
+  <xs:simpleType name="StatisticType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="GAUGE"/>
+      <xs:enumeration value="COUNTER"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="StatisticUnit">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NONE"/>
+      <xs:enumeration value="PERCENT"/>
+      <xs:enumeration value="BYTES"/>
+      <xs:enumeration value="SECONDS"/>
+      <xs:enumeration value="BYTES_PER_SECOND"/>
+      <xs:enumeration value="BITS_PER_SECOND"/>
+      <xs:enumeration value="COUNT_PER_SECOND"/>
+    </xs:restriction>
+  </xs:simpleType>
 
   <xs:complexType name="Statistics">
     <xs:complexContent>
@@ -281,8 +300,15 @@
       </xs:annotation>
       <xs:element ref="value" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="type" type="ValueType"/>
   </xs:complexType>
+
+  <xs:simpleType name="ValueType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INTEGER"/>
+      <xs:enumeration value="DECIMAL"/>
+    </xs:restriction>
+  </xs:simpleType>
 
   <!-- CPUs -->
 
@@ -393,16 +419,16 @@
           <xs:element ref="boot_protocols" minOccurs="0"/>
           <xs:element ref="error_handling" minOccurs="0"/>
           <xs:element ref="storage_formats" minOccurs="0"/>
-          <xs:element ref="creation_statuses" minOccurs="0"/>
-          <xs:element ref="power_management_statuses" minOccurs="0"/>
-          <xs:element ref="host_statuses" minOccurs="0"/>
-          <xs:element ref="network_statuses" minOccurs="0"/>
-          <xs:element ref="storage_domain_statuses" minOccurs="0"/>
-          <xs:element ref="template_statuses" minOccurs="0"/>
-          <xs:element ref="vm_statuses" minOccurs="0"/>
-          <xs:element ref="disk_statuses" minOccurs="0"/>
-          <xs:element ref="host_nic_statuses" minOccurs="0"/>
-          <xs:element ref="data_center_statuses" minOccurs="0"/>
+          <xs:element ref="creation_states" minOccurs="0"/>
+          <xs:element ref="power_management_states" minOccurs="0"/>
+          <xs:element ref="host_states" minOccurs="0"/>
+          <xs:element ref="network_states" minOccurs="0"/>
+          <xs:element ref="storage_domain_states" minOccurs="0"/>
+          <xs:element ref="template_states" minOccurs="0"/>
+          <xs:element ref="vm_states" minOccurs="0"/>
+          <xs:element ref="disk_states" minOccurs="0"/>
+          <xs:element ref="host_nic_states" minOccurs="0"/>
+          <xs:element ref="data_center_states" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -733,14 +759,14 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:element name="data_center_statuses" type="DataCenterStatuses"/>
+  <xs:element name="data_center_states" type="DataCenterStates"/>
 
-  <xs:complexType name="DataCenterStatuses">
+  <xs:complexType name="DataCenterStates">
     <xs:sequence>
-      <xs:element name="data_center_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="data_center_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="DataCenterStatuses"/>
+            <jaxb:property name="DataCenterStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -830,14 +856,14 @@
     <xs:attribute name="type" type="xs:string"/>
   </xs:complexType>
 
-  <xs:element name="power_management_statuses" type="PowerManagementStatuses"/>
+  <xs:element name="power_management_states" type="PowerManagementStates"/>
 
-  <xs:complexType name="PowerManagementStatuses">
+  <xs:complexType name="PowerManagementStates">
     <xs:sequence>
-      <xs:element name="power_management_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="power_management_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="PowerManagementStatuses"/>
+            <jaxb:property name="PowerManagementStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -906,14 +932,14 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:element name="host_statuses" type="HostStatuses"/>
+  <xs:element name="host_states" type="HostStates"/>
 
-  <xs:complexType name="HostStatuses">
+  <xs:complexType name="HostStates">
     <xs:sequence>
-      <xs:element name="host_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="host_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="HostStatuses"/>
+            <jaxb:property name="HostStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -1258,14 +1284,14 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:element name="network_statuses" type="NetworkStatuses"/>
+  <xs:element name="network_states" type="NetworkStates"/>
 
-  <xs:complexType name="NetworkStatuses">
+  <xs:complexType name="NetworkStates">
     <xs:sequence>
-      <xs:element name="network_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="network_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="NetworkStatuses"/>
+            <jaxb:property name="NetworkStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -1394,14 +1420,14 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:element name="storage_domain_statuses" type="StorageDomainStatuses"/>
+  <xs:element name="storage_domain_states" type="StorageDomainStates"/>
 
-  <xs:complexType name="StorageDomainStatuses">
+  <xs:complexType name="StorageDomainStates">
     <xs:sequence>
-      <xs:element name="storage_domain_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="storage_domain_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="StorageDomainStatuses"/>
+            <jaxb:property name="StorageDomainStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -1469,14 +1495,14 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:element name="template_statuses" type="TemplateStatuses"/>
+  <xs:element name="template_states" type="TemplateStates"/>
 
-  <xs:complexType name="TemplateStatuses">
+  <xs:complexType name="TemplateStates">
     <xs:sequence>
-      <xs:element name="template_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="template_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="TemplateStatuses"/>
+            <jaxb:property name="TemplateStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -1628,14 +1654,14 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:element name="vm_statuses" type="VmStatuses"/>
+  <xs:element name="vm_states" type="VmStates"/>
 
-  <xs:complexType name="VmStatuses">
+  <xs:complexType name="VmStates">
     <xs:sequence>
-      <xs:element name="vm_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="vm_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="VmStatuses"/>
+            <jaxb:property name="VmStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -1800,14 +1826,14 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:element name="disk_statuses" type="DiskStatuses"/>
+  <xs:element name="disk_states" type="DiskStates"/>
 
-  <xs:complexType name="DiskStatuses">
+  <xs:complexType name="DiskStates">
     <xs:sequence>
-      <xs:element name="disk_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="disk_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="DiskStatuses"/>
+            <jaxb:property name="DiskStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -1919,14 +1945,14 @@
     </xs:complexContent>
   </xs:complexType>
 
-  <xs:element name="host_nic_statuses" type="HostNICStatuses"/>
+  <xs:element name="host_nic_states" type="HostNICStates"/>
 
-  <xs:complexType name="HostNICStatuses">
+  <xs:complexType name="HostNICStates">
     <xs:sequence>
-      <xs:element name="host_nic_status" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="host_nic_state" type="xs:string" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:appinfo>
-            <jaxb:property name="HostNICStatuses"/>
+            <jaxb:property name="HostNICStates"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
@@ -2018,4 +2044,5 @@
       <xs:element name="enabled" type="xs:boolean" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
+
 </xs:schema>

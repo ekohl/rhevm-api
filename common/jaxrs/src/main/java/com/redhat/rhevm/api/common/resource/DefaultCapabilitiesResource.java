@@ -23,10 +23,16 @@ import com.redhat.rhevm.api.model.BootDevices;
 import com.redhat.rhevm.api.model.Capabilities;
 import com.redhat.rhevm.api.model.CPU;
 import com.redhat.rhevm.api.model.CPUs;
+import com.redhat.rhevm.api.model.CreationStates;
+import com.redhat.rhevm.api.model.CreationStatus;
+import com.redhat.rhevm.api.model.DataCenterStates;
+import com.redhat.rhevm.api.model.DataCenterStatus;
 import com.redhat.rhevm.api.model.DiskFormat;
 import com.redhat.rhevm.api.model.DiskFormats;
 import com.redhat.rhevm.api.model.DiskInterface;
 import com.redhat.rhevm.api.model.DiskInterfaces;
+import com.redhat.rhevm.api.model.DiskStates;
+import com.redhat.rhevm.api.model.DiskStatus;
 import com.redhat.rhevm.api.model.DiskType;
 import com.redhat.rhevm.api.model.DiskTypes;
 import com.redhat.rhevm.api.model.DisplayType;
@@ -35,19 +41,33 @@ import com.redhat.rhevm.api.model.FenceType;
 import com.redhat.rhevm.api.model.FenceTypes;
 import com.redhat.rhevm.api.model.NicInterface;
 import com.redhat.rhevm.api.model.NicInterfaces;
+import com.redhat.rhevm.api.model.HostNICStates;
+import com.redhat.rhevm.api.model.HostStates;
+import com.redhat.rhevm.api.model.HostStatus;
+import com.redhat.rhevm.api.model.NetworkStates;
+import com.redhat.rhevm.api.model.NetworkStatus;
+import com.redhat.rhevm.api.model.NicStatus;
 import com.redhat.rhevm.api.model.OsType;
 import com.redhat.rhevm.api.model.OsTypes;
 import com.redhat.rhevm.api.model.PowerManagement;
 import com.redhat.rhevm.api.model.Option;
 import com.redhat.rhevm.api.model.Options;
+import com.redhat.rhevm.api.model.PowerManagementStates;
+import com.redhat.rhevm.api.model.PowerManagementStatus;
 import com.redhat.rhevm.api.model.PowerManagers;
 import com.redhat.rhevm.api.model.SchedulingPolicies;
 import com.redhat.rhevm.api.model.SchedulingPolicyType;
+import com.redhat.rhevm.api.model.StorageDomainStates;
+import com.redhat.rhevm.api.model.StorageDomainStatus;
 import com.redhat.rhevm.api.model.StorageDomainType;
 import com.redhat.rhevm.api.model.StorageDomainTypes;
 import com.redhat.rhevm.api.model.StorageType;
 import com.redhat.rhevm.api.model.StorageTypes;
+import com.redhat.rhevm.api.model.TemplateStates;
+import com.redhat.rhevm.api.model.TemplateStatus;
 import com.redhat.rhevm.api.model.VersionCaps;
+import com.redhat.rhevm.api.model.VmStates;
+import com.redhat.rhevm.api.model.VmStatus;
 import com.redhat.rhevm.api.model.VmType;
 import com.redhat.rhevm.api.model.VmTypes;
 import com.redhat.rhevm.api.resource.CapabilitiesResource;
@@ -267,6 +287,126 @@ public class DefaultCapabilitiesResource implements CapabilitiesResource {
     {
         addDiskInterfaces(VERSION21, DiskInterface.values());
         addDiskInterfaces(VERSION22, DiskInterface.values());
+    }
+
+    private void addCreationStates(VersionCaps version, CreationStatus... statuses) {
+        version.setCreationStates(new CreationStates());
+        for (CreationStatus status : statuses) {
+            version.getCreationStates().getCreationStates().add(status.value());
+        }
+    }
+
+    {
+        addCreationStates(VERSION21, CreationStatus.values());
+        addCreationStates(VERSION22, CreationStatus.values());
+    }
+
+    private void addPowerManagementStates(VersionCaps version, PowerManagementStatus... statuses) {
+        version.setPowerManagementStates(new PowerManagementStates());
+        for (PowerManagementStatus status : statuses) {
+            version.getPowerManagementStates().getPowerManagementStates().add(status.value());
+        }
+    }
+
+    {
+        addPowerManagementStates(VERSION21, PowerManagementStatus.values());
+        addPowerManagementStates(VERSION22, PowerManagementStatus.values());
+    }
+
+    private void addHostStates(VersionCaps version, HostStatus... statuses) {
+        version.setHostStates(new HostStates());
+        for (HostStatus status : statuses) {
+            version.getHostStates().getHostStates().add(status.value());
+        }
+    }
+
+    {
+        addHostStates(VERSION21, HostStatus.values());
+        addHostStates(VERSION22, HostStatus.values());
+    }
+
+    private void addNetworkStates(VersionCaps version, NetworkStatus... statuses) {
+        version.setNetworkStates(new NetworkStates());
+        for (NetworkStatus status : statuses) {
+            version.getNetworkStates().getNetworkStates().add(status.value());
+        }
+    }
+
+    {
+        addNetworkStates(VERSION21, NetworkStatus.values());
+        addNetworkStates(VERSION22, NetworkStatus.values());
+    }
+
+    private void addStorageDomainStates(VersionCaps version, StorageDomainStatus... statuses) {
+        version.setStorageDomainStates(new StorageDomainStates());
+        for (StorageDomainStatus status : statuses) {
+            version.getStorageDomainStates().getStorageDomainStates().add(status.value());
+        }
+    }
+
+    {
+        addStorageDomainStates(VERSION21, StorageDomainStatus.values());
+        addStorageDomainStates(VERSION22, StorageDomainStatus.values());
+    }
+
+    private void addTemplateStates(VersionCaps version, TemplateStatus... statuses) {
+        version.setTemplateStates(new TemplateStates());
+        for (TemplateStatus status : statuses) {
+            version.getTemplateStates().getTemplateStates().add(status.value());
+        }
+    }
+
+    {
+        addTemplateStates(VERSION21, TemplateStatus.values());
+        addTemplateStates(VERSION22, TemplateStatus.values());
+    }
+
+    private void addVmStates(VersionCaps version, VmStatus... statuses) {
+        version.setVmStates(new VmStates());
+        for (VmStatus status : statuses) {
+            version.getVmStates().getVmStates().add(status.value());
+        }
+    }
+
+    {
+        addVmStates(VERSION21, VmStatus.values());
+        addVmStates(VERSION22, VmStatus.values());
+    }
+
+    private void addDiskStates(VersionCaps version, DiskStatus... statuses) {
+        version.setDiskStates(new DiskStates());
+        for (DiskStatus status : statuses) {
+            version.getDiskStates().getDiskStates().add(status.value());
+        }
+    }
+
+    {
+        addDiskStates(VERSION21, DiskStatus.values());
+        addDiskStates(VERSION22, DiskStatus.values());
+    }
+
+    private void addDataCenterStates(VersionCaps version, DataCenterStatus... statuses) {
+        version.setDataCenterStates(new DataCenterStates());
+        for (DataCenterStatus status : statuses) {
+            version.getDataCenterStates().getDataCenterStates().add(status.value());
+        }
+    }
+
+    {
+        addDataCenterStates(VERSION21, DataCenterStatus.values());
+        addDataCenterStates(VERSION22, DataCenterStatus.values());
+    }
+
+    private void addHostNicStates(VersionCaps version, NicStatus... statuses) {
+        version.setHostNicStates(new HostNICStates());
+        for (NicStatus status : statuses) {
+            version.getHostNicStates().getHostNICStates().add(status.value());
+        }
+    }
+
+    {
+        addHostNicStates(VERSION21, NicStatus.values());
+        addHostNicStates(VERSION22, NicStatus.values());
     }
 
     private final SchedulingPolicies SCHEDULING_POLICIES = new SchedulingPolicies();

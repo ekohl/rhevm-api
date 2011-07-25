@@ -6,7 +6,7 @@ import com.redhat.rhevm.api.model.Status;
 public class StatusUtils {
 
     public static Status create(String statusStr) {
-        if (statusStr==null) {
+        if (StringUtils.isNullOrEmpty(statusStr)) {
             return null;
         } else {
             Status status = new Status();

@@ -24,11 +24,11 @@ public abstract class AbstractStatisticsParser {
             statistic.setId(UUID.asId(name));
             statistic.setName(name);
             statistic.setDescription(description);
-            statistic.setType(type.value());
-            statistic.setUnit(unit.value());
+            statistic.setType(type);
+            statistic.setUnit(unit);
             Value value = new Value();
             statistic.setValues(new Values());
-            statistic.getValues().setType(valueType.value());
+            statistic.getValues().setType(valueType);
             statistic.getValues().getValues().add(value);
             return statistic;
     }
