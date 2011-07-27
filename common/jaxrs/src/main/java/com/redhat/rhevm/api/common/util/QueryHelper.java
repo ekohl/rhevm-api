@@ -114,16 +114,34 @@ public class QueryHelper {
      */
     public static String getConstraint(UriInfo uriInfo, String defaultQuery, Class<?> clz, boolean typePrefix) {
         MultivaluedMap<String, String> queries = uriInfo.getQueryParameters();
-        String constraint = queries != null
-                            && queries.get(CONSTRAINT_PARAMETER) != null
-                            && queries.get(CONSTRAINT_PARAMETER).size() > 0
-                            ? queries.get(CONSTRAINT_PARAMETER).get(0)
-                            : null;
         String prefix = typePrefix ? RETURN_TYPES.get(clz) : "";
-        return constraint != null
-               ? prefix + constraint
+        HashMap<String, String> constraints = getConstraints(queries, CONSTRAINT_PARAMETER);
+
+        return constraints != null && constraints.containsKey(CONSTRAINT_PARAMETER)
+               ? prefix + constraints.get(CONSTRAINT_PARAMETER)
                : defaultQuery != null
                  ? prefix + defaultQuery
                  : null;
+    }
+
+    public static String getConstraint(MultivaluedMap<String, String> queries, String constraint) {
+        return queries != null
+               && queries.get(constraint) != null
+               && queries.get(constraint).size() > 0 ? queries.get(constraint).get(0)
+                                                       :
+                                                       null;
+    }
+
+    public static HashMap<String, String> getConstraints(MultivaluedMap<String, String> queries, String... constraints) {
+        HashMap<String, String> params = new HashMap<String, String>();
+        if (constraints != null && constraints.length >0) {
+            for (String key : constraints) {
+                String value = getConstraint(queries, key);
+                if (value != null && !value.isEmpty()) {
+                    params.put(key, value);
+                }
+            }
+        }
+        return params;
     }
 }
