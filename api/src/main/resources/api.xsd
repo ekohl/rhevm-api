@@ -426,6 +426,7 @@
           <xs:element ref="storage_domain_states" minOccurs="0"/>
           <xs:element ref="template_states" minOccurs="0"/>
           <xs:element ref="vm_states" minOccurs="0"/>
+          <xs:element ref="vm_pause_details" minOccurs="0"/>
           <xs:element ref="disk_states" minOccurs="0"/>
           <xs:element ref="host_nic_states" minOccurs="0"/>
           <xs:element ref="data_center_states" minOccurs="0"/>
@@ -1662,6 +1663,20 @@
         <xs:annotation>
           <xs:appinfo>
             <jaxb:property name="VmStates"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="vm_pause_details" type="VmPauseDetails"/>
+
+  <xs:complexType name="VmPauseDetails">
+    <xs:sequence>
+      <xs:element name="vm_pause_detail" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:appinfo>
+            <jaxb:property name="VmPauseDetails"/>
           </xs:appinfo>
         </xs:annotation>
       </xs:element>
