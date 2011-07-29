@@ -66,7 +66,7 @@ public class PowerShellPool {
     }
 
     private void spawn() {
-        log.info("Spawning powershell");
+        log.info("Spawning powershell; spawned is now " + spawned);
 
         executor.execute(new PowerShellLauncher());
         ++spawned;
