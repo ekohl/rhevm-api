@@ -29,7 +29,7 @@ import com.redhat.rhevm.api.common.invocation.Current;
 import com.redhat.rhevm.api.common.security.auth.Principal;
 
 public class PowerShellPool {
-	private static final Log log = LogFactory.getLog(PowerShellPool.class);
+    private static final Log log = LogFactory.getLog(PowerShellPool.class);
 
     // REVISIT: add a timeout after which we will reduce
     //          the pool to the low watermark
