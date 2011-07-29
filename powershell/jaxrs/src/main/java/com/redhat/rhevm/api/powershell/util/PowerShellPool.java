@@ -22,10 +22,14 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.redhat.rhevm.api.common.invocation.Current;
 import com.redhat.rhevm.api.common.security.auth.Principal;
 
 public class PowerShellPool {
+	private static final Log log = LogFactory.getLog(PowerShellPool.class);
 
     // REVISIT: add a timeout after which we will reduce
     //          the pool to the low watermark
@@ -44,6 +48,8 @@ public class PowerShellPool {
     private int spawned;
 
     public PowerShellPool(ExecutorService executor, Principal principal, Current current, int lowSize, int highSize) {
+        log.info("Creating powershell pool for " + principal.getUser());
+
         this.executor = executor;
         this.principal = principal;
         this.current = current;
@@ -60,6 +66,8 @@ public class PowerShellPool {
     }
 
     private void spawn() {
+        log.info("Spawning powershell");
+
         executor.execute(new PowerShellLauncher());
         ++spawned;
     }
